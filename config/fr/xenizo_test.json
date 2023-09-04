@@ -1,0 +1,18 @@
+{
+  "docIdForNames": "fra_lsg",
+  "jxl": {
+    "path": "jxl"
+  },
+  "lhs": [
+    {
+      "label": "GREC",
+      "type": "greek",
+      "id": "grc_ugnt"
+    },
+    {
+      "label": "SEGOND 1910",
+      "type": "trans",
+      "id": "fra_lsg"
+    }
+  ]
+}

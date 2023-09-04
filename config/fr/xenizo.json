@@ -1,0 +1,32 @@
+{
+  "jxl": {
+    "path": "jxl"
+  },
+  "docIdForNames": "fra_lsg",
+  "lhs": [
+    {
+      "label": "GREC",
+      "type": "greek",
+      "id": "grc_ugnt",
+      "src": ""
+    },
+    {
+      "label": "SEGOND 1910",
+      "type": "trans",
+      "id": "fr_lsg",
+      "src": ""
+    },
+    {
+      "label": "LITTÉRAL",
+      "type": "trans",
+      "id": "fr_trlx",
+      "src": ""
+    },
+    {
+      "label": "SÉMANTIQUE",
+      "type": "trans",
+      "id": "fr_trsx",
+      "src": ""
+    }
+  ]
+}

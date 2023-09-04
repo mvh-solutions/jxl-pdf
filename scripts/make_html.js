@@ -1,6 +1,6 @@
 const path = require('path');
 const fse = require('fs-extra');
-const { Proskomma } = require('proskomma-core');
+const {Proskomma} = require('proskomma-core');
 
 const cvForSentence = sentence => {
     const cvSet = new Set([]);
@@ -8,7 +8,7 @@ const cvForSentence = sentence => {
     const cvValues = Array.from(cvSet);
     const cv1 = cvValues[0];
     const cv2 = cvValues[cvValues.length - 1];
-    if (cv1 === cv2){
+    if (cv1 === cv2) {
         return cv1;
     }
     const [c1, v1] = cv1.split(':');
@@ -19,17 +19,64 @@ const cvForSentence = sentence => {
     return `${cv1}-${cv2}`
 };
 
-const quoteForCv = (pk, docSetId, bookCode, cv) => {
+const trimLhsText = (cvRecord, greekContent) => {
+    if (!greekContent) {
+        throw new Error('Trimming text requires Greek content: make sure this is first in the config LHS array');
+    }
+    let tokens = cvRecord.tokens;
+    while (tokens.length > 0) {
+        const firstTokenGreek = tokens[0].scopes.length === 0 ? "banana" : tokens[0].scopes[0].split('/').reverse()[0];
+        if (greekContent.has(firstTokenGreek)) {
+            break;
+        }
+        tokens = tokens.slice(1);
+    }
+    let punctuation = [];
+    while (tokens.length > 0) {
+        const lastTokenGreek = tokens[tokens.length - 1].scopes.length === 0 ? "banana" : tokens[tokens.length - 1].scopes[0].split('/').reverse()[0];
+        if (greekContent.has(lastTokenGreek)) {
+            break;
+        }
+        if (lastTokenGreek === "banana") {
+            punctuation.push(tokens[tokens.length - 1].payload);
+        } else {
+            punctuation = [];
+        }
+        tokens.pop();
+    }
+    return (
+        tokens.map(cvr => cvr.payload).join('') +
+        punctuation.reverse().join('')
+    ).replace(/\\s/g, " ")
+        .trim();
+}
+
+const quoteForCv = (pk, sentenceRecord, bookCode, cv) => {
     const cvRecord = pk
-        .gqlQuerySync(`{docSet(id:"${docSetId}") { document(bookCode:"${bookCode}") {cv(chapterVerses: "${cv}") {tokens {payload scopes(startsWith: ["attribute/spanWithAtts/w/lemma"])}}}}}`)
+        .gqlQuerySync(`{docSet(id:"${sentenceRecord.id}") { document(bookCode:"${bookCode}") {cv(chapterVerses: "${cv}") {tokens {subType payload scopes(startsWith: ["attribute/milestone/zaln/x-content"])}}}}}`)
         .data
         .docSet
         .document
         .cv
         .map(cvr => cvr.tokens)
         .reduce((a, b) => [...a, ...b], []);
-    return cvRecord.map(cvr => cvr.payload.replace(/\\s/g, " ")).join('');
+    return {
+        type: sentenceRecord.type,
+        tokens: cvRecord.map(cvr => {
+            return {...cvr, payload: cvr.payload.replace(/\\s/g, " ")}
+        }),
+    }
 };
+
+const getGreekContent = chunks => {
+    const payloadSet = new Set([]);
+    chunks.forEach(
+        ch => ch.source.forEach(
+            s => payloadSet.add(s.content)
+        )
+    );
+    return payloadSet;
+}
 
 const getBookName = (pk, docSetId, bookCode) => {
     const headers = pk
@@ -76,14 +123,21 @@ for (const template of ['index', 'sentence', 'greekLeft', 'transLeft', 'jxl', 'j
     templates[template] = readTemplate(template);
 }
 
+console.log(`${jxlJson.length} Sentences:`);
 let sentences = [];
 for (const [sentenceN, sentenceJson] of jxlJson.entries()) {
+    console.log(`  ${sentenceN + 1}`);
     const cv = cvForSentence(sentenceJson);
     let leftContent = [];
+    let greekContent = null;
     for (const content of config.lhs) {
+        const cvRecord = quoteForCv(pk, content, bookCode, cv);
+        if (cvRecord.type === "greek") {
+            greekContent = getGreekContent(sentenceJson.chunks);
+        }
         let sentence = templates[`${content.type}Left`]
             .replace('%%LABEL%%', content.label)
-            .replace('%%CONTENT%%', quoteForCv(pk, content.id, bookCode, cv));
+            .replace('%%CONTENT%%', cvRecord.type === "greek" ? sentenceJson.sourceString : trimLhsText(cvRecord, greekContent));
         leftContent.push(sentence);
     }
     let jxlRows = [];
@@ -92,7 +146,7 @@ for (const [sentenceN, sentenceJson] of jxlJson.entries()) {
         const gloss = chunk.gloss;
         const row = templates.jxlRow
             .replace('%%GREEK%%', greek)
-            .replace('%%GLOSS%%', gloss);
+            .replace('%%GLOSS%%', gloss.replace(/\*([^*]+)\*/g, (m, m1) => `<i>${m1}</i>`));
         jxlRows.push(row);
     }
     const jxl = templates.jxl.replace('%%ROWS%%', jxlRows.join('\n'));

@@ -1,0 +1,111 @@
+@page {
+    size: 297mm 210mm;
+    margin-right: 15mm;
+    margin-left: 15mm;
+
+}
+@page :right {
+    margin-top: 25mm;
+    margin-bottom: 15mm;
+    @bottom-center {
+        font-size: 9pt;
+        font-family: "Open Sans ExtraBold", sans-serif;
+        content: "Page " counter(page);
+    }
+}
+
+@page :left {
+    margin-top: 15mm;
+    margin-bottom: 25mm;
+    @top-center {
+        font-size: 9pt;
+        font-family: "Open Sans ExtraBold", sans-serif;
+        content: "Page " counter(page);
+    }
+}
+body {
+    font-size: 9pt;
+    line-height: 10pt;
+    font-family: "Open Sans SemiCondensed", sans-serif;
+}
+p {
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    font-size: 9pt;
+    line-height: 10pt;
+    font-family: "Open Sans ExtraBold", sans-serif;
+    font-weight: bold;
+    text-align: left;
+    margin: 0;
+    padding-bottom: 3.5pt;
+    margin-bottom: 5pt;
+    border-bottom: solid 1.5px black;
+}
+.phraseN {
+    float: none;
+}
+.sentenceRef {
+    float: right;
+}
+.transAbbr {
+    font-family: "Open Sans SemiCondensed SemiBold", sans-serif;
+    font-weight: bold;
+    font-style: italic;
+    padding-right: 5px;
+}
+.leftPane {
+    display: inline-block;
+    width: 147mm;
+    vertical-align: top;
+    padding-right: 2.5mm;
+}
+.rightPane {
+    width: 120mm;
+    height: 100%;
+    display: inline-block;
+    padding-left: 2.5mm;
+}
+.rightPane table {
+    width: 120mm;
+    border-collapse: collapse;
+}
+.sentence {
+    string-set: sentenceN attr(data-n), cvRef attr(data-cv);
+    page-break-inside: avoid;
+    vertical-align: top;
+    padding-bottom: 10pt;
+}
+.origGreek {
+    font-family: Cardo, serif;
+    text-align: justify;
+}
+.legacy {
+    margin-top: 10pt;
+    text-align: justify;
+}
+.literal {
+    margin-top: 10pt;
+    text-align: justify;
+}
+.semantic {
+    margin-top: 10pt;
+    text-align: justify;
+}
+.jxlGreek {
+    width: 60mm;
+    font-family: Cardo, serif;
+    text-align: right;
+    vertical-align: top;
+    margin: 0;
+    padding: 0;
+    padding-right: 2pt;
+
+}
+.jxlGloss {
+    width: 62mm;
+    font-family: "Open Sans Condensed Light", sans-serif;
+    vertical-align: top;
+    padding-left: 3pt;
+}

@@ -1,7 +1,11 @@
 {
   "docIdForNames": "fra_lsg",
   "jxl": {
-    "path": "jxl"
+    "path": "fra_jxl",
+    "notes": {
+      "pivot": "jxl2note",
+      "entries": "fra_tn"
+    }
   },
   "lhs": [
     {
@@ -13,6 +17,11 @@
       "label": "SEGOND 1910",
       "type": "trans",
       "id": "fra_lsg"
+    },
+    {
+      "label": "SÉMANTIQUE",
+      "type": "trans",
+      "id": "fra_trsx"
     }
   ]
 }

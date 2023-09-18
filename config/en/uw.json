@@ -1,0 +1,23 @@
+{
+  "docIdForNames": "eng_ult",
+  "jxl": {
+    "path": "eng_jxl"
+  },
+  "lhs": [
+    {
+      "label": "GREEK",
+      "type": "greek",
+      "id": "grc_ugnt"
+    },
+    {
+      "label": "LITERAL",
+      "type": "trans",
+      "id": "eng_ult"
+    },
+    {
+      "label": "SIMPLIFIED",
+      "type": "trans",
+      "id": "eng_ust"
+    }
+  ]
+}

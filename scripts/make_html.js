@@ -103,8 +103,32 @@ if (process.argv.length !== 5) {
 const configPath = process.argv[2];
 const bookCode = process.argv[3];
 const outputPath = path.resolve(process.argv[4]);
-const config = fse.readJsonSync(configPath);
-const jxlJson = fse.readJsonSync(path.join('data', config.jxl.path, `${bookCode}.json`));
+const config = fse.readJsonSync(path.resolve(configPath));
+const jxlJson = fse.readJsonSync(path.resolve(path.join('data', config.jxl.path, `${bookCode}.json`)));
+let notePivot = {};
+let notes = {};
+let pivotIds = new Set([]);
+if (config.jxl.notes && config.jxl.notes.pivot) {
+    const pivotRows = fse.readFileSync(path.join('data', config.jxl.notes.pivot, `${bookCode}.tsv`)).toString().split("\n");
+    for (const pivotRow of pivotRows) {
+        const cells = pivotRow.split("\t");
+        if (!cells[4] || cells[4].length === 0) {
+            continue;
+        }
+        if (!notePivot[cells[0]]) {
+            notePivot[cells[0]] = {};
+        }
+        notePivot[cells[0]][cells[1]] = cells[4].trim();
+        pivotIds.add(cells[4].trim());
+    }
+    const notesRows = fse.readFileSync(path.join('data', config.jxl.notes.entries, `${bookCode}.tsv`)).toString().split("\n");
+    for (const notesRow of notesRows) {
+        const cells = notesRow.split('\t');
+        if (pivotIds.has(cells[4])) {
+            notes[cells[4]] = cells[6];
+        }
+    }
+}
 
 const pk = new Proskomma();
 console.log("Loading USFM into Proskomma");
@@ -141,22 +165,41 @@ for (const [sentenceN, sentenceJson] of jxlJson.entries()) {
         leftContent.push(sentence);
     }
     let jxlRows = [];
-    for (const chunk of sentenceJson.chunks) {
+    let sentenceNotes = [];
+    for (const [chunkN, chunk] of sentenceJson.chunks.entries()) {
         const greek = chunk.source.map(s => s.content).join(' ');
         const gloss = chunk.gloss;
+        let noteFound = false;
+        if (notePivot[`${sentenceN + 1}`] && notePivot[`${sentenceN + 1}`][`${chunkN + 1}`]) {
+            noteFound = true;
+            const noteId = notePivot[`${sentenceN + 1}`][`${chunkN + 1}`];
+            sentenceNotes.push(
+                notes[noteId]
+                    .replace(/\([^)]+\)/g, "")
+                    .replace(/\*\*([^*]+)\*\*/g, (m, m1) => `<span class="b">${m1}</span>`)
+                    .replace(/\*([^*]+)\*/g, (m, m1) => `<i>${m1}</i>`)
+            );
+        }
         const row = templates.jxlRow
             .replace('%%GREEK%%', greek)
-            .replace('%%GLOSS%%', gloss.replace(/\*([^*]+)\*/g, (m, m1) => `<i>${m1}</i>`));
+            .replace('%%GLOSS%%', gloss.replace(/\*([^*]+)\*/g, (m, m1) => `<i>${m1}</i>`))
+            .replace('%%NOTECALLERS%%', (noteFound ? `<span class="note_caller">${sentenceNotes.length}</span>` : ""));
         jxlRows.push(row);
     }
-    const jxl = templates.jxl.replace('%%ROWS%%', jxlRows.join('\n'));
+    const jxl = templates.jxl
+        .replace('%%ROWS%%', jxlRows.join('\n'));
     const sentence = templates.sentence
         .replace('%%SENTENCEN%%', sentenceN + 1)
         .replace('%%NSENTENCES%%', jxlJson.length)
         .replace('%%BOOKNAME%%', bookName)
         .replace('%%SENTENCEREF%%', cv)
         .replace('%%LEFTCONTENT%%', leftContent.join('\n'))
-        .replace('%%JXL%%', jxl);
+        .replace('%%JXL%%', jxl)
+        .replace(
+            '%%NOTES%%',
+            sentenceNotes.length === 0 ?
+                "" :
+                `<section class="jxl_notes">${sentenceNotes.map((note, n) => `<p class="note"><span class="note_n">${n + 1}</span>&nbsp;:&nbsp;${note}</p>`).join('')}</section>`);
     sentences.push(sentence);
 }
 const index = templates.index

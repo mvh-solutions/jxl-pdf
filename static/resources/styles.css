@@ -109,3 +109,31 @@ h1 {
     vertical-align: top;
     padding-left: 3pt;
 }
+.note_caller {
+    font-weight: bold;
+    font-size: 6pt;
+    font-family: "Open Sans ExtraBold", sans-serif;
+    vertical-align: top;
+    padding-left: 0.5em;
+}
+.jxl_notes {
+    border-top: solid 1px black;
+    padding-top: 4pt;
+    margin-top: 5pt;
+}
+.note {
+    font-size: 8pt;
+    font-family: "Open Sans Condensed Light", sans-serif;
+    padding-left: 1.2em;
+    text-indent: -1.2em;
+}
+.note .b {
+    font-family: "Open Sans Condensed", sans-serif;
+    font-weight: normal;
+}
+.note_n {
+    font-weight: bold;
+    font-size: 6pt;
+    font-family: "Open Sans ExtraBold", sans-serif;
+    vertical-align: top;
+}

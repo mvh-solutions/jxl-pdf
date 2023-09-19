@@ -41,7 +41,7 @@ h1 {
     margin: 0;
     padding-bottom: 3.5pt;
     margin-bottom: 5pt;
-    border-bottom: solid 1.5px black;
+    border-bottom: solid 1.5pt black;
 }
 .phraseN {
     float: none;
@@ -53,7 +53,7 @@ h1 {
     font-family: "Open Sans SemiCondensed SemiBold", sans-serif;
     font-weight: bold;
     font-style: italic;
-    padding-right: 5px;
+    padding-right: 2pt;
 }
 .leftPane {
     display: inline-block;
@@ -117,15 +117,20 @@ h1 {
     padding-left: 0.5em;
 }
 .jxl_notes {
-    border-top: solid 1px black;
+    border-top: solid 1pt black;
     padding-top: 4pt;
     margin-top: 5pt;
+}
+.chapterNote {
+    page-break-inside: avoid;
+    padding-bottom: 10pt;
 }
 .note {
     font-size: 8pt;
     font-family: "Open Sans Condensed Light", sans-serif;
     padding-left: 1.2em;
     text-indent: -1.2em;
+    text-align: justify;
 }
 .note .b {
     font-family: "Open Sans Condensed", sans-serif;
@@ -136,4 +141,23 @@ h1 {
     font-size: 6pt;
     font-family: "Open Sans ExtraBold", sans-serif;
     vertical-align: top;
+}
+.note_h2, .note_h3, .note_h4, .note_body {
+    border-left: solid black 1.5pt;
+    padding-left: 10pt;
+    margin-top: 10pt;
+}
+.note_h2 {
+    font-family: "Open Sans SemiBold", sans-serif;
+}
+.note_h3 {
+    font-family: "Open Sans", sans-serif;
+    font-style: italic;
+}
+.note_h4 {
+    font-style: italic;
+}
+
+.note_body {
+    text-align: justify
 }

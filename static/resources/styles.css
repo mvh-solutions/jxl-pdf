@@ -123,7 +123,19 @@ h1 {
 }
 .chapterNote {
     page-break-inside: avoid;
-    padding-bottom: 10pt;
+    break-before: page;
+    padding-bottom: 50pt;
+}
+.bookNote {
+    break-after: page;
+}
+.bookNoteBody {
+    columns: 3;
+    column-gap: 36pt;
+}
+.chapterNoteBody {
+    columns: 3;
+    column-gap: 36pt;
 }
 .note {
     font-size: 8pt;
@@ -143,14 +155,16 @@ h1 {
     vertical-align: top;
 }
 .note_h2, .note_h3, .note_h4, .note_body {
-    border-left: solid black 1.5pt;
-    padding-left: 10pt;
-    margin-top: 10pt;
+    margin-bottom: 10pt;
+}
+.note_h2, .note_h3, .note_h4 {
+    -webkit-column-break-after: avoid;
 }
 .note_h2 {
     font-family: "Open Sans SemiBold", sans-serif;
 }
 .note_h3 {
+    margin-top: 10px;
     font-family: "Open Sans", sans-serif;
     font-style: italic;
 }
@@ -160,4 +174,37 @@ h1 {
 
 .note_body {
     text-align: justify
+}
+.note_list1 {
+    padding-left: 1em;
+    font-family: "Open Sans Condensed Light", sans-serif;
+    font-weight: bold;
+}
+.note_list2 {
+    display: list-item;
+    list-style-type: circle;
+    list-style-position: inside;
+    padding-left: 2em;
+    font-family: "Open Sans Condensed Light", sans-serif;
+ }
+.front_body {
+    columns: 3;
+    column-gap: 36pt;
+    text-align: justify;
+    break-after: recto;
+}
+
+.front_body p {
+    margin-bottom: 10pt;
+    break-inside: avoid;
+}
+.front_body h2 {
+    margin: 0;
+    margin-bottom: 10pt;
+    font-size: 9pt;
+    line-height: 10pt;
+    font-family: "Open Sans SemiBold", sans-serif;
+    font-weight: bold;
+    font-style: italic;
+    text-align: left;
 }

@@ -1,5 +1,6 @@
 {
   "docIdForNames": "fra_lsg",
+  "frontMatter": "fra_front",
   "jxl": {
     "path": "fra_jxl",
     "notes": {

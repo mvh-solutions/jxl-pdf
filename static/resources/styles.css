@@ -98,6 +98,7 @@ h1 {
     width: 60mm;
     font-family: Cardo, serif;
     text-align: right;
+    vertical-align: baseline;
     margin: 0;
     padding: 0;
     padding-right: 2pt;
@@ -106,13 +107,14 @@ h1 {
 .jxlGloss {
     width: 62mm;
     font-family: "Open Sans", sans-serif;
+    vertical-align: baseline;
     padding-left: 3pt;
 }
 .note_caller {
     font-weight: bold;
     font-size: 6pt;
     font-family: "Open Sans ExtraBold", sans-serif;
-    vertical-align: baseline;
+    vertical-align: top;
     padding-left: 0.5em;
 }
 .jxl_notes {

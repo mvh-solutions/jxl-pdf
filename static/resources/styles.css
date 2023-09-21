@@ -53,7 +53,9 @@ h1 {
     font-family: "Open Sans SemiCondensed SemiBold", sans-serif;
     font-weight: bold;
     font-style: italic;
-    padding-right: 1em;
+    padding-right: 6pt;
+    text-decoration: underline;
+    text-decoration-thickness: 0.5pt;
 }
 .leftPane {
     display: inline-block;
@@ -77,31 +79,25 @@ h1 {
     vertical-align: top;
     padding-bottom: 10pt;
 }
-.origGreek {
+.firstLeft {
+    text-align: justify;
+    padding-left: 12pt;
+    text-indent: -12pt;
+}
+.otherLeft {
+    margin-top: 10pt;
+    text-align: justify;
+    padding-left: 12pt;
+    text-indent: -12pt;
+}
+.greekLeft {
     font-family: Cardo, serif;
-    text-align: justify;
-    padding-left: 2em;
-    text-indent: -2em;
 }
-.legacy {
-    margin-top: 10pt;
-    text-align: justify;
-}
-.literal {
-    margin-top: 10pt;
-    text-align: justify;
-    padding-left: 2em;
-    text-indent: -2em;
-}
-.semantic {
-    margin-top: 10pt;
-    text-align: justify;
-}
+.transLeft {}
 .jxlGreek {
     width: 60mm;
     font-family: Cardo, serif;
     text-align: right;
-    vertical-align: top;
     margin: 0;
     padding: 0;
     padding-right: 2pt;
@@ -110,14 +106,13 @@ h1 {
 .jxlGloss {
     width: 62mm;
     font-family: "Open Sans", sans-serif;
-    vertical-align: top;
     padding-left: 3pt;
 }
 .note_caller {
     font-weight: bold;
     font-size: 6pt;
     font-family: "Open Sans ExtraBold", sans-serif;
-    vertical-align: top;
+    vertical-align: baseline;
     padding-left: 0.5em;
 }
 .jxl_notes {

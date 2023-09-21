@@ -94,6 +94,17 @@ const getBookName = (pk, docSetId, bookCode) => {
     return bookCode;
 }
 
+const cleanNoteLine = noteLine => noteLine
+    .trim()
+    .replace(/^#+ +/,"")
+    .replace(/^-+ +/,"")
+    .replace(/\((Pour|Voir)[^)]+\)/g, "")
+    .replace(/\(\[.*?\)\)/g, "")
+    .replace(/\*\*([^*]+)\*\*/g, (m, m1) => `<span class="b">${m1}</span>`)
+    .replace(/\*([^*]+)\*/g, (m, m1) => `<i>${m1}</i>`)
+    .replace(/\[(.+?)\]\(.+?\)/g, "$1")
+
+
 const maybeChapterNotes = (chapterN, noteType) => {
     const chapterNoteRecord = notes[`${chapterN}_intro`];
     if (chapterNoteRecord) {
@@ -119,14 +130,8 @@ const maybeChapterNotes = (chapterN, noteType) => {
                     .replace("%%CLASS%%", paraClass)
                     .replace(
                         "%%NOTE%%",
-                        noteLine
-                            .trim()
-                            .replace(/^#+ +/,"")
-                            .replace(/^-+ +/,"")
-                            .replace(/\(Pour[^)]+\)/g, "")
-                            .replace(/\(\[.*?\)\)/g, "")
-                            .replace(/\*\*([^*]+)\*\*/g, (m, m1) => `<span class="b">${m1}</span>`)
-                            .replace(/\*([^*]+)\*/g, (m, m1) => `<i>${m1}</i>`)                    )
+                        cleanNoteLine(noteLine)
+                    )
             );
         }
         return templates[`${noteType || 'chapter'}Note`]
@@ -190,7 +195,7 @@ const bookName = getBookName(pk, config.docIdForNames, bookCode);
 const readTemplate = templateName => fse.readFileSync(path.join('src', 'templates', templateName + '.html')).toString();
 
 const templates = {};
-for (const template of ['index', 'sentence', 'greekLeft', 'transLeft', 'jxl', 'jxlRow', 'chapterNote', 'bookNote', 'markdownPara']) {
+for (const template of ['index', 'sentence', 'firstLeft', 'otherLeft', 'jxl', 'jxlRow', 'chapterNote', 'bookNote', 'markdownPara']) {
     templates[template] = readTemplate(template);
 }
 console.log(`${jxlJson.length} Sentences:`);
@@ -217,10 +222,16 @@ for (const [sentenceN, sentenceJson] of jxlJson.entries()) {
         if (cvRecord.type === "greek") {
             greekContent = getGreekContent(sentenceJson.chunks);
         }
-        let sentence = templates[`${content.type}Left`]
+    }
+    let first = true;
+    for (const content of config.lhs) {
+        const cvRecord = quoteForCv(pk, content, bookCode, cv);
+        let sentence = templates[`${first ? "first" : "other"}Left`]
+            .replace('%%LANGCLASS%%', cvRecord.type === "greek" ? "greekLeft" : "transLeft")
             .replace('%%LABEL%%', content.label)
             .replace('%%CONTENT%%', cvRecord.type === "greek" ? sentenceJson.sourceString : trimLhsText(cvRecord, greekContent));
         leftContent.push(sentence);
+        first = false;
     }
     let jxlRows = [];
     let sentenceNotes = [];
@@ -232,10 +243,7 @@ for (const [sentenceN, sentenceJson] of jxlJson.entries()) {
             noteFound = true;
             const noteId = notePivot[`${sentenceN + 1}`][`${chunkN + 1}`];
             sentenceNotes.push(
-                notes[noteId]
-                    .replace(/\(Pour[^)]+\)/g, "")
-                    .replace(/\*\*([^*]+)\*\*/g, (m, m1) => `<span class="b">${m1}</span>`)
-                    .replace(/\*([^*]+)\*/g, (m, m1) => `<i>${m1}</i>`)
+                cleanNoteLine(notes[noteId])
             );
         }
         const row = templates.jxlRow

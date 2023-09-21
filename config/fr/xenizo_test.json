@@ -20,9 +20,14 @@
       "id": "fra_lsg"
     },
     {
+      "label": "LITTÉRALE",
+      "type": "trans",
+      "id": "fra_tlx"
+    },
+    {
       "label": "SÉMANTIQUE",
       "type": "trans",
-      "id": "fra_trsx"
+      "id": "fra_tsx"
     }
   ]
 }

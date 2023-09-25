@@ -4,6 +4,7 @@
     margin-left: 15mm;
 
 }
+
 @page :right {
     margin-top: 25mm;
     margin-bottom: 15mm;
@@ -23,15 +24,24 @@
         content: "Page " counter(page);
     }
 }
+
+@page :blank {
+    @top-center {
+        content: none
+    }
+}
+
 body {
     font-size: 9pt;
     line-height: 10pt;
     font-family: "Open Sans", sans-serif;
 }
+
 p {
     margin: 0;
     padding: 0;
 }
+
 h1 {
     font-size: 9pt;
     line-height: 10pt;
@@ -43,12 +53,15 @@ h1 {
     margin-bottom: 5pt;
     border-bottom: solid 1.5pt black;
 }
+
 .phraseN {
     float: none;
 }
+
 .sentenceRef {
     float: right;
 }
+
 .transAbbr {
     font-family: "Open Sans SemiCondensed SemiBold", sans-serif;
     font-weight: bold;
@@ -57,43 +70,53 @@ h1 {
     text-decoration: underline;
     text-decoration-thickness: 0.5pt;
 }
+
 .leftPane {
     display: inline-block;
     width: 135mm;
     vertical-align: top;
     padding-right: 2.5mm;
 }
+
 .rightPane {
     width: 127mm;
     height: 100%;
     display: inline-block;
     padding-left: 2.5mm;
 }
+
 .rightPane table {
     width: 127mm;
     border-collapse: collapse;
 }
+
 .sentence {
     string-set: sentenceN attr(data-n), cvRef attr(data-cv);
     page-break-inside: avoid;
     vertical-align: top;
     padding-bottom: 10pt;
 }
+
 .firstLeft {
     text-align: justify;
     padding-left: 12pt;
     text-indent: -12pt;
 }
+
 .otherLeft {
     margin-top: 10pt;
     text-align: justify;
     padding-left: 12pt;
     text-indent: -12pt;
 }
+
 .greekLeft {
     font-family: Cardo, serif;
 }
-.transLeft {}
+
+.transLeft {
+}
+
 .jxlGreek {
     width: 60mm;
     font-family: Cardo, serif;
@@ -104,12 +127,14 @@ h1 {
     padding-right: 2pt;
 
 }
+
 .jxlGloss {
     width: 62mm;
     font-family: "Open Sans", sans-serif;
     vertical-align: baseline;
     padding-left: 3pt;
 }
+
 .note_caller {
     font-weight: bold;
     font-size: 6pt;
@@ -117,27 +142,37 @@ h1 {
     vertical-align: top;
     padding-left: 0.5em;
 }
+
 .jxl_notes {
     border-top: solid 1pt black;
     padding-top: 4pt;
     margin-top: 5pt;
 }
+
 .chapterNote {
     page-break-inside: avoid;
     break-before: page;
     padding-bottom: 50pt;
 }
+
 .bookNote {
     break-after: page;
 }
+
 .bookNoteBody {
-    columns: 3;
+    columns: 2;
     column-gap: 36pt;
+    padding: 6pt;
+    background-color: #EEE;
 }
+
 .chapterNoteBody {
-    columns: 3;
+    columns: 2;
     column-gap: 36pt;
+    padding: 6pt;
+    background-color: #EEE;
 }
+
 .note {
     font-size: 8pt;
     font-family: "Open Sans Condensed Light", sans-serif;
@@ -145,30 +180,37 @@ h1 {
     text-indent: -1.2em;
     text-align: justify;
 }
+
 .note .b {
     font-family: "Open Sans Condensed", sans-serif;
     font-weight: normal;
 }
+
 .note_n {
     font-weight: bold;
     font-size: 6pt;
     font-family: "Open Sans ExtraBold", sans-serif;
     vertical-align: top;
 }
+
 .note_h2, .note_h3, .note_h4, .note_body {
     margin-bottom: 10pt;
 }
+
 .note_h2, .note_h3, .note_h4 {
     -webkit-column-break-after: avoid;
 }
+
 .note_h2 {
     font-family: "Open Sans SemiBold", sans-serif;
 }
+
 .note_h3 {
     margin-top: 10px;
     font-family: "Open Sans", sans-serif;
     font-style: italic;
 }
+
 .note_h4 {
     font-style: italic;
 }
@@ -176,29 +218,35 @@ h1 {
 .note_body {
     text-align: justify
 }
+
 .note_list1 {
     padding-left: 1em;
     font-family: "Open Sans Condensed Light", sans-serif;
     font-weight: bold;
 }
+
 .note_list2 {
     display: list-item;
     list-style-type: circle;
     list-style-position: inside;
     padding-left: 2em;
     font-family: "Open Sans Condensed Light", sans-serif;
- }
-.front_body {
-    columns: 3;
-    column-gap: 36pt;
-    text-align: justify;
+}
+.front {
     break-after: recto;
+}
+
+.front_body {
+    columns: 2;
+    column-gap: 36pt;
+    text-align: left;
+    break-after: page;
 }
 
 .front_body p {
     margin-bottom: 10pt;
-    break-inside: avoid;
 }
+
 .front_body h2 {
     margin: 0;
     margin-bottom: 10pt;
@@ -208,4 +256,61 @@ h1 {
     font-weight: bold;
     font-style: italic;
     text-align: left;
+}
+.half_page {
+    break-after: recto;
+}
+.half_page h2 {
+    font-weight: bold;
+}
+.half_page .front_body {
+    margin-top: 50pt;
+    columns: 1;
+    text-align: left;
+    font-family: Courrier, monospace;
+    font-size: 8pt;
+    margin-left: 72pt;
+    margin-right: 72pt;
+}
+.half_page .front_body ul {
+    list-style-type: none;
+}
+.half_page .front_body ul li {
+    margin-bottom: 10pt;
+}
+.preface .front_body {
+    columns: 2;
+    column-gap: 36pt;
+    break-after: page;
+}
+.preface .front_body h2 {
+    margin: 0;
+    margin-bottom: 10pt;
+    font-size: 9pt;
+    line-height: 10pt;
+    font-family: "Open Sans SemiBold", sans-serif;
+    font-weight: bold;
+    font-style: italic;
+    text-align: left;
+}
+.mode_emploi_figure {
+    columns: 2;
+    column-gap: 36pt;
+}
+
+.image_number {
+    font-weight: bold;
+    padding-right: 0.5em;
+}
+.mode_emploi_figure p {
+    text-align: justify;
+    padding-left: 1em;
+    text-indent: -1em;
+    margin-bottom: 10pt;
+}
+.mode_emploi_image {
+    width: 128mm;
+    padding: 3pt;
+    border: solid 1pt black;
+    margin-bottom: 20pt;
 }

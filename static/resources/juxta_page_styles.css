@@ -1,40 +1,16 @@
 @page {
-    size: 297mm 210mm;
-    margin-right: 15mm;
-    margin-left: 15mm;
-
+    size: 1008pt 720pt;
+    margin-right: 44pt;
+    margin-left: 44pt;
+    margin-bottom: 50pt;
+    margin-top: 40pt;
 }
 
-@page :right {
-    margin-top: 25mm;
-    margin-bottom: 15mm;
-    @bottom-center {
-        font-size: 9pt;
-        font-family: "Open Sans ExtraBold", sans-serif;
-        content: "Page " counter(page);
-    }
-}
-
-@page :left {
-    margin-top: 15mm;
-    margin-bottom: 25mm;
-    @top-center {
-        font-size: 9pt;
-        font-family: "Open Sans ExtraBold", sans-serif;
-        content: "Page " counter(page);
-    }
-}
-
-@page :blank {
-    @top-center {
-        content: none
-    }
-}
 
 body {
     font-size: 9pt;
     line-height: 10pt;
-    font-family: "Open Sans", sans-serif;
+    font-family: "Gentium Book Plus", serif;
 }
 
 p {
@@ -43,50 +19,60 @@ p {
 }
 
 h1 {
+    font-size: 14pt;
+    line-height: 20pt;
+    font-weight: bold;
+    margin: 0;
+}
+
+h2.phraseN {
     font-size: 9pt;
     line-height: 10pt;
-    font-family: "Open Sans ExtraBold", sans-serif;
     font-weight: bold;
-    text-align: left;
     margin: 0;
     padding-bottom: 3.5pt;
     margin-bottom: 5pt;
     border-bottom: solid 1.5pt black;
+    width: 388pt;
+    text-align: left;
 }
 
-.phraseN {
-    float: none;
-}
-
-.sentenceRef {
-    float: right;
+h2.sentenceRef {
+    font-size: 9pt;
+    line-height: 10pt;
+    font-weight: bold;
+    margin: 0;
+    padding-bottom: 3.5pt;
+    margin-bottom: 5pt;
+    border-bottom: solid 1.5pt black;
+    width: 388pt;
+    text-align: right;
 }
 
 .transAbbr {
-    font-family: "Open Sans SemiCondensed SemiBold", sans-serif;
+    font-family: "Gentium Book Plus", serif;
     font-weight: bold;
     font-style: italic;
     padding-right: 6pt;
-    text-decoration: underline;
-    text-decoration-thickness: 0.5pt;
 }
 
 .leftPane {
     display: inline-block;
-    width: 135mm;
+    width: 388pt;
     vertical-align: top;
-    padding-right: 2.5mm;
+    margin-right: 72pt;
 }
 
 .rightPane {
-    width: 127mm;
+    width: 388pt;
     height: 100%;
     display: inline-block;
-    padding-left: 2.5mm;
+    vertical-align: top;
+    margin-left: 72pt;
 }
 
 .rightPane table {
-    width: 127mm;
+    width: 388pt;
     border-collapse: collapse;
 }
 
@@ -97,48 +83,37 @@ h1 {
     padding-bottom: 10pt;
 }
 
-.firstLeft {
-    text-align: justify;
-    padding-left: 12pt;
-    text-indent: -12pt;
-}
-
-.otherLeft {
-    margin-top: 10pt;
+.firstLeft, .otherLeft {
     text-align: justify;
     padding-left: 12pt;
     text-indent: -12pt;
 }
 
 .greekLeft {
-    font-family: Cardo, serif;
 }
 
 .transLeft {
 }
 
 .jxlGreek {
-    width: 60mm;
-    font-family: Cardo, serif;
+    width: 188pt;
     text-align: right;
     vertical-align: baseline;
     margin: 0;
     padding: 0;
-    padding-right: 2pt;
+    padding-right: 6pt;
 
 }
 
 .jxlGloss {
-    width: 62mm;
-    font-family: "Open Sans", sans-serif;
+    width: 188pt;
     vertical-align: baseline;
-    padding-left: 3pt;
+    padding-left: 6pt;
 }
 
 .note_caller {
     font-weight: bold;
     font-size: 6pt;
-    font-family: "Open Sans ExtraBold", sans-serif;
     vertical-align: top;
     padding-left: 0.5em;
 }
@@ -152,7 +127,7 @@ h1 {
 .chapterNote {
     page-break-inside: avoid;
     break-before: page;
-    padding-bottom: 50pt;
+    padding-bottom: 20pt;
 }
 
 .bookNote {
@@ -161,35 +136,29 @@ h1 {
 
 .bookNoteBody {
     columns: 2;
-    column-gap: 36pt;
-    padding: 6pt;
-    background-color: #EEE;
+    column-gap: 144pt;
 }
 
 .chapterNoteBody {
     columns: 2;
-    column-gap: 36pt;
-    padding: 6pt;
-    background-color: #EEE;
+    column-gap: 144pt;
 }
 
 .note {
-    font-size: 8pt;
-    font-family: "Open Sans Condensed Light", sans-serif;
+    font-size: 7pt;
+    line-height: 10pt;
     padding-left: 1.2em;
     text-indent: -1.2em;
     text-align: justify;
 }
 
 .note .b {
-    font-family: "Open Sans Condensed", sans-serif;
-    font-weight: normal;
+    font-weight: bold;
 }
 
 .note_n {
     font-weight: bold;
     font-size: 6pt;
-    font-family: "Open Sans ExtraBold", sans-serif;
     vertical-align: top;
 }
 
@@ -202,12 +171,11 @@ h1 {
 }
 
 .note_h2 {
-    font-family: "Open Sans SemiBold", sans-serif;
+    font-weight: bold;
 }
 
 .note_h3 {
     margin-top: 10px;
-    font-family: "Open Sans", sans-serif;
     font-style: italic;
 }
 
@@ -221,7 +189,6 @@ h1 {
 
 .note_list1 {
     padding-left: 1em;
-    font-family: "Open Sans Condensed Light", sans-serif;
     font-weight: bold;
 }
 
@@ -230,7 +197,6 @@ h1 {
     list-style-type: circle;
     list-style-position: inside;
     padding-left: 2em;
-    font-family: "Open Sans Condensed Light", sans-serif;
 }
 .front {
     break-after: recto;
@@ -252,7 +218,6 @@ h1 {
     margin-bottom: 10pt;
     font-size: 9pt;
     line-height: 10pt;
-    font-family: "Open Sans SemiBold", sans-serif;
     font-weight: bold;
     font-style: italic;
     text-align: left;
@@ -269,6 +234,7 @@ h1 {
     text-align: left;
     font-family: Courrier, monospace;
     font-size: 8pt;
+    line-height: 10pt;
     margin-left: 72pt;
     margin-right: 72pt;
 }
@@ -288,7 +254,6 @@ h1 {
     margin-bottom: 10pt;
     font-size: 9pt;
     line-height: 10pt;
-    font-family: "Open Sans SemiBold", sans-serif;
     font-weight: bold;
     font-style: italic;
     text-align: left;
@@ -309,7 +274,7 @@ h1 {
     margin-bottom: 10pt;
 }
 .mode_emploi_image {
-    width: 128mm;
+    width: 350pt;
     padding: 3pt;
     border: solid 1pt black;
     margin-bottom: 20pt;

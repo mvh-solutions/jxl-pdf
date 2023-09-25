@@ -195,7 +195,7 @@ const bookName = getBookName(pk, config.docIdForNames, bookCode);
 const readTemplate = templateName => fse.readFileSync(path.join('src', 'templates', templateName + '.html')).toString();
 
 const templates = {};
-for (const template of ['index', 'sentence', 'firstLeft', 'otherLeft', 'jxl', 'jxlRow', 'chapterNote', 'bookNote', 'markdownPara']) {
+for (const template of ['juxta_page', 'sentence', 'firstLeft', 'otherLeft', 'jxl', 'jxlRow', 'chapterNote', 'bookNote', 'markdownPara']) {
     templates[template] = readTemplate(template);
 }
 console.log(`${jxlJson.length} Sentences:`);
@@ -268,7 +268,7 @@ for (const [sentenceN, sentenceJson] of jxlJson.entries()) {
                 `<section class="jxl_notes">${sentenceNotes.map((note, n) => `<p class="note"><span class="note_n">${n + 1}</span>&nbsp;:&nbsp;${note}</p>`).join('')}</section>`);
     sentences.push(sentence);
 }
-const index = templates.index
+const index = templates.juxta_page
     .replace('%%TITLE%%', `${bookCode} - ${configPath}`)
     .replace('%%SENTENCES%%', sentences.join(''));
 

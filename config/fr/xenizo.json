@@ -1,32 +1,33 @@
 {
-  "jxl": {
-    "path": "jxl"
-  },
   "docIdForNames": "fra_lsg",
+  "frontMatter": "fra_front",
+  "jxl": {
+    "path": "fra_jxl",
+    "notes": {
+      "pivot": "jxl2note",
+      "entries": "fra_tn"
+    }
+  },
   "lhs": [
-    {
-      "label": "GREC",
-      "type": "greek",
-      "id": "grc_ugnt",
-      "src": ""
-    },
     {
       "label": "SEGOND 1910",
       "type": "trans",
-      "id": "fr_lsg",
-      "src": ""
+      "id": "fra_lsg"
     },
     {
-      "label": "LITTÉRAL",
+      "label": "GREC",
+      "type": "greek",
+      "id": "grc_ugnt"
+    },
+    {
+      "label": "LITTÉRALE",
       "type": "trans",
-      "id": "fr_trlx",
-      "src": ""
+      "id": "fra_tlx"
     },
     {
       "label": "SÉMANTIQUE",
       "type": "trans",
-      "id": "fr_trsx",
-      "src": ""
+      "id": "fra_tsx"
     }
   ]
 }

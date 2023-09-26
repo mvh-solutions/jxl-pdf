@@ -23,6 +23,10 @@ h1 {
     line-height: 20pt;
     font-weight: bold;
     margin: 0;
+    margin-bottom: 6pt;
+    border-bottom: 2pt solid black;
+    padding-bottom: 2pt;
+    width: 388pt;
 }
 
 h2.phraseN {
@@ -84,7 +88,7 @@ h2.sentenceRef {
 }
 
 .firstLeft, .otherLeft {
-    text-align: justify;
+    text-align: left;
     padding-left: 12pt;
     text-indent: -12pt;
 }
@@ -128,10 +132,12 @@ h2.sentenceRef {
     page-break-inside: avoid;
     break-before: page;
     padding-bottom: 20pt;
+    font-family: "Open Sans", sans-serif;
 }
 
 .bookNote {
     break-after: page;
+    font-family: "Open Sans", sans-serif;
 }
 
 .bookNoteBody {
@@ -149,7 +155,7 @@ h2.sentenceRef {
     line-height: 10pt;
     padding-left: 1.2em;
     text-indent: -1.2em;
-    text-align: justify;
+    text-align: left;
 }
 
 .note .b {
@@ -184,7 +190,7 @@ h2.sentenceRef {
 }
 
 .note_body {
-    text-align: justify
+    text-align: left;
 }
 
 .note_list1 {
@@ -197,85 +203,4 @@ h2.sentenceRef {
     list-style-type: circle;
     list-style-position: inside;
     padding-left: 2em;
-}
-.front {
-    break-after: recto;
-}
-
-.front_body {
-    columns: 2;
-    column-gap: 36pt;
-    text-align: left;
-    break-after: page;
-}
-
-.front_body p {
-    margin-bottom: 10pt;
-}
-
-.front_body h2 {
-    margin: 0;
-    margin-bottom: 10pt;
-    font-size: 9pt;
-    line-height: 10pt;
-    font-weight: bold;
-    font-style: italic;
-    text-align: left;
-}
-.half_page {
-    break-after: recto;
-}
-.half_page h2 {
-    font-weight: bold;
-}
-.half_page .front_body {
-    margin-top: 50pt;
-    columns: 1;
-    text-align: left;
-    font-family: Courrier, monospace;
-    font-size: 8pt;
-    line-height: 10pt;
-    margin-left: 72pt;
-    margin-right: 72pt;
-}
-.half_page .front_body ul {
-    list-style-type: none;
-}
-.half_page .front_body ul li {
-    margin-bottom: 10pt;
-}
-.preface .front_body {
-    columns: 2;
-    column-gap: 36pt;
-    break-after: page;
-}
-.preface .front_body h2 {
-    margin: 0;
-    margin-bottom: 10pt;
-    font-size: 9pt;
-    line-height: 10pt;
-    font-weight: bold;
-    font-style: italic;
-    text-align: left;
-}
-.mode_emploi_figure {
-    columns: 2;
-    column-gap: 36pt;
-}
-
-.image_number {
-    font-weight: bold;
-    padding-right: 0.5em;
-}
-.mode_emploi_figure p {
-    text-align: justify;
-    padding-left: 1em;
-    text-indent: -1em;
-    margin-bottom: 10pt;
-}
-.mode_emploi_image {
-    width: 350pt;
-    padding: 3pt;
-    border: solid 1pt black;
-    margin-bottom: 20pt;
 }

@@ -1,33 +1,62 @@
 {
   "docIdForNames": "fra_lsg",
-  "frontMatter": "fra_front",
-  "jxl": {
-    "path": "fra_jxl",
-    "notes": {
-      "pivot": "jxl2note",
-      "entries": "fra_tn"
-    }
-  },
-  "lhs": [
+  "notes": "fra_tn",
+  "sections": [
     {
-      "label": "SEGOND 1910",
-      "type": "trans",
-      "id": "fra_lsg"
+      "id": "half",
+      "type": "front",
+      "path": "fra_front/half_page",
+      "styles": "non_juxta_page_styles"
     },
     {
-      "label": "GREC",
-      "type": "greek",
-      "id": "grc_ugnt"
+      "id": "preface",
+      "type": "front",
+      "path": "fra_front/preface",
+      "styles": "non_juxta_page_styles"
     },
     {
-      "label": "LITTÉRALE",
-      "type": "trans",
-      "id": "fra_tlx"
+      "id": "emploi",
+      "type": "front",
+      "path": "fra_front/mode_emploi",
+      "styles": "non_juxta_page_styles"
     },
     {
-      "label": "SÉMANTIQUE",
-      "type": "trans",
-      "id": "fra_tsx"
+      "id": "bookNotes",
+      "type": "bookNote",
+      "styles": "non_juxta_page_styles"
+    },
+    {
+      "id": "juxta",
+      "type": "jxlSpread",
+      "styles": "juxta_page_styles",
+      "jxl": {
+        "path": "fra_jxl",
+        "notes": {
+          "pivot": "jxl2note"
+        }
+      },
+      "lhs": [
+        {
+          "label": "SEGOND 1910",
+          "type": "trans",
+          "id": "fra_lsg"
+        },
+        {
+          "label": "GREC",
+          "type": "greek",
+          "id": "grc_ugnt"
+        },
+        {
+          "label": "LITTÉRALE",
+          "type": "trans",
+          "id": "fra_tlx"
+        },
+        {
+          "label": "SÉMANTIQUE",
+          "type": "trans",
+          "id": "fra_tsx"
+        }
+      ]
     }
   ]
 }

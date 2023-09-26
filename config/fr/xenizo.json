@@ -6,29 +6,34 @@
       "id": "half",
       "type": "front",
       "path": "fra_front/half_page",
-      "styles": "non_juxta_page_styles"
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto"
     },
     {
       "id": "preface",
       "type": "front",
       "path": "fra_front/preface",
-      "styles": "non_juxta_page_styles"
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto"
     },
     {
       "id": "emploi",
       "type": "front",
       "path": "fra_front/mode_emploi",
-      "styles": "non_juxta_page_styles"
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto"
     },
     {
       "id": "bookNotes",
       "type": "bookNote",
-      "styles": "non_juxta_page_styles"
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto"
     },
     {
       "id": "juxta",
       "type": "jxlSpread",
       "styles": "juxta_page_styles",
+      "startOn": "verso",
       "jxl": {
         "path": "fra_jxl",
         "notes": {

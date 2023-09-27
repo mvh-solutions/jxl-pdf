@@ -375,7 +375,7 @@ const doScript = async () => {
     const notesRows = fse.readFileSync(path.join('data', config.notes, `${bookCode}.tsv`)).toString().split("\n");
     for (const notesRow of notesRows) {
         const cells = notesRow.split('\t');
-        if (cells[2] === "intro") {
+        if (cells[1] === "front" && cells[2] === "intro") {
             const noteKey = `${cells[1]}_${cells[2]}`;
             notes[noteKey] = cells[6];
         }

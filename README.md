@@ -1,6 +1,10 @@
 # jxl-pdf
 Printable PDFs from Sundesmos Juxtalinear JSON
 
+## Installing the Fonts
+- https://fonts.google.com/specimen/Gentium+Book+Plus
+- https://fonts.google.com/specimen/Open+Sans
+
 ## Generating HTML and PDF
 ```
 # Install the script

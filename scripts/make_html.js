@@ -189,7 +189,7 @@ const doScript = async () => {
         await waitTillHTMLRendered(page);
         await page.pdf({
             path: pdfOutputPath,
-            format: orientation === 'landscape' ? 'A3' : 'A5',
+            format: orientation === 'landscape' ? 'A3' : 'A3',
             landscape: orientation === 'landscape',
             timeout: 300000
         }); // 5 minutes

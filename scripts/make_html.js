@@ -1,7 +1,6 @@
 const path = require("path");
 const fse = require("fs-extra");
 const {Proskomma} = require("proskomma-core");
-const {exit} = require("process");
 const puppeteer = require('puppeteer');
 
 const doScript = async () => {
@@ -148,7 +147,7 @@ const doScript = async () => {
         }
     }
 
-    const doPuppet = async (link, pdfOutputPath, orientation) => {
+    const doPuppet = async (serverPort, sectionId, pdfOutputPath, orientation) => {
 
         const waitTillHTMLRendered = async (page, timeout = 30000) => {
             const checkDurationMsecs = 1000;
@@ -181,7 +180,7 @@ const doScript = async () => {
         console.log(`     Running Puppet`);
         const browser = await puppeteer.launch({headless: "new"});
         const page = await browser.newPage();
-        await page.goto(link, {waitUntil: 'load'});
+        await page.goto(`http://localhost:${serverPort}/html/${outputDirName}/${sectionId}.html`, {waitUntil: 'load'});
         page.on("pageerror", function (err) {
                 theTempValue = err.toString();
                 console.log("Page error: " + theTempValue);
@@ -210,10 +209,10 @@ const doScript = async () => {
                 fse.readFileSync(path.resolve(path.join('data', `${section.path}.html`))).toString()
             )
         fse.writeFileSync(
-            path.join(outputPath, `${section.id}.html`),
+            path.join(outputPath, outputDirName, `${section.id}.html`),
             content
         );
-        await doPuppet('http://localhost:35955/html/newDir/' + section.id + '.html', path.resolve(path.join(outputPath, 'pdf', `${section.id}.pdf`)));
+        await doPuppet(serverPort, section.id, path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id}.pdf`)));
     }
 
     const doJxlSpreadSection = async (section, notes, notePivot) => {
@@ -315,21 +314,22 @@ const doScript = async () => {
             sentences.push(sentence);
         }
         fse.writeFileSync(
-            path.join(outputPath, `${section.id}.html`),
+            path.join(outputPath, outputDirName, `${section.id}.html`),
             templates['juxta_page']
                 .replace('%%TITLE%%', `${bookCode} - ${section.id} - ${section.type}`)
                 .replace('%%SENTENCES%%', sentences.join(''))
         );
         await doPuppet(
-            'http://localhost:35955/html/newDir/' + section.id + '.html',
-            path.resolve(path.join(outputPath, 'pdf', `${section.id}_double.pdf`)),
+            serverPort,
+            section.id,
+            path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id}.pdf`)),
             true
         );
     }
 
     const doBookNoteSection = async (section, notes, notePivot) => {
         fse.writeFileSync(
-            path.join(outputPath, `${section.id}.html`),
+            path.join(outputPath, outputDirName, `${section.id}.html`),
             templates['non_juxta_page']
                 .replace(
                     "%%TITLE%%",
@@ -340,19 +340,25 @@ const doScript = async () => {
                     maybeChapterNotes("front", "book", notes)
                 )
         );
-        await doPuppet('http://localhost:35955/html/newDir/' + section.id + '.html', path.resolve(path.join(outputPath, 'pdf', `${section.id}.pdf`)));
+        await doPuppet(
+            serverPort,
+            section.id,
+            path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id}.pdf`))
+        );
     }
 
 // Script
-    const usage = "USAGE: node make_html.js <configPath> <bookCode> <outputDir>";
-    if (process.argv.length !== 5) {
+    const usage = "USAGE: node make_html.js <configPath> <bookCode> <serverPort> <outputDirName>";
+    if (process.argv.length !== 6) {
         console.log(`Wrong number of arguments!\n${usage}`);
         process.exit(1);
     }
 
     const configPath = process.argv[2];
     const bookCode = process.argv[3];
-    const outputPath = path.resolve(process.argv[4]);
+    const serverPort = process.argv[4];
+    const outputDirName = process.argv[5];
+    const outputPath = path.resolve('static/html');
 
     const templates = {};
     for (const template of ['juxta_page', 'non_juxta_page', 'web_index_page', 'web_index_page_link', 'sentence', 'firstLeft', 'otherLeft', 'jxl', 'jxlRow', 'chapterNote', 'bookNote', 'markdownPara']) {
@@ -360,7 +366,7 @@ const doScript = async () => {
     }
 
     const config = fse.readJsonSync(path.resolve(configPath));
-    fse.mkdirsSync(path.join(outputPath, 'pdf'));
+    fse.mkdirsSync(path.join(outputPath, outputDirName, 'pdf'));
 
     let links = [];
     let notes = {};
@@ -401,12 +407,12 @@ const doScript = async () => {
         }
     }
     fse.writeFileSync(
-        path.join(outputPath, "index.html"),
+        path.join(outputPath, outputDirName, "index.html"),
         templates['web_index_page']
             .replace("%%LINKS%%", links.join("\n"))
     );
     fse.writeJsonSync(
-        path.join(outputPath, 'pdf', "manifest.json"),
+        path.join(outputPath, outputDirName, 'pdf', "manifest.json"),
         manifest
     )
 }

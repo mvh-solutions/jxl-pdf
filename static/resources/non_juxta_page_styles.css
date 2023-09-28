@@ -52,10 +52,44 @@ h1 {
     font-style: italic;
     text-align: left;
 }
-.half_page {}
+.half_page {
+    break-before: recto;
+}
 .half_page h2 {
     font-weight: bold;
 }
+.title_page {
+    text-align: center;
+    font-size: 14pt;
+    line-height: 18pt;
+}
+.title_page > h1 {
+    text-align: center;
+    font-size: 18pt;
+    border: none;
+    margin-bottom: 60pt;
+}
+
+.title_page > h3 {
+    text-align: center;
+    font-size: 14pt;
+    border: none;
+}
+
+h3.pub_details {
+    margin-top: 144pt;
+    font-weight: normal;
+    font-size: 12pt;
+}
+
+h3.descriptif {
+    margin-bottom: 60pt;
+}
+
+p.resource {
+    margin-bottom: 18pt;
+}
+
 .half_page .front_body {
     margin-top: 50pt;
     columns: 1;
@@ -166,4 +200,11 @@ h1 {
     list-style-type: circle;
     list-style-position: inside;
     padding-left: 2em;
+}
+
+.exp {
+    font-size: 70%;
+    vertical-align: baseline;
+    position: relative;
+    top: -0.5em;
 }

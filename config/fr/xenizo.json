@@ -7,33 +7,39 @@
       "type": "front",
       "path": "fra_front/half_page",
       "styles": "non_juxta_page_styles",
-      "startOn": "recto"
+      "startOn": "recto",
+      "showPageNumber": false
     },
     {
       "id": "preface",
       "type": "front",
       "path": "fra_front/preface",
       "styles": "non_juxta_page_styles",
-      "startOn": "recto"
+      "startOn": "recto",
+      "showPageNumber": true
     },
     {
       "id": "emploi",
       "type": "front",
       "path": "fra_front/mode_emploi",
       "styles": "non_juxta_page_styles",
-      "startOn": "recto"
+      "startOn": "recto",
+      "showPageNumber": true
     },
     {
       "id": "bookNotes",
       "type": "bookNote",
       "styles": "non_juxta_page_styles",
-      "startOn": "recto"
+      "startOn": "recto",
+      "showPageNumber": true
+
     },
     {
       "id": "juxta",
       "type": "jxlSpread",
       "styles": "juxta_page_styles",
       "startOn": "verso",
+      "showPageNumber": true,
       "jxl": {
         "path": "fra_jxl",
         "notes": {

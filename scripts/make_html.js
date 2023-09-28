@@ -390,6 +390,7 @@ const doScript = async () => {
             id: section.id,
             type: section.type,
             startOn: section.startOn,
+            showPageNumber: section.showPageNumber,
             makeFromDouble: section.type === "jxlSpread"
         })
         switch (section.type) {

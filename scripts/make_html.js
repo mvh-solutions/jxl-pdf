@@ -229,8 +229,11 @@ const doScript = async () => {
                 if (!notePivot[cells[0]]) {
                     notePivot[cells[0]] = {};
                 }
-                notePivot[cells[0]][cells[1]] = cells[4].trim();
-                pivotIds.add(cells[4].trim());
+                const noteIds = cells[4].split(";").map(n => n.trim());
+                notePivot[cells[0]][cells[1]] = noteIds;
+                for (const noteId of noteIds) {
+                    pivotIds.add(noteId);
+                }
             }
             const notesRows = fse.readFileSync(path.join('data', config.notes, `${bookCode}.tsv`)).toString().split("\n");
             for (const notesRow of notesRows) {
@@ -281,20 +284,23 @@ const doScript = async () => {
             let jxlRows = [];
             let sentenceNotes = [];
             for (const [chunkN, chunk] of sentenceJson.chunks.entries()) {
+                let noteN = [];
                 const greek = chunk.source.map(s => s.content).join(' ');
                 const gloss = chunk.gloss;
                 let noteFound = false;
                 if (notePivot[`${sentenceN + 1}`] && notePivot[`${sentenceN + 1}`][`${chunkN + 1}`]) {
                     noteFound = true;
-                    const noteId = notePivot[`${sentenceN + 1}`][`${chunkN + 1}`];
-                    sentenceNotes.push(
-                        cleanNoteLine(notes[noteId])
-                    );
+                    for (const noteId of notePivot[`${sentenceN + 1}`][`${chunkN + 1}`]) {
+                        sentenceNotes.push(
+                            cleanNoteLine(notes[noteId])
+                        );
+                        noteN.push(sentenceNotes.length);
+                    }
                 }
                 const row = templates.jxlRow
                     .replace('%%GREEK%%', greek)
                     .replace('%%GLOSS%%', gloss.replace(/\*([^*]+)\*/g, (m, m1) => `<i>${m1}</i>`))
-                    .replace('%%NOTECALLERS%%', (noteFound ? `<span class="note_caller">${sentenceNotes.length}</span>` : ""));
+                    .replace('%%NOTECALLERS%%', (noteFound ? `<span class="note_caller">${noteN.join(", ")}</span>` : ""));
                 jxlRows.push(row);
             }
             const jxl = templates.jxl

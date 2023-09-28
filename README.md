@@ -32,6 +32,12 @@ node scripts/make_html.js ./config/fr/xenizo.json PHP 1234 newDir
 cd python-jxl
 ./install_pyenv.sh
 
+source ~/.bashrc
+
+pyenv install -v 3.9.15
+
+pyenv virtualenv 3.9.15 cut_pdf
+
 pip install -r requirements.txt
 
 python cut_pdf.py

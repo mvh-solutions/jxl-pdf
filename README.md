@@ -24,3 +24,10 @@ node scripts/make_html.js ./config/fr/xenizo.json PHP 1234 newDir
 # View the HTML via the localhost browser under `html`. (Scripts won't work from
 # file explorer because of CORS.) The generated PDFs are in a subdirectory.
 ```
+
+## Generating the FULL PDF (python)
+
+```bash
+cd python-jxl
+python cut_pdf.py
+```

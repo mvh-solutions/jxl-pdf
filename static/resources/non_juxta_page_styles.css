@@ -53,7 +53,7 @@ h1 {
     text-align: left;
 }
 .half_page {
-    break-before: recto;
+    break-before: page;
 }
 .half_page h2 {
     font-weight: bold;

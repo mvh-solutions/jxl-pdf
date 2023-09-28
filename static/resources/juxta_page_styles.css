@@ -89,8 +89,7 @@ h2.sentenceRef {
 
 .firstLeft, .otherLeft {
     text-align: left;
-    padding-left: 12pt;
-    text-indent: -12pt;
+    margin-bottom: 5pt;
 }
 
 .greekLeft {
@@ -117,9 +116,11 @@ h2.sentenceRef {
 
 .note_caller {
     font-weight: bold;
-    font-size: 6pt;
-    vertical-align: top;
-    padding-left: 0.5em;
+    font-size: 70%;
+    vertical-align: baseline;
+    position: relative;
+    top: -0.5em;
+    padding-left: 1pt;
 }
 
 .jxl_notes {

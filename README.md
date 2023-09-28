@@ -28,8 +28,11 @@ node scripts/make_html.js ./config/fr/xenizo.json PHP 1234 newDir
 ## Generating the FULL PDF (python)
 
 ```bash
-pip install PyPDF2 reportlab
-
+# to install pyenv and activate all the requirements
 cd python-jxl
+./install_pyenv.sh
+
+pip install -r requirements.txt
+
 python cut_pdf.py
 ```

@@ -300,8 +300,9 @@ const doScript = async () => {
                 const row = templates.jxlRow
                     .replace('%%GREEK%%', greek)
                     .replace('%%GLOSS%%', gloss.replace(/\*([^*]+)\*/g, (m, m1) => `<i>${m1}</i>`))
-                    .replace('%%NOTECALLERS%%', (noteFound ? `<span class="note_caller">${noteN.join(", ")}</span>` : ""));
+                    .replace('%%NOTECALLERS%%', (noteFound ? `${sentenceNotes.map((note, n) => `<p class="note">${note}</p>`).join('')}` : ""));
                 jxlRows.push(row);
+                sentenceNotes = [];
             }
             const jxl = templates.jxl
                 .replace('%%ROWS%%', jxlRows.join('\n'));
@@ -316,7 +317,7 @@ const doScript = async () => {
                     '%%NOTES%%',
                     sentenceNotes.length === 0 ?
                         "" :
-                        `<section class="jxl_notes">${sentenceNotes.map((note, n) => `<p class="note"><span class="note_n">${n + 1}</span>&nbsp;:&nbsp;${note}</p>`).join('')}</section>`);
+                        ``);
             sentences.push(sentence);
         }
         fse.writeFileSync(

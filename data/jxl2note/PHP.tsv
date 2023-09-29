@@ -10,8 +10,8 @@
 1	10	καὶ Κυρίου Ἰησοῦ Χριστοῦ	et du-Seigneur Jésus Christ.	
 2	1	εὐχαριστῶ	Je remercie	
 2	2	τῷ Θεῷ μου	le Dieu de-moi	
-2	3	ἐπὶ πάσῃ τῇ μνείᾳ	dans chaque souvenir	PHP_1_3_ntp5
-2	4	ὑμῶν	de vous,	
+2	3	ἐπὶ πάσῃ τῇ μνείᾳ	dans chaque souvenir	
+2	4	ὑμῶν	de vous,	PHP_1_3_ntp5
 2	5	ἐν πάσῃ δεήσει μου	dans chaque prière de-moi,	
 2	6	ποιούμενος τὴν δέησιν	faisant ma prière	
 2	7	πάντοτε μετὰ χαρᾶς	toujours avec joie	
@@ -33,18 +33,17 @@
 2	23	φρονεῖν τοῦτο	*de* ressentir cela	
 2	24	ὑπὲρ ὑμῶν πάντων	pour vous tous	
 2	25	διὰ	à cause de	
-2	26	τὸ ἔχειν με	le fait-d'avoir quant-à-moi	PHP_1_7_sowf
+2	26	τὸ ἔχειν με	le fait-d'avoir quant-à-moi	
 2	27	ὑμᾶς	vous	
-2	28	ἐν τῇ καρδίᾳ	dans mon cœur	
+2	28	ἐν τῇ καρδίᾳ	dans mon cœur	PHP_1_7_sowf
 2	29	ὑμᾶς πάντας ὄντας	vous tous étant	
 2	30	συνκοινωνούς μου	participants-avec moi	
-2	31	τῆς χάριτος	de-la grâce	PHP_1_7_jn2s
+2	31	τῆς χάριτος	de-la grâce	
 2	32	τε	non seulement	
 2	33	ἔν τοῖς δεσμοῖς μου	dans les chaînes de-moi,	PHP_1_7_lrs1
 2	34	καὶ	mais encore	
 2	35	ἐν τῇ ἀπολογίᾳ	dans ma défense	
 2	36	καὶ βεβαιώσει τοῦ εὐαγγελίου	et *dans ma* consolidation de-l'évangile.	
-3	0			
 3	1	γάρ ὁ Θεός	Car Dieu	
 3	2	μάρτυς μου	*est* témoin de-moi,	PHP_1_8_sf3a
 3	3	ὡς	que	
@@ -56,7 +55,7 @@
 4	2	ἵνα	que	
 4	3	ἡ ἀγάπη ὑμῶν	l'amour de-vous	
 4	4	περισσεύῃ	abonde	PHP_1_9_l2jl
-4	5	ἔτι μᾶλλον καὶ μᾶλλον	de plus en plus	PHP_1_9_v2rw
+4	5	ἔτι μᾶλλον καὶ μᾶλλον	de plus en plus	
 4	6	ἐν ἐπιγνώσει	dans *la* connaissance	
 4	7	καὶ πάσῃ αἰσθήσει	et *dans* tout discernement,	PHP_1_9_l1cy
 4	8	εἰς τὸ δοκιμάζειν ὑμᾶς	pour le fait-de-distinguer quant-à-vous	PHP_1_10_e17g
@@ -66,11 +65,10 @@
 4	12	καὶ ἀπρόσκοποι	et sans-reproche	PHP_1_10_siv8
 4	13	εἰς ἡμέραν Χριστοῦ	pour *le* jour du-Christ,	
 4	14	πεπληρωμένοι	étant devenus pleins	
-4	15	καρπὸν δικαιοσύνης	*du* fruit de-justice	
+4	15	καρπὸν δικαιοσύνης	*du* fruit de-justice	PHP_1_11_lu5n
 4	16	τὸν	celui 	
-4	17	διὰ Ἰησοῦ Χριστοῦ	*qui vient* par Jésus Christ,	PHP_1_11_lu5n
+4	17	διὰ Ἰησοῦ Χριστοῦ	*qui vient* par Jésus Christ,	
 4	18	εἰς δόξαν καὶ ἔπαινον Θεοῦ	pour *la* gloire et *la* louange de-Dieu.	PHP_1_11_hwg1
-5	0			PHP_1_12_uyc6
 5	1	δὲ	Maintenant,	PHP_1_12_yrp2
 5	2	ἀδελφοί	frères,	PHP_1_12_tu2t
 5	3	βούλομαι ὑμᾶς γινώσκειν	je-veux *que* vous sachiez,	
@@ -94,46 +92,46 @@
 5	21	λαλεῖν τὸν λόγον ἀφόβως	annoncer la parole sans-peur.	PHP_1_14_gy47
 6	1	τινὲς μὲν	Plusieurs	
 6	2	καὶ καὶ	il est vrai	
-6	3	κηρύσσουσιν τὸν Χριστὸν	proclament le Christ	PHP_1_15_vw1s
-6	4	διὰ φθόνον καὶ ἔριν	par jalousie et rivalité,	PHP_1_15_f32h
+6	3	κηρύσσουσιν τὸν Χριστὸν	proclament le Christ	
+6	4	διὰ φθόνον καὶ ἔριν	par jalousie et rivalité,	
 6	5	δὲ τινὲς	mais d'autres	
-6	6	δι’ εὐδοκίαν	par bonne-intention.	PHP_1_15_v1sb
-7	1	οἱ μὲν	Ceux-ci	PHP_1_16_qf4p
+6	6	δι’ εὐδοκίαν	par bonne-intention.	
+7	1	οἱ μὲν	Ceux-ci	
 7	2	ἐξ ἀγάπης	*proclament le Christ* par amour	
 7	3	εἰδότες ὅτι	sachant que	
 7	4	κεῖμαι	je suis établi	PHP_1_16_ttr2
 7	5	εἰς ἀπολογίαν τοῦ εὐαγγελίου	pour *la* défense de-l'évangile,	PHP_1_16_st7k
-7	6	δὲ οἱ	mais ceux-là	PHP_1_17_eq7s
+7	6	δὲ οἱ	mais ceux-là	
 7	7	καταγγέλλουσιν τὸν Χριστὸν	proclament-ouvertement le Christ	
 7	8	ἐξ ἐριθείας	par ambition,	
 7	9	οἰόμενοι	pensant	
 7	10	οὐχ ἁγνῶς	pas purement	
 7	11	ἐγείρειν θλῖψιν	élever une-tribulation	
 7	12	τοῖς δεσμοῖς μου	dans-les chaînes de-moi.	PHP_1_17_z8ty
-8	1	τί γάρ	Quoi en-effet ?	PHP_1_18_z5ia;PHP_1_17_z8ty;PHP_1_18_wnn0
-9	1	πλὴν ὅτι	*La* seule *chose qui compte, c'est* que	PHP_1_18_ah9v
+8	1	τί γάρ	Quoi en-effet ?	PHP_1_18_z5ia
+9	1	πλὴν ὅτι	*La* seule *chose qui compte, c'est* que	
 9	2	παντὶ τρόπῳ	de-toute manière,	
 9	3	εἴτε προφάσει εἴτε ἀληθείᾳ	soit par-prétexte, soit par-vérité,	
 9	4	Χριστὸς καταγγέλλεται	Christ est-proclamé-ouvertement	
-9	5	καὶ ἐν τούτῳ χαίρω	et en cela je-me-réjouis,	PHP_1_18_c8tr
+9	5	καὶ ἐν τούτῳ χαίρω	et en cela je-me-réjouis,	
 9	6	ἀλλὰ καὶ	mais encore	
-9	7	χαρήσομαι	je me réjouirai.	PHP_1_18_cf58
+9	7	χαρήσομαι	je me réjouirai.	
 10	1	γὰρ οἶδα ὅτι	Car je-sais que	
-10	2	τοῦτό ἀποβήσεται μοι	cela aboutira pour-moi	PHP_1_19_qp81
+10	2	τοῦτό ἀποβήσεται μοι	cela aboutira pour-moi	
 10	3	εἰς σωτηρίαν	au salut	PHP_1_19_h9hf
 10	4	διὰ τῆς δεήσεως ὑμῶν	à-travers la prière de-vous,	
-10	5	καὶ ἐπιχορηγίας	et *à travers l'* assistance	PHP_1_19_x3fs
-10	6	τοῦ Πνεύματος Ἰησοῦ Χριστοῦ	de-l'Esprit de-Jésus Christ	PHP_1_19_c48j
+10	5	καὶ ἐπιχορηγίας	et *à travers l'* assistance	
+10	6	τοῦ Πνεύματος Ἰησοῦ Χριστοῦ	de-l'Esprit de-Jésus Christ	
 10	7	κατὰ τὴν ἀποκαραδοκίαν	selon ma ferme-assurance	
 10	8	καὶ ἐλπίδα μου	et *l'* espoir de-moi,	PHP_1_20_fh48
 10	9	ὅτι αἰσχυνθήσομαι ἐν οὐδενὶ	que je-n'aurai-honte de rien,	
-10	10	ἀλλ’ ἐν πάσῃ παρρησίᾳ	mais *qu'* en toute assurance,	PHP_1_20_tk7l
+10	10	ἀλλ’ ἐν πάσῃ παρρησίᾳ	mais *qu'* en toute assurance,	
 10	11	ὡς νῦν καὶ πάντοτε	maintenant comme toujours,	
 10	12	Χριστὸς μεγαλυνθήσεται	Christ sera-glorifié	
-10	13	ἐν τῷ σώματί μου	à-travers le corps de-moi,	PHP_1_20_jz1z;PHP_1_20_t8z9
+10	13	ἐν τῷ σώματί μου	à-travers le corps de-moi,	PHP_1_20_jz1z
 10	14	εἴτε διὰ ζωῆς	soit à-travers *ma* vie	
 10	15	εἴτε διὰ θανάτου	soit à-travers *ma* mort.	PHP_1_20_y78k
-11	1	γὰρ ἐμοὶ	Car pour-moi	PHP_1_21_p9b7
+11	1	γὰρ ἐμοὶ	Car pour-moi	
 11	2	τὸ ζῆν Χριστὸς	le *fait de* vivre *c'est* Christ,	PHP_1_21_sxt5
 11	3	καὶ τὸ ἀποθανεῖν κέρδος	et le *fait-de* mourir *c'est* un-gain.	PHP_1_21_n3jd
 12	1	δὲ	Cependant	
@@ -168,12 +166,12 @@
 16	6	εἴτε ἀπὼν	soit *moi* absent,	
 16	7	ἀκούω τὰ περὶ ὑμῶν	j'entende cela à-propos-de vous,	
 16	8	ὅτι στήκετε ἐν ἑνὶ πνεύματι	que vous-restez-ferme en un-seul esprit,	PHP_1_27_cd3b
-16	9	συναθλοῦντες μιᾷ ψυχῇ	combattant d'une-seule âme	PHP_1_27_jey6;PHP_1_27_ej2s
+16	9	συναθλοῦντες μιᾷ ψυχῇ	combattant d'une-seule âme	
 16	10	τῇ πίστει τοῦ εὐαγγελίου	pour-la foi de-l'évangile ;	PHP_1_27_ya3h
 16	11	καὶ μὴ πτυρόμενοι	et n'étant-effrayés	
 16	12	ἐν μηδενὶ	en rien	PHP_1_28_i9yt
 16	13	ὑπὸ τῶν ἀντικειμένων	par les opposants,	
-16	14	ἔνδειξις ἥτις ἐστὶν αὐτοῖς	*ce sera* un-signe qui est pour-eux	
+16	14	ἔνδειξις ἥτις ἐστὶν αὐτοῖς	*ce sera* un-signe qui est pour-eux	PHP_1_28_l495
 16	15	ἀπωλείας	*un signe* de-ruine,	
 16	16	δὲ σωτηρίας ὑμῶν	mais *un signe* du-salut de-nous,	
 16	17	καὶ τοῦτο ἀπὸ Θεοῦ	et cela de-la-part de-Dieu ;	PHP_1_28_nb4b
@@ -199,8 +197,8 @@
 17	9	ἔχοντες τὴν αὐτὴν ἀγάπην	ayant le même amour,	
 17	10	σύνψυχοι	*étant* d'une même âme,	
 17	11	φρονοῦντες τὸ ἓν	ayant un seul *avis*.	
-18	1	μηδὲν κατ’ ἐριθείαν	*Ne faites* rien par ambition,	PHP_2_3_y1le
-18	2	μηδὲ κατὰ κενοδοξίαν	ni par vaine-gloire,	
+18	1	μηδὲν κατ’ ἐριθείαν	*Ne faites* rien par ambition,	
+18	2	μηδὲ κατὰ κενοδοξίαν	ni par vaine-gloire,	PHP_2_3_y1le
 18	3	ἀλλὰ τῇ ταπεινοφροσύνῃ	mais par-humilité	
 18	4	ἡγούμενοι ἀλλήλους	pensant les-uns-les-autres	
 18	5	ὑπερέχοντας ἑαυτῶν	être-supérieurs à-vous-mêmes,	
@@ -208,38 +206,38 @@
 18	7	τὰ ἑαυτῶν	les *intérêts* d'eux-mêmes,	
 18	8	ἀλλὰ	mais	
 18	9	ἕκαστοι καὶ	chacun *de vous considérant* aussi	
-18	10	τὰ ἑτέρων	les *intérêts* des-autres.	PHP_2_4_ezk6
+18	10	τὰ ἑτέρων	les *intérêts* des-autres.	
 19	1	φρονεῖτε ἐν ὑμῖν	Pensez en vous	
 19	2	τοῦτο ὃ καὶ	cet *état d'esprit* qui *était* aussi	
 19	3	ἐν Χριστῷ Ἰησοῦ	en Christ Jésus ;	PHP_2_5_rh98
 19	4	ὃς ὑπάρχων	*Jésus* qui existant	
 19	5	ἐν μορφῇ Θεοῦ	en forme de-Dieu,	PHP_2_6_hs4q
 19	6	οὐχ ἡγήσατο	n'a pas considéré	
-19	7	τὸ εἶναι ἴσα Θεῷ	le fait-d'être égal à-Dieu	PHP_2_6_els2
-19	8	ἁρπαγμὸν	*comme* un prix à arracher,	
+19	7	τὸ εἶναι ἴσα Θεῷ	le fait-d'être égal à-Dieu	
+19	8	ἁρπαγμὸν	*comme* un prix à arracher,	PHP_2_6_els2
 19	9	ἀλλὰ ἐκένωσεν	mais a-vidé	
 19	10	ἑαυτὸν	lui-même	PHP_2_7_yu25
 19	11	λαβών μορφὴν δούλου	prenant une-forme de-serviteur,	
 19	12	γενόμενος	devenant	
-19	13	ἐν ὁμοιώματι ἀνθρώπων	dans l'apparence des-humains	PHP_2_7_tc8n
+19	13	ἐν ὁμοιώματι ἀνθρώπων	dans l'apparence des-humains	
 20	1	καὶ εὑρεθεὶς	Et ayant-été-trouvé	
 20	2	σχήματι	quant à son apparence	
 20	3	ὡς ἄνθρωπος	en-tant-qu' humain,	
 20	4	ἐταπείνωσεν ἑαυτὸν	il-a-humilié lui-même,	
 20	5	γενόμενος ὑπήκοος μέχρι θανάτου	devenant obéissant jusqu'à *la* mort,	PHP_2_8_t8a6
-20	6	δὲ θανάτου σταυροῦ	même *la* mort sur-la-croix.	PHP_2_8_hi57
+20	6	δὲ θανάτου σταυροῦ	même *la* mort sur-la-croix.	
 21	1	διὸ καὶ	C'est-pourquoi aussi	
 21	2	ὁ Θεὸς ὑπερύψωσεν αὐτὸν	Dieu a-grandement-exalté lui,	
 21	3	καὶ ἐχαρίσατο	et il-a-accordé-gracieusement	
 21	4	αὐτῷ	à lui	
 21	5	τὸ ὄνομα	le nom	
-21	6	τὸ ὑπὲρ πᾶν ὄνομα	celui au-dessus-de tout nom,	PHP_2_9_mvb7;PHP_2_9_qsy9
-21	7	ἵνα ἐν τῷ ὀνόματι Ἰησοῦ	afin-qu' au nom de-Jésus,	PHP_2_10_tk45
+21	6	τὸ ὑπὲρ πᾶν ὄνομα	celui au-dessus-de tout nom,	PHP_2_9_mvb7
+21	7	ἵνα ἐν τῷ ὀνόματι Ἰησοῦ	afin-qu' au nom de-Jésus,	
 21	8	πᾶν γόνυ	tout genou	
 21	9	ἐπουρανίων	des hommes qui sont dans le ciel	
 21	10	καὶ ἐπιγείων	et des-hommes-qui-sont-sur-la-terre	
 21	11	καὶ καταχθονίων	et des-hommes-qui-sont-sous-la-terre	PHP_2_10_kfb4
-21	12	κάμψῃ	plie	
+21	12	κάμψῃ	plie	PHP_2_10_tk45
 21	13	καὶ πᾶσα γλῶσσα	et *que* toute langue	PHP_2_11_xy4f
 21	14	ἐξομολογήσηται ὅτι	reconnaisse que	
 21	15	Ἰησοῦς Χριστὸς Κύριος	Jésus Christ *est* Seigneur,	
@@ -251,16 +249,16 @@
 22	5	τὴν σωτηρίαν ἑαυτῶν	le salut de-vous-mêmes,	PHP_2_12_j897
 22	6	μετὰ φόβου καὶ τρόμου	avec crainte et tremblement,	PHP_2_12_cm1s
 22	7	μὴ μόνον	non seulement	
-22	8	ὡς ἐν τῇ παρουσίᾳ μου	comme en la présence de-moi,	PHP_2_12_c1ix
+22	8	ὡς ἐν τῇ παρουσίᾳ μου	comme en la présence de-moi,	
 22	9	ἀλλὰ νῦν	mais maintenant	
 22	10	πολλῷ μᾶλλον	beaucoup plus	
-22	11	ἐν τῇ ἀπουσίᾳ μου	en l' absence de-moi.	PHP_2_12_u5ng
+22	11	ἐν τῇ ἀπουσίᾳ μου	en l' absence de-moi.	
 23	1	γάρ Θεὸς ἐστιν	Car Dieu est	
 23	2	ὁ ἐνεργῶν	celui mettant-en-œuvre	
 23	3	καὶ τὸ θέλειν	et le fait-de-vouloir,	
 23	4	καὶ τὸ ἐνεργεῖν	et le fait-d'être-à-l'œuvre,	
 23	5	ἐν ὑμῖν	en vous,	
-23	6	ὑπὲρ τῆς εὐδοκίας	selon son plaisir.	PHP_2_13_m6b8
+23	6	ὑπὲρ τῆς εὐδοκίας	selon son plaisir.	
 24	1	ποιεῖτε πάντα	Faites toutes-choses	
 24	2	χωρὶς γογγυσμῶν καὶ διαλογισμῶν	sans murmures ni contestations,	
 24	3	ἵνα γένησθε	afin-que vous-deveniez	
@@ -271,7 +269,7 @@
 24	8	ἐν οἷς	parmi qui	
 24	9	φαίνεσθε	vous brillez	
 24	10	ὡς φωστῆρες ἐν κόσμῳ	comme des-flambeaux dans l'univers,	PHP_2_15_p71u
-24	11	ἐπέχοντες λόγον ζωῆς	portant *la* parole de-vie	PHP_2_16_u3qb;PHP_2_16_eq86
+24	11	ἐπέχοντες λόγον ζωῆς	portant *la* parole de-vie	PHP_2_16_u3qb
 24	12	εἰς καύχημα ἐμοὶ	pour la-gloire à-moi	
 24	13	εἰς ἡμέραν Χριστοῦ	au jour de-Christ,	PHP_2_16_q7y8
 24	14	ὅτι	parce que	
@@ -291,7 +289,7 @@
 25	3	χαίρετε τὸ αὐτὸ	réjouissez-vous de-la même-manière	
 25	4	καὶ συνχαίρετέ μοι	et réjouissez-vous-avec moi.	
 26	1	δὲ ἐλπίζω	Et j'espère	
-26	2	ἐν Κυρίῳ Ἰησοῦ	dans le-Seigneur Jésus,	PHP_2_19_gml9
+26	2	ἐν Κυρίῳ Ἰησοῦ	dans le-Seigneur Jésus,	
 26	3	πέμψαι ταχέως ὑμῖν Τιμόθεον	envoyer bientôt à-vous Timothée,	
 26	4	ἵνα	afin que	
 26	5	κἀγὼ	moi aussi	
@@ -300,7 +298,7 @@
 26	8	τὰ περὶ ὑμῶν	les *choses* au-sujet-de vous.	
 27	1	γὰρ	Car	
 27	2	ἔχω οὐδένα	je n'ai personne	
-27	3	ἰσόψυχον	ayant les mêmes sentiments,	PHP_2_20_d9mw
+27	3	ἰσόψυχον	ayant les mêmes sentiments,	
 27	4	ὅστις	qui	
 27	5	μεριμνήσει γνησίως	s'inquiétera fidèlement	
 27	6	τὰ περὶ ὑμῶν	des *choses* au-sujet-de vous.	
@@ -323,7 +321,7 @@
 30	8	δὲ	mais de l'autre,	
 30	9	πέποιθα ἐν Κυρίῳ	j'ai-confiance dans *le* Seigneur,	
 30	10	ὅτι αὐτὸς καὶ	que moi-même aussi	
-30	11	ἐλεύσομαι ταχέως	je-viendrai bientôt.	PHP_2_24_yn62
+30	11	ἐλεύσομαι ταχέως	je-viendrai bientôt.	
 31	1	δὲ ἡγησάμην ἀναγκαῖον	Et j'ai-estimé nécessaire	
 31	2	πέμψαι πρὸς ὑμᾶς	envoyer vers vous,	
 31	3	Ἐπαφρόδιτον	Épaphrodite,	PHP_2_25_k4wz
@@ -332,11 +330,11 @@
 31	6	καὶ συνστρατιώτην μου	et compagnon-de-combat de-moi,	PHP_2_25_c3ce
 31	7	δὲ ἀπόστολον	et apôtre *de vous*	
 31	8	καὶ λειτουργὸν ὑμῶν	et serviteur de-vous	
-31	9	τῆς χρείας μου	du besoin de-moi,	PHP_2_25_qsd6
+31	9	τῆς χρείας μου	du besoin de-moi,	
 31	10	ἐπειδὴ	puisque	
 31	11	ἦν ἐπιποθῶν	il-était désirant	
 31	12	ὑμᾶς πάντας	vous tous,	
-31	13	καὶ ἀδημονῶν	et s'angoissant,	PHP_2_26_gxn9
+31	13	καὶ ἀδημονῶν	et s'angoissant,	
 31	14	διότι	parce que	
 31	15	ἠκούσατε	vous avez entendu	
 31	16	ὅτι ἠσθένησεν	qu' il-a-été-malade.	
@@ -356,7 +354,7 @@
 33	5	ἰδόντες πάλιν	voyant à-nouveau	
 33	6	αὐτὸν	lui,	
 33	7	κἀγὼ	et *que* moi	
-33	8	ὦ ἀλυπότερος	je-sois moins-triste.	PHP_2_28_y5gc
+33	8	ὦ ἀλυπότερος	je-sois moins-triste.	
 34	1	οὖν	Donc	
 34	2	προσδέχεσθε αὐτὸν	accueillez lui	PHP_2_29_y95x
 34	3	ἐν Κυρίῳ	dans *le* Seigneur	
@@ -373,7 +371,7 @@
 34	14	τῆς λειτουργίας	du service	
 34	15	πρός με	envers moi.	PHP_2_30_g98z
 35	1	τὸ λοιπόν	Au reste,	
-35	2	ἀδελφοί μου	frères de-moi,	PHP_3_1_zu9l;PHP_3_1_s3bx
+35	2	ἀδελφοί μου	frères de-moi,	PHP_3_1_zu9l
 35	3	χαίρετε ἐν Κυρίῳ	réjouissez-vous dans *le* Seigneur.	PHP_3_1_ymm2
 36	1	γράφειν ὑμῖν	Écrire à-vous	
 36	2	τὰ αὐτὰ	les mêmes *choses*,	
@@ -381,12 +379,12 @@
 36	4	ἐμοὶ μὲν	pour-moi d'un-côté,	
 36	5	ὑμῖν δὲ	pour-vous de-l'autre	
 36	6	ἀσφαλές	*c'est une* sûreté.	PHP_3_1_qb78
-37	1	βλέπετε τοὺς κύνας	Prenez-garde aux chiens ;	PHP_3_2_ny6y;PHP_3_2_yeax;PHP_3_2_yr9n
+37	1	βλέπετε τοὺς κύνας	Prenez-garde aux chiens ;	PHP_3_2_yeax
 37	2	βλέπετε τοὺς κακοὺς ἐργάτας	prenez-garde aux mauvais ouvriers ;	
-37	3	βλέπετε τὴν κατατομήν	prenez-garde à-la circoncision.	PHP_3_2_x8r2;PHP_3_2_cka6
+37	3	βλέπετε τὴν κατατομήν	prenez-garde à-la circoncision.	PHP_3_2_cka6
 38	1	γάρ	Car	
 38	2	ἡμεῖς ἐσμεν	nous nous-sommes	PHP_3_3_y8yt
-38	3	ἡ περιτομή	la circoncision,	PHP_3_2_zin8;PHP_3_3_xt5r
+38	3	ἡ περιτομή	la circoncision,	PHP_3_3_xt5r
 38	4	οἱ λατρεύοντες	ceux servant	
 38	5	Πνεύματι Θεοῦ	à-l'Esprit de-Dieu	
 38	6	καὶ καυχώμενοι	et se-glorifiant	
@@ -399,9 +397,9 @@
 39	1	εἴ τις ἄλλος	Si quelqu'un d'autre	
 39	2	δοκεῖ	pense	
 39	3	πεποιθέναι ἐν σαρκί	avoir-confiance dans *la* chair ;	
-39	4	ἐγὼ μᾶλλον	*alors* moi plus *que lui* :	PHP_3_4_u4f1;PHP_3_4_upw5
-39	5	περιτομῇ	par la circoncision	PHP_3_5_yq98
-39	6	ὀκταήμερος	*quand j'étais* âgé-de-huit-jours	PHP_3_5_am85
+39	4	ἐγὼ μᾶλλον	*alors* moi plus *que lui* :	PHP_3_4_upw5
+39	5	περιτομῇ	par la circoncision	
+39	6	ὀκταήμερος	*quand j'étais* âgé-de-huit-jours	
 39	7	ἐκ γένους Ἰσραήλ	de *la* race d'Israël	
 39	8	φυλῆς Βενιαμείν	*de la* tribu de-Benjamin,	
 39	9	Ἑβραῖος ἐξ Ἑβραίων	Hébreu *né* de *parents* Hébreux,	PHP_3_5_p4ik
@@ -411,30 +409,30 @@
 39	13	γενόμενος ἄμεμπτος	devenu irréprochable	
 39	14	κατὰ δικαιοσύνην	selon *la* justice	
 39	15	τὴν ἐν νόμῳ	celle dans *la* loi.	PHP_3_6_hln8
-40	1	ἅτινα	*Les* choses qui	
+40	1	ἅτινα	*Les* choses qui	PHP_3_7_n4lg
 40	2	ἦν μοι	étaient pour-moi	
-40	3	κέρδη	un gain,	PHP_3_7_n4lg
+40	3	κέρδη	un gain,	
 40	4	ἥγημαι	j'ai pensé	
-40	5	ταῦτα ζημίαν	ces *choses être* une-perte	PHP_3_7_lb8f;PHP_3_8_e1fp
+40	5	ταῦτα ζημίαν	ces *choses être* une-perte	PHP_3_7_lb8f
 40	6	διὰ τὸν Χριστὸν	à-cause du Christ.	
 41	1	ἀλλὰ μενοῦνγε	Mais en-plus	
 41	2	καὶ	aussi	
 41	3	ἡγοῦμαι πάντα	je-pense toutes *choses*	
-41	4	εἶναι ζημίαν	être une-perte	
+41	4	εἶναι ζημίαν	être une-perte	PHP_3_8_e1fp
 41	5	διὰ τὸ ὑπερέχον	à-cause-de l' excellence	
-41	6	τῆς γνώσεως Χριστοῦ Ἰησοῦ	de-la connaissance du-Christ Jésus	PHP_3_8_cv55
+41	6	τῆς γνώσεως Χριστοῦ Ἰησοῦ	de-la connaissance du-Christ Jésus	
 41	7	τοῦ Κυρίου μου	le Seigneur de-moi,	
 41	8	δι’ ὃν	à-cause-de qui	
 41	9	ἐζημιώθην	j'ai éprouvé la perte	
 41	10	τὰ πάντα	de toutes-les-choses	
 41	11	καὶ ἡγοῦμαι	et je-pense	
 41	12	σκύβαλα	*que toutes ces choses sont* des déchets,	
-41	13	ἵνα κερδήσω Χριστὸν	afin-que je-gagne Christ,	PHP_3_8_afs4
+41	13	ἵνα κερδήσω Χριστὸν	afin-que je-gagne Christ,	
 41	14	καὶ εὑρεθῶ	et *que* je-sois-trouvé	
 41	15	ἐν αὐτῷ	en lui,	PHP_3_9_iy4k
 41	16	μὴ ἔχων	n'ayant pas	
 41	17	ἐμὴν δικαιοσύνην	ma *propre* justice,	
-41	18	τὴν ἐκ νόμου	celle de *la* loi,	PHP_3_9_g9a9
+41	18	τὴν ἐκ νόμου	celle de *la* loi,	
 41	19	ἀλλὰ τὴν	mais celle	
 41	20	διὰ πίστεως Χριστοῦ	*qui vient* à-travers *la* foi en-Christ	PHP_3_9_qw6g
 41	21	τὴν δικαιοσύνην ἐκ Θεοῦ	la justice *qui vient* de Dieu	
@@ -443,21 +441,21 @@
 41	24	καὶ τὴν δύναμιν	et la puissance	PHP_3_10_vj4s
 41	25	τῆς ἀναστάσεως αὐτοῦ	de-la résurrection de-lui,	
 41	26	καὶ κοινωνίαν	et la-participation	
-41	27	παθημάτων αὐτοῦ	aux-souffrances de-lui,	PHP_3_10_xm68
+41	27	παθημάτων αὐτοῦ	aux-souffrances de-lui,	
 41	28	συμμορφιζόμενος	étant devenu conforme	
 41	29	τῷ θανάτῳ αὐτοῦ	à-la mort de-lui,	PHP_3_10_xw42
-41	30	εἴ πως	si d'une-certaine-manière	
+41	30	εἴ πως	si d'une-certaine-manière	PHP_3_11_l4rm
 41	31	καταντήσω	je parviens	
 41	32	εἰς τὴν ἐξανάστασιν	à la résurrection	
-41	33	τὴν ἐκ νεκρῶν	celle *d'* entre *les* morts.	PHP_3_11_l4rm
+41	33	τὴν ἐκ νεκρῶν	celle *d'* entre *les* morts.	
 42	1	οὐχ ὅτι	*Je* ne *dis* pas que	
-42	2	ἔλαβον ἤδη	j'ai-attrapé *tout cela* déjà,	PHP_3_12_xk5q;PHP_3_12_ms3v
-42	3	ἢ τετελείωμαι ἤδη	ou *que* j'ai-atteint-la-perfection déjà ;	PHP_3_12_h8p7
+42	2	ἔλαβον ἤδη	j'ai-attrapé *tout cela* déjà,	PHP_3_12_xk5q
+42	3	ἢ τετελείωμαι ἤδη	ou *que* j'ai-atteint-la-perfection déjà ;	PHP_3_12_h8p7;PHP_3_12_ms3v
 42	4	δὲ διώκω	mais je-poursuis-la-course,	PHP_3_12_i5ld
 42	5	εἰ καταλάβω καὶ	si j'obtiens aussi,	
 42	6	ἐφ’ ᾧ	*ce* pour quoi	
-42	7	κατελήμφθην καὶ	j'ai-été-saisi *moi* aussi	
-42	8	ὑπὸ Χριστοῦ Ἰησοῦ	par Christ Jésus.	PHP_3_12_m52v;PHP_3_12_fr9q
+42	7	κατελήμφθην καὶ	j'ai-été-saisi *moi* aussi	PHP_3_12_m52v
+42	8	ὑπὸ Χριστοῦ Ἰησοῦ	par Christ Jésus.	PHP_3_12_fr9q
 43	1	ἀδελφοί	Frères,	PHP_3_13_tzg8
 43	2	ἐγὼ οὐ λογίζομαι	moi je ne pense pas	
 43	3	ἐμαυτὸν κατειληφέναι	moi avoir-obtenu *tout cela*	PHP_3_13_kqk7
@@ -468,9 +466,9 @@
 43	8	ἐπεκτεινόμενος	tendant vers	
 43	9	τοῖς ἔμπροσθεν	les *choses* devant,	PHP_3_13_ia2b
 43	10	διώκω κατὰ σκοπὸν	je-poursuis-la-course vers le-but	
-43	11	εἰς τὸ βραβεῖον	pour *obtenir* le prix	
+43	11	εἰς τὸ βραβεῖον	pour *obtenir* le prix	PHP_3_14_lmr6
 43	12	τῆς κλήσεως	de-l' appel	
-43	13	ἄνω	d'en haut	PHP_3_14_lmr6
+43	13	ἄνω	d'en haut	
 43	14	τοῦ Θεοῦ ἐν Χριστῷ Ἰησοῦ	de Dieu en Christ Jésus.	PHP_3_14_z39s
 44	1	οὖν	Donc,	
 44	2	ὅσοι τέλειοι	autant-que *nous sommes* accomplis,	
@@ -481,7 +479,7 @@
 44	7	ὁ Θεὸς	Dieu	
 44	8	ἀποκαλύψει	révèlera	
 44	9	τοῦτο καὶ	cela aussi	
-44	10	ὑμῖν	à vous.	PHP_3_15_yy22
+44	10	ὑμῖν	à vous.	
 45	1	πλὴν	Seulement	
 45	2	εἰς ὃ	*en considérant* vers quoi	
 45	3	ἐφθάσαμεν	nous sommes *déjà* arrivés,	PHP_3_16_pxn9
@@ -495,13 +493,13 @@
 46	6	οὕτω καθὼς	ainsi que	
 46	7	ἔχετε	vous avez	
 46	8	ἡμᾶς	nous	
-46	9	τύπον	*comme* modèle.	PHP_3_17_h4tv
+46	9	τύπον	*comme* modèle.	
 47	1	γὰρ	Car	
 47	2	πολλοὶ περιπατοῦσιν	beaucoup marchent	PHP_3_18_ab61
 47	3	οὓς πολλάκις	dont souvent	
-47	4	ἔλεγον ὑμῖν	je-parlais à-vous,	PHP_3_18_zwp3
+47	4	ἔλεγον ὑμῖν	je-parlais à-vous,	
 47	5	δὲ νῦν λέγω	mais *dont* maintenant je-parle	
-47	6	καὶ κλαίων	aussi *en* pleurant,	PHP_3_18_h6pc
+47	6	καὶ κλαίων	aussi *en* pleurant,	
 47	7	τοὺς ἐχθροὺς τοῦ σταυροῦ τοῦ Χριστοῦ	les ennemis de-la croix du Christ ;	PHP_3_18_n8q2
 47	8	ὧν τὸ τέλος	desquels la fin	
 47	9	ἀπώλεια	*est la* ruine,	PHP_3_19_v8gv
@@ -522,15 +520,14 @@
 48	9	ὃς μετασχηματίσει	qui transfigurera	
 48	10	τὸ σῶμα τῆς ταπεινώσεως ἡμῶν	le corps de-l' humiliation de-nous,	PHP_3_21_eye2
 48	11	σύμμορφον	conforme	
-48	12	τῷ σώματι τῆς δόξης αὐτοῦ	au corps de-la gloire de-lui,	PHP_3_21_b2bc
+48	12	τῷ σώματι τῆς δόξης αὐτοῦ	au corps de-la gloire de-lui,	
 48	13	κατὰ τὴν ἐνέργειαν	selon la capacité	
 48	14	τοῦ αὐτὸν δύνασθαι	de lui pouvoir,	
 48	15	καὶ ὑποτάξαι αὑτῷ	et de-soumettre à-lui	
 48	16	τὰ πάντα	toutes les *choses*.	PHP_3_21_qz6p
-49	0			PHP_4_1_xmc4
 49	1	ὥστε	Ainsi,	
 49	2	ἀδελφοί μου	frères de-moi	PHP_4_1_ngs7
-49	3	ἀγαπητοὶ καὶ ἐπιπόθητοι	bien-aimés et désirés,	PHP_4_1_fe2y
+49	3	ἀγαπητοὶ καὶ ἐπιπόθητοι	bien-aimés et désirés,	
 49	4	χαρὰ καὶ στέφανός μου	joie et couronne de-moi,	PHP_4_1_wx5w
 49	5	οὕτως στήκετε	de-cette-manière tenez-ferme	PHP_4_1_dz44
 49	6	ἐν Κυρίῳ ἀγαπητοί	dans *le* Seigneur, bien-aimés.	
@@ -540,7 +537,7 @@
 50	4	ἐν Κυρίῳ	dans *le* Seigneur.	PHP_4_2_iyq7
 51	1	ναὶ	Oui,	
 51	2	ἐρωτῶ σέ καὶ	je-demande à-toi aussi,	PHP_4_3_yb3f
-51	3	γνήσιε σύνζυγε	sincère collègue,	PHP_4_1_zk6q;PHP_4_3_hdz7
+51	3	γνήσιε σύνζυγε	sincère collègue,	PHP_4_3_hdz7
 51	4	συνλαμβάνου αὐταῖς	aide elles,	
 51	5	αἵτινες συνήθλησάν μοι	elles-qui ont-combattu avec-moi	
 51	6	ἐν τῷ εὐαγγελίῳ	dans l' évangile	
@@ -557,19 +554,19 @@
 53	3	πᾶσιν ἀνθρώποις	par-tous *les* hommes.	
 54	1	ὁ Κύριος ἐγγύς	Le Seigneur *est* proche.	PHP_4_5_snk5
 55	1	μεριμνᾶτε μηδὲν	Souciez-vous *à propos* de-rien,	
-55	2	ἀλλ’ ἐν παντὶ	mais en tout,	PHP_4_6_h63g
+55	2	ἀλλ’ ἐν παντὶ	mais en tout,	
 55	3	τὰ αἰτήματα ὑμῶν	les demandes de-vous	
 55	4	γνωριζέσθω	qu'*elles* soient connues	
 55	5	πρὸς τὸν Θεόν	pour Dieu,	
 55	6	τῇ προσευχῇ καὶ τῇ δεήσει	par-la prière et la supplication	
 55	7	μετὰ εὐχαριστίας	avec gratitude.	
-56	1	καὶ ἡ εἰρήνη τοῦ Θεοῦ	Et la paix de Dieu	PHP_4_7_u1sz
+56	1	καὶ ἡ εἰρήνη τοῦ Θεοῦ	Et la paix de Dieu	
 56	2	ἡ ὑπερέχουσα	celle dépassant	
 56	3	πάντα νοῦν	toute compréhension,	PHP_4_7_zr4x
 56	4	φρουρήσει τὰς καρδίας ὑμῶν	protégera les cœurs de-vous	
 56	5	καὶ τὰ νοήματα ὑμῶν	et les pensées de-vous	
-56	6	ἐν Χριστῷ Ἰησοῦ	en Christ Jésus.	PHP_4_7_sb6s;PHP_4_7_tsz6
-57	1	τὸ λοιπόν	Le reste,	PHP_4_8_b8ig
+56	6	ἐν Χριστῷ Ἰησοῦ	en Christ Jésus.	PHP_4_7_sb6s
+57	1	τὸ λοιπόν	Le reste,	
 57	2	ἀδελφοί	frères,	PHP_4_8_fxn5
 57	3	ὅσα ἐστὶν ἀληθῆ	tout-ce-qui est vrai,	
 57	4	ὅσα σεμνά	tout-ce-qui *est* honorable,	
@@ -577,15 +574,15 @@
 57	6	ὅσα ἁγνά	tout-ce-qui *est* pur,	
 57	7	ὅσα προσφιλῆ	tout-ce-qui *est* aimable,	PHP_4_8_r275
 57	8	ὅσα εὔφημα	tout-ce-qui *est* recommandable,	PHP_4_8_pv1i
-57	9	εἴ τις ἀρετὴ	s' *il y a* quelque vertu	PHP_4_8_i5gl
-57	10	καὶ εἴ τις ἔπαινος	et s' *il y a* quelque louange,	PHP_4_8_e9eb
+57	9	εἴ τις ἀρετὴ	s' *il y a* quelque vertu	
+57	10	καὶ εἴ τις ἔπαινος	et s' *il y a* quelque louange,	
 57	11	λογίζεσθε ταῦτα	considérez ces *choses*.	
 58	1	ἃ	Ce que	
 58	2	καὶ ἐμάθετε	et vous-avez-appris	
 58	3	καὶ παρελάβετε	et vous-avez-reçu,	
 58	4	καὶ ἠκούσατε	et vous-avez-entendu	
 58	5	καὶ εἴδετε	et vous-avez-vu,	
-58	6	ἐν ἐμοί	en moi,	PHP_4_9_m145
+58	6	ἐν ἐμοί	en moi,	
 58	7	πράσσετε ταῦτα	pratiquez ces *choses*	
 58	8	καὶ ὁ Θεὸς τῆς εἰρήνης	et le Dieu de-la paix	
 58	9	ἔσται μεθ’ ὑμῶν	sera avec vous.	
@@ -605,7 +602,7 @@
 60	5	ἔμαθον	j'ai appris	
 60	6	εἶναι	*à* être	
 60	7	αὐτάρκης	me satisfaisant,	PHP_4_11_ts2k
-60	8	ἐν οἷς εἰμι	dans *les situations dans* lesquelles je-suis.	PHP_4_11_ew5e
+60	8	ἐν οἷς εἰμι	dans *les situations dans* lesquelles je-suis.	
 61	1	καὶ οἶδα ταπεινοῦσθαι	Et je-sais être-humilié,	
 61	2	καὶ οἶδα περισσεύειν	et je-sais être-dans-l'abondance.	PHP_4_12_lgp9
 62	1	ἐν παντὶ	En toute *circonstance*	
@@ -617,7 +614,7 @@
 62	7	καὶ ὑστερεῖσθαι	et *à* être-dans-le-besoin.	PHP_4_12_ufv4
 63	1	ἰσχύω πάντα	J'ai-la-force *pour* tout	
 63	2	ἐν τῷ ἐνδυναμοῦντί	en celui qui-rend-capable	
-63	3	με	moi.	PHP_4_13_z1pb
+63	3	με	moi.	
 64	1	πλὴν	Mais	
 64	2	ἐποιήσατε καλῶς	vous-avez-agi bellement,	
 64	3	συνκοινωνήσαντές	ayant pris *votre* part	
@@ -626,7 +623,7 @@
 65	2	Φιλιππήσιοι	Philippiens,	
 65	3	οἴδατε ὅτι	vous-savez que	
 65	4	ἐν ἀρχῇ	au commencement	
-65	5	τοῦ εὐαγγελίου	*de ma proclamation* de-l' évangile,	PHP_4_15_w23w
+65	5	τοῦ εὐαγγελίου	*de ma proclamation* de-l' évangile,	
 65	6	ὅτε ἐξῆλθον	quand je-suis-parti	
 65	7	ἀπὸ Μακεδονίας	hors-de Macédoine,	
 65	8	οὐδεμία ἐκκλησία	aucune église	
@@ -647,8 +644,8 @@
 67	5	τὸν πλεονάζοντα	celui croissant	
 67	6	εἰς λόγον ὑμῶν	pour le-compte de-vous.	PHP_4_17_bh3t
 68	1	δὲ ἀπέχω πάντα	Et je-reçois tout,	PHP_4_18_fs44
-68	2	καὶ περισσεύω	et je-suis-dans-l'abondance,	PHP_4_18_en6t
-68	3	πεπλήρωμαι	et je-suis-comblé,	PHP_4_18_p6y1
+68	2	καὶ περισσεύω	et je-suis-dans-l'abondance,	
+68	3	πεπλήρωμαι	et je-suis-comblé,	
 68	4	δεξάμενος	ayant reçu	
 68	5	τὰ παρ’ ὑμῶν	les *choses de* chez vous	
 68	6	παρὰ Ἐπαφροδίτου	de-la-main-d' Épaphrodite,	
@@ -665,10 +662,10 @@
 70	3	ἡ δόξα	*soit* la gloire	
 70	4	εἰς τοὺς αἰῶνας τῶν αἰώνων	pour les siècles des siècles.	
 71	1	ἀμήν	Amen !	
-72	1	ἀσπάσασθε	Saluez	
+72	1	ἀσπάσασθε	Saluez	PHP_4_21_h2jr
 72	2	πάντα ἅγιον	chaque saint	
 72	3	ἐν Χριστῷ Ἰησοῦ	en Christ Jésus,	
-72	4	οἱ ἀδελφοί σὺν ἐμοὶ	les frères *qui sont* avec moi	PHP_4_21_h2jr;PHP_4_21_z65a
+72	4	οἱ ἀδελφοί σὺν ἐμοὶ	les frères *qui sont* avec moi	PHP_4_21_z65a
 72	5	ἀσπάζονται ὑμᾶς	saluent vous,	
 72	6	πάντες οἱ ἅγιοι	tous les saints,	
 72	7	ἀσπάζονται ὑμᾶς	saluent vous,	

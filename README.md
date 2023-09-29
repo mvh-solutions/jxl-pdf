@@ -24,3 +24,21 @@ node scripts/make_html.js ./config/fr/xenizo.json PHP 1234 newDir
 # View the HTML via the localhost browser under `html`. (Scripts won't work from
 # file explorer because of CORS.) The generated PDFs are in a subdirectory.
 ```
+
+## Generating the FULL PDF (python)
+
+```bash
+# to install pyenv and activate all the requirements
+cd python-jxl
+./install_pyenv.sh
+
+source ~/.bashrc
+
+pyenv install -v 3.9.15
+
+pyenv virtualenv 3.9.15 cut_pdf
+
+pip install -r requirements.txt
+
+python cut_pdf.py
+```

@@ -4,6 +4,13 @@
     margin-left: 44pt;
     margin-bottom: 50pt;
     margin-top: 40pt;
+
+    @footnote {
+        float: bottom;
+        columns: 2;
+        column-gap: 144pt;
+        margin-top: 30pt;
+    }
 }
 
 
@@ -57,7 +64,12 @@ h2.sentenceRef {
     font-family: "Gentium Book Plus", serif;
     font-weight: bold;
     font-style: italic;
-    padding-right: 6pt;
+    padding-right: 4pt;
+}
+
+.transAbbr {
+    font-size: 12pt;
+    font-weight: bold;
 }
 
 .leftPane {
@@ -90,7 +102,10 @@ h2.sentenceRef {
 .firstLeft, .otherLeft {
     text-align: left;
     margin-bottom: 5pt;
+    padding-left: 6pt;
+    text-indent: -6pt;
 }
+
 
 .greekLeft {
 }
@@ -114,19 +129,13 @@ h2.sentenceRef {
     padding-left: 6pt;
 }
 
-.note_caller {
+::footnote-call {
     font-weight: bold;
     font-size: 70%;
     vertical-align: baseline;
     position: relative;
     top: -0.5em;
     padding-left: 1pt;
-}
-
-.jxl_notes {
-    border-top: solid 1pt black;
-    padding-top: 4pt;
-    margin-top: 5pt;
 }
 
 .chapterNote {
@@ -153,20 +162,15 @@ h2.sentenceRef {
 
 .note {
     font-size: 7pt;
-    line-height: 10pt;
+    line-height: 9pt;
     padding-left: 1.2em;
     text-indent: -1.2em;
     text-align: left;
+    float: footnote;
 }
 
 .note .b {
     font-weight: bold;
-}
-
-.note_n {
-    font-weight: bold;
-    font-size: 6pt;
-    vertical-align: top;
 }
 
 .note_h2, .note_h3, .note_h4, .note_body {

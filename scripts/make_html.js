@@ -104,7 +104,7 @@ const doScript = async () => {
         .trim()
         .replace(/^#+ +/, "")
         .replace(/^-+ +/, "")
-        .replace(/\((Pour|Voir)[^)]+\)/g, "")
+        .replace(/\(([Pp]our|[Vv]oir)[^)]+\)/g, "")
         .replace(/\(\[.*?\)\)/g, "")
         .replace(/\*\*([^*]+)\*\*/g, (m, m1) => `<span class="b">${m1}</span>`)
         .replace(/\*([^*]+)\*/g, (m, m1) => `<i>${m1}</i>`)

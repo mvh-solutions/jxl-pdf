@@ -131,6 +131,7 @@ p.resource {
 }
 .mode_emploi_image_div {
     columns: 1;
+    margin-top: 10pt;
     margin-bottom: 10pt;
 }
 .mode_emploi_image {
@@ -138,9 +139,20 @@ p.resource {
     padding: 3pt;
     border: solid 1pt black;
 }
+.saisi_figure {
+    columns: 1;
+}
+.saisi_image_div {
+    columns: 1;
+    margin-bottom: 10pt;
+}
+.saisi_image {
+    width: 388pt;
+    padding: 3pt;
+    border: solid 1pt black;
+}
 .bookNote {
     break-after: page;
-    font-family: "Open Sans", sans-serif;
 }
 
 .bookNoteBody {
@@ -191,15 +203,14 @@ p.resource {
 }
 
 .note_list1 {
-    padding-left: 1em;
-    font-weight: bold;
+    padding-left: 2em;
 }
 
 .note_list2 {
     display: list-item;
     list-style-type: circle;
     list-style-position: inside;
-    padding-left: 2em;
+    padding-left: 4em;
 }
 
 .exp {
@@ -207,4 +218,9 @@ p.resource {
     vertical-align: baseline;
     position: relative;
     top: -0.5em;
+}
+.hr {
+    text-align: center;
+    margin-bottom: 20pt;
+    margin-top: 10pt;
 }

@@ -68,6 +68,14 @@
           "id": "fra_tsx"
         }
       ]
+    },
+    {
+      "id": "histoire",
+      "type": "front",
+      "path": "fra_back/histoire_juxta",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
     }
   ]
 }

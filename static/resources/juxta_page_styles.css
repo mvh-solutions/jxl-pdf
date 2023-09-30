@@ -9,7 +9,7 @@
         float: bottom;
         columns: 2;
         column-gap: 144pt;
-        margin-top: 30pt;
+        margin-top: 10pt;
     }
 }
 
@@ -138,6 +138,10 @@ h2.sentenceRef {
     padding-left: 1pt;
 }
 
+::footnote-marker {
+    font-weight: bold;
+}
+
 .chapterNote {
     page-break-inside: avoid;
     break-before: page;
@@ -163,10 +167,12 @@ h2.sentenceRef {
 .note {
     font-size: 7pt;
     line-height: 9pt;
-    padding-left: 1.2em;
-    text-indent: -1.2em;
-    text-align: left;
+    text-align: justify;
     float: footnote;
+    margin-bottom: 0pt;
+    -webkit-column-break-inside: avoid;
+    padding-left: 6pt;
+    text-indent: -6pt;
 }
 
 .note .b {

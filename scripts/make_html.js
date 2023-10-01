@@ -255,6 +255,7 @@ const doScript = async () => {
         const bookName = getBookName(pk, config.docIdForNames, bookCode);
         let sentences = [];
         let chapterN = 0;
+        console.log(`       Sentences`);
         for (const [sentenceN, sentenceJson] of jxlJson.entries()) {
             const cv = cvForSentence(sentenceJson);
             const newChapterN = cv.split(':')[0];
@@ -262,7 +263,7 @@ const doScript = async () => {
                 sentences.push(maybeChapterNotes(newChapterN, 'chapter', notes));
                 chapterN = newChapterN;
             }
-            console.log(`       ${sentenceN + 1}`);
+            console.log(`         ${sentenceN + 1}`);
             let leftContent = [];
             let greekContent = null;
             for (const content of section.lhs) {
@@ -274,10 +275,16 @@ const doScript = async () => {
             let first = true;
             for (const content of section.lhs) {
                 const cvRecord = quoteForCv(pk, content, bookCode, cv);
+                let lhsText = sentenceJson.sourceString;
+                if (sentenceJson.forceTrans && cvRecord.type !== "greek") {
+                    lhsText = sentenceJson.forceTrans[content.id];
+                } else if (cvRecord.type !== "greek") {
+                    lhsText = trimLhsText(cvRecord, greekContent);
+                }
                 let sentence = templates[`${first ? "first" : "other"}Left`]
                     .replace('%%LANGCLASS%%', cvRecord.type === "greek" ? "greekLeft" : "transLeft")
                     .replace('%%LABEL%%', content.label)
-                    .replace('%%CONTENT%%', cvRecord.type === "greek" ? sentenceJson.sourceString : trimLhsText(cvRecord, greekContent));
+                    .replace('%%CONTENT%%', lhsText);
                 leftContent.push(sentence);
                 first = false;
             }

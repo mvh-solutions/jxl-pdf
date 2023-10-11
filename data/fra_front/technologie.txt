@@ -4,31 +4,32 @@ Les documents de base
 
 L'approche polytextuelle de Xenizo à la traduction, sur le plan linguistique, est soutenue par des technologies créées ou adaptées sur mesure pour le projet.
 
-Les textes bibliques sont enregistrés dans un format qui s'appelle USFM ("Unified Standard Format Markers"). https://paratext.org/usfm Ce format est aujourd'hui utilisé par la quasi-totalité de traducteurs de la Bible, malgré son syntaxe complexe. USFM permet de décrire des mise en pages sophistiquées à un niveau sémantique ( selon l'utilisation de ce mot dans le monde informatique ). Autrement dit, il existe des centaines de balises pour désigner, par exemple, le tetragrammaton ou une inscription, sans pour autant fixer la police ou la taille de ce texte.
+Les textes bibliques sont enregistrés dans un format qui s'appelle USFM ("Unified Standard Format Markers"). https://paratext.org/usfm Ce format est aujourd'hui utilisé par la quasi-totalité de traducteurs de la Bible, malgré sa syntaxe complexe. USFM permet de décrire des mise en pages sophistiquées à un niveau sémantique (selon l'utilisation de ce mot dans le monde informatique). Autrement dit, il existe des centaines de balises pour désigner, par exemple, le tetragramme ou une inscription, sans pour autant fixer la police ou la taille de ce texte.
 
-La technologie Xenizo s'appuie massivement sur l'alignement des textes, c'est-à dire des liens entre les mots dans une traduction et les mots traduits dans la langue source. Il existe plusieurs façons de representer cette alignement. Ici on utilise l'approche d'unfoldingWord qui consiste à ajouter l'alignement aux fichiers USFM. On finit donc avec des documents qui sont difficilement lisibles sans outil adapté, mais qui sont assez faciles à traiter dans un logiciel adapté.
+La technologie Xenizo s'appuie fortement sur l'alignement des textes, c'est-à-dire des liens entre les mots dans une traduction et les mots traduits dans la langue source. Il existe plusieurs façons de representer cet alignement. Ici on utilise l'approche d'unfoldingWord qui consiste à ajouter l'alignement aux fichiers USFM. On finit donc avec des documents qui sont difficilement lisibles sans outil adapté, mais qui sont assez faciles à traiter dans un logiciel adapté.
 
 La traduction biblique se fait typiquement au sein d'un écosystème numérique qui facilite la gestion des documents, ainsi que la communication dans l'équipe. On peut notamment citer https://registry.paratext.org, géré par les sociétés bibliques et par SIL/Wycliffe et associé à l'éditeur Paratext. Pour des projets libre de droits, on choisit souvent door43.org, géré par unfoldingWord mais utilisé par d'autres organisations. Actuellement Xenizo utilise https://www.translationcore.com, un éditeur unfoldingWord, pour créer et aligner ses traductions littérale et sémantique.
 
-USFM n'a aucune notion de textes parallèles. Xenizo utilise donc son propre format, de la famille JSON, pour relier les textes grecs et français du juxtalinéaire. Ce JSON est édité via une application conçue exprès pour la tâche qui s'appelle Sundesmos.
+USFM n'a aucune notion de textes parallèles. Xenizo utilise donc son propre format, qui respecte la syntaxe JSON (JavaScript Object Notation), pour relier les textes grecs et français du juxtalinéaire. Un fichier est édité via une application, nommée Sundesmos, conçue par notre équipe afin de conserver l'information de l'alignement.
 
-Les notes de traduction sont enregistrées dans Door43 en format tabulaire - précisement en TSV qui peut être lu par des logiciels tels que Microsoft Office ou Libre Office. Chaque note a un identifiant unique plus une référence par livre, chapitre et verset. La colonne qui contient les notes proprement dites est en format markdown https://www.markdownguide.org/  Il existe des outils pour éditer ces notes mais, pour l'instant, Xenizo utilise Libre Office.
+Les notes de traduction sont enregistrées dans Door43 en format tabulaire - précisement en TSV qui peut être lu par des logiciels tels que Microsoft Office ou Libre Office. Chaque note a un identifiant unique plus une référence par livre, chapitre et verset. La colonne qui contient les notes proprement dites est en format markdown https://www.markdownguide.org/ . Il existe des outils pour éditer ces notes mais, pour l'instant, Xenizo utilise Libre Office.
 
 La mise en page
 
 La présentation polytextuelle est structuré selon des phrases grecques. Or, USFM est structuré par paragraphe, et aussi par chapitre/verset. La restructuration par phrase est faite via https://doc.proskomma.bible Proskomma, une bibliothèque conçue par Xenizo pour manipuler du contenu biblique. Les textes en français sont découpés à la base de leur alignement à la phrase grecque.
 
-Les notes sont reliées au juxtalinéaire via une table de pivôt qui relie une note à un "chunk" précis dans le juxtalinéaire. En ce moment cette table se construit manuellement en effectuant des copier-collés d'identifiant. Des modifications éventuelles des notes se fait directement dans le TSV de la note.
+Les notes traduction (nommément les notes de bas de page) sont reliées au texte juxtalinéaire et à la portion de texte correspondante, via deux tableaux. Ces tableaux sont traités par nos algorithmes, mais beaucoup se fait à la main pour le moment. Notamment en effectuant des copier-collés d'identifiant de note. Aussi, les modifications éventuelles des notes se font directement dans le fichier TSV de la note.
 
-Xenizo utilise https://pagedjs.org PagedJS comme moteur de mise en page. PagedJS ajoute à un navigateur tel que Chrome la notion d'une page de taille fixe, selon les normes de W3C. A un haut niveau, la mise en page passe donc par les étapes suivantes :
+Xenizo utilise https://pagedjs.org PagedJS comme moteur de mise en page. PagedJS ajoute à un navigateur tel que Chrome la notion d'une page de taille fixe, selon les normes de W3C.
+Afin de clarifier notre méthode, voici les étapes générales de notre processus de mise en page :
 
-- création d'un fichier de configuration qui spécifie des sections dans le document et les sources pour chaque section
-- création de fichiers HTML pour chaque section, liés à des feuilles de style CSS qui précisent la façon de présenter cet HTML
-- conversion du HTML en PDF via un script qui "affiche" et sauvegarde les pages
-- dans le cas de sections qui couvrent deux pages à la fois, le PDF est découpé pour créer des pages rectos et versos
-- les PDFs pour chaque section sont collés ensemble, intercalés si nécessaire par des pages vides, et numérotées
-- ce PDF permet l'impression d'un document par Print On Demand.
+- création d'un fichier de configuration. Il spécifie des sections dans le document (introduction, première de couverture, etc.) et leurs sources;
+- création de fichiers HTML pour chaque section, liés à des feuilles de style CSS. Celles-ci précisent la mise en page de ce document HTML;
+- conversion de chaque sections en PDF (cela nous donne autant de PDF que de sections);
+- dans le cas de sections qui couvrent deux pages à la fois, le PDF est découpé pour créer des pages rectos et versos;
+- les PDFs de chaque sections sont découpés aux bonnes mesures, collés ensemble, intercalés si nécessaire par des pages vides et numérotés
+- le PDF est ensuite imprimé par un système de Print On Demand.
 
 Vers un "workflow"
 
-Le procédé décrit ci-haut est complexe, manuel et parfois obscur. Xenizo oeuvre pour intégrer ces différentes étapes dans Sundesmos, leur éditeur juxtalinéaire, pour permettre à des biblistes et traducteurs d'avancer sans se soucier du fonctionnement de la technologie.
+Le procédé décrit ci-haut est complexe, manuel et parfois obscur. Aussi, le travail de traduction des biblistes et traducteurs, la modification de notes, puis de sources juxtalinéaires et d'autres formats particuliers de fichiers, peux s'avérer laborieuse et longue. Xenizo oeuvre pour intégrer astucieusement toutes ces étapes dans Sundesmos, leur éditeur juxtalinéaire, afin d'alléger le fardeau des professionnels de la traduction, pour qu'ils n'aient plus qu'à se concentrer sur leur travail.

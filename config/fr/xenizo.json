@@ -35,6 +35,35 @@
 
     },
     {
+      "id": "fourColumn",
+      "type": "4ColumnSpread",
+      "startOn": "verso",
+      "styles": "4_column_spread_page_styles",
+      "showPageNumber": true,
+      "texts": [
+        {
+          "label": "SEGOND 1910",
+          "type": "trans",
+          "id": "fra_lsg"
+        },
+        {
+          "label": "GREC",
+          "type": "greek",
+          "id": "grc_ugnt"
+        },
+        {
+          "label": "LITTÉRALE",
+          "type": "trans",
+          "id": "fra_tlx"
+        },
+        {
+          "label": "SÉMANTIQUE",
+          "type": "trans",
+          "id": "fra_tsx"
+        }
+      ]
+    },
+    {
       "id": "juxta",
       "type": "jxlSpread",
       "styles": "juxta_page_styles",

@@ -157,17 +157,17 @@ const doScript = async () => {
             let countStableSizeIterations = 0;
             const minStableSizeIterations = 3;
 
-            while(checkCounts++ <= maxChecks){
+            while (checkCounts++ <= maxChecks) {
                 let html = await page.content();
                 let currentHTMLSize = html.length;
 
                 let bodyHTMLSize = await page.evaluate(() => document.body.innerHTML.length);
-                if(lastHTMLSize !== 0 && currentHTMLSize === lastHTMLSize)
+                if (lastHTMLSize !== 0 && currentHTMLSize === lastHTMLSize)
                     countStableSizeIterations++;
                 else
                     countStableSizeIterations = 0; //reset the counter
 
-                if(countStableSizeIterations >= minStableSizeIterations) {
+                if (countStableSizeIterations >= minStableSizeIterations) {
                     console.log("     Page rendered fully");
                     break;
                 }
@@ -195,6 +195,89 @@ const doScript = async () => {
         }); // 5 minutes
         console.log(`     Saved PDF to ${pdfOutputPath}`);
         await browser.close();
+    }
+
+    const pkWithDocs = (bookCode, docSpecs) => {
+        const pk = new Proskomma();
+        console.log("     Loading USFM into Proskomma");
+        for (const docSpec of docSpecs) {
+            console.log(`       ${docSpec.id}`);
+            const [lang, abbr] = docSpec.id.split('_');
+            const contentString = fse.readFileSync(path.join('data', docSpec.id, `${bookCode}.usfm`)).toString();
+            pk.importDocument({lang, abbr}, 'usfm', contentString);
+        }
+        return pk;
+    }
+
+    const getCVTexts = (bookCode, pk) => {
+        const cvQuery = `{
+            docSets {
+            id
+            document(bookCode: """${bookCode}""") {
+                id
+                cvIndexes {
+                    chapter
+                    verses {
+                        verse {
+                            verseRange
+                            text(normalizeSpace: true)
+                        }
+                    }
+                }
+            }
+        }
+        }
+    `;
+        const result = pk.gqlQuerySync(cvQuery)
+            .data
+            .docSets
+            .map(
+                ds => ({
+                    id: ds.id,
+                    chapters: ds.document.cvIndexes.map(
+                        cvi => ({
+                            chapterN: cvi.chapter,
+                            verses: cvi.verses
+                                .filter(vs => vs.verse.length > 0)
+                                .map(
+                                    vs => ({
+                                        verseN: vs.verse[0].verseRange,
+                                        text: vs.verse[0].text
+                                    })
+                                )
+                        })
+                    )
+                })
+            );
+        const cvLookup = {};
+        for (const ds of result) {
+            cvLookup[ds.id] = {};
+            for (const chapter of ds.chapters) {
+                cvLookup[ds.id][chapter.chapterN] = {};
+                for (const verse of chapter.verses) {
+                    cvLookup[ds.id][chapter.chapterN][verse.verseN] = verse.text;
+                }
+            }
+        }
+        let ret = [];
+        for (const chapter of result[0].chapters) {
+            for (const verse of chapter.verses) {
+                const cv = `${chapter.chapterN}:${verse.verseN}`;
+                const retRecord = {
+                    cv,
+                    texts: {}
+                };
+                for (const ds of Object.keys(cvLookup)) {
+                    if (cvLookup[ds][chapter.chapterN] && cvLookup[ds][chapter.chapterN][verse.verseN]) {
+                        retRecord.texts[ds] = cvLookup[ds][chapter.chapterN][verse.verseN];
+                    }
+                }
+                if (Object.keys(retRecord.texts).length > 0) {
+                    ret.push(retRecord);
+                }
+            }
+        }
+        return ret;
     }
 
 // Section handlers
@@ -244,14 +327,7 @@ const doScript = async () => {
             }
         }
 
-        const pk = new Proskomma();
-        console.log("     Loading USFM into Proskomma");
-        for (const lhs of section.lhs) {
-            console.log(`       ${lhs.id}`);
-            const [lang, abbr] = lhs.id.split('_');
-            const contentString = fse.readFileSync(path.join('data', lhs.id, `${bookCode}.usfm`)).toString();
-            pk.importDocument({lang, abbr}, 'usfm', contentString);
-        }
+        const pk = pkWithDocs(bookCode, section.lhs);
         const bookName = getBookName(pk, config.docIdForNames, bookCode);
         let sentences = [];
         let chapterN = 0;
@@ -361,6 +437,45 @@ const doScript = async () => {
         );
     }
 
+    const do4ColumnSpreadSection = async (section, notes, notePivot) => {
+        if (!section.texts || section.texts.length !== 4) {
+            throw new Error("4 Column Spread Section requires exactly 4  text definitions");
+        }
+        const pk = pkWithDocs(bookCode, section.texts);
+        const cvTexts = getCVTexts(bookCode, pk);
+        const verses = [];
+        for (const cvRecord of cvTexts) {
+            const verseHtml = templates['4_column_spread_verse']
+                .replace(/%%BCV%%/g, cvRecord.cv)
+                .replace(
+                    '%%VERSOCOLUMNS%%',
+                    `<div class="4col1">${cvRecord.texts.fra_lsg || "-"}</div><div class="4col2">${cvRecord.texts.grc_ugnt || "-"}</div>`
+                )
+                .replace(
+                    '%%RECTOCOLUMNS%%',
+                    `<div class="4col3">${cvRecord.texts.fra_tlx || "-"}</div><div class="4col4">${cvRecord.texts.fra_tsx || "-"}</div>`
+                );
+            verses.push(verseHtml)
+        }
+        fse.writeFileSync(
+            path.join(outputPath, outputDirName, `${section.id}.html`),
+            templates['4_column_spread_page']
+                .replace(
+                    "%%TITLE%%",
+                    `${section.id} - ${section.type}`
+                )
+                .replace(
+                    "%%VERSES%%",
+                    verses.join('\n')
+                )
+        );
+        await doPuppet(
+            serverPort,
+            section.id,
+            path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id}.pdf`))
+        );
+    }
+
 // Script
     const usage = "USAGE: node make_html.js <configPath> <bookCode> <serverPort> <outputDirName>";
     if (process.argv.length !== 6) {
@@ -375,7 +490,21 @@ const doScript = async () => {
     const outputPath = path.resolve('static/html');
 
     const templates = {};
-    for (const template of ['juxta_page', 'non_juxta_page', 'web_index_page', 'web_index_page_link', 'sentence', 'firstLeft', 'otherLeft', 'jxl', 'jxlRow', 'chapterNote', 'bookNote', 'markdownPara']) {
+    for (const template of [
+        'juxta_page',
+        'non_juxta_page',
+        '4_column_spread_page',
+        '4_column_spread_verse',
+        'web_index_page',
+        'web_index_page_link',
+        'sentence', 'firstLeft',
+        'otherLeft',
+        'jxl',
+        'jxlRow',
+        'chapterNote',
+        'bookNote',
+        'markdownPara'
+    ]) {
         templates[template] = readTemplate(template);
     }
 
@@ -413,6 +542,9 @@ const doScript = async () => {
                 break;
             case "jxlSpread":
                 await doJxlSpreadSection(section, notes, notePivot);
+                break;
+            case "4ColumnSpread":
+                await do4ColumnSpreadSection(section, notes, notePivot);
                 break;
             case "bookNote":
                 await doBookNoteSection(section, notes, notePivot);

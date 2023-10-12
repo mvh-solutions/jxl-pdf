@@ -1,0 +1,217 @@
+@page {
+    size: 1008pt 720pt;
+    margin-right: 44pt;
+    margin-left: 44pt;
+    margin-bottom: 50pt;
+    margin-top: 40pt;
+
+    @footnote {
+        float: bottom;
+        columns: 2;
+        column-gap: 144pt;
+        margin-top: 10pt;
+    }
+}
+
+
+body {
+    font-size: 9pt;
+    line-height: 10pt;
+    font-family: "Gentium Book Plus", serif;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 14pt;
+    line-height: 20pt;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 6pt;
+    border-bottom: 2pt solid black;
+    padding-bottom: 2pt;
+    width: 388pt;
+}
+
+h2.phraseN {
+    font-size: 9pt;
+    line-height: 10pt;
+    font-weight: bold;
+    margin: 0;
+    padding-bottom: 3.5pt;
+    margin-bottom: 5pt;
+    border-bottom: solid 1.5pt black;
+    width: 388pt;
+    text-align: left;
+}
+
+h2.sentenceRef {
+    font-size: 9pt;
+    line-height: 10pt;
+    font-weight: bold;
+    margin: 0;
+    padding-bottom: 3.5pt;
+    margin-bottom: 5pt;
+    border-bottom: solid 1.5pt black;
+    width: 388pt;
+    text-align: right;
+}
+
+.transAbbr {
+    font-family: "Gentium Book Plus", serif;
+    font-weight: bold;
+    font-style: italic;
+    padding-right: 4pt;
+}
+
+.transAbbr {
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.leftPane {
+    display: inline-block;
+    width: 388pt;
+    vertical-align: top;
+    margin-right: 72pt;
+}
+
+.rightPane {
+    width: 388pt;
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 72pt;
+}
+
+.rightPane table {
+    width: 388pt;
+    border-collapse: collapse;
+}
+
+.sentence {
+    string-set: sentenceN attr(data-n), cvRef attr(data-cv);
+    page-break-inside: avoid;
+    vertical-align: top;
+    padding-bottom: 10pt;
+}
+
+.firstLeft, .otherLeft {
+    text-align: left;
+    margin-bottom: 5pt;
+    padding-left: 6pt;
+    text-indent: -6pt;
+}
+
+
+.greekLeft {
+}
+
+.transLeft {
+}
+
+.jxlGreek {
+    width: 188pt;
+    text-align: right;
+    vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    padding-right: 6pt;
+
+}
+
+.jxlGloss {
+    width: 188pt;
+    vertical-align: baseline;
+    padding-left: 6pt;
+}
+
+::footnote-call {
+    font-weight: bold;
+    font-size: 70%;
+    vertical-align: baseline;
+    position: relative;
+    top: -0.5em;
+    padding-left: 1pt;
+}
+
+::footnote-marker {
+    font-weight: bold;
+}
+
+.chapterNote {
+    page-break-inside: avoid;
+    break-before: page;
+    padding-bottom: 20pt;
+    font-family: "Open Sans", sans-serif;
+}
+
+.bookNote {
+    break-after: page;
+    font-family: "Open Sans", sans-serif;
+}
+
+.bookNoteBody {
+    columns: 2;
+    column-gap: 144pt;
+}
+
+.chapterNoteBody {
+    columns: 2;
+    column-gap: 144pt;
+}
+
+.note {
+    font-size: 7pt;
+    line-height: 9pt;
+    text-align: justify;
+    float: footnote;
+    margin-bottom: 0pt;
+    -webkit-column-break-inside: avoid;
+    padding-left: 6pt;
+    text-indent: -6pt;
+}
+
+.note .b {
+    font-weight: bold;
+}
+
+.note_h2, .note_h3, .note_h4, .note_body {
+    margin-bottom: 10pt;
+}
+
+.note_h2, .note_h3, .note_h4 {
+    -webkit-column-break-after: avoid;
+}
+
+.note_h2 {
+    font-weight: bold;
+}
+
+.note_h3 {
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.note_h4 {
+    font-style: italic;
+}
+
+.note_body {
+    text-align: left;
+}
+
+.note_list1 {
+    padding-left: 1em;
+    font-weight: bold;
+}
+
+.note_list2 {
+    display: list-item;
+    list-style-type: circle;
+    list-style-position: inside;
+    padding-left: 2em;
+}

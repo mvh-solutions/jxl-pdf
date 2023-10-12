@@ -447,7 +447,7 @@ const doScript = async () => {
 
     const do4ColumnSpreadSection = async (section, notes, notePivot) => {
         if (!section.texts || section.texts.length !== 4) {
-            throw new Error("4 Column Spread Section requires exactly 4  text definitions");
+            throw new Error("4 Column Spread Section requires exactly 4 text definitions");
         }
         const pk = pkWithDocs(bookCode, section.texts);
         const bookName = getBookName(pk, config.docIdForNames, bookCode);
@@ -493,6 +493,52 @@ const doScript = async () => {
         );
     }
 
+    const do2ColumnSection = async (section, notes, notePivot) => {
+        if (!section.texts || section.texts.length !== 2) {
+            throw new Error("2 Column Section requires exactly 2 text definitions");
+        }
+        const pk = pkWithDocs(bookCode, section.texts);
+        const bookName = getBookName(pk, section.texts[0].id, bookCode);
+        const cvTexts = getCVTexts(bookCode, pk);
+        const verses = [];
+        verses.push(templates['2_column_title'].replace('%%BOOKNAME%%', bookName));
+        for (const cvRecord of cvTexts) {
+            const verseHtml = templates['2_column_verse']
+                .replace("%%TRANS1TITLE%%", section.texts[0].label)
+                .replace("%%TRANS2TITLE%%", section.texts[1].label)
+                .replace(
+                    '%%LEFTCOLUMN%%',
+                    `<div class="col1"><span class="cv">${cvRecord.cv.endsWith(":1") ? `${bookName}&nbsp;` : ""}${cvRecord.cv}</span> ${cvRecord.texts[section.texts[0].id] || "-"}</div>`
+                )
+                .replace(
+                    '%%RIGHTCOLUMN%%',
+                    `<div class="col2">${cvRecord.texts[section.texts[1].id] || "-"}</div>`
+                );
+            verses.push(verseHtml);
+        }
+        fse.writeFileSync(
+            path.join(outputPath, outputDirName, `${section.id}.html`),
+            templates['2_column_page']
+                .replace(
+                    "%%TITLE%%",
+                    `${section.id} - ${section.type}`
+                )
+                .replace(
+                    "%%BODY%%",
+                    verses.join('\n')
+                )
+                .replace(
+                    "%%BOOKNAME%%",
+                    bookName
+                )
+        );
+        await doPuppet(
+            serverPort,
+            section.id,
+            path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id}.pdf`))
+        );
+    }
+
 // Script
     const usage = "USAGE: node make_html.js <configPath> <bookCode> <serverPort> <outputDirName>";
     if (process.argv.length !== 6) {
@@ -513,6 +559,9 @@ const doScript = async () => {
         '4_column_spread_page',
         '4_column_spread_verse',
         '4_column_spread_title',
+        '2_column_page',
+        '2_column_verse',
+        '2_column_title',
         'web_index_page',
         'web_index_page_link',
         'sentence', 'firstLeft',
@@ -563,6 +612,9 @@ const doScript = async () => {
                 break;
             case "4ColumnSpread":
                 await do4ColumnSpreadSection(section, notes, notePivot);
+                break;
+            case "2Column":
+                await do2ColumnSection(section, notes, notePivot);
                 break;
             case "bookNote":
                 await doBookNoteSection(section, notes, notePivot);

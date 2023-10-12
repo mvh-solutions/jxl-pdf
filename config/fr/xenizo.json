@@ -64,6 +64,25 @@
       ]
     },
     {
+      "id": "twoColumn",
+      "type": "2Column",
+      "startOn": "recto",
+      "styles": "2_column_spread_page_styles",
+      "showPageNumber": true,
+      "texts": [
+        {
+          "label": "Littérale",
+          "type": "trans",
+          "id": "fra_tlx"
+        },
+        {
+          "label": "Sémantique",
+          "type": "trans",
+          "id": "fra_tsx"
+        }
+      ]
+    },
+    {
       "id": "emploi",
       "type": "front",
       "path": "fra_front/mode_emploi",

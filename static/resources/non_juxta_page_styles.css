@@ -2,6 +2,10 @@
     size: 504pt 720pt;
     margin-bottom: 50pt;
     margin-top: 40pt;
+    @footnote {
+        float: bottom;
+        margin-top: 10pt;
+    }
 }
 @page :left {
     margin-left: 44pt;
@@ -104,7 +108,7 @@ p.resource {
 .half_page .front_body ul li {
     margin-bottom: 10pt;
 }
-.preface .front_body h2 {
+.preface .front_body h2, .technologie .front_body h2 {
     margin: 0;
     margin-bottom: 10pt;
     font-size: 9pt;
@@ -223,4 +227,42 @@ p.resource {
     text-align: center;
     margin-bottom: 20pt;
     margin-top: 10pt;
+}
+.note {
+    font-size: 7pt;
+    line-height: 9pt;
+    text-align: justify;
+    float: footnote;
+    margin-bottom: 0pt;
+    padding-left: 6pt;
+    text-indent: -6pt;
+}
+::footnote-call {
+    font-weight: bold;
+    font-size: 70%;
+    vertical-align: baseline;
+    position: relative;
+    top: -0.5em;
+    padding-left: 1pt;
+}
+
+::footnote-marker {
+    font-weight: bold;
+}
+h2 {
+    -webkit-column-break-after: avoid;
+}
+ul {
+    break-inside: auto;
+}
+.technologie .front_body ul li {
+    margin-bottom: 10pt;
+}
+.matieres .front_body {
+    columns: 1;
+    font-size: 12pt;
+    line-height: 14pt;
+}
+.matieres .pageNumber {
+    float: right;
 }

@@ -19,9 +19,9 @@
       "showPageNumber": true
     },
     {
-      "id": "emploi",
+      "id": "tech",
       "type": "front",
-      "path": "fra_front/mode_emploi",
+      "path": "fra_front/technologie",
       "styles": "non_juxta_page_styles",
       "startOn": "recto",
       "showPageNumber": true
@@ -64,6 +64,14 @@
       ]
     },
     {
+      "id": "emploi",
+      "type": "front",
+      "path": "fra_front/mode_emploi",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
       "id": "juxta",
       "type": "jxlSpread",
       "styles": "juxta_page_styles",
@@ -102,6 +110,14 @@
       "id": "histoire",
       "type": "front",
       "path": "fra_back/histoire_juxta",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "id": "matieres",
+      "type": "front",
+      "path": "fra_back/matieres",
       "styles": "non_juxta_page_styles",
       "startOn": "recto",
       "showPageNumber": true

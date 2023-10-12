@@ -54,6 +54,9 @@ const doScript = async () => {
             tokens.map(cvr => cvr.payload).join('') +
             punctuation.reverse().join('')
         ).replace(/\\s/g, " ")
+            .replace(/ ;/g, "&nbsp;;")
+            .replace(/ :/g, "&nbsp;:")
+            .replace(/ !/g, "&nbsp;!")
             .trim();
     }
 
@@ -255,7 +258,12 @@ const doScript = async () => {
             for (const chapter of ds.chapters) {
                 cvLookup[ds.id][chapter.chapterN] = {};
                 for (const verse of chapter.verses) {
-                    cvLookup[ds.id][chapter.chapterN][verse.verseN] = verse.text;
+                    cvLookup[ds.id][chapter.chapterN][verse.verseN] = verse.text
+                        .replace(/\\s/g, " ")
+                        .replace(/ ;/g, "&nbsp;;")
+                        .replace(/ :/g, "&nbsp;:")
+                        .replace(/ !/g, "&nbsp;!")
+                        .trim();;
                 }
             }
         }
@@ -442,20 +450,21 @@ const doScript = async () => {
             throw new Error("4 Column Spread Section requires exactly 4  text definitions");
         }
         const pk = pkWithDocs(bookCode, section.texts);
+        const bookName = getBookName(pk, config.docIdForNames, bookCode);
         const cvTexts = getCVTexts(bookCode, pk);
         const verses = [];
         for (const cvRecord of cvTexts) {
             const verseHtml = templates['4_column_spread_verse']
-                .replace(/%%BCV%%/g, cvRecord.cv)
+                .replace(/%%BCV%%/g, `${bookName} ${cvRecord.cv}`)
                 .replace(
                     '%%VERSOCOLUMNS%%',
-                    `<div class="4col1">${cvRecord.texts.fra_lsg || "-"}</div><div class="4col2">${cvRecord.texts.grc_ugnt || "-"}</div>`
+                    `<div class="col1">${cvRecord.texts.fra_lsg || "-"}</div><div class="col2">${cvRecord.texts.grc_ugnt || "-"}</div>`
                 )
                 .replace(
                     '%%RECTOCOLUMNS%%',
-                    `<div class="4col3">${cvRecord.texts.fra_tlx || "-"}</div><div class="4col4">${cvRecord.texts.fra_tsx || "-"}</div>`
+                    `<div class="col3">${cvRecord.texts.fra_tlx || "-"}</div><div class="col4">${cvRecord.texts.fra_tsx || "-"}</div>`
                 );
-            verses.push(verseHtml)
+            verses.push(verseHtml);
         }
         fse.writeFileSync(
             path.join(outputPath, outputDirName, `${section.id}.html`),
@@ -534,7 +543,7 @@ const doScript = async () => {
             type: section.type,
             startOn: section.startOn,
             showPageNumber: section.showPageNumber,
-            makeFromDouble: section.type === "jxlSpread"
+            makeFromDouble: ["jxlSpread", "4ColumnSpread"].includes(section.type)
         })
         switch (section.type) {
             case "front":

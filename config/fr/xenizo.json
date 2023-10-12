@@ -42,22 +42,22 @@
       "showPageNumber": true,
       "texts": [
         {
-          "label": "SEGOND 1910",
+          "label": "Segond 1910",
           "type": "trans",
           "id": "fra_lsg"
         },
         {
-          "label": "GREC",
+          "label": "Grec",
           "type": "greek",
           "id": "grc_ugnt"
         },
         {
-          "label": "LITTÉRALE",
+          "label": "Littérale",
           "type": "trans",
           "id": "fra_tlx"
         },
         {
-          "label": "SÉMANTIQUE",
+          "label": "Sémantique",
           "type": "trans",
           "id": "fra_tsx"
         }

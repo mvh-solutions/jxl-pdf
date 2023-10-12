@@ -453,16 +453,20 @@ const doScript = async () => {
         const bookName = getBookName(pk, config.docIdForNames, bookCode);
         const cvTexts = getCVTexts(bookCode, pk);
         const verses = [];
+        verses.push(templates['4_column_spread_title'].replace('%%BOOKNAME%%', bookName));
         for (const cvRecord of cvTexts) {
             const verseHtml = templates['4_column_spread_verse']
-                .replace(/%%BCV%%/g, `${bookName} ${cvRecord.cv}`)
+                .replace("%%TRANS1TITLE%%", section.texts[0].label)
+                .replace("%%TRANS2TITLE%%", section.texts[1].label)
+                .replace("%%TRANS3TITLE%%", section.texts[2].label)
+                .replace("%%TRANS4TITLE%%", section.texts[3].label)
                 .replace(
                     '%%VERSOCOLUMNS%%',
-                    `<div class="col1">${cvRecord.texts.fra_lsg || "-"}</div><div class="col2">${cvRecord.texts.grc_ugnt || "-"}</div>`
+                    `<div class="col1"><span class="cv">${cvRecord.cv.endsWith(":1") ? `${bookName}&nbsp;` : ""}${cvRecord.cv}</span> ${cvRecord.texts[section.texts[0].id] || "-"}</div><div class="col2">${cvRecord.texts[section.texts[1].id] || "-"}</div>`
                 )
                 .replace(
                     '%%RECTOCOLUMNS%%',
-                    `<div class="col3">${cvRecord.texts.fra_tlx || "-"}</div><div class="col4">${cvRecord.texts.fra_tsx || "-"}</div>`
+                    `<div class="col3">${cvRecord.texts[section.texts[2].id] || "-"}</div><div class="col4">${cvRecord.texts[section.texts[3].id] || "-"}</div>`
                 );
             verses.push(verseHtml);
         }
@@ -476,6 +480,10 @@ const doScript = async () => {
                 .replace(
                     "%%VERSES%%",
                     verses.join('\n')
+                )
+                .replace(
+                    "%%BOOKNAME%%",
+                    bookName
                 )
         );
         await doPuppet(
@@ -504,6 +512,7 @@ const doScript = async () => {
         'non_juxta_page',
         '4_column_spread_page',
         '4_column_spread_verse',
+        '4_column_spread_title',
         'web_index_page',
         'web_index_page_link',
         'sentence', 'firstLeft',

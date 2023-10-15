@@ -1,23 +1,135 @@
 {
-  "docIdForNames": "eng_ult",
-  "jxl": {
-    "path": "eng_jxl"
-  },
-  "lhs": [
+  "docIdForNames": "en_ult",
+  "notes": "en_tn",
+  "sections": [
     {
-      "label": "GREEK",
-      "type": "greek",
-      "id": "grc_ugnt"
+      "id": "half",
+      "type": "front",
+      "path": "fra_front/half_page",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": false
     },
     {
-      "label": "LITERAL",
-      "type": "trans",
-      "id": "eng_ult"
+      "id": "preface",
+      "type": "front",
+      "path": "fra_front/preface",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
     },
     {
-      "label": "SIMPLIFIED",
-      "type": "trans",
-      "id": "eng_ust"
+      "id": "tech",
+      "type": "front",
+      "path": "fra_front/technologie",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "id": "bookNotes",
+      "type": "bookNote",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+
+    },
+    {
+      "id": "fourColumn",
+      "type": "4ColumnSpread",
+      "startOn": "verso",
+      "styles": "4_column_spread_page_styles",
+      "showPageNumber": true,
+      "texts": [
+        {
+          "label": "ULT",
+          "type": "trans",
+          "id": "en_ult"
+        },
+        {
+          "label": "Grec",
+          "type": "greek",
+          "id": "grc_ugnt"
+        },
+        {
+          "label": "UST",
+          "type": "trans",
+          "id": "en_ust"
+        }
+      ]
+    },
+    {
+      "id": "twoColumn",
+      "type": "2Column",
+      "startOn": "recto",
+      "styles": "2_column_spread_page_styles",
+      "showPageNumber": true,
+      "texts": [
+        {
+          "label": "ULT",
+          "type": "trans",
+          "id": "en_ult"
+        },
+        {
+          "label": "UST",
+          "type": "trans",
+          "id": "en_ust"
+        }
+      ]
+    },
+    {
+      "id": "emploi",
+      "type": "front",
+      "path": "fra_front/mode_emploi",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "id": "juxta",
+      "type": "jxlSpread",
+      "styles": "juxta_page_styles",
+      "startOn": "verso",
+      "showPageNumber": true,
+      "jxl": {
+        "path": "en_jxl",
+        "notes": {
+          "pivot": "jxl2note"
+        }
+      },
+      "lhs": [
+        {
+          "label": "ULT",
+          "type": "trans",
+          "id": "en_ult"
+        },
+        {
+          "label": "Grec",
+          "type": "greek",
+          "id": "grc_ugnt"
+        },
+        {
+          "label": "UST",
+          "type": "trans",
+          "id": "en_ust"
+        }
+      ]
+    },
+    {
+      "id": "histoire",
+      "type": "front",
+      "path": "fra_back/histoire_juxta",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "id": "matieres",
+      "type": "front",
+      "path": "fra_back/matieres",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
     }
   ]
 }

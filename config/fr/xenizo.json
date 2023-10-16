@@ -1,6 +1,7 @@
 {
   "docIdForNames": "fra_lsg",
   "notes": "fra_tn",
+  "notesFormat": "tsv9",
   "sections": [
     {
       "id": "half",

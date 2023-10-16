@@ -57,6 +57,7 @@ const doScript = async () => {
             .replace(/ ;/g, "&nbsp;;")
             .replace(/ :/g, "&nbsp;:")
             .replace(/ !/g, "&nbsp;!")
+            .replace(/{([^}]+)}/g, (res, m1) => `<i>${m1}</i>`)
             .trim();
     }
 
@@ -382,6 +383,9 @@ const doScript = async () => {
                 if (notePivot[`${sentenceN + 1}`] && notePivot[`${sentenceN + 1}`][`${chunkN + 1}`]) {
                     noteFound = true;
                     for (const noteId of notePivot[`${sentenceN + 1}`][`${chunkN + 1}`]) {
+                        if (!notes[noteId]) {
+                            continue;
+                        }
                         sentenceNotes.push(
                             cleanNoteLine(notes[noteId])
                         );

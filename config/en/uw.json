@@ -1,6 +1,7 @@
 {
-  "docIdForNames": "en_ult",
-  "notes": "en_tn",
+  "docIdForNames": "eng_ult",
+  "notes": "eng_tn",
+  "notesFormat": "tsv7",
   "sections": [
     {
       "id": "half",
@@ -42,19 +43,24 @@
       "showPageNumber": true,
       "texts": [
         {
-          "label": "ULT",
-          "type": "trans",
-          "id": "en_ult"
-        },
-        {
           "label": "Grec",
           "type": "greek",
           "id": "grc_ugnt"
         },
         {
+          "label": "ULT",
+          "type": "trans",
+          "id": "eng_ult"
+        },
+        {
           "label": "UST",
           "type": "trans",
-          "id": "en_ust"
+          "id": "eng_ust"
+        },
+        {
+          "label": "TLX",
+          "type": "trans",
+          "id": "fra_tlx"
         }
       ]
     },
@@ -68,12 +74,12 @@
         {
           "label": "ULT",
           "type": "trans",
-          "id": "en_ult"
+          "id": "eng_ult"
         },
         {
           "label": "UST",
           "type": "trans",
-          "id": "en_ust"
+          "id": "eng_ust"
         }
       ]
     },
@@ -92,7 +98,7 @@
       "startOn": "verso",
       "showPageNumber": true,
       "jxl": {
-        "path": "en_jxl",
+        "path": "eng_jxl",
         "notes": {
           "pivot": "jxl2note"
         }
@@ -101,7 +107,7 @@
         {
           "label": "ULT",
           "type": "trans",
-          "id": "en_ult"
+          "id": "eng_ult"
         },
         {
           "label": "Grec",
@@ -111,7 +117,7 @@
         {
           "label": "UST",
           "type": "trans",
-          "id": "en_ust"
+          "id": "eng_ust"
         }
       ]
     },

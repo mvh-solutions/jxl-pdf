@@ -376,7 +376,6 @@ const doScript = async () => {
             let jxlRows = [];
             let sentenceNotes = [];
             for (const [chunkN, chunk] of sentenceJson.chunks.entries()) {
-                let noteN = [];
                 const greek = chunk.source.map(s => s.content).join(' ');
                 const gloss = chunk.gloss;
                 let noteFound = false;
@@ -389,13 +388,12 @@ const doScript = async () => {
                         sentenceNotes.push(
                             cleanNoteLine(notes[noteId])
                         );
-                        noteN.push(sentenceNotes.length);
                     }
                 }
                 const row = templates.jxlRow
                     .replace('%%GREEK%%', greek)
                     .replace('%%GLOSS%%', gloss.replace(/\*([^*]+)\*/g, (m, m1) => `<i>${m1}</i>`))
-                    .replace('%%NOTECALLERS%%', (noteFound ? `${sentenceNotes.map((note, n) => `<p class="note">${note}</p>`).join('')}` : ""));
+                    .replace('%%NOTECALLERS%%', (noteFound ? `${sentenceNotes.map(note => `<p class="note">${note}</p>`).join('')}` : ""));
                 jxlRows.push(row);
                 sentenceNotes = [];
             }
@@ -506,6 +504,22 @@ const doScript = async () => {
         const cvTexts = getCVTexts(bookCode, pk);
         const verses = [];
         verses.push(templates['2_column_title'].replace('%%BOOKNAME%%', bookName));
+        const headerHtml = templates['2_column_header_page']
+            .replace(
+                "%%TITLE%%",
+                `${section.id} - ${section.type}`
+            )
+            .replace("%%TRANS1TITLE%%", section.texts[0].label)
+            .replace("%%TRANS2TITLE%%", section.texts[1].label);
+        fse.writeFileSync(
+            path.join(outputPath, outputDirName, `${section.id}_superimpose.html`),
+            headerHtml
+        );
+        await doPuppet(
+            serverPort,
+            `${section.id}_superimpose`,
+            path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id}_superimpose.pdf`))
+        );
         for (const cvRecord of cvTexts) {
             const verseHtml = templates['2_column_verse']
                 .replace("%%TRANS1TITLE%%", section.texts[0].label)
@@ -564,6 +578,7 @@ const doScript = async () => {
         '4_column_spread_verse',
         '4_column_spread_title',
         '2_column_page',
+        '2_column_header_page',
         '2_column_verse',
         '2_column_title',
         'web_index_page',
@@ -606,7 +621,19 @@ const doScript = async () => {
             startOn: section.startOn,
             showPageNumber: section.showPageNumber,
             makeFromDouble: ["jxlSpread", "4ColumnSpread"].includes(section.type)
-        })
+        });
+        if (section.type === "2Column") {
+            links.push(
+                templates['web_index_page_link']
+                    .replace(/%%ID%%/g, `${section.id}_superimpose`)
+            );
+            manifest.push({
+                id: `${section.id}_superimpose`,
+                type: "superimpose",
+                for: section.id
+            });
+        }
+
         switch (section.type) {
             case "front":
                 await doFrontSection(section, notes, notePivot);

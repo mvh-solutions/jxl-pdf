@@ -213,6 +213,15 @@ const doScript = async () => {
         return pk;
     }
 
+    const vrNumbers = vrs => {
+        let [fromV, toV] = vrs.split('-').map( vs => parseInt(vs));
+        let ret = [];
+        while (fromV <= toV+1) {
+            ret.push(fromV++);
+        }
+        return ret;
+    }
+
     const getCVTexts = (bookCode, pk) => {
         const cvQuery = `{
             docSets {
@@ -221,6 +230,10 @@ const doScript = async () => {
                 id
                 cvIndexes {
                     chapter
+                    verseNumbers {
+                        number
+                        range
+                    }
                     verses {
                         verse {
                             verseRange
@@ -241,6 +254,8 @@ const doScript = async () => {
                     chapters: ds.document.cvIndexes.map(
                         cvi => ({
                             chapterN: cvi.chapter,
+                            verseRanges: cvi.verseNumbers
+                                .filter(vr => vr.range.includes("-")),
                             verses: cvi.verses
                                 .filter(vs => vs.verse.length > 0)
                                 .map(
@@ -254,9 +269,18 @@ const doScript = async () => {
                 })
             );
         const cvLookup = {};
+        const verseRanges = {};
         for (const ds of result) {
             cvLookup[ds.id] = {};
+            const seenRanges = new Set([]);
             for (const chapter of ds.chapters) {
+                if (!verseRanges[chapter.chapterN]) {
+                    verseRanges[chapter.chapterN] = {};
+                }
+                for (const vr of chapter.verseRanges) {
+                    verseRanges[chapter.chapterN][vr.number] = !seenRanges.has(vr.range) ? vr.range : null;
+                    seenRanges.add(vr.range);
+                }
                 cvLookup[ds.id][chapter.chapterN] = {};
                 for (const verse of chapter.verses) {
                     cvLookup[ds.id][chapter.chapterN][verse.verseN] = verse.text
@@ -264,6 +288,7 @@ const doScript = async () => {
                         .replace(/ ;/g, "&nbsp;;")
                         .replace(/ :/g, "&nbsp;:")
                         .replace(/ !/g, "&nbsp;!")
+                        .replace(/{([^}]+)}/g, (res, m1) => `<i>${m1}</i>`)
                         .trim();;
                 }
             }
@@ -271,14 +296,39 @@ const doScript = async () => {
         let ret = [];
         for (const chapter of result[0].chapters) {
             for (const verse of chapter.verses) {
-                const cv = `${chapter.chapterN}:${verse.verseN}`;
                 const retRecord = {
-                    cv,
                     texts: {}
                 };
-                for (const ds of Object.keys(cvLookup)) {
-                    if (cvLookup[ds][chapter.chapterN] && cvLookup[ds][chapter.chapterN][verse.verseN]) {
-                        retRecord.texts[ds] = cvLookup[ds][chapter.chapterN][verse.verseN];
+                if (verseRanges[chapter.chapterN] && verse.verseN in verseRanges[chapter.chapterN]) { // verseRange record exists
+                    retRecord.cv = `${chapter.chapterN}:${verseRanges[chapter.chapterN][verse.verseN]}`;
+                    for (const ds of Object.keys(cvLookup)) {
+                        if (cvLookup[ds][chapter.chapterN]) {
+                            if (
+                                verseRanges[chapter.chapterN][verse.verseN] &&
+                                cvLookup[ds][chapter.chapterN][verseRanges[chapter.chapterN][verse.verseN]]
+                            ) { // verseRange for which the verseRange exists directly
+                                retRecord.texts[ds] = cvLookup[ds][chapter.chapterN][verseRanges[chapter.chapterN][verse.verseN]];
+                            }
+                            else if (verse.verseN in cvLookup[ds][chapter.chapterN]) { // verseRange for which there is single verse content;
+                                if (!verseRanges[chapter.chapterN][verse.verseN]) { // verseRange is null, so already handled for a previous verse
+                                    continue;
+                                }
+                                for (const vrNumber of vrNumbers(verseRanges[chapter.chapterN][verse.verseN])) {
+                                    if (!retRecord.texts[ds]) {
+                                        retRecord.texts[ds] = cvLookup[ds][chapter.chapterN][vrNumber] || "??";
+                                    } else {
+                                        retRecord.texts[ds] += ` ${cvLookup[ds][chapter.chapterN][vrNumber] || "??"}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    retRecord.cv = `${chapter.chapterN}:${verse.verseN}`;
+                    for (const ds of Object.keys(cvLookup)) {
+                        if (cvLookup[ds][chapter.chapterN] && verse.verseN in cvLookup[ds][chapter.chapterN]) {
+                            retRecord.texts[ds] = cvLookup[ds][chapter.chapterN][verse.verseN];
+                        }
                     }
                 }
                 if (Object.keys(retRecord.texts).length > 0) {

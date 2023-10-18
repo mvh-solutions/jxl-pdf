@@ -504,6 +504,10 @@ const doScript = async () => {
         const pk = pkWithDocs(bookCode, section.texts);
         const bookName = getBookName(pk, config.docIdForNames, bookCode);
         const cvTexts = getCVTexts(bookCode, pk);
+        fse.writeFileSync(
+            path.join(outputPath, outputDirName, 'pdf', "cv.json"),
+            JSON.stringify(cvTexts, null, 2)
+        );
         const verses = [];
         verses.push(templates['4_column_spread_title'].replace('%%BOOKNAME%%', bookName));
         for (const cvRecord of cvTexts) {

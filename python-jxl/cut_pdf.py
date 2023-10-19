@@ -1,5 +1,5 @@
 import os
-from PyPDF2 import PdfReader, PdfWriter, PdfMerger, PaperSize
+from PyPDF2 import PdfReader, PdfWriter, PdfMerger, PaperSize, Transformation
 from PyPDF2.generic import AnnotationBuilder
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A3, portrait, landscape
@@ -81,17 +81,30 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
     # writer.add_blank_page(EXECUTIVE_WIDTH, EXECUTIVE_HEIGHT)
     # writer.add_blank_page(EXECUTIVE_WIDTH, EXECUTIVE_HEIGHT)
     config = readJson()
+    conf_len = len(config)
     numCurrentPage = 1
-    for i in range(len(config)):
-        id=config[i]["id"]
-        type=config[i]["type"]
-        startOn=config[i]["startOn"]
-        makeFromDouble=config[i]["makeFromDouble"]
-        showPageNumber=config[i]["showPageNumber"]
+    for_ids = {}
+    for obj in range(conf_len):
+        if(config[obj].get("for") != None):
+            for_ids[config[obj].get("for")] = config[obj].get("id")
+    for i in range(conf_len):
+        if(config[i].get("for") != None):
+            continue
+        id=config[i].get("id")
+        type=config[i].get("type")
+        startOn=config[i].get("startOn")
+        makeFromDouble=config[i].get("makeFromDouble")
+        showPageNumber=config[i].get("showPageNumber")
         name="{}.pdf".format(id)
         reader = PdfReader(name)
         if(makeFromDouble):
             reader2 = PdfReader(name)
+        else:
+            reader2 = None
+        if(id in for_ids.keys()):
+            read3 = PdfReader("{}.pdf".format(for_ids.get(id)))
+        else:
+            read3 = None
         nbPages = len(reader.pages)
 
         if numCurrentPage%2 != 0 and startOn == "verso":
@@ -115,18 +128,22 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
                     to.setFont(font, 9)
                     to.textLine("{}".format(numCurrentPage))
                     c.drawText(to)
-                numCurrentPage+=1
                 c.showPage()
                 c.save()
 
                 tmpTxt = PdfReader(cname)
 
                 page.merge_page(tmpTxt.pages[0])
+                if(read3 != None):
+                    curPage = read3.pages[0]
+                    page.merge_page(curPage)
 
-                page.mediabox.right = w/2.0+EXECUTIVE_WIDTH/2.0
-                page.mediabox.left = w/2.0-EXECUTIVE_WIDTH/2.0
-                page.mediabox.top = h/2.0+EXECUTIVE_HEIGHT/2.0
-                page.mediabox.bottom = h/2.0-EXECUTIVE_HEIGHT/2.0
+
+                numCurrentPage+=1
+                # page.mediabox.right = w/2.0+EXECUTIVE_WIDTH/2.0
+                # page.mediabox.left = w/2.0-EXECUTIVE_WIDTH/2.0
+                # page.mediabox.top = h/2.0+EXECUTIVE_HEIGHT/2.0
+                # page.mediabox.bottom = h/2.0-EXECUTIVE_HEIGHT/2.0
                 writer.add_page(page)
 
                 os.remove(cname)
@@ -173,16 +190,19 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
 
                 pageR.merge_page(tmpTxt.pages[0])
                 pageL.merge_page(tmpTxt.pages[0])
+                if(read3 != None):
+                    pageR.merge_page(read3.pages[0])
+                    pageL.merge_page(read3.pages[0])
 
-                pageL.mediabox.right = math.floor(w/2.0)
-                pageL.mediabox.left = math.floor(offset_width)
-                pageL.mediabox.top = math.floor(float(pageL.mediabox.height) - offset_height) - 0.5
-                pageL.mediabox.bottom = math.floor(offset_height) + 0.5
+                # pageL.mediabox.right = math.floor(w/2.0)
+                # pageL.mediabox.left = math.floor(offset_width)
+                # pageL.mediabox.top = math.floor(float(pageL.mediabox.height) - offset_height) - 0.5
+                # pageL.mediabox.bottom = math.floor(offset_height) + 0.5
 
-                pageR.mediabox.left = math.floor(w/2.0)
-                pageR.mediabox.right = w - math.floor(offset_width) - 1
-                pageR.mediabox.top = math.floor(float(pageR.mediabox.height) - offset_height) - 0.5
-                pageR.mediabox.bottom = math.floor(offset_height) + 0.5
+                # pageR.mediabox.left = math.floor(w/2.0)
+                # pageR.mediabox.right = w - math.floor(offset_width) - 1
+                # pageR.mediabox.top = math.floor(float(pageR.mediabox.height) - offset_height) - 0.5
+                # pageR.mediabox.bottom = math.floor(offset_height) + 0.5
 
                 writer.add_page(pageL)
                 writer.add_page(pageR)
@@ -458,7 +478,7 @@ if __name__ == "__main__":
             source = source_folder + file_name
             destination = destination_folder + file_name
             # copy only files
-            if os.path.isfile(source):
+            if os.path.isfile(source) and "cv.json" not in file_name:
                 shutil.copy(source, destination)
                 print('copied', file_name)
         print("running...")

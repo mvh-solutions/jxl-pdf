@@ -563,8 +563,8 @@ const doScript = async () => {
                 "%%TITLE%%",
                 `${section.id} - ${section.type}`
             )
-            .replace("%%TRANS1TITLE%%", section.texts[0].label)
-            .replace("%%TRANS2TITLE%%", section.texts[1].label);
+            .replace(/%%TRANS1TITLE%%/g, section.texts[0].label)
+            .replace(/%%TRANS2TITLE%%/g, section.texts[1].label);
         fse.writeFileSync(
             path.join(outputPath, outputDirName, `${section.id}_superimpose.html`),
             headerHtml

@@ -76,6 +76,13 @@ h2.verseRecordHeadRight {
     display: inline-flex;
 }
 
+.columnHeadings {
+    page-break-inside: avoid;
+    break-after: page;
+    vertical-align: top;
+    display: inline-flex;
+}
+
 .col1, .col2 {
     vertical-align: top;
     display: inline-block;

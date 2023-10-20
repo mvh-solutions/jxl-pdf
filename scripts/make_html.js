@@ -574,13 +574,23 @@ const doScript = async () => {
             `${section.id}_superimpose`,
             path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id}_superimpose.pdf`))
         );
+        verses.push(`
+<section class="columnHeadings">
+    <section class="leftColumn">
+        <h2 class="verseRecordHeadLeft">${section.texts[0].label}</h2>
+    </section>
+    <section class="rightColumn">
+        <h2 class="verseRecordHeadRight">${section.texts[1].label}</h2>
+    </section>
+</section>
+`);
         for (const cvRecord of cvTexts) {
             const verseHtml = templates['2_column_verse']
                 .replace("%%TRANS1TITLE%%", section.texts[0].label)
                 .replace("%%TRANS2TITLE%%", section.texts[1].label)
                 .replace(
                     '%%LEFTCOLUMN%%',
-                    `<div class="col1"><span class="cv">${cvRecord.cv.endsWith(":1") ? `${bookName}&nbsp;` : ""}${cvRecord.cv}</span> ${cvRecord.texts[section.texts[0].id] || "-"}</div>`
+                    `<div class="col1"><span class="cv">${cvRecord.cv}</span> ${cvRecord.texts[section.texts[0].id] || "-"}</div>`
                 )
                 .replace(
                     '%%RIGHTCOLUMN%%',

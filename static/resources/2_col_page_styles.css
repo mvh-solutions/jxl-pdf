@@ -1,11 +1,14 @@
 @page {
     size: 504pt 720pt;
     margin-bottom: 50pt;
-    margin-top: 40pt;
+    margin-top: 60pt;
     @footnote {
         float: bottom;
         margin-top: 10pt;
     }
+}
+@page :first {
+    margin-top: 40pt;
 }
 @page :left {
     margin-left: 44pt;
@@ -39,10 +42,10 @@ h1 {
 }
 
 h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
-    font-size: 7pt;
-    line-height: 10pt;
+    font-size: 10pt;
+    line-height: 20pt;
     font-style: italic;
-    font-weight: normal;
+    font-weight: bold;
     margin: 0;
     width: 188pt;
 }
@@ -85,6 +88,7 @@ h2.verseRecordHeadRight {
 
 .col2 {
     margin-right: 12pt;
+    text-indent: 1em;
 }
 
 ::footnote-call {
@@ -118,5 +122,5 @@ h2.verseRecordHeadRight {
 }
 .cv {
     font-style: italic;
-    font-size: 7pt;
+    font-weight: bold;
 }

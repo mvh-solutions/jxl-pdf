@@ -1,7 +1,7 @@
 @page {
     size: 504pt 720pt;
     margin-bottom: 50pt;
-    margin-top: 20pt;
+    margin-top: 40pt;
     @footnote {
         float: bottom;
         margin-top: 10pt;
@@ -39,7 +39,7 @@ h1 {
 }
 
 h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
-    font-size: 14pt;
+    font-size: 10pt;
     line-height: 20pt;
     font-style: italic;
     font-weight: bold;

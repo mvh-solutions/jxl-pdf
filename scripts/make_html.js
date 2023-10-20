@@ -214,9 +214,9 @@ const doScript = async () => {
     }
 
     const vrNumbers = vrs => {
-        let [fromV, toV] = vrs.split('-').map( vs => parseInt(vs));
+        let [fromV, toV] = vrs.split('-').map(vs => parseInt(vs));
         let ret = [];
-        while (fromV <= toV+1) {
+        while (fromV <= toV + 1) {
             ret.push(fromV++);
         }
         return ret;
@@ -289,7 +289,8 @@ const doScript = async () => {
                         .replace(/ :/g, "&nbsp;:")
                         .replace(/ !/g, "&nbsp;!")
                         .replace(/{([^}]+)}/g, (res, m1) => `<i>${m1}</i>`)
-                        .trim();;
+                        .trim();
+                    ;
                 }
             }
         }
@@ -308,8 +309,7 @@ const doScript = async () => {
                                 cvLookup[ds][chapter.chapterN][verseRanges[chapter.chapterN][verse.verseN]]
                             ) { // verseRange for which the verseRange exists directly
                                 retRecord.texts[ds] = cvLookup[ds][chapter.chapterN][verseRanges[chapter.chapterN][verse.verseN]];
-                            }
-                            else if (verse.verseN in cvLookup[ds][chapter.chapterN]) { // verseRange for which there is single verse content;
+                            } else if (verse.verseN in cvLookup[ds][chapter.chapterN]) { // verseRange for which there is single verse content;
                                 if (!verseRanges[chapter.chapterN][verse.verseN]) { // verseRange is null, so already handled for a previous verse
                                     continue;
                                 }
@@ -510,12 +510,36 @@ const doScript = async () => {
         );
         const verses = [];
         verses.push(templates['4_column_spread_title'].replace('%%BOOKNAME%%', bookName));
+        const headerHtml = templates['4_column_header_page']
+            .replace(
+                "%%TITLE%%",
+                `${section.id} - ${section.type}`
+            )
+            .replace(/%%TRANS1TITLE%%/g, section.texts[0].label)
+            .replace(/%%TRANS2TITLE%%/g, section.texts[1].label)
+            .replace(/%%TRANS3TITLE%%/g, section.texts[2].label)
+            .replace(/%%TRANS4TITLE%%/g, section.texts[3].label);
+        fse.writeFileSync(
+            path.join(outputPath, outputDirName, `${section.id}_superimpose.html`),
+            headerHtml
+        );
+        await doPuppet(
+            serverPort,
+            `${section.id}_superimpose`,
+            path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id}_superimpose.pdf`))
+        );
+        verses.push(`
+<section class="columnHeadings">
+    <section class="versoPage">
+        <h2 class="verseRecordHeadLeft"><span style="float: left">${section.texts[0].label}</span>&nbsp;<span style="float: right">${section.texts[1].label}</span></h2>
+    </section>
+    <section class="rectoPage">
+        <h2 class="verseRecordHeadRight"><span style="float: left">${section.texts[2].label}</span>&nbsp;<span style="float: right">${section.texts[3].label}</span></h2>
+    </section>
+</section>
+`);
         for (const cvRecord of cvTexts) {
             const verseHtml = templates['4_column_spread_verse']
-                .replace("%%TRANS1TITLE%%", section.texts[0].label)
-                .replace("%%TRANS2TITLE%%", section.texts[1].label)
-                .replace("%%TRANS3TITLE%%", section.texts[2].label)
-                .replace("%%TRANS4TITLE%%", section.texts[3].label)
                 .replace(
                     '%%VERSOCOLUMNS%%',
                     `<div class="col1"><span class="cv">${cvRecord.cv.endsWith(":1") ? `${bookName}&nbsp;` : ""}${cvRecord.cv}</span> ${cvRecord.texts[section.texts[0].id] || "-"}</div><div class="col2">${cvRecord.texts[section.texts[1].id] || "-"}</div>`
@@ -574,13 +598,23 @@ const doScript = async () => {
             `${section.id}_superimpose`,
             path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id}_superimpose.pdf`))
         );
+        verses.push(`
+<section class="columnHeadings">
+    <section class="leftColumn">
+        <h2 class="verseRecordHeadLeft">${section.texts[0].label}</h2>
+    </section>
+    <section class="rightColumn">
+        <h2 class="verseRecordHeadRight">${section.texts[1].label}</h2>
+    </section>
+</section>
+`);
         for (const cvRecord of cvTexts) {
             const verseHtml = templates['2_column_verse']
                 .replace("%%TRANS1TITLE%%", section.texts[0].label)
                 .replace("%%TRANS2TITLE%%", section.texts[1].label)
                 .replace(
                     '%%LEFTCOLUMN%%',
-                    `<div class="col1"><span class="cv">${cvRecord.cv.endsWith(":1") ? `${bookName}&nbsp;` : ""}${cvRecord.cv}</span> ${cvRecord.texts[section.texts[0].id] || "-"}</div>`
+                    `<div class="col1"><span class="cv">${cvRecord.cv}</span> ${cvRecord.texts[section.texts[0].id] || "-"}</div>`
                 )
                 .replace(
                     '%%RIGHTCOLUMN%%',
@@ -631,6 +665,7 @@ const doScript = async () => {
         '4_column_spread_page',
         '4_column_spread_verse',
         '4_column_spread_title',
+        '4_column_header_page',
         '2_column_page',
         '2_column_header_page',
         '2_column_verse',
@@ -676,7 +711,7 @@ const doScript = async () => {
             showPageNumber: section.showPageNumber,
             makeFromDouble: ["jxlSpread", "4ColumnSpread"].includes(section.type)
         });
-        if (section.type === "2Column") {
+        if (["4ColumnSpread", "2Column"].includes(section.type)) {
             links.push(
                 templates['web_index_page_link']
                     .replace(/%%ID%%/g, `${section.id}_superimpose`)

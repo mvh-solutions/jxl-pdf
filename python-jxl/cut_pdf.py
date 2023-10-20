@@ -91,7 +91,7 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
         if(config[i].get("for") != None):
             continue
         id=config[i].get("id")
-        type=config[i].get("type")
+        typePage=config[i].get("type")
         startOn=config[i].get("startOn")
         makeFromDouble=config[i].get("makeFromDouble")
         showPageNumber=config[i].get("showPageNumber")
@@ -135,7 +135,7 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
                 tmpTxt = PdfReader(cname)
 
                 page.merge_page(tmpTxt.pages[0])
-                if(read3 != None and numCurrentPage!=0 and not itsTheFirstPage):
+                if(read3 != None and numCurrentPage!=0 and not itsTheFirstPage and typePage == "2Column"):
                     if(numCurrentPage%2 == 0):
                         page.merge_page(read3.pages[1])
                     else:
@@ -149,7 +149,7 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
                 page.mediabox.bottom = h/2.0-EXECUTIVE_HEIGHT/2.0
                 writer.add_page(page)
 
-                if(itsTheFirstPage):
+                if(itsTheFirstPage and typePage == "2Column"):
                     itsTheFirstPage = False
                 os.remove(cname)
         else:
@@ -195,7 +195,7 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
 
                 pageR.merge_page(tmpTxt.pages[0])
                 pageL.merge_page(tmpTxt.pages[0])
-                if(read3 != None):
+                if(read3 != None and not itsTheFirstPage and typePage == "4ColumnSpread"):
                     pageR.merge_page(read3.pages[0])
                     pageL.merge_page(read3.pages[1])
 
@@ -213,6 +213,9 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
                 writer.add_page(pageR)
 
                 os.remove(cname)
+                if(itsTheFirstPage and typePage == "4ColumnSpread"):
+                    itsTheFirstPage = False
+        
 
     with open("pages_cropped_FINAL.pdf", "wb") as fp:
         writer.write(fp)

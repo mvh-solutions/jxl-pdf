@@ -3,7 +3,7 @@
     margin-right: 44pt;
     margin-left: 44pt;
     margin-bottom: 50pt;
-    margin-top: 60pt;
+    margin-top: 40pt;
 
     @top-center {
     }
@@ -16,9 +16,6 @@
     }
 }
 
-@page :first {
-    margin-top: 40pt;
-}
 body {
     font-size: 9pt;
     line-height: 10pt;
@@ -42,13 +39,12 @@ h1 {
 }
 
 h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
-    font-size: 7pt;
-    line-height: 10pt;
+    font-size: 10pt;
+    line-height: 20pt;
     font-style: italic;
-    font-weight: normal;
+    font-weight: bold;
     margin: 0;
     width: 388pt;
-    text-align: center;
 }
 
 .versoPage {
@@ -81,9 +77,6 @@ h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
 
 .col1, .col3 {
     margin-right: 12pt;
-}
-.col2, .col3, .col4 {
-    text-indent: 1em;
 }
 
 ::footnote-call {
@@ -119,11 +112,9 @@ h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
     font-style: italic;
     font-size: 7pt;
 }
-h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
-    font-size: 10pt;
-    line-height: 20pt;
-    font-style: italic;
-    font-weight: bold;
-    margin: 0;
-    width: 388pt;
+.columnHeadings {
+    page-break-inside: avoid;
+    break-after: page;
+    vertical-align: top;
+    display: inline-flex;
 }

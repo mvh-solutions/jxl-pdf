@@ -107,6 +107,7 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
             read3 = None
         nbPages = len(reader.pages)
 
+        itsTheFirstPage=True
         if numCurrentPage%2 != 0 and startOn == "verso":
             writer.add_blank_page(EXECUTIVE_WIDTH, EXECUTIVE_HEIGHT)
             numCurrentPage+=1
@@ -134,18 +135,22 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
                 tmpTxt = PdfReader(cname)
 
                 page.merge_page(tmpTxt.pages[0])
-                if(read3 != None):
-                    curPage = read3.pages[0]
-                    page.merge_page(curPage)
+                if(read3 != None and numCurrentPage!=0 and not itsTheFirstPage):
+                    if(numCurrentPage%2 == 0):
+                        page.merge_page(read3.pages[1])
+                    else:
+                        page.merge_page(read3.pages[0])
 
 
                 numCurrentPage+=1
-                # page.mediabox.right = w/2.0+EXECUTIVE_WIDTH/2.0
-                # page.mediabox.left = w/2.0-EXECUTIVE_WIDTH/2.0
-                # page.mediabox.top = h/2.0+EXECUTIVE_HEIGHT/2.0
-                # page.mediabox.bottom = h/2.0-EXECUTIVE_HEIGHT/2.0
+                page.mediabox.right = w/2.0+EXECUTIVE_WIDTH/2.0
+                page.mediabox.left = w/2.0-EXECUTIVE_WIDTH/2.0
+                page.mediabox.top = h/2.0+EXECUTIVE_HEIGHT/2.0
+                page.mediabox.bottom = h/2.0-EXECUTIVE_HEIGHT/2.0
                 writer.add_page(page)
 
+                if(itsTheFirstPage):
+                    itsTheFirstPage = False
                 os.remove(cname)
         else:
             for k in range(nbPages):
@@ -192,17 +197,17 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
                 pageL.merge_page(tmpTxt.pages[0])
                 if(read3 != None):
                     pageR.merge_page(read3.pages[0])
-                    pageL.merge_page(read3.pages[0])
+                    pageL.merge_page(read3.pages[1])
 
-                # pageL.mediabox.right = math.floor(w/2.0)
-                # pageL.mediabox.left = math.floor(offset_width)
-                # pageL.mediabox.top = math.floor(float(pageL.mediabox.height) - offset_height) - 0.5
-                # pageL.mediabox.bottom = math.floor(offset_height) + 0.5
+                pageL.mediabox.right = math.floor(w/2.0)
+                pageL.mediabox.left = math.floor(offset_width)
+                pageL.mediabox.top = math.floor(float(pageL.mediabox.height) - offset_height) - 0.5
+                pageL.mediabox.bottom = math.floor(offset_height) + 0.5
 
-                # pageR.mediabox.left = math.floor(w/2.0)
-                # pageR.mediabox.right = w - math.floor(offset_width) - 1
-                # pageR.mediabox.top = math.floor(float(pageR.mediabox.height) - offset_height) - 0.5
-                # pageR.mediabox.bottom = math.floor(offset_height) + 0.5
+                pageR.mediabox.left = math.floor(w/2.0)
+                pageR.mediabox.right = w - math.floor(offset_width) - 1
+                pageR.mediabox.top = math.floor(float(pageR.mediabox.height) - offset_height) - 0.5
+                pageR.mediabox.bottom = math.floor(offset_height) + 0.5
 
                 writer.add_page(pageL)
                 writer.add_page(pageR)

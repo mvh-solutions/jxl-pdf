@@ -3,9 +3,9 @@ const fse = require("fs-extra");
 const {Proskomma} = require("proskomma-core");
 const puppeteer = require('puppeteer');
 
+const loadTemplates = require('../src/loadTemplates');
+
 const doScript = async () => {
-// General Helper Functions
-    const readTemplate = templateName => fse.readFileSync(path.join('src', 'templates', templateName + '.html')).toString();
 
 // jxlSpread Helper Functions
     const cvForSentence = sentence => {
@@ -665,31 +665,7 @@ const doScript = async () => {
         }
     }
 
-    const templates = {};
-    for (const template of [
-        'juxta_page',
-        'non_juxta_page',
-        '4_column_spread_page',
-        '4_column_spread_verse',
-        '4_column_spread_title',
-        '4_column_header_page',
-        '2_column_page',
-        '2_column_header_page',
-        '2_column_verse',
-        '2_column_title',
-        'web_index_page',
-        'web_index_page_link',
-        'sentence', 'firstLeft',
-        'otherLeft',
-        'jxl',
-        'jxlRow',
-        'chapterNote',
-        'bookNote',
-        'markdownPara'
-    ]) {
-        templates[template] = readTemplate(template);
-    }
-
+    const templates = loadTemplates();
     const config = fse.readJsonSync(path.resolve(configPath));
     fse.mkdirsSync(path.join(outputPath, outputDirName, 'pdf'));
 
@@ -698,7 +674,7 @@ const doScript = async () => {
     let notePivot = {};
     let manifest = [];
     for (const section of config.sections) {
-        console.log(`## Section ${section.id} (${section.type})`);
+        console.log(`## Section ${section.id ? `${section.id} (${section.type})` : section.type}`);
         links.push(
             templates['web_index_page_link']
                 .replace(/%%ID%%/g, section.id)
@@ -724,7 +700,6 @@ const doScript = async () => {
 
         switch (section.type) {
             case "setBook":
-                console.log("setbooks")
                 if (section.source && section.source === "cli" && cliBookCode) {
                     bookCode = cliBookCode;
                 } else if (section.source && section.source === "literal" && section.bookCode) {

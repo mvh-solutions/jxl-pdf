@@ -1,0 +1,69 @@
+{
+  "docIdForNames": "fra_lsg",
+  "notes": "fra_tn",
+  "notesFormat": "tsv9",
+  "sections": [
+    {
+      "type": "setBook",
+      "source": "literal",
+      "bookCode": "PHP"
+    },
+    {
+      "id": "bookNotes",
+      "type": "bookNote",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "id": "twoColumn",
+      "type": "2Column",
+      "startOn": "recto",
+      "styles": "2_column_spread_page_styles",
+      "showPageNumber": true,
+      "texts": [
+        {
+          "label": "Littérale",
+          "type": "trans",
+          "id": "fra_tlx"
+        },
+        {
+          "label": "Sémantique",
+          "type": "trans",
+          "id": "fra_tsx"
+        }
+      ]
+    },
+    {
+      "type": "setBook",
+      "source": "literal",
+      "bookCode": "TIT"
+    },
+    {
+      "id": "bookNotes2",
+      "type": "bookNote",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "id": "twoColumn2",
+      "type": "2Column",
+      "startOn": "recto",
+      "styles": "2_column_spread_page_styles",
+      "showPageNumber": true,
+      "texts": [
+        {
+          "label": "Littérale",
+          "type": "trans",
+          "id": "fra_tlx"
+        },
+        {
+          "label": "Sémantique",
+          "type": "trans",
+          "id": "fra_tsx"
+        }
+      ]
+    }
+  ]
+}

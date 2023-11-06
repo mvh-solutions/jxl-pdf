@@ -357,10 +357,12 @@ const doScript = async () => {
         await doPuppet(serverPort, section.id, path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id}.pdf`)));
     }
 
-    const doJxlSpreadSection = async (section, notes, notePivot) => {
+    const doJxlSpreadSection = async (section) => {
 
         const jxlJson = fse.readJsonSync(path.resolve(path.join('data', section.jxl.path, `${bookCode}.json`)));
         let pivotIds = new Set([]);
+        const notes = {};
+        const notePivot = {};
         if (section.jxl.notes && section.jxl.notes.pivot) {
             const pivotRows = fse.readFileSync(path.join('data', section.jxl.notes.pivot, `${bookCode}.tsv`)).toString().split("\n");
             for (const pivotRow of pivotRows) {
@@ -477,7 +479,16 @@ const doScript = async () => {
         );
     }
 
-    const doBookNoteSection = async (section, notes, notePivot) => {
+    const doBookNoteSection = async (section) => {
+        const notes = {};
+        const notesRows = fse.readFileSync(path.join('data', config.notes, `${bookCode}.tsv`)).toString().split("\n");
+        for (const notesRow of notesRows) {
+            const cells = notesRow.split('\t');
+            if (cells[1] === "front" && cells[2] === "intro") {
+                const noteKey = `${cells[1]}_${cells[2]}`;
+                notes[noteKey] = cells[6];
+            }
+        }
         fse.writeFileSync(
             path.join(outputPath, outputDirName, `${section.id}.html`),
             templates['non_juxta_page']
@@ -497,7 +508,7 @@ const doScript = async () => {
         );
     }
 
-    const do4ColumnSpreadSection = async (section, notes, notePivot) => {
+    const do4ColumnSpreadSection = async (section) => {
         if (!section.texts || section.texts.length !== 4) {
             throw new Error("4 Column Spread Section requires exactly 4 text definitions");
         }
@@ -573,7 +584,7 @@ const doScript = async () => {
         );
     }
 
-    const do2ColumnSection = async (section, notes, notePivot) => {
+    const do2ColumnSection = async (section) => {
         if (!section.texts || section.texts.length !== 2) {
             throw new Error("2 Column Section requires exactly 2 text definitions");
         }
@@ -670,8 +681,6 @@ const doScript = async () => {
     fse.mkdirsSync(path.join(outputPath, outputDirName, 'pdf'));
 
     let links = [];
-    let notes = {};
-    let notePivot = {};
     let manifest = [];
     for (const section of config.sections) {
         console.log(`## Section ${section.id ? `${section.id} (${section.type})` : section.type}`);
@@ -679,13 +688,6 @@ const doScript = async () => {
             templates['web_index_page_link']
                 .replace(/%%ID%%/g, section.id)
         );
-        manifest.push({
-            id: section.id,
-            type: section.type,
-            startOn: section.startOn,
-            showPageNumber: section.showPageNumber,
-            makeFromDouble: ["jxlSpread", "4ColumnSpread"].includes(section.type)
-        });
         if (["4ColumnSpread", "2Column"].includes(section.type)) {
             links.push(
                 templates['web_index_page_link']
@@ -707,36 +709,38 @@ const doScript = async () => {
                 } else {
                     throw new Error(`Could not set bookCode using '${JSON.stringify(section)}': maybe you need to provide a bookCode at the command line?`);
                 }
+                console.log(`      bookCode = ${bookCode}`);
                 break;
             case "front":
-                await doFrontSection(section, notes, notePivot);
+                await doFrontSection(section);
                 break;
             case "jxlSpread":
                 checkBookCode(section.id);
-                await doJxlSpreadSection(section, notes, notePivot);
+                await doJxlSpreadSection(section);
                 break;
             case "4ColumnSpread":
                 checkBookCode(section.id);
-                await do4ColumnSpreadSection(section, notes, notePivot);
+                await do4ColumnSpreadSection(section);
                 break;
             case "2Column":
                 checkBookCode(section.id);
-                await do2ColumnSection(section, notes, notePivot);
+                await do2ColumnSection(section);
                 break;
             case "bookNote":
                 checkBookCode(section.id);
-                const notesRows = fse.readFileSync(path.join('data', config.notes, `${bookCode}.tsv`)).toString().split("\n");
-                for (const notesRow of notesRows) {
-                    const cells = notesRow.split('\t');
-                    if (cells[1] === "front" && cells[2] === "intro") {
-                        const noteKey = `${cells[1]}_${cells[2]}`;
-                        notes[noteKey] = cells[6];
-                    }
-                }
-                await doBookNoteSection(section, notes, notePivot);
+                await doBookNoteSection(section);
                 break;
             default:
                 throw new Error(`Unknown section type '${section.type}' (id '${section.id}')`);
+        }
+        if (section.type !== "setBook") {
+            manifest.push({
+                id: section.id,
+                type: section.type,
+                startOn: section.startOn,
+                showPageNumber: section.showPageNumber,
+                makeFromDouble: ["jxlSpread", "4ColumnSpread"].includes(section.type)
+            });
         }
     }
     fse.writeFileSync(

@@ -4,6 +4,10 @@
   "notesFormat": "tsv9",
   "sections": [
     {
+      "type": "setBook",
+      "source": "cli"
+    },
+    {
       "id": "bookNotes",
       "type": "bookNote",
       "styles": "non_juxta_page_styles",

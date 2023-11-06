@@ -340,7 +340,7 @@ const doScript = async () => {
     }
 
 // Section handlers
-    const doFrontSection = async (section, notes, notePivot) => {
+    const doFrontSection = async (section) => {
         const content = templates['non_juxta_page']
             .replace(
                 "%%TITLE%%",
@@ -646,17 +646,24 @@ const doScript = async () => {
     }
 
 // Script
-    const usage = "USAGE: node make_html.js <configPath> <bookCode> <serverPort> <outputDirName>";
-    if (process.argv.length !== 6) {
+    const usage = "USAGE: node make_html.js <configPath> <serverPort> <outputDirName> [<bookCode>]";
+    if (![5, 6].includes(process.argv.length)) {
         console.log(`Wrong number of arguments!\n${usage}`);
         process.exit(1);
     }
 
     const configPath = process.argv[2];
-    const bookCode = process.argv[3];
-    const serverPort = process.argv[4];
-    const outputDirName = process.argv[5];
+    const serverPort = process.argv[3];
+    const outputDirName = process.argv[4];
+    const cliBookCode = process.argv[5] || null;
     const outputPath = path.resolve('static/html');
+
+    let bookCode = null;
+    const checkBookCode = (sectionId) => {
+        if (!bookCode) {
+            throw new Error(`bookCode not set for section '${sectionId}`);
+        }
+    }
 
     const templates = {};
     for (const template of [
@@ -690,14 +697,6 @@ const doScript = async () => {
     let notes = {};
     let notePivot = {};
     let manifest = [];
-    const notesRows = fse.readFileSync(path.join('data', config.notes, `${bookCode}.tsv`)).toString().split("\n");
-    for (const notesRow of notesRows) {
-        const cells = notesRow.split('\t');
-        if (cells[1] === "front" && cells[2] === "intro") {
-            const noteKey = `${cells[1]}_${cells[2]}`;
-            notes[noteKey] = cells[6];
-        }
-    }
     for (const section of config.sections) {
         console.log(`## Section ${section.id} (${section.type})`);
         links.push(
@@ -724,19 +723,41 @@ const doScript = async () => {
         }
 
         switch (section.type) {
+            case "setBook":
+                console.log("setbooks")
+                if (section.source && section.source === "cli" && cliBookCode) {
+                    bookCode = cliBookCode;
+                } else if (section.source && section.source === "literal" && section.bookCode) {
+                    bookCode = section.bookCode;
+                } else {
+                    throw new Error(`Could not set bookCode using '${JSON.stringify(section)}': maybe you need to provide a bookCode at the command line?`);
+                }
+                break;
             case "front":
                 await doFrontSection(section, notes, notePivot);
                 break;
             case "jxlSpread":
+                checkBookCode(section.id);
                 await doJxlSpreadSection(section, notes, notePivot);
                 break;
             case "4ColumnSpread":
+                checkBookCode(section.id);
                 await do4ColumnSpreadSection(section, notes, notePivot);
                 break;
             case "2Column":
+                checkBookCode(section.id);
                 await do2ColumnSection(section, notes, notePivot);
                 break;
             case "bookNote":
+                checkBookCode(section.id);
+                const notesRows = fse.readFileSync(path.join('data', config.notes, `${bookCode}.tsv`)).toString().split("\n");
+                for (const notesRow of notesRows) {
+                    const cells = notesRow.split('\t');
+                    if (cells[1] === "front" && cells[2] === "intro") {
+                        const noteKey = `${cells[1]}_${cells[2]}`;
+                        notes[noteKey] = cells[6];
+                    }
+                }
                 await doBookNoteSection(section, notes, notePivot);
                 break;
             default:

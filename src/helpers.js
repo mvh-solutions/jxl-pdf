@@ -1,6 +1,7 @@
 const puppeteer = require("puppeteer");
 const fse = require("fs-extra");
 const path = require("path");
+const {Proskomma} = require("proskomma-core");
 
 const cvForSentence = sentence => {
     const cvSet = new Set([]);
@@ -108,7 +109,7 @@ const cleanNoteLine = noteLine => noteLine
     .replace(/\*([^*]+)\*/g, (m, m1) => `<i>${m1}</i>`)
     .replace(/\[(.+?)\]\(.+?\)/g, "$1")
 
-const maybeChapterNotes = (chapterN, noteType, notes) => {
+const maybeChapterNotes = (chapterN, noteType, notes, templates) => {
     const chapterNoteRecord = notes[`${chapterN}_intro`];
     if (chapterNoteRecord) {
         console.log(`     Notes for Chapter ${chapterN}`);
@@ -145,7 +146,7 @@ const maybeChapterNotes = (chapterN, noteType, notes) => {
     }
 }
 
-const doPuppet = async (serverPort, sectionId, pdfOutputPath, orientation) => {
+const doPuppet = async (serverPort, sectionId, pdfOutputPath, orientation, outputDirName) => {
 
     const waitTillHTMLRendered = async (page, timeout = 30000) => {
         const checkDurationMsecs = 1000;
@@ -340,8 +341,8 @@ module.exports = {
     getGreekContent,
     getBookName,
     cleanNoteLine,
+    maybeChapterNotes,
     doPuppet,
     pkWithDocs,
-    vrNumbers,
     getCVTexts
 }

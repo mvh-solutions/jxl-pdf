@@ -9,7 +9,7 @@ const {
     doJxlSpreadSection
 } = require("../src/sectionHandlers");
 
-const doScript = async ({configPath, serverPort, outputDirName, cliBookCode}) => {
+const doPdf = async ({configPath, serverPort, outputDirName, cliBookCode}) => {
     const outputPath = path.resolve('static/html');
 
     let bookCode = null;
@@ -133,4 +133,4 @@ const doScript = async ({configPath, serverPort, outputDirName, cliBookCode}) =>
     )
 }
 
-module.exports = doScript;
+module.exports = doPdf;

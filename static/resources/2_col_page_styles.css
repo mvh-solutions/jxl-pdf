@@ -67,7 +67,6 @@ h2.verseRecordHeadRight {
 
 .rightColumn {
     width: 188pt;
-    height: 100%;
     display: inline-block;
     vertical-align: top;
     margin-left: 6pt;
@@ -76,7 +75,7 @@ h2.verseRecordHeadRight {
 .verseRecord {
     page-break-inside: avoid;
     vertical-align: top;
-    display: inline-flex;
+    display: flex;
 }
 
 .col1, .col2 {
@@ -122,5 +121,31 @@ h2.verseRecordHeadRight {
 }
 .cv {
     font-style: italic;
+    font-weight: bold;
+}
+.note {
+    font-size: 7pt;
+    line-height: 9pt;
+    text-align: justify;
+    float: footnote;
+    margin-bottom: 0pt;
+    padding-left: 6pt;
+    text-indent: -6pt;
+}
+
+.note .b {
+    font-weight: bold;
+}
+
+::footnote-call {
+    font-weight: bold;
+    font-size: 70%;
+    vertical-align: baseline;
+    position: relative;
+    top: -0.5em;
+    padding-left: 1pt;
+}
+
+::footnote-marker {
     font-weight: bold;
 }

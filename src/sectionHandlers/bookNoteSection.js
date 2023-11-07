@@ -16,7 +16,7 @@ const doBookNoteSection = async ({section, serverPort, config, bookCode, outputD
         templates['non_juxta_page']
             .replace(
                 "%%TITLE%%",
-                `${section.id} - ${section.type}`
+                `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`
             )
             .replace(
                 "%%BODY%%",

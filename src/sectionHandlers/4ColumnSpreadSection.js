@@ -17,7 +17,7 @@ const do4ColumnSpreadSection = async ({section, serverPort, config, bookCode, ou
     const headerHtml = templates['4_column_header_page']
         .replace(
             "%%TITLE%%",
-            `${section.id} - ${section.type}`
+            `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`
         )
         .replace(/%%TRANS1TITLE%%/g, section.texts[0].label)
         .replace(/%%TRANS2TITLE%%/g, section.texts[1].label)
@@ -61,7 +61,7 @@ const do4ColumnSpreadSection = async ({section, serverPort, config, bookCode, ou
         templates['4_column_spread_page']
             .replace(
                 "%%TITLE%%",
-                `${section.id} - ${section.type}`
+                `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`
             )
             .replace(
                 "%%VERSES%%",

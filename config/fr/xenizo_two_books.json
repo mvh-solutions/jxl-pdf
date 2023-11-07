@@ -6,7 +6,6 @@
     {
       "type": "setBooks",
       "bookCodes": [
-        "PHP",
         "TIT"
       ],
       "sections": [
@@ -23,6 +22,7 @@
           "startOn": "verso",
           "styles": "4_column_spread_page_styles",
           "showPageNumber": true,
+          "showNotes": true,
           "texts": [
             {
               "label": "Segond 1910",
@@ -87,6 +87,7 @@
           "startOn": "recto",
           "styles": "2_column_spread_page_styles",
           "showPageNumber": true,
+          "showNotes": true,
           "texts": [
             {
               "label": "Littérale",

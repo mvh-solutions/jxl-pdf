@@ -5,7 +5,7 @@ const doFrontSection = async ({section, serverPort, bookCode, outputDirName, out
     const content = templates['non_juxta_page']
         .replace(
             "%%TITLE%%",
-            `${section.id} - ${section.type}`
+            `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`
         )
         .replace(
             "%%BODY%%",

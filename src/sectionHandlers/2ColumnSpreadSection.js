@@ -1,19 +1,27 @@
-const {pkWithDocs, getBookName, getCVTexts, doPuppet} = require("../helpers");
+const {pkWithDocs, getBookName, getCVTexts, cleanNoteLine, doPuppet} = require("../helpers");
 const fse = require("fs-extra");
 const path = require("path");
-const do2ColumnSection = async ({section, serverPort, bookCode, outputDirName, outputPath, templates}) => {
+const do2ColumnSection = async ({section, serverPort, bookCode, config, outputDirName, outputPath, templates}) => {
     if (!section.texts || section.texts.length !== 2) {
         throw new Error("2 Column Section requires exactly 2 text definitions");
     }
     const pk = pkWithDocs(bookCode, section.texts);
     const bookName = getBookName(pk, section.texts[0].id, bookCode);
     const cvTexts = getCVTexts(bookCode, pk);
+    let notes = {};
+    if (section.showNotes) {
+        const notesRows = fse.readFileSync(path.join('data', config.notes, `${bookCode}.tsv`)).toString().split("\n");
+        for (const notesRow of notesRows) {
+            const cells = notesRow.split('\t');
+            notes[`${cells[1]}:${cells[2]}`] = cells[6];
+        }
+    }
     const verses = [];
     verses.push(templates['2_column_title'].replace('%%BOOKNAME%%', bookName));
     const headerHtml = templates['2_column_header_page']
         .replace(
             "%%TITLE%%",
-            `${section.id} - ${section.type}`
+            `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`
         )
         .replace(/%%TRANS1TITLE%%/g, section.texts[0].label)
         .replace(/%%TRANS2TITLE%%/g, section.texts[1].label);
@@ -48,7 +56,11 @@ const do2ColumnSection = async ({section, serverPort, bookCode, outputDirName, o
             )
             .replace(
                 '%%RIGHTCOLUMN%%',
-                `<div class="col2">${cvRecord.texts[section.texts[1].id] || "-"}</div>`
+                `<div class="col2">${cvRecord.texts[section.texts[1].id] || "-"}${Object.entries(notes)
+                    .filter(nr => nr[0] === cvRecord.cv)
+                    .map(nr => cleanNoteLine(nr[1]))
+                    .map(note => `<p class="note">${note}</p>`)
+                    .join('\n')}</div>`
             );
         verses.push(verseHtml);
     }
@@ -57,7 +69,7 @@ const do2ColumnSection = async ({section, serverPort, bookCode, outputDirName, o
         templates['2_column_page']
             .replace(
                 "%%TITLE%%",
-                `${section.id} - ${section.type}`
+                `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`
             )
             .replace(
                 "%%BODY%%",

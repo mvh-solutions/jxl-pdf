@@ -69,7 +69,7 @@ h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
 .verseRecord {
     page-break-inside: avoid;
     vertical-align: top;
-    display: inline-flex;
+    display: flex;
 }
 
 .col1, .col2, .col3, .col4 {
@@ -84,6 +84,19 @@ h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
 }
 .col2, .col3, .col4 {
     text-indent: 1em;
+}
+.note {
+    font-size: 7pt;
+    line-height: 9pt;
+    text-align: justify;
+    float: footnote;
+    margin-bottom: 0pt;
+    padding-left: 6pt;
+    text-indent: -6pt;
+}
+
+.note .b {
+    font-weight: bold;
 }
 
 ::footnote-call {

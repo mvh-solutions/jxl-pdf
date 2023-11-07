@@ -122,7 +122,7 @@ const doJxlSpreadSection = async ({section, serverPort, config, bookCode, output
     fse.writeFileSync(
         path.join(outputPath, outputDirName, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
         templates['juxta_page']
-            .replace('%%TITLE%%', `${bookCode} - ${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`)
+            .replace('%%TITLE%%', `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`)
             .replace('%%SENTENCES%%', sentences.join(''))
     );
     await doPuppet(

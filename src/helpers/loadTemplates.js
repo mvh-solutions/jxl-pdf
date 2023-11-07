@@ -29,4 +29,6 @@ const loadTemplates = () => {
     return templates;
 }
 
-module.exports = loadTemplates;
+module.exports = {
+    loadTemplates
+};

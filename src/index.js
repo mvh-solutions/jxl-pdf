@@ -1,8 +1,8 @@
 const path = require("path");
-const loadTemplates = require("../src/loadTemplates");
+const {loadTemplates} = require("./helpers");
 const fse = require("fs-extra");
 const {
-    do2ColumnSection,
+    do2ColumnSpreadSection,
     do4ColumnSpreadSection,
     doBookNoteSection,
     doFrontSection,
@@ -63,7 +63,7 @@ const doScript = async ({configPath, serverPort, outputDirName, cliBookCode}) =>
                 break;
             case "2Column":
                 checkBookCode(section.id);
-                await do2ColumnSection(
+                await do2ColumnSpreadSection(
                     {section, serverPort, config, bookCode, outputDirName, outputPath, templates}
                 );
                 break;

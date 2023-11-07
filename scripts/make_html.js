@@ -351,10 +351,10 @@ const doScript = async () => {
                 fse.readFileSync(path.resolve(path.join('data', `${section.path}.html`))).toString()
             )
         fse.writeFileSync(
-            path.join(outputPath, outputDirName, `${section.id}.html`),
+            path.join(outputPath, outputDirName, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
             content
         );
-        await doPuppet(serverPort, section.id, path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id}.pdf`)));
+        await doPuppet(serverPort, section.id.replace('%%bookCode%%', bookCode), path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)));
     }
 
     const doJxlSpreadSection = async (section) => {
@@ -466,15 +466,15 @@ const doScript = async () => {
             sentences.push(sentence);
         }
         fse.writeFileSync(
-            path.join(outputPath, outputDirName, `${section.id}.html`),
+            path.join(outputPath, outputDirName, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
             templates['juxta_page']
                 .replace('%%TITLE%%', `${bookCode} - ${section.id} - ${section.type}`)
                 .replace('%%SENTENCES%%', sentences.join(''))
         );
         await doPuppet(
             serverPort,
-            section.id,
-            path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id}.pdf`)),
+            section.id.replace('%%bookCode%%', bookCode),
+            path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)),
             true
         );
     }
@@ -490,7 +490,7 @@ const doScript = async () => {
             }
         }
         fse.writeFileSync(
-            path.join(outputPath, outputDirName, `${section.id}.html`),
+            path.join(outputPath, outputDirName, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
             templates['non_juxta_page']
                 .replace(
                     "%%TITLE%%",
@@ -503,8 +503,8 @@ const doScript = async () => {
         );
         await doPuppet(
             serverPort,
-            section.id,
-            path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id}.pdf`))
+            section.id.replace('%%bookCode%%', bookCode),
+            path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}.pdf`))
         );
     }
 
@@ -531,13 +531,13 @@ const doScript = async () => {
             .replace(/%%TRANS3TITLE%%/g, section.texts[2].label)
             .replace(/%%TRANS4TITLE%%/g, section.texts[3].label);
         fse.writeFileSync(
-            path.join(outputPath, outputDirName, `${section.id}_superimpose.html`),
+            path.join(outputPath, outputDirName, `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.html`),
             headerHtml
         );
         await doPuppet(
             serverPort,
-            `${section.id}_superimpose`,
-            path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id}_superimpose.pdf`))
+            `${section.id.replace('%%bookCode%%', bookCode)}_superimpose`,
+            path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.pdf`))
         );
         verses.push(`
 <section class="columnHeadings">
@@ -562,7 +562,7 @@ const doScript = async () => {
             verses.push(verseHtml);
         }
         fse.writeFileSync(
-            path.join(outputPath, outputDirName, `${section.id}.html`),
+            path.join(outputPath, outputDirName, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
             templates['4_column_spread_page']
                 .replace(
                     "%%TITLE%%",
@@ -579,8 +579,8 @@ const doScript = async () => {
         );
         await doPuppet(
             serverPort,
-            section.id,
-            path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id}.pdf`))
+            section.id.replace('%%bookCode%%', bookCode),
+            path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}.pdf`))
         );
     }
 
@@ -601,13 +601,13 @@ const doScript = async () => {
             .replace(/%%TRANS1TITLE%%/g, section.texts[0].label)
             .replace(/%%TRANS2TITLE%%/g, section.texts[1].label);
         fse.writeFileSync(
-            path.join(outputPath, outputDirName, `${section.id}_superimpose.html`),
+            path.join(outputPath, outputDirName, `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.html`),
             headerHtml
         );
         await doPuppet(
             serverPort,
-            `${section.id}_superimpose`,
-            path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id}_superimpose.pdf`))
+            `${section.id.replace('%%bookCode%%', bookCode)}_superimpose`,
+            path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.pdf`))
         );
         verses.push(`
 <section class="columnHeadings">
@@ -634,7 +634,7 @@ const doScript = async () => {
             verses.push(verseHtml);
         }
         fse.writeFileSync(
-            path.join(outputPath, outputDirName, `${section.id}.html`),
+            path.join(outputPath, outputDirName, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
             templates['2_column_page']
                 .replace(
                     "%%TITLE%%",
@@ -651,8 +651,8 @@ const doScript = async () => {
         );
         await doPuppet(
             serverPort,
-            section.id,
-            path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id}.pdf`))
+            section.id.replace('%%bookCode%%', bookCode),
+            path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}.pdf`))
         );
     }
 
@@ -682,35 +682,25 @@ const doScript = async () => {
 
     let links = [];
     let manifest = [];
-    for (const section of config.sections) {
-        console.log(`## Section ${section.id ? `${section.id} (${section.type})` : section.type}`);
+
+    const doSection = async section => {
+        console.log(`## Section ${section.id.replace('%%bookCode%%', bookCode)} (${section.type} in setBooks)`);
         links.push(
             templates['web_index_page_link']
-                .replace(/%%ID%%/g, section.id)
+                .replace(/%%ID%%/g, section.id.replace('%%bookCode%%', bookCode))
         );
         if (["4ColumnSpread", "2Column"].includes(section.type)) {
             links.push(
                 templates['web_index_page_link']
-                    .replace(/%%ID%%/g, `${section.id}_superimpose`)
+                    .replace(/%%ID%%/g, `${section.id.replace('%%bookCode%%', bookCode)}_superimpose`)
             );
             manifest.push({
-                id: `${section.id}_superimpose`,
+                id: `${section.id.replace('%%bookCode%%', bookCode)}_superimpose`,
                 type: "superimpose",
-                for: section.id
+                for: section.id.replace('%%bookCode%%', bookCode)
             });
         }
-
         switch (section.type) {
-            case "setBook":
-                if (section.source && section.source === "cli" && cliBookCode) {
-                    bookCode = cliBookCode;
-                } else if (section.source && section.source === "literal" && section.bookCode) {
-                    bookCode = section.bookCode;
-                } else {
-                    throw new Error(`Could not set bookCode using '${JSON.stringify(section)}': maybe you need to provide a bookCode at the command line?`);
-                }
-                console.log(`      bookCode = ${bookCode}`);
-                break;
             case "front":
                 await doFrontSection(section);
                 break;
@@ -733,9 +723,45 @@ const doScript = async () => {
             default:
                 throw new Error(`Unknown section type '${section.type}' (id '${section.id}')`);
         }
-        if (section.type !== "setBook") {
+        manifest.push({
+            id: section.id.replace('%%bookCode%%', bookCode),
+            type: section.type,
+            startOn: section.startOn,
+            showPageNumber: section.showPageNumber,
+            makeFromDouble: ["jxlSpread", "4ColumnSpread"].includes(section.type)
+        });
+    }
+
+    for (const section of config.sections) {
+        console.log(`## Section ${section.id ? `${section.id} (${section.type})` : section.type}`);
+
+        switch (section.type) {
+            case "setBook":
+                if (section.source && section.source === "cli" && cliBookCode) {
+                    bookCode = cliBookCode;
+                } else if (section.source && section.source === "literal" && section.bookCode) {
+                    bookCode = section.bookCode;
+                } else {
+                    throw new Error(`Could not set bookCode using '${JSON.stringify(section)}': maybe you need to provide a bookCode at the command line?`);
+                }
+                console.log(`       bookCode = ${bookCode}`);
+                break;
+            case "setBooks":
+                for (const bc of section.bookCodes) {
+                    bookCode = bc;
+                    console.log(`       bookCode = ${bookCode}`);
+                    for (const section2 of section.sections) {
+                        await doSection(section2);
+                    }
+                    bookCode = null;
+                }
+                break;
+            default:
+                await doSection(section);
+        }
+        if (!["setBook", "setBooks"].includes(section.type)) {
             manifest.push({
-                id: section.id,
+                id: section.id.replace('%%bookCode%%', bookCode),
                 type: section.type,
                 startOn: section.startOn,
                 showPageNumber: section.showPageNumber,

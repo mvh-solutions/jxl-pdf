@@ -2,7 +2,7 @@ const path = require("path");
 const {loadTemplates} = require("./helpers");
 const fse = require("fs-extra");
 const {
-    do2ColumnSpreadSection,
+    do2ColumnSection,
     do4ColumnSpreadSection,
     doBookNoteSection,
     doFrontSection,
@@ -63,7 +63,7 @@ const doPdf = async ({configPath, serverPort, outputDirName, cliBookCode}) => {
                 break;
             case "2Column":
                 checkBookCode(section.id);
-                await do2ColumnSpreadSection(
+                await do2ColumnSection(
                     {section, serverPort, config, bookCode, outputDirName, outputPath, templates}
                 );
                 break;

@@ -6,6 +6,7 @@
     {
       "type": "setBooks",
       "bookCodes": [
+        "PHP",
         "TIT"
       ],
       "sections": [

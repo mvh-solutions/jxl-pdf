@@ -4,6 +4,10 @@
   "notesFormat": "tsv9",
   "sections": [
     {
+      "type": "setBook",
+      "source": "cli"
+    },
+    {
       "id": "half",
       "type": "front",
       "path": "fra_front/half_page",

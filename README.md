@@ -18,8 +18,11 @@ npm install
 serve static
 
 # Run the script, passing the port of the server as an argument.
+# bookCode may be required depending on the config.
+# node make_html.js <configPath> <serverPort> <outputDirName> [<bookCode>]
+# Keep outputDirName as 'newDir' for now (hardwired into Python code)
 
-node scripts/make_html.js ./config/fr/xenizo.json PHP 1234 newDir
+node scripts/make_html.js ./config/fr/xenizo.json 1234 newDir TIT
 
 # View the HTML via the localhost browser under `html`. (Scripts won't work from
 # file explorer because of CORS.) The generated PDFs are in a subdirectory.

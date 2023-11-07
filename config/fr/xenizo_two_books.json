@@ -1,0 +1,106 @@
+{
+  "docIdForNames": "fra_lsg",
+  "notes": "fra_tn",
+  "notesFormat": "tsv9",
+  "sections": [
+    {
+      "type": "setBooks",
+      "bookCodes": [
+        "PHP",
+        "TIT"
+      ],
+      "sections": [
+        {
+          "id": "bookNotes_%%bookCode%%",
+          "type": "bookNote",
+          "styles": "non_juxta_page_styles",
+          "startOn": "recto",
+          "showPageNumber": true
+        },
+        {
+          "id": "fourColumn_%%bookCode%%",
+          "type": "4ColumnSpread",
+          "startOn": "verso",
+          "styles": "4_column_spread_page_styles",
+          "showPageNumber": true,
+          "texts": [
+            {
+              "label": "Segond 1910",
+              "type": "trans",
+              "id": "fra_lsg"
+            },
+            {
+              "label": "Grec",
+              "type": "greek",
+              "id": "grc_ugnt"
+            },
+            {
+              "label": "Littérale",
+              "type": "trans",
+              "id": "fra_tlx"
+            },
+            {
+              "label": "Sémantique",
+              "type": "trans",
+              "id": "fra_tsx"
+            }
+          ]
+        },
+        {
+          "id": "juxta_%%bookCode%%",
+          "type": "jxlSpread",
+          "styles": "juxta_page_styles",
+          "startOn": "verso",
+          "showPageNumber": true,
+          "jxl": {
+            "path": "fra_jxl",
+            "notes": {
+              "pivot": "jxl2note"
+            }
+          },
+          "lhs": [
+            {
+              "label": "SEGOND 1910",
+              "type": "trans",
+              "id": "fra_lsg"
+            },
+            {
+              "label": "GREC",
+              "type": "greek",
+              "id": "grc_ugnt"
+            },
+            {
+              "label": "LITTÉRALE",
+              "type": "trans",
+              "id": "fra_tlx"
+            },
+            {
+              "label": "SÉMANTIQUE",
+              "type": "trans",
+              "id": "fra_tsx"
+            }
+          ]
+        },
+        {
+          "id": "twoColumn_%%bookCode%%",
+          "type": "2Column",
+          "startOn": "recto",
+          "styles": "2_column_spread_page_styles",
+          "showPageNumber": true,
+          "texts": [
+            {
+              "label": "Littérale",
+              "type": "trans",
+              "id": "fra_tlx"
+            },
+            {
+              "label": "Sémantique",
+              "type": "trans",
+              "id": "fra_tsx"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

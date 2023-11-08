@@ -1,4 +1,4 @@
-const {pkWithDocs, getBookName, getCVTexts, cleanNoteLine, doPuppet} = require("../helpers");
+const {pkWithDocs, getBookName, getCVTexts, cleanNoteLine, doPuppet, bcvNotes} = require("../helpers");
 const fse = require("fs-extra");
 const path = require("path");
 const do4ColumnSpreadSection = async ({section, serverPort, config, bookCode, outputDirName, outputPath, templates}) => {
@@ -8,14 +8,7 @@ const do4ColumnSpreadSection = async ({section, serverPort, config, bookCode, ou
     const pk = pkWithDocs(bookCode, section.texts);
     const bookName = getBookName(pk, config.docIdForNames, bookCode);
     const cvTexts = getCVTexts(bookCode, pk);
-    let notes = {};
-    if (section.showNotes) {
-        const notesRows = fse.readFileSync(path.join('data', config.notes, `${bookCode}.tsv`)).toString().split("\n");
-        for (const notesRow of notesRows) {
-            const cells = notesRow.split('\t');
-            notes[`${cells[1]}:${cells[2]}`] = cells[6];
-        }
-    }
+    const notes = section.showNotes ? bcvNotes(config, bookCode) : {};
     fse.writeFileSync(
         path.join(outputPath, outputDirName, 'pdf', "cv.json"),
         JSON.stringify(cvTexts, null, 2)
@@ -60,9 +53,8 @@ const do4ColumnSpreadSection = async ({section, serverPort, config, bookCode, ou
             )
             .replace(
                 '%%RECTOCOLUMNS%%',
-                `<div class="col3">${cvRecord.texts[section.texts[2].id] || "-"}</div><div class="col4">${cvRecord.texts[section.texts[3].id] || "-"}${Object.entries(notes)
-                    .filter(nr => nr[0] === cvRecord.cv)
-                    .map(nr => cleanNoteLine(nr[1]))
+                `<div class="col3">${cvRecord.texts[section.texts[2].id] || "-"}</div><div class="col4">${cvRecord.texts[section.texts[3].id] || "-"}${(notes[cvRecord.cv] || [])
+                    .map(nr => cleanNoteLine(nr))
                     .map(note => `<p class="note">${note}</p>`)
                     .join('\n')}</div>`
             );

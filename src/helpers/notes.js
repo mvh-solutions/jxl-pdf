@@ -1,3 +1,5 @@
+const fse = require("fs-extra");
+const path = require("path");
 const cleanNoteLine = noteLine => noteLine
     .trim()
     .replace(/^#+ +/, "")
@@ -45,7 +47,23 @@ const maybeChapterNotes = (chapterN, noteType, notes, templates) => {
     }
 }
 
+const bcvNotes = (config, bookCode) => {
+    const notes = {};
+    const notesRows = fse.readFileSync(path.join('data', config.notes, `${bookCode}.tsv`)).toString().split("\n");
+    for (const notesRow of notesRows) {
+        const cells = notesRow.split('\t');
+        const rowKey = `${cells[1]}:${cells[2]}`;
+        if (!(rowKey in notes)) {
+            notes[rowKey] = [];
+        }
+        notes[rowKey].push(cells[6]);
+    }
+    return notes;
+}
+
+
 module.exports = {
     cleanNoteLine,
-    maybeChapterNotes
+    maybeChapterNotes,
+    bcvNotes
 }

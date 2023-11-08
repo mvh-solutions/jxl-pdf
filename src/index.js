@@ -6,7 +6,8 @@ const {
     do4ColumnSpreadSection,
     doBookNoteSection,
     doFrontSection,
-    doJxlSpreadSection
+    doJxlSpreadSection,
+    doBcvBibleSection,
 } = require("../src/sectionHandlers");
 
 const doPdf = async ({configPath, serverPort, outputDirName, cliBookCode}) => {
@@ -70,6 +71,12 @@ const doPdf = async ({configPath, serverPort, outputDirName, cliBookCode}) => {
             case "bookNote":
                 checkBookCode(section.id);
                 await doBookNoteSection(
+                    {section, serverPort, config, bookCode, outputDirName, outputPath, templates}
+                );
+                break;
+            case "bcvBible":
+                checkBookCode(section.id);
+                await doBcvBibleSection(
                     {section, serverPort, config, bookCode, outputDirName, outputPath, templates}
                 );
                 break;

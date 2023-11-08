@@ -14,6 +14,8 @@ const loadTemplates = () => {
         '2_column_header_page',
         '2_column_verse',
         '2_column_title',
+        'bcv_bible_page',
+        'bcv_bible_verse',
         'web_index_page',
         'web_index_page_link',
         'sentence', 'firstLeft',

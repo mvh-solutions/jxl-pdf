@@ -40,54 +40,21 @@ h1 {
     padding-bottom: 2pt;
     width: 388pt;
 }
-
-h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
-    font-size: 10pt;
-    line-height: 20pt;
+.cvCol {
     font-style: italic;
     font-weight: bold;
-    margin: 0;
-    width: 188pt;
+    width: 24pt;
 }
-
-h2.verseRecordHeadLeft {
-    text-align: left;
-}
-
-h2.verseRecordHeadRight {
-    text-align: right;
-}
-
-.leftColumn {
+.verseContent {
     display: inline-block;
-    width: 188pt;
+    width: 364pt;
     vertical-align: top;
-    margin-right: 6pt;
-}
-
-.rightColumn {
-    width: 188pt;
-    display: inline-block;
-    vertical-align: top;
-    margin-left: 6pt;
 }
 
 .verseRecord {
     page-break-inside: avoid;
     vertical-align: top;
     display: flex;
-}
-
-.col1, .col2 {
-    vertical-align: top;
-    display: inline-block;
-    width: 188pt;
-    text-align: justify;
-}
-
-.col2 {
-    margin-right: 12pt;
-    text-indent: 1em;
 }
 
 ::footnote-call {
@@ -103,34 +70,12 @@ h2.verseRecordHeadRight {
     font-weight: bold;
 }
 
-.head1 {
-    display: inline-block;
-    width: 200pt;
-}
-.head2 {
-    display: inline-block;
-    width: 332pt;
-}
-.head3 {
-    display: inline-block;
-    width: 200pt;
-}
-.head4 {
-    display: inline-block;
-    width: 188pt;
-}
-.cv {
-    font-style: italic;
-    font-weight: bold;
-}
 .note {
     font-size: 7pt;
     line-height: 9pt;
     text-align: justify;
     float: footnote;
     margin-bottom: 0pt;
-    padding-left: 6pt;
-    text-indent: -6pt;
 }
 
 .note .b {

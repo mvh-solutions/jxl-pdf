@@ -11,6 +11,19 @@
       ],
       "sections": [
         {
+          "id": "bible_%%bookCode%%",
+          "type": "bcvBible",
+          "startOn": "recto",
+          "styles": "bcv_bible_page_styles",
+          "showPageNumber": true,
+          "showNotes": true,
+          "text": {
+              "label": "Littérale",
+              "type": "trans",
+              "id": "fra_tlx"
+            }
+        },
+        {
           "id": "bookNotes_%%bookCode%%",
           "type": "bookNote",
           "styles": "non_juxta_page_styles",

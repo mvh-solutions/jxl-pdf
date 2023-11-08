@@ -116,6 +116,8 @@ h2.sentenceRef {
 .jxlGreek {
     width: 188pt;
     text-align: right;
+    line-height: 10pt;
+    font-size: 9pt;
     vertical-align: baseline;
     margin: 0;
     padding: 0;
@@ -125,6 +127,8 @@ h2.sentenceRef {
 
 .jxlGloss {
     width: 188pt;
+    line-height: 10pt;
+    font-size: 9pt;
     vertical-align: baseline;
     padding: 0;
     padding-left: 6pt;

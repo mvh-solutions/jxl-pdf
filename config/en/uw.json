@@ -4,92 +4,8 @@
   "notesFormat": "tsv7",
   "sections": [
     {
-      "id": "half",
-      "type": "front",
-      "path": "fra_front/half_page",
-      "styles": "non_juxta_page_styles",
-      "startOn": "recto",
-      "showPageNumber": false
-    },
-    {
-      "id": "preface",
-      "type": "front",
-      "path": "fra_front/preface",
-      "styles": "non_juxta_page_styles",
-      "startOn": "recto",
-      "showPageNumber": true
-    },
-    {
-      "id": "tech",
-      "type": "front",
-      "path": "fra_front/technologie",
-      "styles": "non_juxta_page_styles",
-      "startOn": "recto",
-      "showPageNumber": true
-    },
-    {
-      "id": "bookNotes",
-      "type": "bookNote",
-      "styles": "non_juxta_page_styles",
-      "startOn": "recto",
-      "showPageNumber": true
-
-    },
-    {
-      "id": "fourColumn",
-      "type": "4ColumnSpread",
-      "startOn": "verso",
-      "styles": "4_column_spread_page_styles",
-      "showPageNumber": true,
-      "texts": [
-        {
-          "label": "Grec",
-          "type": "greek",
-          "id": "grc_ugnt"
-        },
-        {
-          "label": "ULT",
-          "type": "trans",
-          "id": "eng_ult"
-        },
-        {
-          "label": "UST",
-          "type": "trans",
-          "id": "eng_ust"
-        },
-        {
-          "label": "TLX",
-          "type": "trans",
-          "id": "fra_tlx"
-        }
-      ]
-    },
-    {
-      "id": "twoColumn",
-      "type": "2Column",
-      "startOn": "recto",
-      "styles": "2_column_spread_page_styles",
-      "showPageNumber": true,
-      "texts": [
-        {
-          "label": "ULT",
-          "type": "trans",
-          "id": "eng_ult"
-        },
-        {
-          "label": "UST",
-          "type": "trans",
-          "id": "eng_ust"
-        }
-      ]
-    },
-    {
-      "id": "emploi",
-      "type": "front",
-      "path": "fra_front/mode_emploi",
-      "styles": "non_juxta_page_styles",
-      "startOn": "recto",
-      "showPageNumber": true
+      "type": "setBook",
+      "source": "cli"
     },
     {
       "id": "juxta",
@@ -120,22 +36,6 @@
           "id": "eng_ust"
         }
       ]
-    },
-    {
-      "id": "histoire",
-      "type": "front",
-      "path": "fra_back/histoire_juxta",
-      "styles": "non_juxta_page_styles",
-      "startOn": "recto",
-      "showPageNumber": true
-    },
-    {
-      "id": "matieres",
-      "type": "front",
-      "path": "fra_back/matieres",
-      "styles": "non_juxta_page_styles",
-      "startOn": "recto",
-      "showPageNumber": true
     }
   ]
 }

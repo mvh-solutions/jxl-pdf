@@ -11,6 +11,19 @@
       ],
       "sections": [
         {
+          "id": "bible_plus_notes_%%bookCode%%",
+          "type": "biblePlusNotes",
+          "startOn": "recto",
+          "styles": "bible_plus_notes_page_styles",
+          "showPageNumber": true,
+          "showNotes": true,
+          "text": {
+            "label": "Littérale",
+            "type": "trans",
+            "id": "fra_tlx"
+          }
+        },
+        {
           "id": "bible_%%bookCode%%",
           "type": "bcvBible",
           "startOn": "recto",
@@ -18,10 +31,10 @@
           "showPageNumber": true,
           "showNotes": true,
           "text": {
-              "label": "Littérale",
-              "type": "trans",
-              "id": "fra_tlx"
-            }
+            "label": "Littérale",
+            "type": "trans",
+            "id": "fra_tlx"
+          }
         },
         {
           "id": "bookNotes_%%bookCode%%",

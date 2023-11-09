@@ -1,0 +1,103 @@
+@page {
+    size: 504pt 720pt;
+    margin-bottom: 50pt;
+    margin-top: 60pt;
+}
+@page :first {
+    margin-top: 40pt;
+}
+@page :left {
+    margin-left: 44pt;
+    margin-right: 72pt;
+}
+@page :right {
+    margin-left: 72pt;
+    margin-right: 44pt;
+}
+
+body {
+    font-size: 9pt;
+    line-height: 10pt;
+    font-family: "Gentium Book Plus", serif;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 14pt;
+    line-height: 20pt;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 6pt;
+    border-bottom: 2pt solid black;
+    padding-bottom: 2pt;
+    width: 388pt;
+}
+
+h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
+    font-size: 10pt;
+    line-height: 20pt;
+    font-style: italic;
+    font-weight: bold;
+    margin: 0;
+    width: 188pt;
+}
+
+h2.verseRecordHeadLeft {
+    text-align: left;
+}
+
+h2.verseRecordHeadRight {
+    text-align: right;
+}
+
+.leftColumn {
+    display: inline-block;
+    width: 88pt;
+    vertical-align: top;
+    margin-right: 6pt;
+    text-align: left;
+}
+
+.rightColumn {
+    width: 288pt;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 6pt;
+}
+
+.verseRecord {
+    page-break-inside: avoid;
+    vertical-align: top;
+    display: flex;
+    padding-bottom: 4pt;
+    border-bottom: 1pt solid black;
+    margin-bottom: 5pt
+}
+
+.col1, .col2 {
+    vertical-align: top;
+    display: inline-block;
+}
+
+.col2 {
+}
+.cv {
+    font-style: italic;
+    font-weight: bold;
+}
+.note {
+    display: list-item;
+    font-size: 7pt;
+    line-height: 9pt;
+    text-align: justify;
+    margin-bottom: 0pt;
+    margin-left: 10pt;
+}
+
+.note .b {
+    font-weight: bold;
+}

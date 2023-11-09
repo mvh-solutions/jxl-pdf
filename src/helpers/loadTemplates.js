@@ -16,6 +16,8 @@ const loadTemplates = () => {
         '2_column_title',
         'bcv_bible_page',
         'bcv_bible_verse',
+        'bible_plus_notes_page',
+        'bible_plus_notes_verse',
         'web_index_page',
         'web_index_page_link',
         'sentence', 'firstLeft',

@@ -11,8 +11,8 @@ const {
     cleanNoteLine,
     doPuppet
 } = require("../helpers");
-const doJxlSpreadSection = async ({section, serverPort, config, bookCode, outputDirName, outputPath, templates}) => {
 
+const doJxlSpreadSection = async ({section, serverPort, config, bookCode, outputDirName, outputPath, templates}) => {
     const jxlJson = fse.readJsonSync(path.resolve(path.join('data', section.jxl.path, `${bookCode}.json`)));
     let pivotIds = new Set([]);
     const notes = {};
@@ -48,6 +48,12 @@ const doJxlSpreadSection = async ({section, serverPort, config, bookCode, output
     let chapterN = 0;
     console.log(`       Sentences`);
     for (const [sentenceN, sentenceJson] of jxlJson.entries()) {
+        if (section.firstSentence && (sentenceN+1) < section.firstSentence) {
+            continue;
+        }
+        if (section.lastSentence && (sentenceN+1) > section.lastSentence) {
+            continue;
+        }
         const cv = cvForSentence(sentenceJson);
         const newChapterN = cv.split(':')[0];
         if (chapterN !== newChapterN) {

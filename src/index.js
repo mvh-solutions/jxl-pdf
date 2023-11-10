@@ -28,8 +28,8 @@ const doPdf = async ({configPath, serverPort, outputDirName, cliBookCode}) => {
     let links = [];
     let manifest = [];
 
-    const doSection = async section => {
-        console.log(`## Section ${section.id.replace('%%bookCode%%', bookCode)} (${section.type} in setBooks)`);
+    const doSection = async (section, nested) => {
+        nested && console.log(`## Section ${section.id.replace('%%bookCode%%', bookCode)} (${section.type} in setBooks)`);
         links.push(
             templates['web_index_page_link']
                 .replace(/%%ID%%/g, section.id.replace('%%bookCode%%', bookCode))
@@ -118,22 +118,13 @@ const doPdf = async ({configPath, serverPort, outputDirName, cliBookCode}) => {
                     bookCode = bc;
                     console.log(`       bookCode = ${bookCode}`);
                     for (const section2 of section.sections) {
-                        await doSection(section2);
+                        await doSection(section2, true);
                     }
                     bookCode = null;
                 }
                 break;
             default:
-                await doSection(section);
-        }
-        if (!["setBook", "setBooks"].includes(section.type)) {
-            manifest.push({
-                id: section.id.replace('%%bookCode%%', bookCode),
-                type: section.type,
-                startOn: section.startOn,
-                showPageNumber: section.showPageNumber,
-                makeFromDouble: ["jxlSpread", "4ColumnSpread"].includes(section.type)
-            });
+                await doSection(section, false);
         }
     }
     fse.writeFileSync(

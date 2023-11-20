@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer");
+const path = require('path');
 
 const doPuppet = async (serverPort, sectionId, pdfOutputPath, orientation, outputDirName) => {
     const waitTillHTMLRendered = async (page, timeout = 30000) => {
@@ -32,7 +33,8 @@ const doPuppet = async (serverPort, sectionId, pdfOutputPath, orientation, outpu
     console.log(`     Running Puppet`);
     const browser = await puppeteer.launch({headless: "new"});
     const page = await browser.newPage();
-    await page.goto(`http://localhost:${serverPort}/html/${outputDirName}/${sectionId}.html`, {waitUntil: 'load'});
+    const fullPath = path.join(path.normalize(__dirname+`/../../static/html/${outputDirName}/${sectionId}.html`))
+    await page.goto(`file://${fullPath}`);
     page.on("pageerror", function (err) {
             theTempValue = err.toString();
             console.log("Page error: " + theTempValue);

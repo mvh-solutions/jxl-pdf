@@ -1,4 +1,4 @@
-import os
+from datetime import datetime
 from PyPDF2 import PdfReader, PdfWriter, PdfMerger, PaperSize, Transformation
 from PyPDF2.generic import AnnotationBuilder
 from reportlab.pdfgen import canvas
@@ -8,16 +8,30 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
 
+import os
 import sys
 import json
 import math
 import shutil
 
-listFiles = os.listdir('./fonts')
+ARGS = sys.argv
+DEFAULT_DIR="./"
+if(len(ARGS) < 2):
+    print("I need the folder name where all the pdfs are => '../static/html/???' => USAGE : python cut_pdf.py [DIRNAME]")
+    sys.exit()
+else:
+    if(ARGS[1] == "FROMNODE"):
+        DEFAULT_DIR="./python-jxl"
+
+os.chdir(DEFAULT_DIR)
+
+
+listFiles = os.listdir('../fonts')
 for name in listFiles:
+    print("{} here's the root path => {}".format(datetime.now(),os.path.dirname(os.path.realpath(__file__))))
     if(".ttf" in name):
         [fn, ext] = name.split(".")
-        pdfmetrics.registerFont(TTFont(fn, name))
+        pdfmetrics.registerFont(TTFont(fn, "../fonts/"+name))
 
 # 1 inch == 72 pt
 def inch_to_pt(num):
@@ -40,14 +54,11 @@ A3MM_HEIGHT = 297
 OFFSET_WIDTH = (mm_to_pt(A3MM_WIDTH) - 1008)/2
 OFFSET_HEIGHT = (mm_to_pt(A3MM_HEIGHT) - 720)/2
 
-args = sys.argv
-
-
 def calc_offset_text(txt=""):
     return len(txt)*2
 
 def crop():
-    doc=args[1]
+    doc=ARGS[1]
     reader = PdfReader("{}".format(doc))
     writer = PdfWriter()
     nbPages = len(reader.pages)
@@ -344,7 +355,7 @@ def solving_all_the_problems_in_the_world_at_the_same_time():
 
 
 def vertical():
-    doc=args[1]
+    doc=ARGS[1]
     reader = PdfReader("{}".format(doc))
     writer = PdfWriter()
     nbPages = len(reader.pages)
@@ -384,8 +395,8 @@ def vertical():
 def juxta():
     cname = "canvas_{}_tmp.pdf".format(1)
     c = canvas.Canvas(cname, pagesize=landscape(A3))
-    readerL = PdfReader("{}".format(args[1]))
-    readerR = PdfReader("{}".format(args[1]))
+    readerL = PdfReader("{}".format(ARGS[1]))
+    readerR = PdfReader("{}".format(ARGS[1]))
     writer = PdfWriter()
     page1R = readerR.pages[2]
     page1L = readerL.pages[2]
@@ -439,9 +450,9 @@ def juxta():
 
 
 def cut_pages():
-    name=args[1]
-    # start=int(args[2])
-    # range=int(args[3])
+    name=ARGS[1]
+    # start=int(ARGS[2])
+    # range=int(ARGS[3])
 
     reader = PdfReader(name)
     writer = PdfWriter()
@@ -462,7 +473,7 @@ def cut_pages():
 
 
 def reduce_pdf():
-    name=args[1]
+    name=ARGS[1]
     reader = PdfReader(name)
     writer = PdfWriter()
 
@@ -475,26 +486,50 @@ def reduce_pdf():
     with open("compressed_{}".format(name), "wb") as f:
         writer.write(f)
 
-if __name__ == "__main__":
-    if(os.path.exists("../static/html/newDir/pdf/manifest.json")):
-        source_folder = "../static/html/newDir/pdf/"
+def save_pdf():
+    pdfPath="../static/html/{}/pdf/".format(ARGS[1])
+    if(ARGS[1] == "FROMNODE"):
+        pdfPath="../static/html/{}/pdf/".format(ARGS[2])
+    if(os.path.exists("{}manifest.json".format(pdfPath))):
         destination_folder = "./"
+        try:
+            # fetch all files
+            for file_name in os.listdir(pdfPath):
+                # construct full file path
+                source = pdfPath + file_name
+                destination = destination_folder + file_name
+                # copy only files
+                if os.path.isfile(source) and "cv.json" not in file_name:
+                    shutil.copy(source, destination)
+                    print('copied', file_name)
+            print("running...")
+            OLD_solving_all_the_problems_in_the_world_at_the_same_time()
 
-        # fetch all files
-        for file_name in os.listdir(source_folder):
-            # construct full file path
-            source = source_folder + file_name
-            destination = destination_folder + file_name
-            # copy only files
-            if os.path.isfile(source) and "cv.json" not in file_name:
-                shutil.copy(source, destination)
-                print('copied', file_name)
-        print("running...")
-        OLD_solving_all_the_problems_in_the_world_at_the_same_time()
+            with open("logs.txt", "a") as f:
+                f.write("{} [SUCCESS] : file 'pages_cropped_FINAL.pdf' generated\n".format(datetime.now()))
+                f.write("{} [ARGS] {} {}\n".format(datetime.now(), ARGS[0], ARGS[1]))
+                f.close()
+        except Exception as e:
+            with open("logs.txt", "a") as f:
+                f.write("{} [ERROR] :".format(datetime.now()))
+                f.write("{}\n\n".format(e))
+                f.close()
+        # finally:
+        #     listFiles = os.listdir('./')
+        #     for name in listFiles:
+        #         if(".pdf" in name and "FINAL" not in name):
+        #         # if((".pdf" in name and "FINAL" not in name) or name == "manifest.json"):
+        #             os.remove(name)
+        #     with open("logs.txt", "a") as f:
+        #         f.write("{} [DIRECTORY CLEANED]\n".format(datetime.now()))
+        #         f.close()
+    else:
+        with open("logs.txt", "a") as f:
+            f.write("{} [ERROR] : path doesn't exist\n here's the root path => {}".format(datetime.now(),os.path.dirname(os.path.realpath(__file__))))
+            f.write("\n")
+            f.write("{} Have you launched the node script yet? (npm start [...args])\n".format(datetime.now()))
+            f.close()
 
-        listFiles = os.listdir('./')
-        for name in listFiles:
-            if((".pdf" in name and "FINAL" not in name) or name == "manifest.json"):
-                [fn, ext] = name.split(".")
-                os.remove(name)
-        print("Directory cleaned!")
+
+if __name__ == "__main__":
+    save_pdf()

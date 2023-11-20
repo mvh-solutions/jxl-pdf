@@ -1,6 +1,8 @@
 .idea/
 static/html/
-python-jxl/pages_cropped_FINAL.pdf
+python-jxl/*.pdf
+python-jxl/logs.txt
+python-jxl/manifest.json
 
 # Logs
 logs

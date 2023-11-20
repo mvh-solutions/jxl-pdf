@@ -29,6 +29,7 @@
     "callsites": "^3.1.0",
     "caniuse-lite": "^1.0.30001525",
     "chalk": "^2.4.2",
+    "child_process": "^1.0.2",
     "chromium-bidi": "^0.4.22",
     "cliui": "^8.0.1",
     "color-convert": "^1.9.3",
@@ -151,6 +152,7 @@
     "puppeteer": "^21.1.1",
     "puppeteer-core": "^21.1.1",
     "pure-uuid": "^1.8.0",
+    "python-shell": "^5.0.0",
     "queue-tick": "^1.0.1",
     "regenerate": "^1.4.2",
     "regenerate-unicode-properties": "^10.1.0",
@@ -212,7 +214,9 @@
     "yauzl": "^2.10.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "installpy": "pip install -r python-jxl/requirements.txt",
+    "start": "node scripts/make_html.js"
   },
   "repository": {
     "type": "git",

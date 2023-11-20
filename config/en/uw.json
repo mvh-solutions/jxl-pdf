@@ -8,6 +8,30 @@
       "source": "cli"
     },
     {
+      "id": "byPara",
+      "type": "paraBible",
+      "styles": "paraBible_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true,
+      "text": {
+        "label": "ULT",
+        "type": "trans",
+        "id": "eng_ult"
+      },
+      "config": {
+        "showWordAtts": false,
+        "showTitles": false,
+        "showHeadings": true,
+        "showIntroductions": true,
+        "showFootnotes": true,
+        "showXrefs": true,
+        "showParaStyles": true,
+        "showCharacterMarkup": true,
+        "showChapterLabels": true,
+        "showVersesLabels": true
+      }
+    },
+    {
       "id": "juxta",
       "type": "jxlSpread",
       "styles": "juxta_page_styles",

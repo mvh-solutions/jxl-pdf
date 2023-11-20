@@ -1,0 +1,106 @@
+{
+  "docIdForNames": "fra_lsg",
+  "notes": "fra_tn",
+  "notesFormat": "tsv9",
+  "sections": [
+    {
+      "id": "half",
+      "type": "front",
+      "path": "fra_front/half_page",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": false
+    },
+    {
+      "id": "preface",
+      "type": "front",
+      "path": "fra_front/preface",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "id": "tech",
+      "type": "front",
+      "path": "fra_front/technologie",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "id": "emploi",
+      "type": "front",
+      "path": "fra_front/mode_emploi",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "type": "setBooks",
+      "bookCodes": [
+        "PHP",
+        "TIT"
+      ],
+      "sections": [
+        {
+          "id": "bookNotes_%%bookCode%%",
+          "type": "bookNote",
+          "styles": "non_juxta_page_styles",
+          "startOn": "recto",
+          "showPageNumber": true
+        },
+        {
+          "id": "juxta_%%bookCode%%",
+          "type": "jxlSpread",
+          "styles": "juxta_page_styles",
+          "startOn": "verso",
+          "showPageNumber": true,
+          "jxl": {
+            "path": "fra_jxl",
+            "notes": {
+              "pivot": "jxl2note"
+            }
+          },
+          "lhs": [
+            {
+              "label": "SEGOND 1910",
+              "type": "trans",
+              "id": "fra_lsg"
+            },
+            {
+              "label": "GREC",
+              "type": "greek",
+              "id": "grc_ugnt"
+            },
+            {
+              "label": "LITTÉRALE",
+              "type": "trans",
+              "id": "fra_tlx"
+            },
+            {
+              "label": "SÉMANTIQUE",
+              "type": "trans",
+              "id": "fra_tsx"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "histoire",
+      "type": "front",
+      "path": "fra_back/histoire_juxta",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "id": "matieres",
+      "type": "front",
+      "path": "fra_back/matieres",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    }
+  ]
+}

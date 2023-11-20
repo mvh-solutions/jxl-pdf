@@ -28,7 +28,6 @@ os.chdir(DEFAULT_DIR)
 
 listFiles = os.listdir('../fonts')
 for name in listFiles:
-    print("{} here's the root path => {}".format(datetime.now(),os.path.dirname(os.path.realpath(__file__))))
     if(".ttf" in name):
         [fn, ext] = name.split(".")
         pdfmetrics.registerFont(TTFont(fn, "../fonts/"+name))
@@ -514,15 +513,15 @@ def save_pdf():
                 f.write("{} [ERROR] :".format(datetime.now()))
                 f.write("{}\n\n".format(e))
                 f.close()
-        # finally:
-        #     listFiles = os.listdir('./')
-        #     for name in listFiles:
-        #         if(".pdf" in name and "FINAL" not in name):
-        #         # if((".pdf" in name and "FINAL" not in name) or name == "manifest.json"):
-        #             os.remove(name)
-        #     with open("logs.txt", "a") as f:
-        #         f.write("{} [DIRECTORY CLEANED]\n".format(datetime.now()))
-        #         f.close()
+        finally:
+            listFiles = os.listdir('./')
+            for name in listFiles:
+                if(".pdf" in name and "FINAL" not in name):
+                # if((".pdf" in name and "FINAL" not in name) or name == "manifest.json"):
+                    os.remove(name)
+            with open("logs.txt", "a") as f:
+                f.write("{} [DIRECTORY CLEANED]\n".format(datetime.now()))
+                f.close()
     else:
         with open("logs.txt", "a") as f:
             f.write("{} [ERROR] : path doesn't exist\n here's the root path => {}".format(datetime.now(),os.path.dirname(os.path.realpath(__file__))))

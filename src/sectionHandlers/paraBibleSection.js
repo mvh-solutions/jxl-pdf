@@ -1,36 +1,31 @@
-const {pkWithDocs, getBookName, getCVTexts, cleanNoteLine, bcvNotes, doPuppet} = require("../helpers");
+const {pkWithDocs, getBookName, bcvNotes, doPuppet} = require("../helpers");
 const fse = require("fs-extra");
 const path = require("path");
-const doBcvBibleSection = async ({section, serverPort, bookCode, config, outputDirName, outputPath, templates}) => {
+const {SofriaRenderFromProskomma, render} = require("proskomma-json-tools");
+const doParaBibleSection = async ({section, serverPort, bookCode, config, outputDirName, outputPath, templates}) => {
     const pk = pkWithDocs(bookCode, [section.text]);
     const bookName = getBookName(pk, section.text.id, bookCode);
-    const cvTexts = getCVTexts(bookCode, pk);
     const notes = section.showNotes ? bcvNotes(config, bookCode) : {};
-    const verses = [
-        `<h1>${bookName}</h1>`
-    ];
-    for (const cvRecord of cvTexts) {
-        const verseHtml = templates['bcv_bible_verse']
-            .replace("%%CV%%", cvRecord.cv)
-            .replace(
-                '%%VERSECONTENT%%',
-                `${cvRecord.texts[section.text.id] || "-"}${(notes[cvRecord.cv] || [])
-                    .map(nr => cleanNoteLine(nr))
-                    .map(note => `<p class="note">${note}</p>`)
-                    .join('\n')}`
-            );
-        verses.push(verseHtml);
-    }
+    const docId = pk.gqlQuerySync('{documents { id } }').data.documents[0].id;
+    const actions = render.sofria2web.renderActions.sofria2WebActions;
+    const renderers = render.sofria2web.sofria2html.renderers;
+    const cl = new SofriaRenderFromProskomma({proskomma: pk, actions: actions, debugLevel: 0})
+    const output = {};
+    const sectionConfig = section.config;
+    sectionConfig.renderers = renderers;
+    sectionConfig.selectedBcvNotes = [];
+
+    cl.renderDocument({docId, config: section.config, output});
     fse.writeFileSync(
         path.join(outputPath, outputDirName, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
-        templates['bcv_bible_page']
+        templates['para_bible_page']
             .replace(
                 "%%TITLE%%",
                 `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`
             )
             .replace(
                 "%%BODY%%",
-                verses.join('\n')
+                output.paras
             )
             .replace(
                 "%%BOOKNAME%%",
@@ -46,4 +41,4 @@ const doBcvBibleSection = async ({section, serverPort, bookCode, config, outputD
     );
 }
 
-module.exports = doBcvBibleSection;
+module.exports = doParaBibleSection;

@@ -4,6 +4,7 @@ const do4ColumnSpreadSection = require('./4ColumnSpreadSection');
 const doJxlSpreadSection = require('./jxlSpreadSection');
 const do2ColumnSection = require('./2ColumnSection');
 const doBcvBibleSection = require("./bcvBibleSection");
+const doParaBibleSection = require("./paraBibleSection");
 const doBiblePlusNotesSection = require("./biblePlusNotesSection");
 
 module.exports = {
@@ -13,5 +14,6 @@ module.exports = {
     doJxlSpreadSection,
     do2ColumnSection,
     doBcvBibleSection,
+    doParaBibleSection,
     doBiblePlusNotesSection
 }

@@ -14,13 +14,19 @@ import json
 import math
 import shutil
 
-ARGS = sys.argv
+def clean_backslashes(s):
+    return s.replace("./","")
+
+
+ARGS = list(map(clean_backslashes, sys.argv))
 DEFAULT_DIR="./"
 if(len(ARGS) < 2):
     print("I need the folder name where all the pdfs are => '../static/html/???' => USAGE : python cut_pdf.py [DIRNAME]")
     sys.exit()
 else:
+    PDF_NAME="generated_"+ARGS[1]+".pdf"
     if(ARGS[1] == "FROMNODE"):
+        PDF_NAME="generated_"+ARGS[2]+".pdf"
         DEFAULT_DIR="./python-jxl"
 
 os.chdir(DEFAULT_DIR)
@@ -227,9 +233,9 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
                     itsTheFirstPage = False
         
 
-    with open("pages_cropped_FINAL.pdf", "wb") as fp:
+    with open(PDF_NAME, "wb") as fp:
         writer.write(fp)
-        print("pages_cropped_FINAL.pdf succesfully created!")
+        print("{} succesfully created!".format(PDF_NAME))
 
     print("{} pages!".format(len(writer.pages)))
 
@@ -347,7 +353,7 @@ def solving_all_the_problems_in_the_world_at_the_same_time():
                 writer.add_page(pageL)
                 writer.add_page(pageR)
 
-    with open("pages_cropped_FINAL.pdf", "wb") as fp:
+    with open("{}".format(PDF_NAME), "wb") as fp:
         writer.write(fp)
 
     print("{} pages!".format(len(writer.pages)))
@@ -505,19 +511,19 @@ def save_pdf():
             OLD_solving_all_the_problems_in_the_world_at_the_same_time()
 
             with open("logs.txt", "a") as f:
-                f.write("{} [SUCCESS] : file 'pages_cropped_FINAL.pdf' generated\n".format(datetime.now()))
-                f.write("{} [ARGS] {} {}\n".format(datetime.now(), ARGS[0], ARGS[1]))
+                f.write("{} [SUCCESS] : file '{}' generated\n".format(datetime.now(), PDF_NAME))
+                f.write("{} [ARGS] {}\n".format(datetime.now(), " ".join(ARGS)))
                 f.close()
         except Exception as e:
             with open("logs.txt", "a") as f:
                 f.write("{} [ERROR] :".format(datetime.now()))
                 f.write("{}\n\n".format(e))
                 f.close()
+            raise FileNotFoundError(e)
         finally:
             listFiles = os.listdir('./')
             for name in listFiles:
-                if(".pdf" in name and "FINAL" not in name):
-                # if((".pdf" in name and "FINAL" not in name) or name == "manifest.json"):
+                if((".pdf" in name and "generated_" not in name) or name == "manifest.json"):
                     os.remove(name)
             with open("logs.txt", "a") as f:
                 f.write("{} [DIRECTORY CLEANED]\n".format(datetime.now()))

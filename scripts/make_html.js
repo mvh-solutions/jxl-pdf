@@ -13,11 +13,19 @@ const outputDirName = process.argv[4];
 const cliBookCode = process.argv[5] || null;
 
 doPdf({configPath, serverPort, outputDirName, cliBookCode}).then(() => {
-    PythonShell.run('cut_pdf.py', {
+    let pyshell = new PythonShell('cut_pdf.py', {
         mode: 'text', scriptPath:'./python-jxl', args:["FROMNODE", outputDirName]
-    }, function (err, results) {
+    });
+
+    pyshell.on('message', function (message) {
+        // received a message sent from the Python script (a simple "print" statement)
+        console.log(message);
+    });
+
+    // end the input stream and allow the process to exit
+    pyshell.end(function (err,code,signal) {
         if (err) throw err;
-        console.log('results: %j', results);
+        console.log('finished');
     });
 }).catch((e) => {
     console.error(e);

@@ -2,7 +2,7 @@ const {pkWithDocs, getBookName, bcvNotes, doPuppet} = require("../helpers");
 const fse = require("fs-extra");
 const path = require("path");
 const {SofriaRenderFromProskomma, render} = require("proskomma-json-tools");
-const doParaBibleSection = async ({section, serverPort, bookCode, config, outputDirName, outputPath, templates}) => {
+const doParaBibleSection = async ({section, bookCode, config, outputDirName, outputPath, templates}) => {
     const pk = pkWithDocs(bookCode, [section.text]);
     const bookName = getBookName(pk, section.text.id, bookCode);
     const notes = section.showNotes ? bcvNotes(config, bookCode) : {};
@@ -33,7 +33,6 @@ const doParaBibleSection = async ({section, serverPort, bookCode, config, output
             )
     );
     await doPuppet(
-        serverPort,
         section.id.replace('%%bookCode%%', bookCode),
         path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)),
         true,

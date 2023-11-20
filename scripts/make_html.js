@@ -1,18 +1,25 @@
 const doPdf = require('../src/index');
 const PythonShell = require('python-shell').PythonShell;
+var path = require('path');
+var http = require('http');
+var url = require('url');
+var fs = require('fs');
 
-const usage = "USAGE: node make_html.js <configPath> <serverPort> <outputDirName> [<bookCode>]";
+const testGroup = 'Pdf generation';
+var baseDirectory = path.join(path.normalize(__dirname+"/../static/html/output"));
+
+
+const usage = "USAGE: node make_html.js <configPath> <outputDirName> [<bookCode>]";
 if (![5, 6].includes(process.argv.length)) {
     console.log(`Wrong number of arguments!\n${usage}`);
     process.exit(1);
 }
 
 const configPath = process.argv[2];
-const serverPort = process.argv[3];
-const outputDirName = process.argv[4];
-const cliBookCode = process.argv[5] || null;
+const outputDirName = process.argv[3];
+const cliBookCode = process.argv[4] || null;
 
-doPdf({configPath, serverPort, outputDirName, cliBookCode}).then(() => {
+doPdf({configPath, outputDirName, cliBookCode}).then(() => {
     let pyshell = new PythonShell('cut_pdf.py', {
         mode: 'text', scriptPath:'./python-jxl', args:["FROMNODE", outputDirName]
     });

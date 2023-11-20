@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer");
 const path = require('path');
 
-const doPuppet = async (serverPort, sectionId, pdfOutputPath, orientation, outputDirName) => {
+const doPuppet = async (sectionId, pdfOutputPath, orientation, outputDirName) => {
     const waitTillHTMLRendered = async (page, timeout = 30000) => {
         const checkDurationMsecs = 1000;
         const maxChecks = timeout / checkDurationMsecs;

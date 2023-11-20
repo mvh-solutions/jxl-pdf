@@ -23,7 +23,7 @@ cd static && python -m http.server 8080
 
 # Run the script, passing the port of the server as an argument.
 # bookCode may be required depending on the config.
-# node make_html.js <configPath> <serverPort> <outputDirName> [<bookCode>]
+# npm start <configPath> <outputDirName> [<bookCode>]
 # Keep outputDirName as 'newDir' for now (hardwired into Python code)
 
 node scripts/make_html.js ./config/fr/xenizo.json 1234 newDir TIT

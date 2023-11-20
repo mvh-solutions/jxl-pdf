@@ -11,25 +11,14 @@ Printable PDFs from Sundesmos Juxtalinear JSON
 
 npm install
 
-# Set up a localhost server for the static directory where the HTML will be placed
-# by the script and retrieved over HTTP by Puppet. Any static
-# web server will do this, here we use "serve".
-
-serve static
-
-OR
-
-cd static && python -m http.server 8080
-
 # Run the script, passing the port of the server as an argument.
 # bookCode may be required depending on the config.
 # npm start <configPath> <outputDirName> [<bookCode>]
 # Keep outputDirName as 'newDir' for now (hardwired into Python code)
 
-node scripts/make_html.js ./config/fr/xenizo.json 1234 newDir TIT
+npm start ./config/fr/xenizo.json newDir TIT
 
-# View the HTML via the localhost browser under `html`. (Scripts won't work from
-# file explorer because of CORS.) The generated PDFs are in a subdirectory.
+# The generated PDFs are in a subdirectory.
 ```
 
 ## Generating the FULL PDF (python)

@@ -17,7 +17,7 @@ const outputDirName = process.argv[3];
 const cliBookCode = process.argv[4] || null;
 
 doPdf({configPath, outputDirName, cliBookCode}).then(() => {
-    if(flag) {
+    if(!flag) {
         let pyshell = new PythonShell('cut_pdf.py', {
             mode: 'text', scriptPath:'./python-jxl', args:["FROMNODE", outputDirName]
         });

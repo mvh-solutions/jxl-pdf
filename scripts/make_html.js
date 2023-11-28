@@ -1,12 +1,5 @@
 const doPdf = require('../src/index');
 const PythonShell = require('python-shell').PythonShell;
-var path = require('path');
-var http = require('http');
-var url = require('url');
-var fs = require('fs');
-
-const testGroup = 'Pdf generation';
-var baseDirectory = path.join(path.normalize(__dirname+"/../static/html/output"));
 
 
 const usage = "USAGE: node make_html.js <configPath> <outputDirName> [<bookCode>]";

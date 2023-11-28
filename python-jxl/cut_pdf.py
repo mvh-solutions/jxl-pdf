@@ -25,7 +25,10 @@ if(len(ARGS) < 2):
     sys.exit()
 else:
     PDF_NAME="generated_"+ARGS[1]+".pdf"
-    if(ARGS[1] == "FROMNODE"):
+    if(ARGS[1] == "FROMNODE" or ARGS[1] == "FROMNPM"):
+        if(len(ARGS) < 3):
+            print("I need the folder name where all the pdfs are => '../static/html/???' => USAGE : python cut_pdf.py [DIRNAME]")
+            sys.exit()
         PDF_NAME="generated_"+ARGS[2]+".pdf"
         DEFAULT_DIR="./python-jxl"
 
@@ -493,7 +496,7 @@ def reduce_pdf():
 
 def save_pdf():
     pdfPath="../static/html/{}/pdf/".format(ARGS[1])
-    if(ARGS[1] == "FROMNODE"):
+    if(ARGS[1] == "FROMNODE" or ARGS[1] == "FROMNPM"):
         pdfPath="../static/html/{}/pdf/".format(ARGS[2])
     if(os.path.exists("{}manifest.json".format(pdfPath))):
         destination_folder = "./"
@@ -534,6 +537,8 @@ def save_pdf():
             f.write("\n")
             f.write("{} Have you launched the node script yet? (npm start [...args])\n".format(datetime.now()))
             f.close()
+        print("{} [ERROR] : path doesn't exist\n here's the root path => {}".format(datetime.now(),os.path.dirname(os.path.realpath(__file__))))
+        print("{} Have you launched the node script yet? (npm start [...args])\n".format(datetime.now()))
 
 
 if __name__ == "__main__":

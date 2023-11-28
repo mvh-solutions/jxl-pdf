@@ -14,7 +14,6 @@ npm install
 # Run the script, passing the port of the server as an argument.
 # bookCode may be required depending on the config.
 # npm start <configPath> <outputDirName> [<bookCode>]
-# Keep outputDirName as 'newDir' for now (hardwired into Python code)
 
 npm start ./config/fr/xenizo.json newDir TIT
 

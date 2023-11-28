@@ -20,7 +20,7 @@ npm start ./config/fr/xenizo.json newDir TIT
 # The generated PDFs are in a subdirectory.
 ```
 
-## Generating the FULL PDF (python)
+## Generating the full merged and cropped PDF (python)
 
 ```bash
 # to install pyenv and activate all the requirements
@@ -35,5 +35,5 @@ pyenv virtualenv 3.9.15 cut_pdf
 
 pip install -r requirements.txt
 
-python cut_pdf.py
+npm run python [DIRNAME]
 ```

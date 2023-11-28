@@ -11,7 +11,6 @@ Printable PDFs from Sundesmos Juxtalinear JSON
 
 npm install
 
-# Run the script, passing the port of the server as an argument.
 # bookCode may be required depending on the config.
 # npm start <configPath> <outputDirName> [<bookCode>]
 

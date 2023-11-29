@@ -238,7 +238,7 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
 
     with open(PDF_NAME, "wb") as fp:
         writer.write(fp)
-        print("{} succesfully created!".format(PDF_NAME))
+        print("{} succesfully created in {}/{}".format(PDF_NAME, DEFAULT_DIR, PDF_NAME))
 
     print("{} pages!".format(len(writer.pages)))
 

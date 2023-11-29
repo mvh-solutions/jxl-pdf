@@ -12,7 +12,7 @@ const {
     doBiblePlusNotesSection
 } = require("../src/sectionHandlers");
 
-const doPdf = async ({configPath, serverPort, outputDirName, cliBookCode}) => {
+const doPdf = async ({configPath, outputDirName, cliBookCode}) => {
     const outputPath = path.resolve('static/html');
 
     let bookCode = null;
@@ -49,49 +49,49 @@ const doPdf = async ({configPath, serverPort, outputDirName, cliBookCode}) => {
         switch (section.type) {
             case "front":
                 await doFrontSection(
-                    {section, serverPort, config, bookCode, outputDirName, outputPath, templates}
+                    {section, config, bookCode, outputDirName, outputPath, templates}
                 );
                 break;
             case "jxlSpread":
                 checkBookCode(section.id);
                 await doJxlSpreadSection(
-                    {section, serverPort, config, bookCode, outputDirName, outputPath, templates}
+                    {section, config, bookCode, outputDirName, outputPath, templates}
                 );
                 break;
             case "4ColumnSpread":
                 checkBookCode(section.id);
                 await do4ColumnSpreadSection(
-                    {section, serverPort, config, bookCode, outputDirName, outputPath, templates}
+                    {section, config, bookCode, outputDirName, outputPath, templates}
                 );
                 break;
             case "2Column":
                 checkBookCode(section.id);
                 await do2ColumnSection(
-                    {section, serverPort, config, bookCode, outputDirName, outputPath, templates}
+                    {section, config, bookCode, outputDirName, outputPath, templates}
                 );
                 break;
             case "bookNote":
                 checkBookCode(section.id);
                 await doBookNoteSection(
-                    {section, serverPort, config, bookCode, outputDirName, outputPath, templates}
+                    {section, config, bookCode, outputDirName, outputPath, templates}
                 );
                 break;
             case "bcvBible":
                 checkBookCode(section.id);
                 await doBcvBibleSection(
-                    {section, serverPort, config, bookCode, outputDirName, outputPath, templates}
+                    {section, config, bookCode, outputDirName, outputPath, templates}
                 );
                 break;
             case "paraBible":
                 checkBookCode(section.id);
                 await doParaBibleSection(
-                    {section, serverPort, config, bookCode, outputDirName, outputPath, templates}
+                    {section, config, bookCode, outputDirName, outputPath, templates}
                 );
                 break;
             case "biblePlusNotes":
                 checkBookCode(section.id);
                 await doBiblePlusNotesSection(
-                    {section, serverPort, config, bookCode, outputDirName, outputPath, templates}
+                    {section, config, bookCode, outputDirName, outputPath, templates}
                 );
                 break;
             default:

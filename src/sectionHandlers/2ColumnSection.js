@@ -1,7 +1,7 @@
 const {pkWithDocs, getBookName, getCVTexts, cleanNoteLine, bcvNotes, doPuppet} = require("../helpers");
 const fse = require("fs-extra");
 const path = require("path");
-const do2ColumnSection = async ({section, serverPort, bookCode, config, outputDirName, outputPath, templates}) => {
+const do2ColumnSection = async ({section, bookCode, config, outputDirName, outputPath, templates}) => {
     if (!section.texts || section.texts.length !== 2) {
         throw new Error("2 Column Section requires exactly 2 text definitions");
     }
@@ -23,7 +23,6 @@ const do2ColumnSection = async ({section, serverPort, bookCode, config, outputDi
         headerHtml
     );
     await doPuppet(
-        serverPort,
         `${section.id.replace('%%bookCode%%', bookCode)}_superimpose`,
         path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.pdf`)),
         true,
@@ -73,7 +72,6 @@ const do2ColumnSection = async ({section, serverPort, bookCode, config, outputDi
             )
     );
     await doPuppet(
-        serverPort,
         section.id.replace('%%bookCode%%', bookCode),
         path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)),
         true,

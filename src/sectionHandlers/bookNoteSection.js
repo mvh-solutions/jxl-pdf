@@ -1,7 +1,7 @@
 const fse = require("fs-extra");
 const path = require("path");
 const {maybeChapterNotes, doPuppet} = require("../helpers");
-const doBookNoteSection = async ({section, serverPort, config, bookCode, outputDirName, outputPath, templates}) => {
+const doBookNoteSection = async ({section, config, bookCode, outputDirName, outputPath, templates}) => {
     const notes = {};
     const notesRows = fse.readFileSync(path.join('data', config.notes, `${bookCode}.tsv`)).toString().split("\n");
     for (const notesRow of notesRows) {
@@ -24,7 +24,6 @@ const doBookNoteSection = async ({section, serverPort, config, bookCode, outputD
             )
     );
     await doPuppet(
-        serverPort,
         section.id.replace('%%bookCode%%', bookCode),
         path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)),
         true,

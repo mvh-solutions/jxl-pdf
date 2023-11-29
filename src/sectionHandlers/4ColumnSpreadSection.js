@@ -1,7 +1,7 @@
 const {pkWithDocs, getBookName, getCVTexts, cleanNoteLine, doPuppet, bcvNotes} = require("../helpers");
 const fse = require("fs-extra");
 const path = require("path");
-const do4ColumnSpreadSection = async ({section, serverPort, config, bookCode, outputDirName, outputPath, templates}) => {
+const do4ColumnSpreadSection = async ({section, config, bookCode, outputDirName, outputPath, templates}) => {
     if (!section.texts || section.texts.length !== 4) {
         throw new Error("4 Column Spread Section requires exactly 4 text definitions");
     }
@@ -29,7 +29,6 @@ const do4ColumnSpreadSection = async ({section, serverPort, config, bookCode, ou
         headerHtml
     );
     await doPuppet(
-        serverPort,
         `${section.id.replace('%%bookCode%%', bookCode)}_superimpose`,
         path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.pdf`)),
         true,
@@ -77,7 +76,6 @@ const do4ColumnSpreadSection = async ({section, serverPort, config, bookCode, ou
             )
     );
     await doPuppet(
-        serverPort,
         section.id.replace('%%bookCode%%', bookCode),
         path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)),
         true,

@@ -12,7 +12,7 @@ const {
     doPuppet
 } = require("../helpers");
 
-const doJxlSpreadSection = async ({section, serverPort, config, bookCode, outputDirName, outputPath, templates}) => {
+const doJxlSpreadSection = async ({section, config, bookCode, outputDirName, outputPath, templates}) => {
     const jxlJson = fse.readJsonSync(path.resolve(path.join('data', section.jxl.path, `${bookCode}.json`)));
     let pivotIds = new Set([]);
     const notes = {};
@@ -132,7 +132,6 @@ const doJxlSpreadSection = async ({section, serverPort, config, bookCode, output
             .replace('%%SENTENCES%%', sentences.join(''))
     );
     await doPuppet(
-        serverPort,
         section.id.replace('%%bookCode%%', bookCode),
         path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)),
         true,

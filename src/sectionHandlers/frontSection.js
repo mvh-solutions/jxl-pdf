@@ -1,7 +1,7 @@
 const fse = require("fs-extra");
 const path = require("path");
 const {doPuppet} = require("../helpers");
-const doFrontSection = async ({section, serverPort, bookCode, outputDirName, outputPath, templates}) => {
+const doFrontSection = async ({section, bookCode, outputDirName, outputPath, templates}) => {
     const content = templates['non_juxta_page']
         .replace(
             "%%TITLE%%",
@@ -16,7 +16,6 @@ const doFrontSection = async ({section, serverPort, bookCode, outputDirName, out
         content
     );
     await doPuppet(
-        serverPort,
         section.id.replace('%%bookCode%%', bookCode),
         path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)),
         true,

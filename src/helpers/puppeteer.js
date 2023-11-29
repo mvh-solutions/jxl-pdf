@@ -31,7 +31,7 @@ const doPuppet = async (sectionId, pdfOutputPath, orientation, outputDirName) =>
     };
 
     console.log(`     Running Puppet`);
-    const browser = await puppeteer.launch({headless: "new"});
+    const browser = await puppeteer.launch({headless: "new", args: [ '--disable-web-security', ]});
     const page = await browser.newPage();
     const fullPath = path.join(path.normalize(__dirname+`/../../static/html/${outputDirName}/${sectionId}.html`))
     await page.goto(`file://${fullPath}`);

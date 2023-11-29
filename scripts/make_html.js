@@ -3,7 +3,7 @@ const PythonShell = require('python-shell').PythonShell;
 
 
 const usage = "USAGE: node make_html.js <configPath> <outputDirName> [<bookCode>]";
-if (![5, 6].includes(process.argv.length)) {
+if (![4, 5, 6, 7].includes(process.argv.length)) {
     console.log(`Wrong number of arguments!\n${usage}`);
     process.exit(1);
 }
@@ -14,7 +14,7 @@ const flag = (
 
 const configPath = process.argv[2];
 const outputDirName = process.argv[3];
-const cliBookCode = process.argv[4] || null;
+const cliBookCode = /\b[A-Z\d]{1,3}\b/.test(process.argv[4]) ? process.argv[4] : null;
 
 doPdf({configPath, outputDirName, cliBookCode}).then(() => {
     if(!flag) {

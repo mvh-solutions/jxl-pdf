@@ -5,7 +5,7 @@ Printable PDFs from Sundesmos Juxtalinear JSON
 - https://fonts.google.com/specimen/Gentium+Book+Plus
 - https://fonts.google.com/specimen/Open+Sans
 
-## installing python
+## Installing python
 
 ```bash
 # to install pyenv and activate all the requirements

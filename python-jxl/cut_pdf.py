@@ -533,12 +533,12 @@ def save_pdf():
                 f.close()
     else:
         with open("logs.txt", "a") as f:
-            f.write("{} [ERROR] : path doesn't exist\n here's the root path => {}".format(datetime.now(),os.path.dirname(os.path.realpath(__file__))))
+            f.write("{} [ERROR] : path doesn't exists : {}\n\tHere's the root path => {}".format(datetime.now(),pdfPath,os.path.dirname(os.path.realpath(__file__))))
             f.write("\n")
             f.write("{} Have you launched the node script yet? (npm start [...args])\n".format(datetime.now()))
             f.close()
-        print("{} [ERROR] : path doesn't exist\n here's the root path => {}".format(datetime.now(),os.path.dirname(os.path.realpath(__file__))))
-        print("{} Have you launched the node script yet? (npm start [...args])\n".format(datetime.now()))
+        print("[ERROR] : path does not exists : {}\n\tHere's the root path => {}".format(pdfPath,os.path.dirname(os.path.realpath(__file__))))
+        print("\tHave you launched the node script yet? (npm start [...args])\n")
 
 
 if __name__ == "__main__":

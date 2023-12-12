@@ -21,6 +21,7 @@ body {
     line-height: 10pt;
     font-family: "Gentium Book Plus", serif;
     text-align: justify;
+    text-align-last: left;
 }
 
 div.chapters {

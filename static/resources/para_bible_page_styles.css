@@ -269,7 +269,7 @@ p:has(.marks_chapter_label) {
 .marks_verses_label {
     font-weight: bold;
     font-size: 7pt;
-    line-height: 10pt;
+    line-height: 1;
     margin-right: 2pt;
 }
 /* wrappers CSS format : */

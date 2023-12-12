@@ -271,6 +271,7 @@ p:has(.marks_chapter_label) {
     font-size: 7pt;
     line-height: 1;
     margin-right: 2pt;
+    vertical-align: top;
 }
 /* wrappers CSS format : */
 .wrappers_default {

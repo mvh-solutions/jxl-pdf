@@ -147,7 +147,7 @@
     "process": "^0.11.10",
     "progress": "^2.0.3",
     "proskomma-core": "^0.10.4",
-    "proskomma-json-tools": "^0.7.7",
+    "proskomma-json-tools": "^0.8.2",
     "proxy-agent": "^6.3.0",
     "proxy-from-env": "^1.1.0",
     "pump": "^3.0.0",

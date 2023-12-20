@@ -2,7 +2,7 @@ from datetime import datetime
 from PyPDF2 import PdfReader, PdfWriter, PdfMerger, PaperSize, Transformation
 from PyPDF2.generic import AnnotationBuilder
 from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import A3, portrait, landscape
+from reportlab.lib import pagesizes
 from reportlab.lib.units import inch, mm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
@@ -20,6 +20,7 @@ def clean_backslashes(s):
 
 ARGS = list(map(clean_backslashes, sys.argv))
 DEFAULT_DIR="./"
+
 if(len(ARGS) < 2):
     print("I need the folder name where all the pdfs are => '../static/html/???' => USAGE : python cut_pdf.py [DIRNAME]")
     sys.exit()
@@ -31,6 +32,18 @@ else:
             sys.exit()
         PDF_NAME="generated_"+ARGS[2]+".pdf"
         DEFAULT_DIR="./python-jxl"
+    if(ARGS[1] == "FROMNODE"):
+        PAGE_SIZE=ARGS[3]
+    elif(ARGS[1] == "FROMNPM"):
+        PAGE_SIZE=ARGS[2]
+    else:
+        if(len(ARGS) > 2):
+            PAGE_SIZE=ARGS[2]
+        else:
+            PAGE_SIZE = None
+
+if(PAGE_SIZE == "undefined" or PAGE_SIZE == None):
+    PAGE_SIZE="EXECUTIVE"
 
 os.chdir(DEFAULT_DIR)
 
@@ -40,6 +53,22 @@ for name in listFiles:
     if(".ttf" in name):
         [fn, ext] = name.split(".")
         pdfmetrics.registerFont(TTFont(fn, "../fonts/"+name))
+
+PAGE_SIZES = {
+    "A0" : pagesizes.A0,
+    "A1" : pagesizes.A1,
+    "A2" : pagesizes.A2,
+    "A3" : pagesizes.A3,
+    "A4" : pagesizes.A4,
+    "A5" : pagesizes.A5,
+    "A6" : pagesizes.A6,
+    "A7" : pagesizes.A7,
+    "LETTER" : pagesizes.LETTER,
+    "letter" : pagesizes.LETTER,
+    "EXECUTIVE" : [504.0, 720.0]
+}
+
+PAGE_DIMENSIONS = PAGE_SIZES[PAGE_SIZE]
 
 # 1 inch == 72 pt
 def inch_to_pt(num):
@@ -53,8 +82,13 @@ def mm_to_pt(mm):
     inch=mm/25.4
     return inch*72
 
-EXECUTIVE_WIDTH = 504.0
-EXECUTIVE_HEIGHT = 720.0
+# EXECUTIVE_WIDTH = 504.0
+PAGE_WIDTH = PAGE_DIMENSIONS[0]
+# EXECUTIVE_HEIGHT = 720.0
+PAGE_HEIGHT = PAGE_DIMENSIONS[1]
+
+SCALE_WIDTH_X = PAGE_WIDTH / 504.0
+SCALE_HEIGHT_Y = PAGE_HEIGHT / 720.0
 
 A3MM_WIDTH = 420
 A3MM_HEIGHT = 297
@@ -76,10 +110,10 @@ def crop():
         w = int(page.mediabox.width)
         h = int(page.mediabox.height)
         
-        page.mediabox.right = w/2.0+EXECUTIVE_WIDTH/2.0
-        page.mediabox.left = w/2.0-EXECUTIVE_WIDTH/2.0
-        page.mediabox.top = h/2.0+EXECUTIVE_HEIGHT/2.0
-        page.mediabox.bottom = h/2.0-EXECUTIVE_HEIGHT/2.0
+        page.mediabox.right = w/2.0+PAGE_WIDTH/2.0
+        page.mediabox.left = w/2.0-PAGE_WIDTH/2.0
+        page.mediabox.top = h/2.0+PAGE_HEIGHT/2.0
+        page.mediabox.bottom = h/2.0-PAGE_HEIGHT/2.0
         # print("width == {} pt or {} mm".format(w, pt_to_mm(w)))
         # print("height == {} pt or {} mm".format(h, pt_to_mm(h)))
 
@@ -97,8 +131,6 @@ def readJson(name="manifest.json"):
     
 def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBookPlus-Regular"):
     writer = PdfWriter()
-    # writer.add_blank_page(EXECUTIVE_WIDTH, EXECUTIVE_HEIGHT)
-    # writer.add_blank_page(EXECUTIVE_WIDTH, EXECUTIVE_HEIGHT)
     config = readJson()
     conf_len = len(config)
     numCurrentPage = 1
@@ -128,15 +160,15 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
 
         itsTheFirstPage=True
         if numCurrentPage%2 != 0 and startOn == "verso":
-            writer.add_blank_page(EXECUTIVE_WIDTH, EXECUTIVE_HEIGHT)
+            writer.add_blank_page(PAGE_WIDTH, PAGE_HEIGHT)
             numCurrentPage+=1
         if numCurrentPage%2 == 0 and startOn == "recto":
-            writer.add_blank_page(EXECUTIVE_WIDTH, EXECUTIVE_HEIGHT)
+            writer.add_blank_page(PAGE_WIDTH, PAGE_HEIGHT)
             numCurrentPage+=1
         if(not makeFromDouble):
             for j in range(nbPages):
                 cname = "canvas_{}_tmp.pdf".format(j)
-                c = canvas.Canvas(cname, pagesize=A3)
+                c = canvas.Canvas(cname, pagesize=pagesizes.A3)
                 page = reader.pages[j]
 
                 w = int(page.mediabox.width)
@@ -162,10 +194,12 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
 
 
                 numCurrentPage+=1
-                page.mediabox.right = w/2.0+EXECUTIVE_WIDTH/2.0
-                page.mediabox.left = w/2.0-EXECUTIVE_WIDTH/2.0
-                page.mediabox.top = h/2.0+EXECUTIVE_HEIGHT/2.0
-                page.mediabox.bottom = h/2.0-EXECUTIVE_HEIGHT/2.0
+                page.mediabox.right = w/2.0+PAGE_WIDTH/2.0
+                page.mediabox.left = w/2.0-PAGE_WIDTH/2.0
+                page.mediabox.top = h/2.0+PAGE_HEIGHT/2.0
+                page.mediabox.bottom = h/2.0-PAGE_HEIGHT/2.0
+                op = Transformation().scale(sx=SCALE_WIDTH_X, sy=SCALE_HEIGHT_Y).translate(tx=(1-SCALE_WIDTH_X)*w/2, ty=(1-SCALE_HEIGHT_Y)*h/2)
+                page.add_transformation(op)
                 writer.add_page(page)
 
                 if(itsTheFirstPage and typePage == "2Column"):
@@ -174,7 +208,7 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
         else:
             for k in range(nbPages):
                 cname = "canvas_{}_juxta.pdf".format(k)
-                c = canvas.Canvas(cname, pagesize=landscape(A3))
+                c = canvas.Canvas(cname, pagesize=pagesizes.landscape(pagesizes.A3))
                 # readerL = PdfReader("{}".format(name))
                 # readerR = PdfReader("{}".format(name))
                 # writer = PdfWriter()
@@ -228,6 +262,11 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
                 pageR.mediabox.top = math.floor(float(pageR.mediabox.height) - offset_height) - 0.5
                 pageR.mediabox.bottom = math.floor(offset_height) + 0.5
 
+                # op = Transformation().scale(sx=SCALE_WIDTH_X, sy=SCALE_HEIGHT_Y).translate(tx=(1-SCALE_WIDTH_X)*w/2, ty=(1-SCALE_HEIGHT_Y)*h/2)
+                pageR.scale_by(SCALE_WIDTH_X)
+                pageL.scale_by(SCALE_WIDTH_X)
+                # pageR.add_transformation(op)
+                # pageL.add_transformation(op)
                 writer.add_page(pageL)
                 writer.add_page(pageR)
 
@@ -245,7 +284,7 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
 
 def create_page_num(page, num, double=False, textFont="GentiumBookPlus-Regular", textSize=9):
     cname = "canvas_{}_tmp.pdf".format(num)
-    c = canvas.Canvas(cname, pagesize=A3)
+    c = canvas.Canvas(cname, pagesize=pagesizes.A3)
 
     w = int(page.mediabox.width)
     h = int(page.mediabox.height)
@@ -282,8 +321,8 @@ def cut_page(page, left, right, top, bottom):
 
 def solving_all_the_problems_in_the_world_at_the_same_time():
     writer = PdfWriter()
-    writer.add_blank_page(EXECUTIVE_WIDTH, EXECUTIVE_HEIGHT)
-    writer.add_blank_page(EXECUTIVE_WIDTH, EXECUTIVE_HEIGHT)
+    writer.add_blank_page(PAGE_WIDTH, PAGE_HEIGHT)
+    writer.add_blank_page(PAGE_WIDTH, PAGE_HEIGHT)
     config = readJson()
     numCurrentPage = 1
     for i in range(len(config)):
@@ -297,7 +336,7 @@ def solving_all_the_problems_in_the_world_at_the_same_time():
         nbPages = len(reader.pages)
 
         if numCurrentPage%2 != 0 and startOn == "verso":
-            writer.add_blank_page(EXECUTIVE_WIDTH, EXECUTIVE_HEIGHT)
+            writer.add_blank_page(PAGE_WIDTH, PAGE_HEIGHT)
             numCurrentPage+=1
         if(not makeFromDouble):
             for page in reader.pages:
@@ -313,10 +352,10 @@ def solving_all_the_problems_in_the_world_at_the_same_time():
                 numCurrentPage+=1
                 page = cut_page(
                     page,
-                    w/2.0-EXECUTIVE_WIDTH/2.0,
-                    w/2.0+EXECUTIVE_WIDTH/2.0,
-                    h/2.0+EXECUTIVE_HEIGHT/2.0,
-                    h/2.0-EXECUTIVE_HEIGHT/2.0
+                    w/2.0-PAGE_WIDTH/2.0,
+                    w/2.0+PAGE_WIDTH/2.0,
+                    h/2.0+PAGE_HEIGHT/2.0,
+                    h/2.0-PAGE_HEIGHT/2.0
                 )
                 writer.add_page(page)
         else:
@@ -369,7 +408,7 @@ def vertical():
     nbPages = len(reader.pages)
     for i in range(nbPages):
         cname = "canvas_{}_tmp.pdf".format(i)
-        c = canvas.Canvas(cname, pagesize=A3)
+        c = canvas.Canvas(cname, pagesize=pagesizes.A3)
         page = reader.pages[i]
         # writer.add_page(page)
 
@@ -388,10 +427,10 @@ def vertical():
 
         page.merge_page(tmpTxt.pages[0])
 
-        page.mediabox.right = w/2.0+EXECUTIVE_WIDTH/2.0
-        page.mediabox.left = w/2.0-EXECUTIVE_WIDTH/2.0
-        page.mediabox.top = h/2.0+EXECUTIVE_HEIGHT/2.0
-        page.mediabox.bottom = h/2.0-EXECUTIVE_HEIGHT/2.0
+        page.mediabox.right = w/2.0+PAGE_WIDTH/2.0
+        page.mediabox.left = w/2.0-PAGE_WIDTH/2.0
+        page.mediabox.top = h/2.0+PAGE_HEIGHT/2.0
+        page.mediabox.bottom = h/2.0-PAGE_HEIGHT/2.0
         writer.add_page(page)
 
         os.remove(cname)
@@ -402,7 +441,7 @@ def vertical():
 
 def juxta():
     cname = "canvas_{}_tmp.pdf".format(1)
-    c = canvas.Canvas(cname, pagesize=landscape(A3))
+    c = canvas.Canvas(cname, pagesize=pagesizes.landscape(pagesizes.A3))
     readerL = PdfReader("{}".format(ARGS[1]))
     readerR = PdfReader("{}".format(ARGS[1]))
     writer = PdfWriter()

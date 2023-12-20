@@ -1,8 +1,20 @@
 const doPdf = require('../src/index');
+// const { program } = require('commander');
 const PythonShell = require('python-shell').PythonShell;
 
 
 const usage = "USAGE: node make_html.js <configPath> <outputDirName> [<bookCode>]";
+
+// program
+//     .version("0.0.1")
+//     .option('-c, --config <path>', 'path to the config file')
+
+// program.parse();
+
+// const options = program.opts();
+// const args = program.args;
+// const la = args.length;
+
 if (![4, 5, 6, 7].includes(process.argv.length)) {
     console.log(`Wrong number of arguments!\n${usage}`);
     process.exit(1);
@@ -15,11 +27,12 @@ const flag = (
 const configPath = process.argv[2];
 const outputDirName = process.argv[3];
 const cliBookCode = /\b[A-Z\d]{1,3}\b/.test(process.argv[4]) ? process.argv[4] : null;
+const pageSize = process.argv[5];
 
 doPdf({configPath, outputDirName, cliBookCode}).then(() => {
     if(!flag) {
         let pyshell = new PythonShell('cut_pdf.py', {
-            mode: 'text', scriptPath:'./python-jxl', args:["FROMNODE", outputDirName]
+            mode: 'text', scriptPath:'./python-jxl', args:["FROMNODE", outputDirName, pageSize]
         });
     
         pyshell.on('message', function (message) {

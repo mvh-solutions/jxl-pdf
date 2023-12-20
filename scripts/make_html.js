@@ -30,8 +30,8 @@ const outputDirName = options.output;
 let cliBookCode = null;
 const pageFormat = options.pageFormat;
 
-if(options.book) {
-    cliBookCode = /\b[A-Z\d]{1,3}\b/.test(options.book) ? options.book : null;
+if(options.book && /\b[A-Z\d]{1,3}\b/.test(options.book)) {
+    cliBookCode = options.book;
 }
 
 doPdf({configPath, outputDirName, cliBookCode}).then(() => {

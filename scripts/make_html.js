@@ -23,8 +23,6 @@ if (!keysOpt.includes("config") && !keysOpt.includes("output")) {
     process.exit(1);
 }
 
-const flag = !keysOpt.includes("noPython");
-
 const configPath = options.config;
 const outputDirName = options.output;
 let cliBookCode = null;
@@ -35,7 +33,7 @@ if(options.book && /\b[A-Z\d]{1,3}\b/.test(options.book)) {
 }
 
 doPdf({configPath, outputDirName, cliBookCode}).then(() => {
-    if(!flag) {
+    if(options.python) {
         let pyshell = new PythonShell('cut_pdf.py', {
             mode: 'text', scriptPath:'./python-jxl', args:["FROMNODE", outputDirName, pageFormat]
         });

@@ -22,25 +22,34 @@ pip install -r requirements.txt
 ```
 
 ## Generating HTML and PDF
+
+note : ***If `pageFormat` is not set, it will set the page format to default : `EXECUTIVE`***
+
 ```
 # Install the script
 
 npm install
 
 # bookCode may be required depending on the config.
-# npm start <configPath> <outputDirName> [<bookCode>]
+# npm start -- -c <configPath> -o <outputDirName> [-b <bookCode> -p <pageFormat>]
+# or
+# node scripts/make_html.js -c <configPath> -o <outputDirName> [-b <bookCode> -p <pageFormat>]
 
 # for e.g.
-npm start ./config/fr/xenizo.json newDir TIT
+npm start -- -c ./config/fr/xenizo.json -o newDir -b TIT
+# or
+node scripts/make_html.js -c ./config/fr/xenizo.json -o newDir -b TIT
 
 # The generated PDFs are in a subdirectory.
 # under static/html/<outputDirName>/pdf
 ```
 
 if you don't want to launch the python code send the option `-n` or `--no-python` to the script like so :  
-`npm start ./config/fr/xenizo.json newDir TIT -- -n`  
+`npm start -- -c ./config/fr/xenizo.json -o newDir -b TIT --no-python`  
+or  
+`node scripts/make_html.js -c ./config/fr/xenizo.json -o newDir -b TIT --no-python`  
 
 The final pdf will not be generated.  
 
 If you want to run ONLY the python code to generate the final pdf, run the script :  
-`npm run python <outputDirName>`
+`npm run python <outputDirName> [<pageFormat>]`  

@@ -45,8 +45,6 @@
       "styles": "juxta_page_styles",
       "startOn": "verso",
       "showPageNumber": true,
-      "firstSentence": 69,
-      "lastSentence": 79,
       "jxl": {
         "path": "fra_jxl",
         "notes": {

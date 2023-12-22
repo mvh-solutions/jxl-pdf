@@ -86,12 +86,22 @@ h3.pub_details {
     font-size: 12pt;
 }
 
+h3.pub_details2 {
+    margin-top: 288pt;
+    font-weight: normal;
+    font-size: 12pt;
+}
+
 h3.descriptif {
     margin-bottom: 60pt;
 }
 
 p.resource {
     margin-bottom: 18pt;
+}
+
+p.small-gap {
+    margin-bottom: 10pt;
 }
 
 .half_page .front_body {

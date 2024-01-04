@@ -198,8 +198,9 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
                 page.mediabox.left = w/2.0-PAGE_WIDTH/2.0
                 page.mediabox.top = h/2.0+PAGE_HEIGHT/2.0
                 page.mediabox.bottom = h/2.0-PAGE_HEIGHT/2.0
-                op = Transformation().scale(sx=SCALE_WIDTH_X, sy=SCALE_HEIGHT_Y).translate(tx=(1-SCALE_WIDTH_X)*w/2, ty=(1-SCALE_HEIGHT_Y)*h/2)
-                page.add_transformation(op)
+                # op = Transformation().scale(sx=SCALE_WIDTH_X, sy=SCALE_HEIGHT_Y).translate(tx=(1-SCALE_WIDTH_X)*w/2, ty=(1-SCALE_HEIGHT_Y)*h/2)
+                # page.add_transformation(op)
+                page.scale_by(SCALE_WIDTH_X)
                 writer.add_page(page)
 
                 if(itsTheFirstPage and typePage == "2Column"):
@@ -519,8 +520,7 @@ def cut_pages():
         writer.write(f)
 
 
-def reduce_pdf():
-    name=ARGS[1]
+def reduce_pdf(name):
     reader = PdfReader(name)
     writer = PdfWriter()
 
@@ -551,6 +551,7 @@ def save_pdf():
                     print('copied', file_name)
             print("running...")
             OLD_solving_all_the_problems_in_the_world_at_the_same_time()
+            reduce_pdf("generated_output.pdf")
 
             with open("logs.txt", "a") as f:
                 f.write("{} [SUCCESS] : file '{}' generated\n".format(datetime.now(), PDF_NAME))

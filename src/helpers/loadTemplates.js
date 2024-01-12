@@ -5,6 +5,7 @@ const loadTemplates = () => {
     const templates = {};
     for (const templateName of [
         'juxta_page',
+        'simple_juxta_page',
         'non_juxta_page',
         '4_column_spread_page',
         '4_column_spread_verse',
@@ -21,7 +22,9 @@ const loadTemplates = () => {
         'bible_plus_notes_verse',
         'web_index_page',
         'web_index_page_link',
-        'sentence', 'firstLeft',
+        'sentence',
+        'simple_juxta_sentence',
+        'firstLeft',
         'otherLeft',
         'jxl',
         'jxlRow',

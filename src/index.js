@@ -7,6 +7,7 @@ const {
     doBookNoteSection,
     doFrontSection,
     doJxlSpreadSection,
+    doJxlSimpleSection,
     doBcvBibleSection,
     doParaBibleSection,
     doBiblePlusNotesSection
@@ -55,6 +56,12 @@ const doPdf = async ({configPath, outputDirName, cliBookCode}) => {
             case "jxlSpread":
                 checkBookCode(section.id);
                 await doJxlSpreadSection(
+                    {section, config, bookCode, outputDirName, outputPath, templates}
+                );
+                break;
+            case "jxlSimple":
+                checkBookCode(section.id);
+                await doJxlSimpleSection(
                     {section, config, bookCode, outputDirName, outputPath, templates}
                 );
                 break;

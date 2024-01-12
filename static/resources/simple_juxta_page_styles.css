@@ -44,20 +44,19 @@ h1 {
 h2.sentenceHeader {
     font-size: 9pt;
     line-height: 10pt;
+    padding-bottom: 10pt;
     font-weight: bold;
     margin: 0;
-    padding-bottom: 3.5pt;
-    margin-bottom: 5pt;
-    border-bottom: solid 1.5pt black;
     width: 388pt;
-    text-align: left;
+    text-align: center;
 }
 
 .phraseN {
+    font-style: italic;
+    font-weight: normal;
 }
 
 .sentenceRef {
-    float: right;
 }
 
 .rightPane {
@@ -76,7 +75,7 @@ h2.sentenceHeader {
     string-set: sentenceN attr(data-n), cvRef attr(data-cv);
     page-break-inside: avoid;
     vertical-align: top;
-    padding-bottom: 10pt;
+    padding-bottom: 20pt;
 }
 
 .jxlGreek {

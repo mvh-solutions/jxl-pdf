@@ -59,6 +59,8 @@ const makePdf = async function (dirName="output") {
     // Add a blank pages to the documents
     let page;
     let currentPdfPageToCopy, preamble, docPdf;
+    let numPages = 0;
+    let nextPageSide;
     for(const manifestStep of manifest) {
         docPdf = manifestStep.pdf;
         if (manifestStep.makeFromDouble) {
@@ -66,10 +68,13 @@ const makePdf = async function (dirName="output") {
             docPdf = makeFromDouble(manifestStep);
         }
 
-        // TODO startOn recto ou verso
-        // if(manifestStep.startOn) {
+        nextPageSide = numPages%2 == 0 ? "recto" : "verso";
 
-        // }
+        // TODO startOn recto ou verso
+        if(nextPageSide !== manifestStep.startOn) {
+            pdfDoc.addPage(EXECUTIVE);
+            numPages += 1;
+        }
 
         for(let i = 0; i < manifestStep.numPages; i++) {
             currentPdfPageToCopy = docPdf.getPage(i);
@@ -85,6 +90,8 @@ const makePdf = async function (dirName="output") {
                 x: page.getWidth() / 2 - currentPdfPageToCopy.getWidth() / 2,
                 y: page.getHeight() / 2 - currentPdfPageToCopy.getHeight() / 2 - 50,
             });
+
+            numPages += 1;
 
             // TODO showPageNumber
         }

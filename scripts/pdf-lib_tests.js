@@ -33,6 +33,10 @@ const makeFromDouble = function(manifestStep) {
     return manifestStep.pdf;
 }
 
+const makeSuperimposed = function(manifestStep, superimposePdf) {
+    return manifestStep.pdf;
+}
+
 const makePdf = async function (dirName="output") {
     const fontBytes = fse.readFileSync('./fonts/GentiumBookPlus-Regular.ttf');
 
@@ -61,7 +65,16 @@ const makePdf = async function (dirName="output") {
     let currentPdfPageToCopy, preamble, docPdf;
     let numPages = 0;
     let nextPageSide;
+    let superimposeStep;
     for(const manifestStep of manifest) {
+        if(manifestStep.type === "superimpose") continue;
+        superimposeStep = manifest.filter((s) => s.for = manifestStep.id)[0];
+
+        // if we need to superimposes
+        if(superimposeStep) {
+            docPdf = makeSuperimposed(manifestStep, superimposeStep.pdf);
+        }
+
         docPdf = manifestStep.pdf;
         if (manifestStep.makeFromDouble) {
             // TODO if makeFromDouble
@@ -70,7 +83,6 @@ const makePdf = async function (dirName="output") {
 
         nextPageSide = numPages%2 == 0 ? "recto" : "verso";
 
-        // TODO startOn recto ou verso
         if(nextPageSide !== manifestStep.startOn) {
             pdfDoc.addPage(EXECUTIVE);
             numPages += 1;
@@ -106,5 +118,5 @@ const makePdf = async function (dirName="output") {
     fse.writeFileSync("my_final_pdf.pdf", pdfBytes);
 }
 
-makePdf('output');
+// makePdf('output');
 module.exports = makePdf;

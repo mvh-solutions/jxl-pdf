@@ -167,25 +167,25 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
             numCurrentPage+=1
         if(not makeFromDouble):
             for j in range(nbPages):
-                cname = "canvas_{}_tmp.pdf".format(j)
-                c = canvas.Canvas(cname, pagesize=pagesizes.A3)
+                # cname = "canvas_{}_tmp.pdf".format(j)
+                # c = canvas.Canvas(cname, pagesize=pagesizes.A3)
                 page = reader.pages[j]
 
                 w = int(page.mediabox.width)
                 h = int(page.mediabox.height)
 
-                if(showPageNumber):
-                    to = c.beginText()
-                    to.setTextOrigin(w/2, h/2 - 360 + mm_to_pt(10))
-                    to.setFont(font, 9)
-                    to.textLine("{}".format(numCurrentPage))
-                    c.drawText(to)
-                c.showPage()
-                c.save()
+                # if(showPageNumber):
+                #     to = c.beginText()
+                #     to.setTextOrigin(w/2, h/2 - 360 + mm_to_pt(10))
+                #     to.setFont(font, 9)
+                #     to.textLine("{}".format(numCurrentPage))
+                #     c.drawText(to)
+                # c.showPage()
+                # c.save()
 
-                tmpTxt = PdfReader(cname)
+                # tmpTxt = PdfReader(cname)
 
-                page.merge_page(tmpTxt.pages[0])
+                # page.merge_page(tmpTxt.pages[0])
                 if(read3 != None and numCurrentPage!=0 and not itsTheFirstPage and typePage == "2Column"):
                     if(numCurrentPage%2 == 0):
                         page.merge_page(read3.pages[1])
@@ -205,11 +205,11 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
 
                 if(itsTheFirstPage and typePage == "2Column"):
                     itsTheFirstPage = False
-                os.remove(cname)
+                # os.remove(cname)
         else:
             for k in range(nbPages):
-                cname = "canvas_{}_juxta.pdf".format(k)
-                c = canvas.Canvas(cname, pagesize=pagesizes.landscape(pagesizes.A3))
+                # cname = "canvas_{}_juxta.pdf".format(k)
+                # c = canvas.Canvas(cname, pagesize=pagesizes.landscape(pagesizes.A3))
                 # readerL = PdfReader("{}".format(name))
                 # readerR = PdfReader("{}".format(name))
                 # writer = PdfWriter()
@@ -225,30 +225,30 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
                 offset_width = (A3ptw - 1008)/2
                 offset_height = (A3pth - 720)/2
 
-                if(showPageNumber):
-                    to = c.beginText()
-                    to.setTextOrigin(44 + (388/2) + offset_width - calc_offset_text("{}".format(numCurrentPage)), offset_height + mm_to_pt(10))
-                    to.setFont(font, 9)
-                    to.textLine("{}".format(numCurrentPage))
-                    c.drawText(to)
+                # if(showPageNumber):
+                #     to = c.beginText()
+                #     to.setTextOrigin(44 + (388/2) + offset_width - calc_offset_text("{}".format(numCurrentPage)), offset_height + mm_to_pt(10))
+                #     to.setFont(font, 9)
+                #     to.textLine("{}".format(numCurrentPage))
+                #     c.drawText(to)
 
                 numCurrentPage+=1
-                if(showPageNumber):
-                    to = c.beginText()
-                    to.setTextOrigin(w - 44 - (388/2) - offset_width - calc_offset_text("{}".format(numCurrentPage)), offset_height + mm_to_pt(10))
-                    to.setFont(font, 9)
-                    to.textLine("{}".format(numCurrentPage))
-                    c.drawText(to)
+                # if(showPageNumber):
+                #     to = c.beginText()
+                #     to.setTextOrigin(w - 44 - (388/2) - offset_width - calc_offset_text("{}".format(numCurrentPage)), offset_height + mm_to_pt(10))
+                #     to.setFont(font, 9)
+                #     to.textLine("{}".format(numCurrentPage))
+                #     c.drawText(to)
 
                 numCurrentPage+=1
 
-                c.showPage()
-                c.save()
+                # c.showPage()
+                # c.save()
 
-                tmpTxt = PdfReader(cname)
+                # tmpTxt = PdfReader(cname)
 
-                pageR.merge_page(tmpTxt.pages[0])
-                pageL.merge_page(tmpTxt.pages[0])
+                # pageR.merge_page(tmpTxt.pages[0])
+                # pageL.merge_page(tmpTxt.pages[0])
                 if(read3 != None and not itsTheFirstPage and typePage == "4ColumnSpread"):
                     pageR.merge_page(read3.pages[0])
                     pageL.merge_page(read3.pages[1])
@@ -271,7 +271,7 @@ def OLD_solving_all_the_problems_in_the_world_at_the_same_time(font="GentiumBook
                 writer.add_page(pageL)
                 writer.add_page(pageR)
 
-                os.remove(cname)
+                # os.remove(cname)
                 if(itsTheFirstPage and typePage == "4ColumnSpread"):
                     itsTheFirstPage = False
         

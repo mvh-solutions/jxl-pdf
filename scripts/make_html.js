@@ -1,4 +1,5 @@
 const doPdf = require('../src/index');
+const makePdf = require('./pdf-lib_tests');
 const { program } = require('commander');
 const PythonShell = require('python-shell').PythonShell;
 
@@ -48,6 +49,8 @@ doPdf({configPath, outputDirName, cliBookCode}).then(() => {
             if (err) throw err;
             console.log('finished');
         });
+    } else {
+        makePdf(outputDirName);
     }
 }).catch((e) => {
     console.error(e);

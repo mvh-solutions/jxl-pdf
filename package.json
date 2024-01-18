@@ -5,8 +5,10 @@
   "main": "index.js",
   "dependencies": {
     "commander": "^11.1.0",
+    "fontkit": "^2.0.2",
     "fs-extra": "^11.2.0",
     "path": "^0.12.7",
+    "pdf-lib": "^1.17.1",
     "proskomma-core": "^0.10.4",
     "proskomma-json-tools": "^0.8.4",
     "puppeteer": "^21.6.1",

@@ -33,8 +33,19 @@ const makeFromDouble = function(manifestStep) {
     return manifestStep.pdf;
 }
 
-const makeSuperimposed = function(manifestStep, superimposePdf) {
-    return manifestStep.pdf;
+const makeSuperimposed = async function(manifestStep, superimposePdf) {
+    let currentPage;
+    let startOn = manifestStep.startOn;
+    for(let i = 1; i < manifestStep.numPages; i++) {
+        currentPage = manifestStep.pdf.getPage(i);
+        startOn = startOn === "recto" ? "verso" : "recto";
+
+        preamble = await manifestStep.pdf.embedPage(superimposePdf.getPages()[startOn === "recto" ? 0 : 1]);
+        currentPage.drawPage(preamble);
+    }
+
+    manifestStep.pdf.save();
+    // return manifestStep.pdf;
 }
 
 const makePdf = async function (dirName="output") {
@@ -48,7 +59,6 @@ const makePdf = async function (dirName="output") {
     const customFont = await pdfDoc.embedFont(fontBytes);
 
     let currentPdf, currentPdfBytes, currentPath;
-    let pageNumTotal = 0;
 
 
     for(const pdfManifest of manifest) {
@@ -69,16 +79,19 @@ const makePdf = async function (dirName="output") {
     for(const manifestStep of manifest) {
         if(manifestStep.type === "superimpose") continue;
         superimposeStep = manifest.filter((s) => s.for = manifestStep.id)[0];
-
+        
         // if we need to superimposes
         if(superimposeStep) {
-            docPdf = makeSuperimposed(manifestStep, superimposeStep.pdf);
+            await makeSuperimposed(manifestStep, superimposeStep.pdf);
         }
+        
+        // const pdfBytes = await manifestStep.pdf.save();
+        // fse.writeFileSync("base_pdf_" + manifestStep.id + ".pdf", pdfBytes);
 
-        docPdf = manifestStep.pdf;
+        
         if (manifestStep.makeFromDouble) {
             // TODO if makeFromDouble
-            docPdf = makeFromDouble(manifestStep);
+            manifestStep.pdf = makeFromDouble(manifestStep);
         }
 
         nextPageSide = numPages%2 == 0 ? "recto" : "verso";
@@ -89,7 +102,7 @@ const makePdf = async function (dirName="output") {
         }
 
         for(let i = 0; i < manifestStep.numPages; i++) {
-            currentPdfPageToCopy = docPdf.getPage(i);
+            currentPdfPageToCopy = manifestStep.pdf.getPage(i);
             
             // Embed the second page of the constitution and clip the preamble
             preamble = await pdfDoc.embedPage(currentPdfPageToCopy);
@@ -115,8 +128,8 @@ const makePdf = async function (dirName="output") {
 
     // Serialize the PDFDocument to bytes (a Uint8Array)
     const pdfBytes = await pdfDoc.save();
-    fse.writeFileSync("my_final_pdf.pdf", pdfBytes);
+    fse.writeFileSync("output/my_final_pdf.pdf", pdfBytes);
 }
 
-// makePdf('output');
-module.exports = makePdf;
+makePdf('output');
+// module.exports = makePdf;

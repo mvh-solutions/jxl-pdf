@@ -4,7 +4,6 @@ var fontkit = require('fontkit');
 
 // open a font synchronously
 const fse = require("fs-extra");
-// const { S } = require('../lib/pdfjs/build/pdf.worker');
 
 // {
 //     left: 55,
@@ -30,6 +29,10 @@ const PAGE_SIZES = {
 
 const EXECUTIVE = PAGE_SIZES["EXECUTIVE_LULU_WITH_BLEED"];
 
+const makeFromDouble = function(manifestStep) {
+    return manifestStep.pdf;
+}
+
 const makePdf = async function (dirName="output") {
     const fontBytes = fse.readFileSync('./fonts/GentiumBookPlus-Regular.ttf');
 
@@ -42,39 +45,48 @@ const makePdf = async function (dirName="output") {
 
     let currentPdf, currentPdfBytes, currentPath;
     let pageNumTotal = 0;
-    let pdfDict = {};
-    let pdfArray = [];
 
 
-    for(let obj of manifest) {
-        currentPath = fullPath + obj.id + '.pdf';
+    for(const pdfManifest of manifest) {
+        currentPath = fullPath + pdfManifest.id + '.pdf';
         currentPdfBytes = fse.readFileSync(currentPath);
         currentPdf = await PDFDocument.load(currentPdfBytes);
-        pdfDict[obj.id] = currentPdf;
-        pdfArray.push(currentPdf);
 
-        pageNumTotal += currentPdf.getPageCount();
+        pdfManifest.pdf = currentPdf;
+        pdfManifest.numPages = currentPdf.getPageCount();
     }
 
     // Add a blank pages to the documents
     let page;
-    let currentNbPages, currentPdfPageToCopy, preamble, preambleDims;
-    for(let docPdfs of pdfArray) {
-        currentNbPages = docPdfs.getPageCount();
-        for(let i = 0; i < currentNbPages; i++) {
-            currentPdfPageToCopy = docPdfs.getPage(i);
+    let currentPdfPageToCopy, preamble, docPdf;
+    for(const manifestStep of manifest) {
+        docPdf = manifestStep.pdf;
+        if (manifestStep.makeFromDouble) {
+            // TODO if makeFromDouble
+            docPdf = makeFromDouble(manifestStep);
+        }
+
+        // TODO startOn recto ou verso
+        // if(manifestStep.startOn) {
+
+        // }
+
+        for(let i = 0; i < manifestStep.numPages; i++) {
+            currentPdfPageToCopy = docPdf.getPage(i);
             
             // Embed the second page of the constitution and clip the preamble
             preamble = await pdfDoc.embedPage(currentPdfPageToCopy);
-            // preambleDims = preamble.scale(1)
 
+            
             page = pdfDoc.addPage(EXECUTIVE);
             page.drawPage(preamble, {
                 xScale: 1,
                 yScale: 1,
                 x: page.getWidth() / 2 - currentPdfPageToCopy.getWidth() / 2,
                 y: page.getHeight() / 2 - currentPdfPageToCopy.getHeight() / 2 - 50,
-            })
+            });
+
+            // TODO showPageNumber
         }
 
     }
@@ -82,9 +94,6 @@ const makePdf = async function (dirName="output") {
     // Get the width and height of the page
     // const { width, height } = page.getSize();
 
-
-    console.log("pdfDoc.getPageCount() ==", pdfDoc.getPageCount());
-    console.log("pageNumTotal ==", pageNumTotal);
     // Serialize the PDFDocument to bytes (a Uint8Array)
     const pdfBytes = await pdfDoc.save();
     fse.writeFileSync("my_final_pdf.pdf", pdfBytes);

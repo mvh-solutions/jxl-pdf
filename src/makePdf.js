@@ -223,5 +223,5 @@ const makePdf = async function ({dirName="output", pageSize=[521.57, 737.0]}) {
     fse.writeFileSync("output/my_final_pdf_with_pageNum.pdf", pdfBytes);
 }
 
-makePdf({dirName:"output"});
+// makePdf({dirName:"output"});
 module.exports = makePdf;

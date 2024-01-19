@@ -3,6 +3,7 @@ static/html/
 python-jxl/*.pdf
 python-jxl/logs.txt
 python-jxl/manifest.json
+output/
 
 # Logs
 logs

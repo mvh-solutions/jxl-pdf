@@ -1,5 +1,4 @@
-const doPdf = require('../src/index');
-const makePdf = require('./generate_pdf');
+const { doPdf, makePdf } = require('../src/index');
 const { PageSizes } = require('pdf-lib');
 const { program } = require('commander');
 const PythonShell = require('python-shell').PythonShell;

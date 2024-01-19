@@ -1,6 +1,6 @@
 // import { PDFDocument, CustomFontEmbedder, rgb } from 'pdf-lib';
 const { PDFDocument, PageSizes } = require('pdf-lib');
-const {loadTemplate, doPuppet} = require("../src/helpers");
+const {loadTemplate, doPuppet} = require("./helpers");
 var fontkit = require('fontkit');
 
 // open a font synchronously
@@ -40,7 +40,31 @@ const doPageNumber = async ({outputDirName, outputPath, numPages}) => {
     return fullPathPdf;
 }
 
-doPageNumber({outputDirName: 'output', outputPath: './static/html', numPages:10});
+const makePageNumber = async (pdfDoc, showPageArray, dirName, numPages) => {
+    const fullPathPageNum = await doPageNumber({outputDirName: dirName, outputPath: './static/html/', numPages});
+
+    let currentPdfBytes = fse.readFileSync(fullPathPageNum);
+    let currentPdf = await PDFDocument.load(currentPdfBytes);
+    let currentPdfPageToCopy, page, preamble;
+
+    for(let i = 0; i < numPages; i++) {
+        if(!showPageArray[i]) continue;
+        currentPdfPageToCopy = currentPdf.getPage(i);
+        page = pdfDoc.getPage(i);
+        
+        preamble = await pdfDoc.embedPage(currentPdfPageToCopy);
+        page.drawPage(preamble, {
+            xScale: 1,
+            yScale: 1,
+            x: page.getWidth() / 2 - currentPdfPageToCopy.getWidth() / 2,
+            y: page.getHeight() / 2 - currentPdfPageToCopy.getHeight() / 2,
+        });
+    }
+
+    await pdfDoc.save();
+    return pdfDoc;
+}
+
 
 
 const makeFromDouble = async function(manifestStep, pageSize, fontBytes) {
@@ -86,7 +110,7 @@ const makeFromSingle = async function(manifestStep, pageSize, fontBytes) {
 
     const pdfDoc = await PDFDocument.create();
     pdfDoc.registerFontkit(fontkit);
-    const customFont = await pdfDoc.embedFont(fontBytes);
+    await pdfDoc.embedFont(fontBytes);
 
     for(let i = 0; i < manifestStep.numPages; i++) {
         currentPdfPageToCopy = manifestStep.pdf.getPage(i);
@@ -129,6 +153,7 @@ const makePdf = async function ({dirName="output", pageSize=[521.57, 737.0]}) {
     const fontBytes = fse.readFileSync('./fonts/GentiumBookPlus-Regular.ttf');
 
     const fullPath = './static/html/' + dirName + '/pdf/';
+    
     const manifest = fse.readJsonSync(fullPath + 'manifest.json');
 
     const pdfDoc = await PDFDocument.create();
@@ -136,7 +161,7 @@ const makePdf = async function ({dirName="output", pageSize=[521.57, 737.0]}) {
     const customFont = await pdfDoc.embedFont(fontBytes);
 
     let currentPdf, currentPdfBytes, currentPath;
-
+    let showPageArray = [];
 
     for(const pdfManifest of manifest) {
         currentPath = fullPath + pdfManifest.id + '.pdf';
@@ -162,12 +187,7 @@ const makePdf = async function ({dirName="output", pageSize=[521.57, 737.0]}) {
             await makeSuperimposed(manifestStep, superimposeStep.pdf);
         }
         
-        // const pdfBytes = await manifestStep.pdf.save();
-        // fse.writeFileSync("base_pdf_" + manifestStep.id + ".pdf", pdfBytes);
-
-        
         if(manifestStep.makeFromDouble) {
-            // TODO if makeFromDouble
             await makeFromDouble(manifestStep, pageSize, fontBytes);
         } else {
             await makeFromSingle(manifestStep, pageSize, fontBytes);
@@ -178,6 +198,7 @@ const makePdf = async function ({dirName="output", pageSize=[521.57, 737.0]}) {
         if(nextPageSide !== manifestStep.startOn) {
             pdfDoc.addPage(pageSize);
             numPages += 1;
+            showPageArray.push(false);
         }
 
         for(let i = 0; i < manifestStep.numPages; i++) {
@@ -191,19 +212,16 @@ const makePdf = async function ({dirName="output", pageSize=[521.57, 737.0]}) {
             page.drawPage(preamble);
 
             numPages += 1;
-
-            // TODO showPageNumber
+            showPageArray.push(manifestStep.showPageNumber);
         }
-
     }
-
-    // Get the width and height of the page
-    // const { width, height } = page.getSize();
+    
+    const pdfDocWithPageNum = await makePageNumber(pdfDoc, showPageArray, dirName, numPages);
 
     // Serialize the PDFDocument to bytes (a Uint8Array)
-    const pdfBytes = await pdfDoc.save();
-    fse.writeFileSync("output/my_final_pdf.pdf", pdfBytes);
+    const pdfBytes = await pdfDocWithPageNum.save();
+    fse.writeFileSync("output/my_final_pdf_with_pageNum.pdf", pdfBytes);
 }
 
-// makePdf({dirName:"output_landscape"});
+makePdf({dirName:"output"});
 module.exports = makePdf;

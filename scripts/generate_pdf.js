@@ -29,15 +29,18 @@ const doPageNumber = async ({outputDirName, outputPath, numPages}) => {
         path.resolve(path.join(outputPath, outputDirName, '__pageNumbers.html')),
         content
     );
+    let fullPathPdf = path.resolve(path.join(outputPath, outputDirName, 'pdf', '__pageNumbers.pdf'));
     await doPuppet(
         '__pageNumbers',
-        path.resolve(path.join(outputPath, outputDirName, 'pdf', '__pageNumbers.pdf')),
+        fullPathPdf,
         true,
         outputDirName
     );
+
+    return fullPathPdf;
 }
 
-doPageNumber({outputDirName: 'output', outputPath: './static/html', numPages:10});
+console.log(doPageNumber({outputDirName: 'output', outputPath: './static/html', numPages:10}));
 
 
 const makeFromDouble = async function(manifestStep, pageSize, fontBytes) {

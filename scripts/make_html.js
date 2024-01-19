@@ -1,7 +1,6 @@
 const { doPdf, makePdf } = require('../src/index');
 const { PageSizes } = require('pdf-lib');
 const { program } = require('commander');
-const PythonShell = require('python-shell').PythonShell;
 
 
 const usage = "USAGE: node make_html.js -c <configPath> -o <outputDirName> [-b <bookCode> -p <page format>]";
@@ -11,8 +10,8 @@ program
     .option('-c, --config <path>', 'path to the config file')
     .option('-o, --output <output>', 'desired output folder name')
     .option('-b, --book <book>', '3 letters book')
-    .option('-p, --page-format <size>', 'page size format (A4, A5, executive, etc.)')
-    .option('-n, --no-python', 'flag to NOT execute the python script')
+    // .option('-p, --page-format <size>', 'page size format (A4, A5, executive, etc.)')
+    .option('-n, --no-generate', 'flag to NOT execute the generation of the final pdf')
 
 program.parse();
 
@@ -50,21 +49,6 @@ if(options.book && /\b[A-Z\d]{1,3}\b/.test(options.book)) {
 
 doPdf({configPath, outputDirName, cliBookCode}).then(() => {
     if(options.python) {
-        let pyshell = new PythonShell('cut_pdf.py', {
-            mode: 'text', scriptPath:'./python-jxl', args:["FROMNODE", outputDirName, pageFormat]
-        });
-    
-        pyshell.on('message', function (message) {
-            // received a message sent from the Python script (a simple "print" statement)
-            console.log(message);
-        });
-    
-        // end the input stream and allow the process to exit
-        pyshell.end(function (err,code,signal) {
-            if (err) throw err;
-            console.log('finished');
-        });
-    } else {
         makePdf({dirName:outputDirName, pageSize:PAGE_SIZES["EXECUTIVE_LULU_WITH_BLEED"]});
     }
 }).catch((e) => {

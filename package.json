@@ -11,8 +11,7 @@
     "pdf-lib": "^1.17.1",
     "proskomma-core": "^0.10.4",
     "proskomma-json-tools": "^0.8.4",
-    "puppeteer": "^21.6.1",
-    "python-shell": "^5.0.0"
+    "puppeteer": "^21.6.1"
   },
   "scripts": {
     "test": "bash -c \"tape test/code/*.cjs\"",

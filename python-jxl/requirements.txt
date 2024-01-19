@@ -1,4 +1,0 @@
-Pillow==10.0.1
-PyPDF2==3.0.1
-reportlab==4.0.5
-typing_extensions==4.8.0

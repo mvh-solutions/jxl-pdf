@@ -11,6 +11,14 @@
       ],
       "sections": [
         {
+          "id": "half",
+          "type": "front",
+          "path": "fra_front/half_page",
+          "styles": "non_juxta_page_styles",
+          "startOn": "recto",
+          "showPageNumber": false
+        },
+        {
           "id": "twoColumn_%%bookCode%%",
           "type": "2Column",
           "startOn": "recto",

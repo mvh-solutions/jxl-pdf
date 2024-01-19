@@ -36,11 +36,11 @@ const doPageNumber = async ({outputDirName, outputPath, numPages}) => {
         true,
         outputDirName
     );
-
+    
     return fullPathPdf;
 }
 
-console.log(doPageNumber({outputDirName: 'output', outputPath: './static/html', numPages:10}));
+doPageNumber({outputDirName: 'output', outputPath: './static/html', numPages:10});
 
 
 const makeFromDouble = async function(manifestStep, pageSize, fontBytes) {

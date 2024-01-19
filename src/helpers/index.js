@@ -10,7 +10,8 @@ const {
 } = require('./jxl');
 
 const {
-    loadTemplates
+    loadTemplates,
+    loadTemplate
 } = require('./loadTemplates');
 
 const {
@@ -35,6 +36,7 @@ module.exports = {
     trimLhsText,
     getGreekContent,
     loadTemplates,
+    loadTemplate,
     cleanNoteLine,
     maybeChapterNotes,
     bcvNotes,

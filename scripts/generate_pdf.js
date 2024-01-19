@@ -1,9 +1,11 @@
 // import { PDFDocument, CustomFontEmbedder, rgb } from 'pdf-lib';
 const { PDFDocument, PageSizes } = require('pdf-lib');
+const {loadTemplate, doPuppet} = require("../src/helpers");
 var fontkit = require('fontkit');
 
 // open a font synchronously
 const fse = require("fs-extra");
+const path = require("path");
 
 // {
 //     left: 55,
@@ -11,6 +13,31 @@ const fse = require("fs-extra");
 //     right: 300,
 //     top: 575,
 // }
+
+
+const doPageNumber = async ({outputDirName, outputPath, numPages}) => {
+    let masterTemplate = loadTemplate('page_number_master');
+    let pageNumTemplate = loadTemplate('page_number_page');
+    const pageNumberPages = [...Array(numPages).keys()];
+    const pageNumbersHtml = pageNumberPages.map((pageNum) => pageNumTemplate.replace('%%PAGENUM%%', pageNum+1)).join('');
+    const content = masterTemplate
+        .replace(
+            "%%CONTENT%%",
+            pageNumbersHtml
+        )
+    fse.writeFileSync(
+        path.resolve(path.join(outputPath, outputDirName, '__pageNumbers.html')),
+        content
+    );
+    await doPuppet(
+        '__pageNumbers',
+        path.resolve(path.join(outputPath, outputDirName, 'pdf', '__pageNumbers.pdf')),
+        true,
+        outputDirName
+    );
+}
+
+doPageNumber({outputDirName: 'output', outputPath: './static/html', numPages:10});
 
 
 const makeFromDouble = async function(manifestStep, pageSize, fontBytes) {
@@ -175,5 +202,5 @@ const makePdf = async function ({dirName="output", pageSize=[521.57, 737.0]}) {
     fse.writeFileSync("output/my_final_pdf.pdf", pdfBytes);
 }
 
-makePdf({dirName:"output_landscape"});
+// makePdf({dirName:"output_landscape"});
 module.exports = makePdf;

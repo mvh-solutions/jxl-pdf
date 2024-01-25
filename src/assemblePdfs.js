@@ -1,19 +1,8 @@
-// import { PDFDocument, CustomFontEmbedder, rgb } from 'pdf-lib';
 const { PDFDocument, PageSizes } = require('pdf-lib');
 const {loadTemplate, doPuppet} = require("./helpers");
-var fontkit = require('fontkit');
-
-// open a font synchronously
+const fontkit = require('fontkit');
 const fse = require("fs-extra");
 const path = require("path");
-
-// {
-//     left: 55,
-//     bottom: 485,
-//     right: 300,
-//     top: 575,
-// }
-
 
 const doPageNumber = async ({outputDirName, outputPath, numPages}) => {
     let masterTemplate = loadTemplate('page_number_master');
@@ -64,8 +53,6 @@ const makePageNumber = async (pdfDoc, showPageArray, dirName, numPages) => {
     await pdfDoc.save();
     return pdfDoc;
 }
-
-
 
 const makeFromDouble = async function(manifestStep, pageSize, fontBytes) {
     let currentPdfPageToCopy, preamble, page1,page2;
@@ -223,5 +210,4 @@ const assemblePdfs = async function ({dirName="output", pageSize=[521.57, 737.0]
     fse.writeFileSync("output/my_final_pdf_with_pageNum.pdf", pdfBytes);
 }
 
-// makePdf({dirName:"output"});
 module.exports = assemblePdfs;

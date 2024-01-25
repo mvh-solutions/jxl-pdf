@@ -13,10 +13,18 @@ const {
     doBiblePlusNotesSection
 } = require("./sectionHandlers");
 
-const originatePdfs = async ({configPath, outputDirName, cliBookCode}) => {
-    const outputPath = path.resolve('static/html');
+const originatePdfs = async options => {
+    // Set up workspace - options.workingDir should already exist
+    options.htmlPath = path.join(options.workingDir, "html", "pages");
+    fse.mkdirsSync(options.htmlPath);
+    fse.mkdirsSync(path.join(options.workingDir, "html", "resources"));
+    fse.copySync(path.join(__dirname, "..", "static", "resources"), path.join(options.workingDir, "html", "resources"));
+    fse.mkdirsSync(path.join(options.workingDir, "html", "page_resources"));
+    fse.copySync(path.join(__dirname, "..", "static", "page_resources"), path.join(options.workingDir, "html", "page_resources"));
+    options.pdfPath = path.join(options.workingDir, "pdf");
+    fse.mkdirsSync(options.pdfPath);
+    options.manifestPath = path.join(options.workingDir, "manifest.json");
 
-    let bookCode = null;
     const checkBookCode = (sectionId) => {
         if (!bookCode) {
             throw new Error(`bookCode not set for section '${sectionId}`);
@@ -24,11 +32,10 @@ const originatePdfs = async ({configPath, outputDirName, cliBookCode}) => {
     }
 
     const templates = loadTemplates();
-    const config = fse.readJsonSync(path.resolve(configPath));
-    fse.mkdirsSync(path.join(outputPath, outputDirName, 'pdf'));
 
     let links = [];
     let manifest = [];
+    let bookCode = null;
 
     const doSection = async (section, nested) => {
         nested && console.log(`## Section ${section.id.replace('%%bookCode%%', bookCode)} (${section.type} in setBooks)`);
@@ -50,55 +57,55 @@ const originatePdfs = async ({configPath, outputDirName, cliBookCode}) => {
         switch (section.type) {
             case "front":
                 await doFrontSection(
-                    {section, config, bookCode, outputDirName, outputPath, templates}
+                    {section, templates, bookCode, options}
                 );
                 break;
             case "jxlSpread":
                 checkBookCode(section.id);
                 await doJxlSpreadSection(
-                    {section, config, bookCode, outputDirName, outputPath, templates}
+                    {section, templates, bookCode, options}
                 );
                 break;
             case "jxlSimple":
                 checkBookCode(section.id);
                 await doJxlSimpleSection(
-                    {section, config, bookCode, outputDirName, outputPath, templates}
+                    {section, templates, bookCode, options}
                 );
                 break;
             case "4ColumnSpread":
                 checkBookCode(section.id);
                 await do4ColumnSpreadSection(
-                    {section, config, bookCode, outputDirName, outputPath, templates}
+                    {section, templates, bookCode, options}
                 );
                 break;
             case "2Column":
                 checkBookCode(section.id);
                 await do2ColumnSection(
-                    {section, config, bookCode, outputDirName, outputPath, templates}
+                    {section, templates, bookCode, options}
                 );
                 break;
             case "bookNote":
                 checkBookCode(section.id);
                 await doBookNoteSection(
-                    {section, config, bookCode, outputDirName, outputPath, templates}
+                    {section, templates, bookCode, options}
                 );
                 break;
             case "bcvBible":
                 checkBookCode(section.id);
                 await doBcvBibleSection(
-                    {section, config, bookCode, outputDirName, outputPath, templates}
+                    {section, templates, bookCode, options}
                 );
                 break;
             case "paraBible":
                 checkBookCode(section.id);
                 await doParaBibleSection(
-                    {section, config, bookCode, outputDirName, outputPath, templates}
+                    {section, templates, bookCode, options}
                 );
                 break;
             case "biblePlusNotes":
                 checkBookCode(section.id);
                 await doBiblePlusNotesSection(
-                    {section, config, bookCode, outputDirName, outputPath, templates}
+                    {section, templates, bookCode, options}
                 );
                 break;
             default:
@@ -113,13 +120,13 @@ const originatePdfs = async ({configPath, outputDirName, cliBookCode}) => {
         });
     }
 
-    for (const section of config.sections) {
+    for (const section of options.configContent.sections) {
         console.log(`## Section ${section.id ? `${section.id} (${section.type})` : section.type}`);
 
         switch (section.type) {
             case "setBook":
-                if (section.source && section.source === "cli" && cliBookCode) {
-                    bookCode = cliBookCode;
+                if (section.source && section.source === "cli" && options.book) {
+                    bookCode = options.book;
                 } else if (section.source && section.source === "literal" && section.bookCode) {
                     bookCode = section.bookCode;
                 } else {
@@ -142,12 +149,12 @@ const originatePdfs = async ({configPath, outputDirName, cliBookCode}) => {
         }
     }
     fse.writeFileSync(
-        path.join(outputPath, outputDirName, "index.html"),
+        path.join(options.htmlPath, "index.html"),
         templates['web_index_page']
             .replace("%%LINKS%%", links.join("\n"))
     );
     fse.writeJsonSync(
-        path.join(outputPath, outputDirName, 'pdf', "manifest.json"),
+        options.manifestPath,
         manifest
     )
 }

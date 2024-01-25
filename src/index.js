@@ -1,7 +1,7 @@
-const doPdf = require("./doPdf");
-const makePdf = require("./makePdf");
+const originatePdfs = require("./originatePdfs");
+const assemblePdfs = require("./assemblePdfs");
 
 module.exports = {
-    doPdf,
-    makePdf
+    originatePdfs,
+    assemblePdfs
 };

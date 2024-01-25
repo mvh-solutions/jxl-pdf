@@ -13,7 +13,7 @@ const {
     doBiblePlusNotesSection
 } = require("./sectionHandlers");
 
-const doPdf = async ({configPath, outputDirName, cliBookCode}) => {
+const originatePdfs = async ({configPath, outputDirName, cliBookCode}) => {
     const outputPath = path.resolve('static/html');
 
     let bookCode = null;
@@ -152,4 +152,4 @@ const doPdf = async ({configPath, outputDirName, cliBookCode}) => {
     )
 }
 
-module.exports = doPdf;
+module.exports = originatePdfs;

@@ -36,7 +36,7 @@ const doPageNumber = async ({outputDirName, outputPath, numPages}) => {
         true,
         outputDirName
     );
-    
+
     return fullPathPdf;
 }
 
@@ -51,7 +51,7 @@ const makePageNumber = async (pdfDoc, showPageArray, dirName, numPages) => {
         if(!showPageArray[i]) continue;
         currentPdfPageToCopy = currentPdf.getPage(i);
         page = pdfDoc.getPage(i);
-        
+
         preamble = await pdfDoc.embedPage(currentPdfPageToCopy);
         page.drawPage(preamble, {
             xScale: 1,
@@ -76,10 +76,10 @@ const makeFromDouble = async function(manifestStep, pageSize, fontBytes) {
 
     for(let i = 0; i < manifestStep.numPages; i++) {
         currentPdfPageToCopy = manifestStep.pdf.getPage(i);
-        
+
         // Embed the second page of the constitution and clip the preamble
         preamble = await pdfDoc.embedPage(currentPdfPageToCopy);
-        
+
         page1 = pdfDoc.addPage(pageSize);
         page2 = pdfDoc.addPage(pageSize);
 
@@ -114,11 +114,11 @@ const makeFromSingle = async function(manifestStep, pageSize, fontBytes) {
 
     for(let i = 0; i < manifestStep.numPages; i++) {
         currentPdfPageToCopy = manifestStep.pdf.getPage(i);
-        
+
         // Embed the second page of the constitution and clip the preamble
         preamble = await pdfDoc.embedPage(currentPdfPageToCopy);
 
-        
+
         page = pdfDoc.addPage(pageSize);
         page.drawPage(preamble, {
             xScale: 1,
@@ -146,14 +146,14 @@ const makeSuperimposed = async function(manifestStep, superimposePdf) {
     manifestStep.pdf.save();
 }
 
-const makePdf = async function ({dirName="output", pageSize=[521.57, 737.0]}) {
+const assemblePdfs = async function ({dirName="output", pageSize=[521.57, 737.0]}) {
     if(pageSize[0] < 72 || pageSize[1] < 72 || pageSize[0] > 841.89 || pageSize[1] > 1190.55) {
         throw new Error(`Illegal pageSize : ${pageSize[0]} x ${pageSize[1]}`);
     }
     const fontBytes = fse.readFileSync('./fonts/GentiumBookPlus-Regular.ttf');
 
     const fullPath = './static/html/' + dirName + '/pdf/';
-    
+
     const manifest = fse.readJsonSync(fullPath + 'manifest.json');
 
     const pdfDoc = await PDFDocument.create();
@@ -181,12 +181,12 @@ const makePdf = async function ({dirName="output", pageSize=[521.57, 737.0]}) {
     for(const manifestStep of manifest) {
         if(manifestStep.type === "superimpose") continue;
         superimposeStep = manifest.filter((s) => s.for === manifestStep.id)[0];
-        
+
         // if we need to superimposes
         if(superimposeStep) {
             await makeSuperimposed(manifestStep, superimposeStep.pdf);
         }
-        
+
         if(manifestStep.makeFromDouble) {
             await makeFromDouble(manifestStep, pageSize, fontBytes);
         } else {
@@ -203,11 +203,11 @@ const makePdf = async function ({dirName="output", pageSize=[521.57, 737.0]}) {
 
         for(let i = 0; i < manifestStep.numPages; i++) {
             currentPdfPageToCopy = manifestStep.pdf.getPage(i);
-            
+
             // Embed the second page of the constitution and clip the preamble
             preamble = await pdfDoc.embedPage(currentPdfPageToCopy);
 
-            
+
             page = pdfDoc.addPage(pageSize);
             page.drawPage(preamble);
 
@@ -215,7 +215,7 @@ const makePdf = async function ({dirName="output", pageSize=[521.57, 737.0]}) {
             showPageArray.push(manifestStep.showPageNumber);
         }
     }
-    
+
     const pdfDocWithPageNum = await makePageNumber(pdfDoc, showPageArray, dirName, numPages);
 
     // Serialize the PDFDocument to bytes (a Uint8Array)
@@ -224,4 +224,4 @@ const makePdf = async function ({dirName="output", pageSize=[521.57, 737.0]}) {
 }
 
 // makePdf({dirName:"output"});
-module.exports = makePdf;
+module.exports = assemblePdfs;

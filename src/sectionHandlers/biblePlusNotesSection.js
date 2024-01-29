@@ -2,7 +2,7 @@ const {pkWithDocs, getBookName, getCVTexts, cleanNoteLine, bcvNotes, doPuppet} =
 const fse = require("fs-extra");
 const path = require("path");
 const do2BiblePlusNotesSection = async ({section, templates, bookCode, options}) => {
-    const pk = pkWithDocs(bookCode, [section.text]);
+    const pk = pkWithDocs(bookCode, [section.text], options.verbose);
     const bookName = getBookName(pk, section.text.id, bookCode);
     const cvTexts = getCVTexts(bookCode, pk);
     if (!section.showNotes) {
@@ -46,7 +46,7 @@ const do2BiblePlusNotesSection = async ({section, templates, bookCode, options})
             )
     );
     await doPuppet({
-        sectionId: section.id.replace('%%bookCode%%', bookCode),
+        verbose: options.verbose,
         htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
         pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
     });

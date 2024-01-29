@@ -18,11 +18,11 @@ const getBookName = (pk, docSetId, bookCode) => {
     return bookCode;
 }
 
-const pkWithDocs = (bookCode, docSpecs) => {
+const pkWithDocs = (bookCode, docSpecs, verbose=false) => {
     const pk = new Proskomma();
-    console.log("     Loading USFM into Proskomma");
+    verbose && console.log("     Loading USFM into Proskomma");
     for (const docSpec of docSpecs) {
-        console.log(`       ${docSpec.id}`);
+        verbose && console.log(`       ${docSpec.id}`);
         const [lang, abbr] = docSpec.id.split('_');
         const contentString = fse.readFileSync(path.join('data', docSpec.id, `${bookCode}.usfm`)).toString();
         pk.importDocument({lang, abbr}, 'usfm', contentString);

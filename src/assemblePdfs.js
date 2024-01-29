@@ -1,4 +1,4 @@
-const { PDFDocument, PageSizes } = require('pdf-lib');
+const {PDFDocument, PageSizes} = require('pdf-lib');
 const {loadTemplate, doPuppet} = require("./helpers");
 const fontKit = require('fontkit');
 const fse = require("fs-extra");
@@ -20,7 +20,7 @@ const doPageNumber = async ({options, numPages}) => {
     );
     const pageNumbersPdfPath = path.resolve(path.join(options.pdfPath, '__pageNumbers.pdf'));
     await doPuppet({
-        sectionId: "__pageNumbers",
+        verbose: options.verbose,
         htmlPath: path.join(options.htmlPath, `__pageNumbers.html`),
         pdfPath: pageNumbersPdfPath
     });
@@ -48,7 +48,7 @@ const makePageNumber = async ({options, pdfDoc, showPageNumbersArray, numPages})
     return pdfDoc;
 }
 
-const makeFromDouble = async function(manifestStep, pageSize, fontBytes) {
+const makeFromDouble = async function (manifestStep, pageSize, fontBytes) {
     const pdfDoc = await PDFDocument.create();
     pdfDoc.registerFontkit(fontKit);
     await pdfDoc.embedFont(fontBytes);
@@ -62,13 +62,13 @@ const makeFromDouble = async function(manifestStep, pageSize, fontBytes) {
         page1.drawPage(preamble, {
             xScale: 1,
             yScale: 1,
-            x: -(PageSizes.A3[1] - (pageSize[0] * 2))/2,
+            x: -(PageSizes.A3[1] - (pageSize[0] * 2)) / 2,
             y: page1.getHeight() / 2 - pdfPageToCopy.getHeight() / 2,
         });
         page2.drawPage(preamble, {
             xScale: 1,
             yScale: 1,
-            x: -((PageSizes.A3[1] - (pageSize[0] * 2))/2 + pageSize[0]),
+            x: -((PageSizes.A3[1] - (pageSize[0] * 2)) / 2 + pageSize[0]),
             y: page2.getHeight() / 2 - (pdfPageToCopy.getHeight() / 2),
         });
     }
@@ -77,7 +77,7 @@ const makeFromDouble = async function(manifestStep, pageSize, fontBytes) {
     manifestStep.pdf = pdfDoc;
 }
 
-const makeFromSingle = async function(manifestStep, pageSize, fontBytes) {
+const makeFromSingle = async function (manifestStep, pageSize, fontBytes) {
     const pdfDoc = await PDFDocument.create();
     pdfDoc.registerFontkit(fontKit);
     await pdfDoc.embedFont(fontBytes);
@@ -98,7 +98,7 @@ const makeFromSingle = async function(manifestStep, pageSize, fontBytes) {
     manifestStep.pdf = pdfDoc;
 }
 
-const makeSuperimposed = async function(manifestStep, superimposePdf) {
+const makeSuperimposed = async function (manifestStep, superimposePdf) {
     let currentPage;
     let startOn = manifestStep.startOn;
     for (let i = 1; i < manifestStep.numPages; i++) {
@@ -118,6 +118,7 @@ const assemblePdfs = async function (options) {
     await pdfDoc.embedFont(fontBytes);
     let showPageNumbersArray = [];
     // Store original PDFs in manifest dictionary
+    options.verbose && console.log(`      Augment manifest`);
     for (const manifestStep of manifest) {
         const currentPath = path.join(options.pdfPath, `${manifestStep.id}.pdf`)
         const currentPdfBytes = fse.readFileSync(currentPath);
@@ -127,28 +128,34 @@ const assemblePdfs = async function (options) {
     }
 
     let numPages = 0;
+    options.verbose && console.log(`      Manifest steps`);
     for (const manifestStep of manifest) {
         // Loop over non-superimpose steps
         if (manifestStep.type === "superimpose") {
             continue
         }
+        options.verbose && console.log(`         ${manifestStep.id} - ${manifestStep.numPages} originated page(s)`);
 
         // if we need to superimposes
         const superimposeStep = manifest.filter((s) => s.for === manifestStep.id)[0];
         if (superimposeStep) {
+            options.verbose && console.log(`            Superimpose`);
             await makeSuperimposed(manifestStep, superimposeStep.pdf);
         }
 
         // Chop up single or double pages
         if (manifestStep.makeFromDouble) {
+            options.verbose && console.log(`            Double Pages`);
             await makeFromDouble(manifestStep, options.pageFormat, fontBytes);
         } else {
+            options.verbose && console.log(`            Single Pages`);
             await makeFromSingle(manifestStep, options.pageFormat, fontBytes);
         }
 
         // Add blank pages to the documents to respect start side
-        const nextPageSide = numPages%2 === 0 ? "recto" : "verso";
+        const nextPageSide = numPages % 2 === 0 ? "recto" : "verso";
         if (nextPageSide !== manifestStep.startOn) {
+            options.verbose && console.log(`            Add blank page to start on ${nextPageSide}`);
             pdfDoc.addPage(options.pageFormat);
             numPages += 1;
             showPageNumbersArray.push(false);
@@ -167,11 +174,13 @@ const assemblePdfs = async function (options) {
     }
 
     // Generate page numbers PDF and merge with content PDF
+    options.verbose && console.log(`   Add page numbers`);
     const pdfDocWithPageNum = await makePageNumber({options, pdfDoc, showPageNumbersArray, numPages});
 
     // Serialize the PDFDocument to bytes (a Uint8Array)
     const pdfBytes = await pdfDocWithPageNum.save();
     fse.writeFileSync(options.output, pdfBytes);
+    options.verbose && console.log(`   Assembled PDF written to ${options.output}`);
 }
 
 module.exports = assemblePdfs;

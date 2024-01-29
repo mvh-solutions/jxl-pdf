@@ -5,7 +5,7 @@ const do2ColumnSection = async ({section, templates, bookCode, options}) => {
     if (!section.texts || section.texts.length !== 2) {
         throw new Error("2 Column Section requires exactly 2 text definitions");
     }
-    const pk = pkWithDocs(bookCode, section.texts);
+    const pk = pkWithDocs(bookCode, section.texts, options.verbose);
     const bookName = getBookName(pk, section.texts[0].id, bookCode);
     const cvTexts = getCVTexts(bookCode, pk);
     const notes = section.showNotes ? bcvNotes(options.configContent, bookCode) : {};
@@ -23,7 +23,7 @@ const do2ColumnSection = async ({section, templates, bookCode, options}) => {
         headerHtml
     );
     await doPuppet({
-        sectionId: `section.id.replace('%%bookCode%%', bookCode)}_superimpose`,
+        verbose: options.verbose,
         htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.html`),
         pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.pdf`)
     });
@@ -71,7 +71,7 @@ const do2ColumnSection = async ({section, templates, bookCode, options}) => {
             )
     );
     await doPuppet({
-        sectionId: section.id.replace('%%bookCode%%', bookCode),
+        verbose: options.verbose,
         htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
         pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
     });

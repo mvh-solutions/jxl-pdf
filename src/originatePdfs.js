@@ -15,15 +15,12 @@ const {
 
 const originatePdfs = async options => {
     // Set up workspace - options.workingDir should already exist
-    options.htmlPath = path.join(options.workingDir, "html", "pages");
     fse.mkdirsSync(options.htmlPath);
     fse.mkdirsSync(path.join(options.workingDir, "html", "resources"));
     fse.copySync(path.join(__dirname, "..", "static", "resources"), path.join(options.workingDir, "html", "resources"));
     fse.mkdirsSync(path.join(options.workingDir, "html", "page_resources"));
     fse.copySync(path.join(__dirname, "..", "static", "page_resources"), path.join(options.workingDir, "html", "page_resources"));
-    options.pdfPath = path.join(options.workingDir, "pdf");
     fse.mkdirsSync(options.pdfPath);
-    options.manifestPath = path.join(options.workingDir, "manifest.json");
 
     const checkBookCode = (sectionId) => {
         if (!bookCode) {
@@ -38,11 +35,11 @@ const originatePdfs = async options => {
     let bookCode = null;
 
     const doSection = async (section, nested) => {
+        options.verbose && nested && console.log(`   Section ${section.id.replace('%%bookCode%%', bookCode)} (${section.type} in setBooks)`);
         if (section.forceSkip) {
-            console.log(`## Force skip of ${section.id} in config file`);
+            options.verbose && console.log(`      Force skip in config file; continuing...`);
             return;
         }
-        nested && console.log(`## Section ${section.id.replace('%%bookCode%%', bookCode)} (${section.type} in setBooks)`);
         links.push(
             templates['web_index_page_link']
                 .replace(/%%ID%%/g, section.id.replace('%%bookCode%%', bookCode))
@@ -123,13 +120,13 @@ const originatePdfs = async options => {
             makeFromDouble: ["jxlSpread", "4ColumnSpread"].includes(section.type)
         });
         if (section.forceQuit) {
-            console.log("## Force quit in config file");
+            console.log("** Force quit in config file **");
             process.exit(0);
         }
     }
 
     for (const section of options.configContent.sections) {
-        console.log(`## Section ${section.id ? `${section.id} (${section.type})` : section.type}`);
+        options.verbose && console.log(`   Section ${section.id ? `${section.id} (${section.type})` : section.type}`);
 
         switch (section.type) {
             case "setBook":
@@ -140,12 +137,12 @@ const originatePdfs = async options => {
                 } else {
                     throw new Error(`Could not set bookCode using '${JSON.stringify(section)}': maybe you need to provide a bookCode at the command line?`);
                 }
-                console.log(`       bookCode = ${bookCode}`);
+                options.verbose && console.log(`      bookCode = ${bookCode} (from 'setBook')`);
                 break;
             case "setBooks":
                 for (const bc of section.bookCodes) {
                     bookCode = bc;
-                    console.log(`       bookCode = ${bookCode}`);
+                    options.verbose && console.log(`      bookCode = ${bookCode} (from 'setBooks')`);
                     for (const section2 of section.sections) {
                         await doSection(section2, true);
                     }

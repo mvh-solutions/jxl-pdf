@@ -20,11 +20,11 @@ const doBookNoteSection = async ({section, templates, bookCode, options}) => {
             )
             .replace(
                 "%%BODY%%",
-                maybeChapterNotes("front", "book", notes, templates)
+                maybeChapterNotes("front", "book", notes, templates, options.verbose)
             )
     );
     await doPuppet({
-        sectionId: section.id.replace('%%bookCode%%', bookCode),
+        verbose: options.verbose,
         htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
         pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
     });

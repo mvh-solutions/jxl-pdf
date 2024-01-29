@@ -42,11 +42,11 @@ const doJxlSpreadSection = async ({section, templates, bookCode, options}) => {
         }
     }
 
-    const pk = pkWithDocs(bookCode, section.lhs);
+    const pk = pkWithDocs(bookCode, section.lhs, options.verbose);
     const bookName = getBookName(pk, options.configContent.docIdForNames, bookCode);
     let sentences = [];
     let chapterN = 0;
-    console.log(`       Sentences`);
+    options.verbose && console.log(`       Sentences`);
     for (const [sentenceN, sentenceJson] of jxlJson.entries()) {
         if (section.firstSentence && (sentenceN+1) < section.firstSentence) {
             continue;
@@ -57,10 +57,10 @@ const doJxlSpreadSection = async ({section, templates, bookCode, options}) => {
         const cv = cvForSentence(sentenceJson);
         const newChapterN = cv.split(':')[0];
         if (chapterN !== newChapterN) {
-            sentences.push(maybeChapterNotes(newChapterN, 'chapter', notes, templates));
+            sentences.push(maybeChapterNotes(newChapterN, 'chapter', notes, templates, options.verbose));
             chapterN = newChapterN;
         }
-        console.log(`         ${sentenceN + 1}`);
+        options.verbose && console.log(`         ${sentenceN + 1}`);
         let leftContent = [];
         let greekContent = null;
         for (const content of section.lhs) {
@@ -132,7 +132,7 @@ const doJxlSpreadSection = async ({section, templates, bookCode, options}) => {
             .replace('%%SENTENCES%%', sentences.join(''))
     );
     await doPuppet({
-        sectionId: section.id.replace('%%bookCode%%', bookCode),
+        verbose : options.verbose,
         htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
         pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
     });

@@ -4,7 +4,7 @@ const path = require("path");
 const {SofriaRenderFromProskomma, render} = require("proskomma-json-tools");
 
 const doParaBibleSection = async ({section, templates, bookCode, options}) => {
-    const pk = pkWithDocs(bookCode, [section.text]);
+    const pk = pkWithDocs(bookCode, [section.text], options.verbose);
     const bookName = getBookName(pk, section.text.id, bookCode);
     const notes = section.showNotes ? bcvNotes(config, bookCode) : {};
     const docId = pk.gqlQuerySync('{documents { id } }').data.documents[0].id;
@@ -34,7 +34,7 @@ const doParaBibleSection = async ({section, templates, bookCode, options}) => {
             )
     );
     await doPuppet({
-        sectionId: section.id.replace('%%bookCode%%', bookCode),
+        verbose: options.verbose,
         htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
         pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
     });

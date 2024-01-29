@@ -5,7 +5,7 @@ const do4ColumnSpreadSection = async ({section, templates, bookCode, options}) =
     if (!section.texts || section.texts.length !== 4) {
         throw new Error("4 Column Spread Section requires exactly 4 text definitions");
     }
-    const pk = pkWithDocs(bookCode, section.texts);
+    const pk = pkWithDocs(bookCode, section.texts, options.verbose);
     const bookName = getBookName(pk, options.configContent.docIdForNames, bookCode);
     const cvTexts = getCVTexts(bookCode, pk);
     const notes = section.showNotes ? bcvNotes(options.configContent, bookCode) : {};
@@ -31,7 +31,7 @@ const do4ColumnSpreadSection = async ({section, templates, bookCode, options}) =
         headerHtml
     );
     await doPuppet({
-        sectionId: `section.id.replace('%%bookCode%%', bookCode)}_superimpose`,
+        verbose: options.verbose,
         htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.html`),
         pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.pdf`)
     });
@@ -77,7 +77,7 @@ const do4ColumnSpreadSection = async ({section, templates, bookCode, options}) =
             )
     );
     await doPuppet({
-        sectionId: section.id.replace('%%bookCode%%', bookCode),
+        verbose: options.verbose,
         htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
         pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
     });

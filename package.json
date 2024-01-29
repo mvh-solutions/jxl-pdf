@@ -16,9 +16,7 @@
   },
   "scripts": {
     "test": "bash -c \"tape test/code/*.cjs\"",
-    "installpy": "pip install -r python-jxl/requirements.txt",
-    "python": "/usr/bin/python3 python-jxl/cut_pdf.py FROMNPM",
-    "start": "node scripts/make_html.js"
+    "start": "node scripts/make_pdf.js"
   },
   "repository": {
     "type": "git",

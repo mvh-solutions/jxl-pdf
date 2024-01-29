@@ -34,25 +34,25 @@ const STEPS_OPTIONS = {
 
 // Functions to validate and in some cases modify CLI args
 const VALIDATORS = {
-    config: newVal => {
-        const resolved = path.resolve(newVal);
+    config: configPath => {
+        const resolved = path.resolve(configPath);
         if (!(fse.pathExistsSync(resolved)) || !(fse.lstatSync(resolved).isFile())) {
-            throw new commander.InvalidArgumentError(`Config file path '${newVal}' does not exist or is not a file`);
+            throw new commander.InvalidArgumentError(`Config file path '${configPath}' does not exist or is not a file`);
         }
         return resolved;
     },
-    working: newVal => {
-        const resolved = path.resolve(newVal);
+    working: workingDirPath => {
+        const resolved = path.resolve(workingDirPath);
         if ((fse.pathExistsSync(resolved)) && !(fse.lstatSync(resolved).isDirectory())) {
-            throw new commander.InvalidArgumentError(`Working dir path '${newVal}' exists but is not a directory`);
+            throw new commander.InvalidArgumentError(`Working dir path '${workingDirPath}' exists but is not a directory`);
         }
         return resolved;
     },
-    output: newVal => {
-        if (!(fse.pathExistsSync(path.dirname(newVal)))) {
-            throw new commander.InvalidArgumentError(`The parent directory of '${newVal}' does not exist. Please create it or pick another output path.`);
+    output: outputDirPath => {
+        if (!(fse.pathExistsSync(path.dirname(outputDirPath)))) {
+            throw new commander.InvalidArgumentError(`The parent directory of '${outputDirPath}' does not exist. Please create it or pick another output path.`);
         }
-        return path.resolve(newVal);
+        return path.resolve(outputDirPath);
     },
     forceOverwrite: newVal => newVal,
     verbose: newVal => newVal,
@@ -75,17 +75,17 @@ const VALIDATORS = {
             return PAGE_SIZES[newVal.toUpperCase()];
         }
     },
-    book: newVal => {
-        if (!/^[A-Z\d]{3}$/.test(newVal)) {
-            throw new commander.InvalidArgumentError(`Expected a Paratext-style book code, eg 'TIT' or '1CO', not '${newVal}'`);
+    book: bookCode => {
+        if (!/^[A-Z\d]{3}$/.test(bookCode)) {
+            throw new commander.InvalidArgumentError(`Expected a Paratext-style book code, eg 'TIT' or '1CO', not '${bookCode}'`);
         }
-        return newVal;
+        return bookCode;
     },
-    steps: newVal => {
-        if (!(Object.keys(STEPS_OPTIONS).includes(newVal))) {
-            throw new commander.InvalidArgumentError(`'${newVal}' is not one of ${Object.keys(STEPS_OPTIONS)}`)
+    steps: stepOptName => {
+        if (!(Object.keys(STEPS_OPTIONS).includes(stepOptName))) {
+            throw new commander.InvalidArgumentError(`'${stepOptName}' is not one of ${Object.keys(STEPS_OPTIONS)}`)
         }
-        return STEPS_OPTIONS[newVal];
+        return STEPS_OPTIONS[stepOptName];
     }
 };
 

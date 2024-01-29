@@ -49,6 +49,9 @@ const VALIDATORS = {
         return resolved;
     },
     output: newVal => {
+        if (!(fse.pathExistsSync(path.dirname(newVal)))) {
+            throw new commander.InvalidArgumentError(`The parent directory of '${newVal}' does not exist. Please create it or pick another output path.`);
+        }
         return path.resolve(newVal);
     },
     forceOverwrite: newVal => newVal,

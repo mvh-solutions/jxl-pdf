@@ -129,7 +129,7 @@ commander.program
         '-p, --page-format <spec>',
         `One of ${Object.keys(PAGE_SIZES).join(', ')} or '<pointWidth>,<pointHeight>' (eg '504,720' with no spaces)`,
         VALIDATORS.pageFormat,
-        PAGE_SIZES["A5"]
+        PAGE_SIZES["EXECUTIVE"]
     )
     .option(
         '-s, --steps <stepsType>',

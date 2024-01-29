@@ -38,6 +38,10 @@ const originatePdfs = async options => {
     let bookCode = null;
 
     const doSection = async (section, nested) => {
+        if (section.forceSkip) {
+            console.log(`## Force skip of ${section.id} in config file`);
+            return;
+        }
         nested && console.log(`## Section ${section.id.replace('%%bookCode%%', bookCode)} (${section.type} in setBooks)`);
         links.push(
             templates['web_index_page_link']
@@ -118,6 +122,10 @@ const originatePdfs = async options => {
             showPageNumber: section.showPageNumber,
             makeFromDouble: ["jxlSpread", "4ColumnSpread"].includes(section.type)
         });
+        if (section.forceQuit) {
+            console.log("## Force quit in config file");
+            process.exit(0);
+        }
     }
 
     for (const section of options.configContent.sections) {

@@ -7,7 +7,7 @@ const {
     doPuppet
 } = require("../helpers");
 
-const doJxlSimpleSection = async ({section, config, bookCode, outputDirName, outputPath, templates}) => {
+const doJxlSimpleSection = async ({section, templates, bookCode, options}) => {
     const jxlJson = fse.readJsonSync(path.resolve(path.join('data', section.jxl.path, `${bookCode}.json`)));
     let pivotIds = new Set([]);
     const notes = {};
@@ -97,17 +97,16 @@ const doJxlSimpleSection = async ({section, config, bookCode, outputDirName, out
         sentences.push(sentence);
     }
     fse.writeFileSync(
-        path.join(outputPath, outputDirName, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
+        path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
         templates['simple_juxta_page']
             .replace('%%TITLE%%', `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`)
             .replace('%%SENTENCES%%', sentences.join(''))
     );
-    await doPuppet(
-        section.id.replace('%%bookCode%%', bookCode),
-        path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)),
-        true,
-        outputDirName
-    );
+    await doPuppet({
+        sectionId: section.id.replace('%%bookCode%%', bookCode),
+        htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
+        pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
+    });
 }
 
 module.exports = doJxlSimpleSection;

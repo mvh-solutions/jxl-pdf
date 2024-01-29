@@ -181,9 +181,9 @@ if (options.steps.includes("clear")) {
         fse.removeSync(options.workingDir);
     } else {
         options.verbose && console.log(`   Working dir ${options.workingDir} not found - abandoning.`);
-        }
-    process.exit(0);
     }
+    process.exit(0);
+}
 
 // Wrapper function to do originate and/or assemble steps
 const doPDFs = async () => {

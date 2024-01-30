@@ -4,6 +4,13 @@ const fontKit = require('fontkit');
 const fse = require("fs-extra");
 const path = require("path");
 
+/**
+ * Generates HTML for page numbers and converts it to a PDF.
+ * @param {Object} params - Parameters for generating page numbers.
+ *   - options: Object - Configuration options including paths and verbose flag.
+ *   - numPages: number - Total number of pages.
+ * @returns {Promise<string>} - Path to the generated page numbers PDF.
+ */
 const doPageNumber = async ({options, numPages}) => {
     const masterTemplate = loadTemplate('page_number_master');
     const pageNumTemplate = loadTemplate('page_number_page');
@@ -27,6 +34,15 @@ const doPageNumber = async ({options, numPages}) => {
     return pageNumbersPdfPath;
 }
 
+/**
+ * Adds page numbers to the given PDF document.
+ * @param {Object} params - Parameters for adding page numbers.
+ *   - options: Object - Configuration options.
+ *   - pdfDoc: PDFDocument - The PDF document to modify.
+ *   - showPageNumbersArray: boolean[] - Array indicating which pages to number.
+ *   - numPages: number - Total number of pages.
+ * @returns {Promise<PDFDocument>} - The modified PDF document with page numbers.
+ */
 const makePageNumber = async ({options, pdfDoc, showPageNumbersArray, numPages}) => {
     const pageNumbersPdfPath = await doPageNumber({options, numPages});
     const pageNumbersPdf = await PDFDocument.load(fse.readFileSync(pageNumbersPdfPath));
@@ -48,6 +64,13 @@ const makePageNumber = async ({options, pdfDoc, showPageNumbersArray, numPages})
     return pdfDoc;
 }
 
+/**
+ * Creates a PDF from double pages of the source PDF.
+ * @param {JSON} manifestStep - Information about the PDF processing step.
+ * @param {Array<number>} pageSize - The size of the page to create.
+ * @param {Uint8Array} fontBytes - The font data for the PDF.
+ * @returns {Promise<void>} - A promise that resolves when the operation is complete.
+ */
 const makeFromDouble = async function (manifestStep, pageSize, fontBytes) {
     const pdfDoc = await PDFDocument.create();
     pdfDoc.registerFontkit(fontKit);
@@ -77,6 +100,13 @@ const makeFromDouble = async function (manifestStep, pageSize, fontBytes) {
     manifestStep.pdf = pdfDoc;
 }
 
+/**
+ * Creates a PDF from single pages of the source PDF.
+ * @param {Object} manifestStep - Information about the PDF processing step.
+ * @param {Array<number>} pageSize - The size of the page to create.
+ * @param {Uint8Array} fontBytes - The font data for the PDF.
+ * @returns {Promise<void>} - A promise that resolves when the operation is complete.
+ */
 const makeFromSingle = async function (manifestStep, pageSize, fontBytes) {
     const pdfDoc = await PDFDocument.create();
     pdfDoc.registerFontkit(fontKit);
@@ -98,6 +128,12 @@ const makeFromSingle = async function (manifestStep, pageSize, fontBytes) {
     manifestStep.pdf = pdfDoc;
 }
 
+/**
+ * Superimposes content from one PDF onto another.
+ * @param {JSON} manifestStep - Information about the source PDF.
+ * @param {PDFDocument} superimposePdf - The PDF document to superimpose.
+ * @returns {Promise<void>} - A promise that resolves when the operation is complete.
+ */
 const makeSuperimposed = async function (manifestStep, superimposePdf) {
     let currentPage;
     let startOn = manifestStep.startOn;
@@ -192,7 +228,7 @@ const assemblePdfs = async function (options) {
     // Serialize the PDFDocument to bytes (a Uint8Array)
     const pdfBytes = await pdfDocWithPageNum.save();
     fse.writeFileSync(options.output, pdfBytes);
-    options.verbose && console.log(`   Assembled PDF written to ${options.output}`);
+    options.verbose && console.log(`   Assembled PDF (with ${pdfDocWithPageNum.getPageCount()} pages) written to ${options.output}`);
 }
 
 module.exports = assemblePdfs;

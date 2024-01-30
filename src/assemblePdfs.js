@@ -1,5 +1,11 @@
-const {PDFDocument, PageSizes} = require('pdf-lib');
-const {loadTemplate, doPuppet} = require("./helpers");
+const {
+    PDFDocument,
+    PageSizes
+} = require('pdf-lib');
+const {
+    loadTemplate,
+    doPuppet
+} = require("./helpers");
 const fontKit = require('fontkit');
 const fse = require("fs-extra");
 const path = require("path");
@@ -11,7 +17,10 @@ const path = require("path");
  *   - numPages: number - Total number of pages.
  * @returns {Promise<string>} - Path to the generated page numbers PDF.
  */
-const doPageNumber = async ({options, numPages}) => {
+const doPageNumber = async ({
+    options,
+    numPages
+}) => {
     const masterTemplate = loadTemplate('page_number_master');
     const pageNumTemplate = loadTemplate('page_number_page');
     const pageNumbersHtml = [...Array(numPages).keys()]
@@ -20,10 +29,10 @@ const doPageNumber = async ({options, numPages}) => {
     fse.writeFileSync(
         path.resolve(path.join(options.htmlPath, '__pageNumbers.html')),
         masterTemplate
-            .replace(
-                "%%CONTENT%%",
-                pageNumbersHtml
-            )
+        .replace(
+            "%%CONTENT%%",
+            pageNumbersHtml
+        )
     );
     const pageNumbersPdfPath = path.resolve(path.join(options.pdfPath, '__pageNumbers.pdf'));
     await doPuppet({
@@ -43,8 +52,16 @@ const doPageNumber = async ({options, numPages}) => {
  *   - numPages: number - Total number of pages.
  * @returns {Promise<PDFDocument>} - The modified PDF document with page numbers.
  */
-const makePageNumber = async ({options, pdfDoc, showPageNumbersArray, numPages}) => {
-    const pageNumbersPdfPath = await doPageNumber({options, numPages});
+const makePageNumber = async ({
+    options,
+    pdfDoc,
+    showPageNumbersArray,
+    numPages
+}) => {
+    const pageNumbersPdfPath = await doPageNumber({
+        options,
+        numPages
+    });
     const pageNumbersPdf = await PDFDocument.load(fse.readFileSync(pageNumbersPdfPath));
     for (let i = 0; i < numPages; i++) {
         if (!showPageNumbersArray[i]) {
@@ -223,7 +240,12 @@ const assemblePdfs = async function (options) {
 
     // Generate page numbers PDF and merge with content PDF
     options.verbose && console.log(`   Add page numbers`);
-    const pdfDocWithPageNum = await makePageNumber({options, pdfDoc, showPageNumbersArray, numPages});
+    const pdfDocWithPageNum = await makePageNumber({
+        options,
+        pdfDoc,
+        showPageNumbersArray,
+        numPages
+    });
 
     // Serialize the PDFDocument to bytes (a Uint8Array)
     const pdfBytes = await pdfDocWithPageNum.save();

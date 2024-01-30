@@ -1,4 +1,7 @@
-const {originatePdfs, assemblePdfs} = require('../src/index');
+const {
+    originatePdfs,
+    assemblePdfs
+} = require('../src/index');
 const commander = require('commander');
 const fse = require('fs-extra');
 const path = require('path');
@@ -48,7 +51,7 @@ if (options.steps.includes("clear")) {
 
 // Wrapper function to do originate and/or assemble steps
 const doPDFs = async () => {
-    try{
+    try {
         if (options.steps.includes("originate")) {
             options.verbose && console.log("** ORIGINATE **");
             if (fse.pathExistsSync(options.workingDir)) {
@@ -67,7 +70,7 @@ const doPDFs = async () => {
             }
             await assemblePdfs(options);
         }
-    } catch(error) {
+    } catch (error) {
         console.error(`An error occurred: ${error.message}`);
     }
 }

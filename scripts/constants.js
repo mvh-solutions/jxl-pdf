@@ -1,6 +1,8 @@
 const path = require('path');
 const os = require('os');
-const {PageSizes} = require('pdf-lib');
+const {
+    PageSizes
+} = require('pdf-lib');
 
 const constants = {
     VERSION: "0.0.1",

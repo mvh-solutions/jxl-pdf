@@ -48,29 +48,29 @@ if (options.steps.includes("clear")) {
 
 // Wrapper function to do originate and/or assemble steps
 const doPDFs = async () => {
-    if (options.steps.includes("originate")) {
-        options.verbose && console.log("** ORIGINATE **");
-        if (fse.pathExistsSync(options.workingDir)) {
-            options.verbose && console.log(`   Deleting working dir ${options.workingDir}`);
-            fse.removeSync(options.workingDir);
-        } else {
-            options.verbose && console.log(`   Creating working dir ${options.workingDir}`);
+    try{
+        if (options.steps.includes("originate")) {
+            options.verbose && console.log("** ORIGINATE **");
+            if (fse.pathExistsSync(options.workingDir)) {
+                options.verbose && console.log(`   Deleting working dir ${options.workingDir}`);
+                fse.removeSync(options.workingDir);
+            } else {
+                options.verbose && console.log(`   Creating working dir ${options.workingDir}`);
+            }
+            fse.mkdirsSync(options.workingDir);
+            await originatePdfs(options);
         }
-        fse.mkdirsSync(options.workingDir);
-        await originatePdfs(options);
-    }
-    if (options.steps.includes("assemble")) {
-        options.verbose && console.log("** ASSEMBLE **");
-        if (!fse.pathExistsSync(options.manifestPath)) {
-            throw new Error("Cannot run assemble without first originating content");
+        if (options.steps.includes("assemble")) {
+            options.verbose && console.log("** ASSEMBLE **");
+            if (!fse.pathExistsSync(options.manifestPath)) {
+                throw new Error("Cannot run assemble without first originating content");
+            }
+            await assemblePdfs(options);
         }
-        await assemblePdfs(options);
+    } catch(error) {
+        console.error(`An error occurred: ${error.message}`);
     }
 }
 
 // Run the wrapper function
-doPDFs()
-    .catch((e) => {
-        console.error(e);
-    })
-    .then();
+doPDFs();

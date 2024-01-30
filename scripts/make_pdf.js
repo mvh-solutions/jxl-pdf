@@ -32,7 +32,19 @@ const STEPS_OPTIONS = {
     "ALL": ["originate", "assemble"]
 }
 
-// Functions to validate and in some cases modify CLI args
+/**
+ * VALIDATORS: Functions to ensure CLI args meet criteria (and in some cases modify CLI args).
+ * - config: Validates path to the JSON config file.
+ * - working: Checks existence of the working directory.
+ * - output: Ensures the output directory's parent exists.
+ * - forceOverwrite: Returns boolean for overwrite permission.
+ * - verbose: Returns boolean for verbose mode.
+ * - pageFormat: Validates custom or predefined page sizes.
+ * - book: Checks for valid Paratext-style book code.
+ * - steps: Validates processing steps options.
+ *
+ * Usage: `VALIDATORS[key](value)` to validate each command-line option.
+ */
 const VALIDATORS = {
     config: configPath => {
         const resolved = path.resolve(configPath);

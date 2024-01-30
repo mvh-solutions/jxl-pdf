@@ -110,6 +110,18 @@ const makeSuperimposed = async function (manifestStep, superimposePdf) {
     manifestStep.pdf.save();
 }
 
+/**
+ * Assembles a single PDF from multiple sources based on a manifest file. 
+ * The final PDF is saved to the specified output location.
+ * 
+ * @param {object} options - Configuration for assembling PDFs.
+ *   Includes:
+ *   - workingDir: Directory path for temporary files.
+ *   - pdfPath: Path where source PDFs are located.
+ *   - output: Output file path for the assembled PDF.
+ *   - pageFormat: Format specification for pages in the PDF.
+ *   - verbose: Boolean to enable verbose logging.
+ */
 const assemblePdfs = async function (options) {
     const fontBytes = fse.readFileSync('./fonts/GentiumBookPlus-Regular.ttf');
     const manifest = fse.readJsonSync(path.join(options.workingDir, 'manifest.json'));

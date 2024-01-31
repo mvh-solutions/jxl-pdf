@@ -11,12 +11,12 @@ const parseCommandLineArguments = () => {
         .version(constants.VERSION)
 
     program
-        .option(
+        .requiredOption(
             '-c, --config <path>',
             '(Required): Path to the JSON config file (must exist)',
             VALIDATORS.config
         )
-        .option(
+        .requiredOption(
             '-o, --output <path>',
             '(Required): Path to which the final PDF should be written (should not exist unless --force-overwrite flag is set)',
             VALIDATORS.output,

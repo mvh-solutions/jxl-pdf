@@ -152,10 +152,9 @@ const makeFromSingle = async function (manifestStep, pageSize, fontBytes) {
  * @returns {Promise<void>} - A promise that resolves when the operation is complete.
  */
 const makeSuperimposed = async function (manifestStep, superimposePdf) {
-    let currentPage;
     let startOn = manifestStep.startOn;
     for (let i = 1; i < manifestStep.numPages; i++) {
-        currentPage = manifestStep.pdf.getPage(i);
+        const currentPage = manifestStep.pdf.getPage(i);
         startOn = startOn === "recto" ? "verso" : "recto";
         const preamble = await manifestStep.pdf.embedPage(superimposePdf.getPages()[startOn === "recto" ? 0 : 1]);
         currentPage.drawPage(preamble);

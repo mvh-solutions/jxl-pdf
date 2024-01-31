@@ -1,14 +1,14 @@
 const {pkWithDocs, getBookName, getCVTexts, cleanNoteLine, bcvNotes, doPuppet} = require("../helpers");
 const fse = require("fs-extra");
 const path = require("path");
-const do2BiblePlusNotesSection = async ({section, bookCode, config, outputDirName, outputPath, templates}) => {
-    const pk = pkWithDocs(bookCode, [section.text]);
+const do2BiblePlusNotesSection = async ({section, templates, bookCode, options}) => {
+    const pk = pkWithDocs(bookCode, [section.text], options.verbose);
     const bookName = getBookName(pk, section.text.id, bookCode);
     const cvTexts = getCVTexts(bookCode, pk);
     if (!section.showNotes) {
         throw new Error("BiblePlusNotes section requires notes");
     }
-    const notes = bcvNotes(config, bookCode);
+    const notes = bcvNotes(options.configContent, bookCode);
     const verses = [
         `<h1>${bookName}</h1>`
     ];
@@ -30,7 +30,7 @@ const do2BiblePlusNotesSection = async ({section, bookCode, config, outputDirNam
         verses.push(verseHtml);
     }
     fse.writeFileSync(
-        path.join(outputPath, outputDirName, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
+        path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
         templates['bible_plus_notes_page']
             .replace(
                 "%%TITLE%%",
@@ -45,12 +45,11 @@ const do2BiblePlusNotesSection = async ({section, bookCode, config, outputDirNam
                 bookName
             )
     );
-    await doPuppet(
-        section.id.replace('%%bookCode%%', bookCode),
-        path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)),
-        true,
-        outputDirName
-    );
+    await doPuppet({
+        verbose: options.verbose,
+        htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
+        pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
+    });
 }
 
 module.exports = do2BiblePlusNotesSection;

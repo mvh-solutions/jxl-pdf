@@ -1,11 +1,11 @@
 const {pkWithDocs, getBookName, getCVTexts, cleanNoteLine, bcvNotes, doPuppet} = require("../helpers");
 const fse = require("fs-extra");
 const path = require("path");
-const doBcvBibleSection = async ({section, bookCode, config, outputDirName, outputPath, templates}) => {
-    const pk = pkWithDocs(bookCode, [section.text]);
+const doBcvBibleSection = async ({section, templates, bookCode, options}) => {
+    const pk = pkWithDocs(bookCode, [section.text], options.verbose);
     const bookName = getBookName(pk, section.text.id, bookCode);
     const cvTexts = getCVTexts(bookCode, pk);
-    const notes = section.showNotes ? bcvNotes(config, bookCode) : {};
+    const notes = section.showNotes ? bcvNotes(options.configContent, bookCode) : {};
     const verses = [
         `<h1>${bookName}</h1>`
     ];
@@ -22,7 +22,7 @@ const doBcvBibleSection = async ({section, bookCode, config, outputDirName, outp
         verses.push(verseHtml);
     }
     fse.writeFileSync(
-        path.join(outputPath, outputDirName, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
+        path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
         templates['bcv_bible_page']
             .replace(
                 "%%TITLE%%",
@@ -37,12 +37,11 @@ const doBcvBibleSection = async ({section, bookCode, config, outputDirName, outp
                 bookName
             )
     );
-    await doPuppet(
-        section.id.replace('%%bookCode%%', bookCode),
-        path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)),
-        true,
-        outputDirName
-    );
+    await doPuppet({
+        verbose: options.verbose,
+        htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
+        pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
+    });
 }
 
 module.exports = doBcvBibleSection;

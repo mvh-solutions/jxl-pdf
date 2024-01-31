@@ -10,10 +10,10 @@ const cleanNoteLine = noteLine => noteLine
     .replace(/\*([^*]+)\*/g, (m, m1) => `<i>${m1}</i>`)
     .replace(/\[(.+?)\]\(.+?\)/g, "$1")
 
-const maybeChapterNotes = (chapterN, noteType, notes, templates) => {
+const maybeChapterNotes = (chapterN, noteType, notes, templates, verbose=false) => {
     const chapterNoteRecord = notes[`${chapterN}_intro`];
     if (chapterNoteRecord) {
-        console.log(`     Notes for Chapter ${chapterN}`);
+        verbose && console.log(`     Notes for Chapter ${chapterN}`);
         const chapterNoteText = chapterNoteRecord.split(/(<br>)+/).filter(l => l.replace('<br>', '').length > 0);
         const chapterNoteHeading = chapterNoteText[0].replace(/^# +/, "");
         let noteParas = [];

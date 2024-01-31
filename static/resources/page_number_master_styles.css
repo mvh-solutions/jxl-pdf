@@ -1,0 +1,28 @@
+@page {
+    size: 504pt 720pt;
+    margin-right: 44pt;
+    margin-left: 44pt;
+    margin-bottom: 0pt;
+    margin-top: 0pt;
+}
+
+@page :left {
+    margin-left: 44pt;
+    margin-right: 72pt;
+}
+@page :right {
+    margin-left: 72pt;
+    margin-right: 44pt;
+}
+
+body {
+    font-size: 9pt;
+    font-family: "Gentium Book Plus", serif;
+    text-align: center;
+}
+
+.pagenum {
+    padding-top: 680pt;
+    text-align: center;
+    page-break-after: always;
+}

@@ -1,55 +1,36 @@
 # jxl-pdf
-Printable PDFs from Sundesmos Juxtalinear JSON
+Versatile, print-ready PDFs, from industry-standard source files, in Javascript
 
 ## Installing the Fonts
 - https://fonts.google.com/specimen/Gentium+Book+Plus
 - https://fonts.google.com/specimen/Open+Sans
 
-## Installing python
-
-```bash
-# to install pyenv and activate all the requirements
-cd python-jxl
-./install_pyenv.sh
-
-source ~/.bashrc
-
-pyenv install -v 3.9.15
-
-pyenv virtualenv 3.9.15 cut_pdf
-
-pip install -r requirements.txt
-```
-
-## Generating HTML and PDF
-
-note : ***If `pageFormat` is not set, it will set the page format to default : `EXECUTIVE`***
-
+## Installation
 ```
 # Install the script
 
 npm install
-
-# bookCode may be required depending on the config.
-# npm start -- -c <configPath> -o <outputDirName> [-b <bookCode> -p <pageFormat>]
-# or
-# node scripts/make_html.js -c <configPath> -o <outputDirName> [-b <bookCode> -p <pageFormat>]
-
-# for e.g.
-npm start -- -c ./config/fr/xenizo.json -o newDir -b TIT
-# or
-node scripts/make_html.js -c ./config/fr/xenizo.json -o newDir -b TIT
-
-# The generated PDFs are in a subdirectory.
-# under static/html/<outputDirName>/pdf
 ```
+## Script options
 
-if you don't want to launch the python code send the option `-n` or `--no-python` to the script like so :  
-`npm start -- -c ./config/fr/xenizo.json -o newDir -b TIT --no-python`  
-or  
-`node scripts/make_html.js -c ./config/fr/xenizo.json -o newDir -b TIT --no-python`  
+Usage: `node scripts/make_pdfs.js [options]`
 
-The final pdf will not be generated.  
-
-If you want to run ONLY the python code to generate the final pdf, run the script :  
-`npm run python <outputDirName> [<pageFormat>]`  
+  **-V, --version**: output the version number
+  
+  **-c, --config <path>** (Required): Path to the JSON config file (must exist)
+  
+  **-o, --output <path>** (Required): Path to which the final PDF should be written (should not exist unless --force-overwrite flag is set)
+  
+  **-w, --working-dir <path>**: Path to a directory for temporary files including originated PDFs. This directory will be created recursively if necessary, and will be cleared whenever the ASSEMBLE stage runs. (default: "/home/mark/.jxlpdf/working")
+  
+  **-f, --force-overwrite**: When set, will clear and overwrite an existing directory for output. Use with care! (default: false)
+  
+  **-v, --verbose**: When set, generates console output for debugging and entertainment purposes (default: false)
+  
+  **-b, --book <bookCode>**: Paratext 3-character bookCode, eg 'TIT' (required for some configurations) (default: null)
+  
+  **-p, --page-format <spec>**: One of A0, A1, A2, A3, A4, A5, A6, A7, LETTER, EXECUTIVE, EXECUTIVE_LULU_WITH_BLEED or '<pointWidth>,<pointHeight>' (eg '504,720' with no spaces) (default: [504,720])
+  
+  **-s, --steps <stepsType>**: The processing steps that will take place. Options are ARGSONLY, CLEAR, ORIGINATE, ASSEMBLE, ALL (default: ["originate","assemble"])
+  
+  **-h, --help**: display help for command

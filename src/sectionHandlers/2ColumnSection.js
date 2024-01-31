@@ -1,14 +1,14 @@
 const {pkWithDocs, getBookName, getCVTexts, cleanNoteLine, bcvNotes, doPuppet} = require("../helpers");
 const fse = require("fs-extra");
 const path = require("path");
-const do2ColumnSection = async ({section, bookCode, config, outputDirName, outputPath, templates}) => {
+const do2ColumnSection = async ({section, templates, bookCode, options}) => {
     if (!section.texts || section.texts.length !== 2) {
         throw new Error("2 Column Section requires exactly 2 text definitions");
     }
-    const pk = pkWithDocs(bookCode, section.texts);
+    const pk = pkWithDocs(bookCode, section.texts, options.verbose);
     const bookName = getBookName(pk, section.texts[0].id, bookCode);
     const cvTexts = getCVTexts(bookCode, pk);
-    const notes = section.showNotes ? bcvNotes(config, bookCode) : {};
+    const notes = section.showNotes ? bcvNotes(options.configContent, bookCode) : {};
     const verses = [];
     verses.push(templates['2_column_title'].replace('%%BOOKNAME%%', bookName));
     const headerHtml = templates['2_column_header_page']
@@ -19,15 +19,14 @@ const do2ColumnSection = async ({section, bookCode, config, outputDirName, outpu
         .replace(/%%TRANS1TITLE%%/g, section.texts[0].label)
         .replace(/%%TRANS2TITLE%%/g, section.texts[1].label);
     fse.writeFileSync(
-        path.join(outputPath, outputDirName, `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.html`),
+        path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.html`),
         headerHtml
     );
-    await doPuppet(
-        `${section.id.replace('%%bookCode%%', bookCode)}_superimpose`,
-        path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.pdf`)),
-        true,
-        outputDirName
-    );
+    await doPuppet({
+        verbose: options.verbose,
+        htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.html`),
+        pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.pdf`)
+    });
     verses.push(`
 <section class="columnHeadings">
     <section class="leftColumn">
@@ -56,7 +55,7 @@ const do2ColumnSection = async ({section, bookCode, config, outputDirName, outpu
         verses.push(verseHtml);
     }
     fse.writeFileSync(
-        path.join(outputPath, outputDirName, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
+        path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
         templates['2_column_page']
             .replace(
                 "%%TITLE%%",
@@ -71,12 +70,11 @@ const do2ColumnSection = async ({section, bookCode, config, outputDirName, outpu
                 bookName
             )
     );
-    await doPuppet(
-        section.id.replace('%%bookCode%%', bookCode),
-        path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)),
-        true,
-        outputDirName
-    );
+    await doPuppet({
+        verbose: options.verbose,
+        htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
+        pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
+    });
 }
 
 module.exports = do2ColumnSection;

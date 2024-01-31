@@ -12,7 +12,7 @@ const {
     doPuppet
 } = require("../helpers");
 
-const doJxlSpreadSection = async ({section, config, bookCode, outputDirName, outputPath, templates}) => {
+const doJxlSpreadSection = async ({section, templates, bookCode, options}) => {
     const jxlJson = fse.readJsonSync(path.resolve(path.join('data', section.jxl.path, `${bookCode}.json`)));
     let pivotIds = new Set([]);
     const notes = {};
@@ -33,7 +33,7 @@ const doJxlSpreadSection = async ({section, config, bookCode, outputDirName, out
                 pivotIds.add(noteId);
             }
         }
-        const notesRows = fse.readFileSync(path.join('data', config.notes, `${bookCode}.tsv`)).toString().split("\n");
+        const notesRows = fse.readFileSync(path.join('data', options.configContent.notes, `${bookCode}.tsv`)).toString().split("\n");
         for (const notesRow of notesRows) {
             const cells = notesRow.split('\t');
             if (pivotIds.has(cells[4])) {
@@ -42,11 +42,11 @@ const doJxlSpreadSection = async ({section, config, bookCode, outputDirName, out
         }
     }
 
-    const pk = pkWithDocs(bookCode, section.lhs);
-    const bookName = getBookName(pk, config.docIdForNames, bookCode);
+    const pk = pkWithDocs(bookCode, section.lhs, options.verbose);
+    const bookName = getBookName(pk, options.configContent.docIdForNames, bookCode);
     let sentences = [];
     let chapterN = 0;
-    console.log(`       Sentences`);
+    options.verbose && console.log(`       Sentences`);
     for (const [sentenceN, sentenceJson] of jxlJson.entries()) {
         if (section.firstSentence && (sentenceN+1) < section.firstSentence) {
             continue;
@@ -57,10 +57,10 @@ const doJxlSpreadSection = async ({section, config, bookCode, outputDirName, out
         const cv = cvForSentence(sentenceJson);
         const newChapterN = cv.split(':')[0];
         if (chapterN !== newChapterN) {
-            sentences.push(maybeChapterNotes(newChapterN, 'chapter', notes, templates));
+            sentences.push(maybeChapterNotes(newChapterN, 'chapter', notes, templates, options.verbose));
             chapterN = newChapterN;
         }
-        console.log(`         ${sentenceN + 1}`);
+        options.verbose && console.log(`         ${sentenceN + 1}`);
         let leftContent = [];
         let greekContent = null;
         for (const content of section.lhs) {
@@ -126,17 +126,16 @@ const doJxlSpreadSection = async ({section, config, bookCode, outputDirName, out
         sentences.push(sentence);
     }
     fse.writeFileSync(
-        path.join(outputPath, outputDirName, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
+        path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
         templates['juxta_page']
             .replace('%%TITLE%%', `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`)
             .replace('%%SENTENCES%%', sentences.join(''))
     );
-    await doPuppet(
-        section.id.replace('%%bookCode%%', bookCode),
-        path.resolve(path.join(outputPath, outputDirName, 'pdf', `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)),
-        true,
-        outputDirName
-    );
+    await doPuppet({
+        verbose : options.verbose,
+        htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
+        pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
+    });
 }
 
 module.exports = doJxlSpreadSection;

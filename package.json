@@ -5,18 +5,18 @@
   "main": "index.js",
   "dependencies": {
     "commander": "^11.1.0",
+    "fontkit": "^2.0.2",
     "fs-extra": "^11.2.0",
+    "os": "^0.1.2",
     "path": "^0.12.7",
+    "pdf-lib": "^1.17.1",
     "proskomma-core": "^0.10.4",
     "proskomma-json-tools": "^0.8.4",
-    "puppeteer": "^21.6.1",
-    "python-shell": "^5.0.0"
+    "puppeteer": "^21.6.1"
   },
   "scripts": {
     "test": "bash -c \"tape test/code/*.cjs\"",
-    "installpy": "pip install -r python-jxl/requirements.txt",
-    "python": "/usr/bin/python3 python-jxl/cut_pdf.py FROMNPM",
-    "start": "node scripts/make_html.js"
+    "start": "node scripts/make_pdf.js"
   },
   "repository": {
     "type": "git",

@@ -51,27 +51,23 @@ if (options.steps.includes("clear")) {
 
 // Wrapper function to do originate and/or assemble steps
 const doPDFs = async () => {
-    try {
-        if (options.steps.includes("originate")) {
-            options.verbose && console.log("** ORIGINATE **");
-            if (fse.pathExistsSync(options.workingDir)) {
-                options.verbose && console.log(`   Deleting working dir ${options.workingDir}`);
-                fse.removeSync(options.workingDir);
-            } else {
-                options.verbose && console.log(`   Creating working dir ${options.workingDir}`);
-            }
-            fse.mkdirsSync(options.workingDir);
-            await originatePdfs(options);
+    if (options.steps.includes("originate")) {
+        options.verbose && console.log("** ORIGINATE **");
+        if (fse.pathExistsSync(options.workingDir)) {
+            options.verbose && console.log(`   Deleting working dir ${options.workingDir}`);
+            fse.removeSync(options.workingDir);
+        } else {
+            options.verbose && console.log(`   Creating working dir ${options.workingDir}`);
         }
-        if (options.steps.includes("assemble")) {
-            options.verbose && console.log("** ASSEMBLE **");
-            if (!fse.pathExistsSync(options.manifestPath)) {
-                throw new Error("Cannot run assemble without first originating content");
-            }
-            await assemblePdfs(options);
+        fse.mkdirsSync(options.workingDir);
+        await originatePdfs(options);
+    }
+    if (options.steps.includes("assemble")) {
+        options.verbose && console.log("** ASSEMBLE **");
+        if (!fse.pathExistsSync(options.manifestPath)) {
+            throw new Error("Cannot run assemble without first originating content");
         }
-    } catch (error) {
-        console.error(`An error occurred: ${error.message}`);
+        await assemblePdfs(options);
     }
 }
 

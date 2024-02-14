@@ -1,6 +1,5 @@
 const {
     PDFDocument,
-    PageSizes
 } = require('pdf-lib');
 const {
     loadTemplate,
@@ -9,6 +8,7 @@ const {
 const fontKit = require('fontkit');
 const fse = require("fs-extra");
 const path = require("path");
+const {PAGE_SIZES} = require("../utils/constants");
 
 /**
  * Generates HTML for page numbers and converts it to a PDF.
@@ -102,13 +102,13 @@ const makeFromDouble = async function (manifestStep, pageSize, fontBytes) {
         page1.drawPage(preamble, {
             xScale: 1,
             yScale: 1,
-            x: -(PageSizes.A3[1] - (pageSize[0] * 2)) / 2,
+            x: -(PAGE_SIZES.A3P.pageSize[1] - (pageSize[0] * 2)) / 2,
             y: page1.getHeight() / 2 - pdfPageToCopy.getHeight() / 2,
         });
         page2.drawPage(preamble, {
             xScale: 1,
             yScale: 1,
-            x: -((PageSizes.A3[1] - (pageSize[0] * 2)) / 2 + pageSize[0]),
+            x: -((PAGE_SIZES.A3P.pageSize[1] - (pageSize[0] * 2)) / 2 + pageSize[0]),
             y: page2.getHeight() / 2 - (pdfPageToCopy.getHeight() / 2),
         });
     }
@@ -163,9 +163,9 @@ const makeSuperimposed = async function (manifestStep, superimposePdf) {
 }
 
 /**
- * Assembles a single PDF from multiple sources based on a manifest file. 
+ * Assembles a single PDF from multiple sources based on a manifest file.
  * The final PDF is saved to the specified output location.
- * 
+ *
  * @param {object} options - Configuration for assembling PDFs.
  *   Includes:
  *   - workingDir: Directory path for temporary files.
@@ -210,17 +210,17 @@ const assemblePdfs = async function (options) {
         // Chop up single or double pages
         if (manifestStep.makeFromDouble) {
             options.verbose && console.log(`            Double Pages`);
-            await makeFromDouble(manifestStep, options.pageFormat, fontBytes);
+            await makeFromDouble(manifestStep, options.pageFormat.pageSize, fontBytes);
         } else {
             options.verbose && console.log(`            Single Pages`);
-            await makeFromSingle(manifestStep, options.pageFormat, fontBytes);
+            await makeFromSingle(manifestStep, options.pageFormat.pageSize, fontBytes);
         }
 
         // Add blank pages to the documents to respect start side
         const nextPageSide = numPages % 2 === 0 ? "recto" : "verso";
         if (nextPageSide !== manifestStep.startOn) {
             options.verbose && console.log(`            Add blank page to start on ${nextPageSide}`);
-            pdfDoc.addPage(options.pageFormat);
+            pdfDoc.addPage(options.pageFormat.pageSize);
             numPages += 1;
             showPageNumbersArray.push(false);
         }
@@ -230,7 +230,7 @@ const assemblePdfs = async function (options) {
 
             // Embed the content and clip the preamble
             const preamble = await pdfDoc.embedPage(pdfPageToCopy);
-            const page = pdfDoc.addPage(options.pageFormat);
+            const page = pdfDoc.addPage(options.pageFormat.pageSize);
             page.drawPage(preamble);
             numPages += 1;
             showPageNumbersArray.push(manifestStep.showPageNumber);

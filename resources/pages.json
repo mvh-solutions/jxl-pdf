@@ -1,0 +1,139 @@
+{
+  "EXECUTIVE": {
+    "name": {
+      "en": "Executive"
+    },
+    "pageSize": [
+      504,
+      720
+    ],
+    "margins": {
+      "top": [
+        25
+      ],
+      "bottom": [
+        25
+      ],
+      "outer": [
+        20
+      ],
+      "inner": [
+        30
+      ]
+    },
+    "pageNumberOffset": [
+      10
+    ],
+    "sections": {
+      "front": {},
+      "bookNote": {},
+      "4ColumnSpread": {},
+      "jxlSpread": {},
+      "jxlSimple": {},
+      "2Column": {},
+      "bcvBible": {},
+      "paraBible": {},
+      "biblePlusNotes": {}
+    }
+  },
+  "A4P": {
+    "name": {
+      "en": "A4 Portrait"
+    },
+    "pageSize": [
+      595.28,
+      841.89
+    ],
+    "margins": {
+      "top": [
+        25
+      ],
+      "bottom": [
+        25
+      ],
+      "outer": [
+        20
+      ],
+      "inner": [
+        30
+      ]
+    },
+    "pageNumberOffset": [
+      10
+    ],
+    "sections": {
+      "front": {},
+      "bookNote": {},
+      "4ColumnSpread": {},
+      "jxlSpread": {},
+      "jxlSimple": {},
+      "2Column": {},
+      "bcvBible": {},
+      "paraBible": {},
+      "biblePlusNotes": {}
+    }
+  },
+  "A3P": {
+    "name": {
+      "en": "A4 Portrait"
+    },
+    "pageSize": [
+      595.28,
+      841.89
+    ]
+  },
+  "A5P": {
+    "name": {
+      "en": "A5 Portrait"
+    },
+    "pageSize": [
+      419.53,
+      595.28
+    ]
+  },
+  "A6P": {
+    "name": {
+      "en": "A6 Portrait"
+    },
+    "pageSize": [
+      297.64,
+      419.53
+    ]
+  },
+  "FOLIO": {
+    "name": {
+      "en": "Folio"
+    },
+    "pageSize": [
+      612,
+      936
+    ]
+  },
+  "LEGAL": {
+    "name": {
+      "en": "Folio"
+    },
+    "pageSize": [
+      612,
+      1008
+    ]
+  },
+  "LETTER": {
+    "name": {
+      "en": "Letter"
+    },
+    "pageSize": [
+      612,
+      792
+    ]
+  },
+  "TABLOID": {
+    "name": {
+      "en": "Tabloid"
+    },
+    "pageSize": [
+      792,
+      1224
+    ]
+  }
+}

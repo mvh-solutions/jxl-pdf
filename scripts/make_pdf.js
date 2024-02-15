@@ -18,7 +18,7 @@ options.manifestPath = path.join(options.workingDir, "manifest.json");
 options.verbose && console.log("** CLI **");
 if (options.verbose) {
     for (const [k, v] of Object.entries(options)) {
-        console.log(`   ${k}: ${JSON.stringify(v)}`);
+        console.log(`   ${k}: ${JSON.stringify(v, null, 4)}`);
     }
 }
 

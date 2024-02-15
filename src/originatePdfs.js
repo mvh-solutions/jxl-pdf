@@ -13,11 +13,22 @@ const {
     doBiblePlusNotesSection
 } = require("./sectionHandlers");
 
+const setupCSS = options => {
+    const cssFilenames = fse.readdirSync(path.join(__dirname, "..", "static", "resources"))
+        .filter(name => name.endsWith(".css"));
+    for (const filename of cssFilenames) {
+        const fileContent = fse.readFileSync(path.join(__dirname, "..", "static", "resources", filename));
+        fse.writeFileSync(path.join(options.workingDir, "html", "resources", filename), fileContent);
+    }
+    options.verbose && console.log(`   ${cssFilenames.length} CSS file(s) customized`);
+}
+
 const originatePdfs = async options => {
     // Set up workspace - options.workingDir should already exist
     fse.mkdirsSync(options.htmlPath);
     fse.mkdirsSync(path.join(options.workingDir, "html", "resources"));
-    fse.copySync(path.join(__dirname, "..", "static", "resources"), path.join(options.workingDir, "html", "resources"));
+    setupCSS(options);
+    fse.copySync(path.join(__dirname, "..", "static", "resources", "paged.polyfill.js"), path.join(options.workingDir, "html", "resources", "paged.polyfill.js"));
     fse.mkdirsSync(path.join(options.workingDir, "html", "page_resources"));
     fse.copySync(path.join(__dirname, "..", "static", "page_resources"), path.join(options.workingDir, "html", "page_resources"));
     fse.mkdirsSync(options.pdfPath);

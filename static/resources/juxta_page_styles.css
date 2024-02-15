@@ -1,18 +1,20 @@
 @page {
-    size: 1008pt 720pt;
-    margin-right: 44pt;
-    margin-left: 44pt;
-    margin-bottom: 50pt;
-    margin-top: 40pt;
+    size: %%DOUBLEPAGEWIDTH%%pt %%PAGEHEIGHT%%pt;
+    margin-right: %%MARGINOUTER%%pt;
+    margin-left: %%MARGINOUTER%%pt;
+    margin-bottom: %%MARGINBOTTOM%%pt;
+    margin-top: %%MARGINTOP%%pt;
+
+    @top-center {
+    }
 
     @footnote {
         float: bottom;
         columns: 2;
-        column-gap: 144pt;
+        column-gap: %%DOUBLEMARGININNER%%pt;
         margin-top: 10pt;
     }
 }
-
 
 body {
     font-size: 9pt;

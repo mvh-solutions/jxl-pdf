@@ -1,18 +1,22 @@
 @page {
-    size: 504pt 720pt;
-    margin-bottom: 50pt;
-    margin-top: 60pt;
+    size: %%PAGEWIDTH%%pt %%PAGEHEIGHT%%pt;
+    margin-bottom: %%MARGINBOTTOM%%pt;
+    margin-top: %%MARGINTOP%%pt;
+    @footnote {
+        float: bottom;
+        margin-top: %%FOOTEROFFSET%%pt;
+    }
 }
 @page :first {
-    margin-top: 40pt;
+    margin-top: %%FIRSTPAGEMARGINTOP%%pt;
 }
 @page :left {
-    margin-left: 44pt;
-    margin-right: 72pt;
+    margin-left: %%MARGINOUTER%%pt;
+    margin-right: %%MARGININNER%%pt;
 }
 @page :right {
-    margin-left: 72pt;
-    margin-right: 44pt;
+    margin-left: %%MARGININNER%%pt;
+    margin-right: %%MARGINOUTER%%pt;
 }
 
 body {

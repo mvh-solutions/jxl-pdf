@@ -9,19 +9,22 @@
     ],
     "margins": {
       "top": [
-        25
+        60
+      ],
+      "firstPageTop": [
+        40
       ],
       "bottom": [
-        25
+        50
       ],
       "outer": [
-        20
+        44
       ],
       "inner": [
-        30
+        72
       ]
     },
-    "pageNumberOffset": [
+    "footerOffset": [
       10
     ],
     "sections": {
@@ -46,19 +49,22 @@
     ],
     "margins": {
       "top": [
-        25
+        60
+      ],
+      "firstPageTop": [
+        40
       ],
       "bottom": [
-        25
+        50
       ],
       "outer": [
-        20
+        44
       ],
       "inner": [
-        30
+        72
       ]
     },
-    "pageNumberOffset": [
+    "footerOffset": [
       10
     ],
     "sections": {

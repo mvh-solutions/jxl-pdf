@@ -17,7 +17,29 @@ const setupCSS = options => {
     const cssFilenames = fse.readdirSync(path.join(__dirname, "..", "static", "resources"))
         .filter(name => name.endsWith(".css"));
     for (const filename of cssFilenames) {
-        const fileContent = fse.readFileSync(path.join(__dirname, "..", "static", "resources", filename));
+        let fileContent = fse.readFileSync(path.join(__dirname, "..", "static", "resources", filename)).toString();
+        const pageFormat = options.pageFormat;
+        const spaceOption = 0; // MAKE THIS CONFIGURABLE
+        for (const [placeholder, value] of [
+            ["PAGEWIDTH", pageFormat.pageSize[0]],
+            ["DOUBLEPAGEWIDTH", pageFormat.pageSize[0] * 2],
+            ["PAGEHEIGHT", pageFormat.pageSize[1]],
+            ["MARGINTOP", pageFormat.margins.top[spaceOption]],
+            ["FIRSTPAGEMARGINTOP", pageFormat.margins.firstPageTop[spaceOption]],
+            ["MARGINBOTTOM", pageFormat.margins.bottom[spaceOption]],
+            ["FOOTEROFFSET", pageFormat.footerOffset[spaceOption]],
+            ["MARGININNER", pageFormat.margins.inner[spaceOption]],
+            ["DOUBLEMARGININNER", pageFormat.margins.inner[spaceOption] * 2],
+            ["MARGINOUTER", pageFormat.margins.outer[spaceOption]],
+            ["PAGENUMBERTOPMARGIN", (pageFormat.pageSize[1] + pageFormat.footerOffset[spaceOption]) - pageFormat.margins.bottom[spaceOption]]
+        ]) {
+            const substRe = new RegExp(`%%${placeholder}%%`, "g");
+            fileContent = fileContent.replace(substRe, value);
+        }
+        const checkRe = new RegExp("%%[A-Z0-9]+%%");
+        if (checkRe.test(fileContent)) {
+            throw new Error(`${checkRe.exec(fileContent)} found in CSS from ${filename} after substitution`);
+        }
         fse.writeFileSync(path.join(options.workingDir, "html", "resources", filename), fileContent);
     }
     options.verbose && console.log(`   ${cssFilenames.length} CSS file(s) customized`);

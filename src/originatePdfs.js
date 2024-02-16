@@ -20,8 +20,10 @@ const setupCSS = options => {
         let fileContent = fse.readFileSync(path.join(__dirname, "..", "static", "resources", filename)).toString();
         const pageFormat = options.pageFormat;
         const spaceOption = 0; // MAKE THIS CONFIGURABLE
+        const pageBodyWidth = pageFormat.pageSize[0] - (pageFormat.margins.inner[spaceOption] + pageFormat.margins.outer[spaceOption]);
         for (const [placeholder, value] of [
             ["PAGEWIDTH", pageFormat.pageSize[0]],
+            ["PAGEBODYWIDTH", pageBodyWidth],
             ["DOUBLEPAGEWIDTH", pageFormat.pageSize[0] * 2],
             ["PAGEHEIGHT", pageFormat.pageSize[1]],
             ["MARGINTOP", pageFormat.margins.top[spaceOption]],
@@ -31,7 +33,11 @@ const setupCSS = options => {
             ["MARGININNER", pageFormat.margins.inner[spaceOption]],
             ["DOUBLEMARGININNER", pageFormat.margins.inner[spaceOption] * 2],
             ["MARGINOUTER", pageFormat.margins.outer[spaceOption]],
-            ["PAGENUMBERTOPMARGIN", (pageFormat.pageSize[1] + pageFormat.footerOffset[spaceOption]) - pageFormat.margins.bottom[spaceOption]]
+            ["PAGENUMBERTOPMARGIN", (pageFormat.pageSize[1] + pageFormat.footerOffset[spaceOption]) - pageFormat.margins.bottom[spaceOption]],
+            ["COLUMNGAP", pageFormat.columnGap[spaceOption]],
+            ["HALFCOLUMNGAP", pageFormat.columnGap[spaceOption] / 2],
+            ["2COLUMNWIDTH", (pageBodyWidth - pageFormat.columnGap[spaceOption]) / 2],
+            ["3COLUMNWIDTH", (pageBodyWidth - (pageFormat.columnGap[spaceOption] * 2)) / 3]
         ]) {
             const substRe = new RegExp(`%%${placeholder}%%`, "g");
             fileContent = fileContent.replace(substRe, value);

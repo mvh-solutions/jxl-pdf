@@ -38,7 +38,7 @@ h1 {
     margin-bottom: 6pt;
     border-bottom: 2pt solid black;
     padding-bottom: 2pt;
-    width: 388pt;
+    width: %%PAGEBODYWIDTH%%pt;
 }
 
 h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
@@ -47,7 +47,7 @@ h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
     font-style: italic;
     font-weight: bold;
     margin: 0;
-    width: 188pt;
+    width: %%2COLUMNWIDTH%%pt;
 }
 
 h2.verseRecordHeadLeft {
@@ -60,16 +60,16 @@ h2.verseRecordHeadRight {
 
 .leftColumn {
     display: inline-block;
-    width: 188pt;
+    width: %%2COLUMNWIDTH%%pt;
     vertical-align: top;
-    margin-right: 6pt;
+    margin-right: %%HALFCOLUMNGAP%%pt;
 }
 
 .rightColumn {
-    width: 188pt;
+    width: %%2COLUMNWIDTH%%pt;
     display: inline-block;
     vertical-align: top;
-    margin-left: 6pt;
+    margin-left: %%HALFCOLUMNGAP%%pt;
 }
 
 .verseRecord {
@@ -81,7 +81,7 @@ h2.verseRecordHeadRight {
 .col1, .col2 {
     vertical-align: top;
     display: inline-block;
-    width: 188pt;
+    width: %%2COLUMNWIDTH%%pt;
     text-align: justify;
 }
 

@@ -1,6 +1,6 @@
 const path = require('path');
 const os = require('os');
-const pageSizes = require('../resources/pages.json');
+const pageSizes = require('../../resources/pages.json');
 
 const constants = {
     VERSION: "0.0.1",

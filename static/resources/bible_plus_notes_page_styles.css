@@ -38,39 +38,22 @@ h1 {
     margin-bottom: 6pt;
     border-bottom: 2pt solid black;
     padding-bottom: 2pt;
-    width: 388pt;
-}
-
-h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
-    font-size: 10pt;
-    line-height: 20pt;
-    font-style: italic;
-    font-weight: bold;
-    margin: 0;
-    width: 188pt;
-}
-
-h2.verseRecordHeadLeft {
-    text-align: left;
-}
-
-h2.verseRecordHeadRight {
-    text-align: right;
+    width: %%PAGEBODYWIDTH%%pt;
 }
 
 .leftColumn {
     display: inline-block;
-    width: 88pt;
+    width: %SCRIPTURECOLUMNWIDTH%pt;
     vertical-align: top;
-    margin-right: 6pt;
+    margin-right: %%HALFCOLUMNGAP%%pt;
     text-align: left;
 }
 
 .rightColumn {
-    width: 288pt;
+    width: %NOTESCOLUMNWIDTH%pt;
     display: inline-block;
     vertical-align: top;
-    margin-left: 6pt;
+    margin-left: %%HALFCOLUMNGAP%%pt;
 }
 
 .verseRecord {

@@ -1,5 +1,5 @@
 const path = require("path");
-const {loadTemplates} = require("./helpers");
+const {loadTemplates, setupOneCSS, checkCssSubstitution} = require("./helpers");
 const fse = require("fs-extra");
 const {
     do2ColumnSection,
@@ -39,13 +39,9 @@ const setupCSS = options => {
             ["2COLUMNWIDTH", (pageBodyWidth - pageFormat.columnGap[spaceOption]) / 2],
             ["3COLUMNWIDTH", (pageBodyWidth - (pageFormat.columnGap[spaceOption] * 2)) / 3]
         ]) {
-            const substRe = new RegExp(`%%${placeholder}%%`, "g");
-            fileContent = fileContent.replace(substRe, value);
+            fileContent = setupOneCSS(fileContent, placeholder, "%%", value);
         }
-        const checkRe = new RegExp("%%[A-Z0-9]+%%");
-        if (checkRe.test(fileContent)) {
-            throw new Error(`${checkRe.exec(fileContent)} found in CSS from ${filename} after substitution`);
-        }
+        checkCssSubstitution(filename, fileContent,"%%");
         fse.writeFileSync(path.join(options.workingDir, "html", "resources", filename), fileContent);
     }
     options.verbose && console.log(`   ${cssFilenames.length} CSS file(s) customized`);

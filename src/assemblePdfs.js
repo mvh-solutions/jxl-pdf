@@ -8,7 +8,7 @@ const {
 const fontKit = require('fontkit');
 const fse = require("fs-extra");
 const path = require("path");
-const {PAGE_SIZES} = require("../utils/constants");
+const {PAGE_SIZES} = require("./helpers/constants");
 
 /**
  * Generates HTML for page numbers and converts it to a PDF.

@@ -35,7 +35,7 @@ h1 {
     margin-bottom: 6pt;
     border-bottom: 2pt solid black;
     padding-bottom: 2pt;
-    width: 388pt;
+    width: %%PAGEBODYWIDTH%%pt;
 }
 
 h2.phraseN {
@@ -46,7 +46,7 @@ h2.phraseN {
     padding-bottom: 3.5pt;
     margin-bottom: 5pt;
     border-bottom: solid 1.5pt black;
-    width: 388pt;
+    width: %%PAGEBODYWIDTH%%pt;
     text-align: left;
 }
 
@@ -58,7 +58,7 @@ h2.sentenceRef {
     padding-bottom: 3.5pt;
     margin-bottom: 5pt;
     border-bottom: solid 1.5pt black;
-    width: 388pt;
+    width: %%PAGEBODYWIDTH%%pt;
     text-align: right;
 }
 
@@ -76,7 +76,7 @@ h2.sentenceRef {
 
 .leftPane {
     display: inline-block;
-    width: 388pt;
+    width: %%PAGEBODYWIDTH%%pt;
     vertical-align: top;
     margin-right: 72pt;
 }
@@ -86,11 +86,11 @@ h2.sentenceRef {
     height: 100%;
     display: inline-block;
     vertical-align: top;
-    margin-left: 72pt;
+    margin-left: %%MARGININNER%%pt;
 }
 
 .rightPane table {
-    width: 388pt;
+    width: %%PAGEBODYWIDTH%%pt;
     border-collapse: collapse;
 }
 
@@ -116,24 +116,24 @@ h2.sentenceRef {
 }
 
 .jxlGreek {
-    width: 188pt;
+    width: %%2COLUMNWIDTH%%pt;
     text-align: right;
     line-height: 10pt;
     font-size: 9pt;
     vertical-align: baseline;
     margin: 0;
     padding: 0;
-    padding-right: 6pt;
+    padding-right: %%HALFCOLUMNGAP%%pt;
 
 }
 
 .jxlGloss {
-    width: 188pt;
+    width: %%2COLUMNWIDTH%%pt;
     line-height: 10pt;
     font-size: 9pt;
     vertical-align: baseline;
     padding: 0;
-    padding-left: 6pt;
+    padding-left: %%HALFCOLUMNGAP%%pt;
 }
 
 ::footnote-call {
@@ -162,12 +162,12 @@ h2.sentenceRef {
 
 .bookNoteBody {
     columns: 2;
-    column-gap: 144pt;
+    column-gap: %%DOUBLEMARGININNER%%pt;
 }
 
 .chapterNoteBody {
     columns: 2;
-    column-gap: 144pt;
+    column-gap: %%DOUBLEMARGININNER%%pt;
 }
 
 .note {

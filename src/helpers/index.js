@@ -1,3 +1,14 @@
+const parseCommandLineArguments = require('./cli-parser');
+
+const constants = require('./constants');
+
+const VALIDATORS = require('./validators');
+
+const {
+    setupOneCSS,
+    checkCssSubstitution
+} = require('./css');
+
 const {
     quoteForCv,
     getCVTexts
@@ -30,6 +41,11 @@ const {
 } = require('./puppeteer');
 
 module.exports = {
+    constants,
+    parseCommandLineArguments,
+    VALIDATORS,
+    setupOneCSS,
+    checkCssSubstitution,
     quoteForCv,
     getCVTexts,
     cvForSentence,

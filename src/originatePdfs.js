@@ -1,5 +1,5 @@
 const path = require("path");
-const {loadTemplates} = require("./helpers");
+const {loadTemplates, setupOneCSS, checkCssSubstitution} = require("./helpers");
 const fse = require("fs-extra");
 const {
     do2ColumnSection,
@@ -13,11 +13,46 @@ const {
     doBiblePlusNotesSection
 } = require("./sectionHandlers");
 
+const setupCSS = options => {
+    const cssFilenames = fse.readdirSync(path.join(__dirname, "..", "static", "resources"))
+        .filter(name => name.endsWith(".css"));
+    for (const filename of cssFilenames) {
+        let fileContent = fse.readFileSync(path.join(__dirname, "..", "static", "resources", filename)).toString();
+        const pageFormat = options.pageFormat;
+        const spaceOption = 0; // MAKE THIS CONFIGURABLE
+        const pageBodyWidth = pageFormat.pageSize[0] - (pageFormat.margins.inner[spaceOption] + pageFormat.margins.outer[spaceOption]);
+        for (const [placeholder, value] of [
+            ["PAGEWIDTH", pageFormat.pageSize[0]],
+            ["PAGEBODYWIDTH", pageBodyWidth],
+            ["DOUBLEPAGEWIDTH", pageFormat.pageSize[0] * 2],
+            ["PAGEHEIGHT", pageFormat.pageSize[1]],
+            ["MARGINTOP", pageFormat.margins.top[spaceOption]],
+            ["FIRSTPAGEMARGINTOP", pageFormat.margins.firstPageTop[spaceOption]],
+            ["MARGINBOTTOM", pageFormat.margins.bottom[spaceOption]],
+            ["FOOTEROFFSET", pageFormat.footerOffset[spaceOption]],
+            ["MARGININNER", pageFormat.margins.inner[spaceOption]],
+            ["DOUBLEMARGININNER", pageFormat.margins.inner[spaceOption] * 2],
+            ["MARGINOUTER", pageFormat.margins.outer[spaceOption]],
+            ["PAGENUMBERTOPMARGIN", (pageFormat.pageSize[1] + pageFormat.footerOffset[spaceOption]) - pageFormat.margins.bottom[spaceOption]],
+            ["COLUMNGAP", pageFormat.columnGap[spaceOption]],
+            ["HALFCOLUMNGAP", pageFormat.columnGap[spaceOption] / 2],
+            ["2COLUMNWIDTH", (pageBodyWidth - pageFormat.columnGap[spaceOption]) / 2],
+            ["3COLUMNWIDTH", (pageBodyWidth - (pageFormat.columnGap[spaceOption] * 2)) / 3]
+        ]) {
+            fileContent = setupOneCSS(fileContent, placeholder, "%%", value);
+        }
+        checkCssSubstitution(filename, fileContent,"%%");
+        fse.writeFileSync(path.join(options.workingDir, "html", "resources", filename), fileContent);
+    }
+    options.verbose && console.log(`   ${cssFilenames.length} CSS file(s) customized`);
+}
+
 const originatePdfs = async options => {
     // Set up workspace - options.workingDir should already exist
     fse.mkdirsSync(options.htmlPath);
     fse.mkdirsSync(path.join(options.workingDir, "html", "resources"));
-    fse.copySync(path.join(__dirname, "..", "static", "resources"), path.join(options.workingDir, "html", "resources"));
+    setupCSS(options);
+    fse.copySync(path.join(__dirname, "..", "static", "resources", "paged.polyfill.js"), path.join(options.workingDir, "html", "resources", "paged.polyfill.js"));
     fse.mkdirsSync(path.join(options.workingDir, "html", "page_resources"));
     fse.copySync(path.join(__dirname, "..", "static", "page_resources"), path.join(options.workingDir, "html", "page_resources"));
     fse.mkdirsSync(options.pdfPath);

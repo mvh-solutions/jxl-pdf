@@ -1,20 +1,16 @@
 @page {
-    size: 504pt 720pt;
-    margin-right: 44pt;
-    margin-left: 44pt;
-    margin-bottom: 0pt;
-    margin-top: 0pt;
+    size: %%PAGEWIDTH%%pt %%PAGEHEIGHT%%pt;
+    margin-bottom: 0;
+    margin-top: 0;
 }
-
 @page :left {
-    margin-left: 44pt;
-    margin-right: 72pt;
+    margin-left: %%MARGINOUTER%%pt;
+    margin-right: %%MARGININNER%%pt;
 }
 @page :right {
-    margin-left: 72pt;
-    margin-right: 44pt;
+    margin-left: %%MARGININNER%%pt;
+    margin-right: %%MARGINOUTER%%pt;
 }
-
 body {
     font-size: 9pt;
     font-family: "Gentium Book Plus", serif;
@@ -22,7 +18,7 @@ body {
 }
 
 .pagenum {
-    padding-top: 680pt;
+    padding-top: %%PAGENUMBERTOPMARGIN%%pt;
     text-align: center;
     page-break-after: always;
 }

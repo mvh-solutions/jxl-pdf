@@ -1,9 +1,9 @@
 @page {
-    size: 1008pt 720pt;
-    margin-right: 44pt;
-    margin-left: 44pt;
-    margin-bottom: 50pt;
-    margin-top: 60pt;
+    size: %%DOUBLEPAGEWIDTH%%pt %%PAGEHEIGHT%%pt;
+    margin-right: %%MARGINOUTER%%pt;
+    margin-left: %%MARGINOUTER%%pt;
+    margin-bottom: %%MARGINBOTTOM%%pt;
+    margin-top: %%MARGINTOP%%pt;
 
     @top-center {
     }
@@ -11,13 +11,13 @@
     @footnote {
         float: bottom;
         columns: 2;
-        column-gap: 144pt;
+        column-gap: %%DOUBLEMARGININNER%%pt;
         margin-top: 10pt;
     }
 }
 
 @page :first {
-    margin-top: 40pt;
+    margin-top: %%FIRSTPAGEMARGINTOP%%pt;
 }
 body {
     font-size: 9pt;
@@ -38,7 +38,7 @@ h1 {
     margin-bottom: 6pt;
     border-bottom: 2pt solid black;
     padding-bottom: 2pt;
-    width: 388pt;
+    width: %%PAGEBODYWIDTH%%pt;
 }
 
 h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
@@ -47,23 +47,23 @@ h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
     font-style: italic;
     font-weight: normal;
     margin: 0;
-    width: 388pt;
+    width: %%PAGEBODYWIDTH%%pt;
     text-align: center;
 }
 
 .versoPage {
     display: inline-block;
-    width: 388pt;
+    width: %%PAGEBODYWIDTH%%pt;
     vertical-align: top;
-    margin-right: 72pt;
+    margin-right: %%MARGININNER%%pt;
 }
 
 .rectoPage {
-    width: 388pt;
+    width: %%PAGEBODYWIDTH%%pt;
     height: 100%;
     display: inline-block;
     vertical-align: top;
-    margin-left: 72pt;
+    margin-left: %%MARGININNER%%pt;
 }
 
 .verseRecord {
@@ -75,7 +75,7 @@ h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
 .col1, .col2, .col3, .col4 {
     vertical-align: top;
     display: inline-block;
-    width: 188pt;
+    width: %%2COLUMNWIDTH%%pt;
     text-align: justify;
 }
 
@@ -138,5 +138,5 @@ h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
     font-style: italic;
     font-weight: bold;
     margin: 0;
-    width: 388pt;
+    width: %%PAGEBODYWIDTH%%pt;
 }

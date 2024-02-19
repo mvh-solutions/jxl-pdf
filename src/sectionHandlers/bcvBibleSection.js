@@ -1,4 +1,4 @@
-const {pkWithDocs, getBookName, getCVTexts, cleanNoteLine, bcvNotes, doPuppet} = require("../helpers");
+const {pkWithDocs, getBookName, getCVTexts, cleanNoteLine, bcvNotes, doPuppet, setupOneCSS, checkCssSubstitution} = require("../helpers");
 const fse = require("fs-extra");
 const path = require("path");
 const doBcvBibleSection = async ({section, templates, bookCode, options}) => {
@@ -37,6 +37,14 @@ const doBcvBibleSection = async ({section, templates, bookCode, options}) => {
                 bookName
             )
     );
+    const cssPath = path.join(options.workingDir, "html", "resources", "bcv_bible_page_styles.css");
+    let css = fse.readFileSync(cssPath).toString();
+    const spaceOption = 0; // MAKE THIS CONFIGURABLE
+    for (const [placeholder, values] of options.pageFormat.sections.bcvBible.cssValues) {
+        css = setupOneCSS(css, placeholder, "%", values[0]);
+    }
+    checkCssSubstitution("bcv_bible_page_styles.css", css,"%");
+    fse.writeFileSync(cssPath, css);
     await doPuppet({
         verbose: options.verbose,
         htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),

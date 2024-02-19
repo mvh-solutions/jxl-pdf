@@ -1,19 +1,15 @@
 @page {
-    size: 504pt 720pt;
-    margin-bottom: 50pt;
-    margin-top: 40pt;
-    @footnote {
-        float: bottom;
-        margin-top: 10pt;
-    }
+    size: %%PAGEWIDTH%%pt %%PAGEHEIGHT%%pt;
+    margin-bottom: %%MARGINBOTTOM%%pt;
+    margin-top: %%FIRSTPAGEMARGINTOP%%pt;
 }
 @page :left {
-    margin-left: 44pt;
-    margin-right: 72pt;
+    margin-left: %%MARGINOUTER%%pt;
+    margin-right: %%MARGININNER%%pt;
 }
 @page :right {
-    margin-left: 72pt;
-    margin-right: 44pt;
+    margin-left: %%MARGININNER%%pt;
+    margin-right: %%MARGINOUTER%%pt;
 }
 
 body {
@@ -35,7 +31,7 @@ h1 {
     margin-bottom: 6pt;
     border-bottom: 2pt solid black;
     padding-bottom: 2pt;
-    width: 388pt;
+    width: %%PAGEBODYWIDTH%%pt;
 }
 
 h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
@@ -44,7 +40,7 @@ h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
     font-style: italic;
     font-weight: bold;
     margin: 0;
-    width: 188pt;
+    width: %%2COLUMNWIDTH%%pt;
 }
 
 h2.verseRecordHeadLeft {
@@ -57,17 +53,17 @@ h2.verseRecordHeadRight {
 
 .leftColumn {
     display: inline-block;
-    width: 188pt;
+    width: %%2COLUMNWIDTH%%pt;
     vertical-align: top;
-    margin-right: 6pt;
+    margin-right: %%HALFCOLUMNGAP%%pt;
 }
 
 .rightColumn {
-    width: 188pt;
+    width: %%2COLUMNWIDTH%%pt;
     height: 100%;
     display: inline-block;
     vertical-align: top;
-    margin-left: 6pt;
+    margin-left: %%HALFCOLUMNGAP%%pt;
 }
 
 .verseRecord {
@@ -86,7 +82,7 @@ h2.verseRecordHeadRight {
 .col1, .col2 {
     vertical-align: top;
     display: inline-block;
-    width: 188pt;
+    width: %%2COLUMNWIDTH%%pt;
     text-align: justify;
 }
 

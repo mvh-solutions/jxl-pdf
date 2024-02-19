@@ -10,7 +10,7 @@ const commander = require('commander');
  * - output: Ensures the output directory's parent exists.
  * - forceOverwrite: Returns boolean for overwrite permission.
  * - verbose: Returns boolean for verbose mode.
- * - pageFormat: Validates custom or predefined page sizes.
+ * - pageFormat: Validates predefined page sizes.
  * - book: Checks for valid Paratext-style book code.
  * - steps: Validates processing steps options.
  *
@@ -40,23 +40,11 @@ const VALIDATORS = {
     forceOverwrite: newVal => newVal,
     verbose: newVal => newVal,
     pageFormat: newVal => {
-        if ([1, 2, 3, 4, 5, 6, 7, 8, 9].includes(parseInt(newVal.charAt(0)))) { // Should be a custom page size
-            const customBits = newVal.split(",");
-            if (customBits.length !== 2) {
-                throw new commander.InvalidArgumentError(`Custom page size '${newVal}' should contain exactly two comma-separated values`)
-            }
-            const width = parseFloat(customBits[0]);
-            const height = parseFloat(customBits[1]);
-            if (!width || width < constants.MIN_PAGE_SIZE[0] || !height || height < constants.MIN_PAGE_SIZE[1]) {
-                throw new commander.InvalidArgumentError(`Custom page size '${newVal}' does not contain two comma-separated values of at least ${constants.MIN_PAGE_SIZE[0]} x ${constants.MIN_PAGE_SIZE[1]}}`)
-            }
-            return [width, height]
-        } else { // Should be a known page size
-            if (!(newVal.toUpperCase() in constants.PAGE_SIZES)) {
-                throw new commander.InvalidArgumentError(`'${newVal}' is not one of ${Object.keys(constants.PAGE_SIZES)}`)
-            }
-            return constants.PAGE_SIZES[newVal.toUpperCase()];
+        const ucFormat = newVal.toUpperCase();
+        if (!(ucFormat in constants.PAGE_SIZES)) {
+            throw new commander.InvalidArgumentError(`'${ucFormat}' is not one of ${Object.keys(constants.PAGE_SIZES)}`)
         }
+        return constants.PAGE_SIZES[ucFormat];
     },
     book: bookCode => {
         if (!/^[A-Z\d]{3}$/.test(bookCode)) {

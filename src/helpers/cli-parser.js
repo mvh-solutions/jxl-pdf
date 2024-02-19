@@ -47,7 +47,7 @@ const parseCommandLineArguments = () => {
         )
         .option(
             '-p, --page-format <spec>',
-            `One of ${Object.keys(constants.PAGE_SIZES).join(', ')} or '<pointWidth>,<pointHeight>' (eg '504,720' with no spaces)`,
+            `One of ${Object.keys(constants.PAGE_SIZES).join(', ')}`,
             VALIDATORS.pageFormat,
             constants.PAGE_SIZES[constants.DEFAULT_PAGE_SIZE]
         )

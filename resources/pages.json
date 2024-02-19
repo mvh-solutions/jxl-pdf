@@ -1,0 +1,212 @@
+{
+  "EXECUTIVE": {
+    "name": {
+      "en": "Executive"
+    },
+    "pageSize": [
+      504,
+      720
+    ],
+    "margins": {
+      "top": [
+        60
+      ],
+      "firstPageTop": [
+        40
+      ],
+      "bottom": [
+        50
+      ],
+      "outer": [
+        44
+      ],
+      "inner": [
+        72
+      ]
+    },
+    "footerOffset": [
+      10
+    ],
+    "columnGap": [
+      12
+    ],
+    "sections": {
+      "front": {},
+      "bookNote": {},
+      "4ColumnSpread": {},
+      "jxlSpread": {},
+      "jxlSimple": {},
+      "2Column": {},
+      "bcvBible": {
+        "cssValues": [
+          [
+            "CVCOLUMNWIDTH",
+            [
+              24
+            ]
+          ],
+          [
+            "VERSECOLUMNWIDTH",
+            [
+              364
+            ]
+          ]
+        ]
+      },
+      "paraBible": {},
+      "biblePlusNotes": {
+        "cssValues": [
+          [
+            "SCRIPTURECOLUMNWIDTH",
+            [
+              88
+            ]
+          ],
+          [
+            "NOTESCOLUMNWIDTH",
+            [
+              288
+            ]
+          ]
+        ]
+      }
+    }
+  },
+  "A4P": {
+    "name": {
+      "en": "A4 Portrait"
+    },
+    "pageSize": [
+      595,
+      842
+    ],
+    "margins": {
+      "top": [
+        60
+      ],
+      "firstPageTop": [
+        40
+      ],
+      "bottom": [
+        50
+      ],
+      "outer": [
+        44
+      ],
+      "inner": [
+        72
+      ]
+    },
+    "footerOffset": [
+      10
+    ],
+    "columnGap": [
+      12
+    ],
+    "sections": {
+      "front": {},
+      "bookNote": {},
+      "4ColumnSpread": {},
+      "jxlSpread": {},
+      "jxlSimple": {},
+      "2Column": {},
+      "bcvBible": {
+        "cssValues": [
+          [
+            "CVCOLUMNWIDTH",
+            [
+              50
+            ]
+          ],
+          [
+            "VERSECOLUMNWIDTH",
+            [
+              429
+            ]
+          ]
+        ]
+      },
+      "paraBible": {},
+      "biblePlusNotes": {
+        "cssValues": [
+          [
+            "SCRIPTURECOLUMNWIDTH",
+            [
+              107
+            ]
+          ],
+          [
+            "NOTESCOLUMNWIDTH",
+            [
+              360
+            ]
+          ]
+        ]
+      }
+    }
+  },
+  "A3P": {
+    "name": {
+      "en": "A4 Portrait"
+    },
+    "pageSize": [
+      841.89,
+      1190,
+      5
+    ]
+  },
+  "A5P": {
+    "name": {
+      "en": "A5 Portrait"
+    },
+    "pageSize": [
+      419.53,
+      595.28
+    ]
+  },
+  "A6P": {
+    "name": {
+      "en": "A6 Portrait"
+    },
+    "pageSize": [
+      297.64,
+      419.53
+    ]
+  },
+  "FOLIO": {
+    "name": {
+      "en": "Folio"
+    },
+    "pageSize": [
+      612,
+      936
+    ]
+  },
+  "LEGAL": {
+    "name": {
+      "en": "Folio"
+    },
+    "pageSize": [
+      612,
+      1008
+    ]
+  },
+  "LETTER": {
+    "name": {
+      "en": "Letter"
+    },
+    "pageSize": [
+      612,
+      792
+    ]
+  },
+  "TABLOID": {
+    "name": {
+      "en": "Tabloid"
+    },
+    "pageSize": [
+      792,
+      1224
+    ]
+  }
+}

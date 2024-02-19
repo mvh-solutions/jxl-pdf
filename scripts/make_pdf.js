@@ -5,7 +5,7 @@ const {
 const commander = require('commander');
 const fse = require('fs-extra');
 const path = require('path');
-const parseCommandLineArguments = require('../utils/cli-parser');
+const parseCommandLineArguments = require('../src/helpers/cli-parser');
 
 const options = parseCommandLineArguments();
 
@@ -18,7 +18,7 @@ options.manifestPath = path.join(options.workingDir, "manifest.json");
 options.verbose && console.log("** CLI **");
 if (options.verbose) {
     for (const [k, v] of Object.entries(options)) {
-        console.log(`   ${k}: ${JSON.stringify(v)}`);
+        console.log(`   ${k}: ${JSON.stringify(v, null, 4)}`);
     }
 }
 
@@ -51,27 +51,23 @@ if (options.steps.includes("clear")) {
 
 // Wrapper function to do originate and/or assemble steps
 const doPDFs = async () => {
-    try {
-        if (options.steps.includes("originate")) {
-            options.verbose && console.log("** ORIGINATE **");
-            if (fse.pathExistsSync(options.workingDir)) {
-                options.verbose && console.log(`   Deleting working dir ${options.workingDir}`);
-                fse.removeSync(options.workingDir);
-            } else {
-                options.verbose && console.log(`   Creating working dir ${options.workingDir}`);
-            }
-            fse.mkdirsSync(options.workingDir);
-            await originatePdfs(options);
+    if (options.steps.includes("originate")) {
+        options.verbose && console.log("** ORIGINATE **");
+        if (fse.pathExistsSync(options.workingDir)) {
+            options.verbose && console.log(`   Deleting working dir ${options.workingDir}`);
+            fse.removeSync(options.workingDir);
+        } else {
+            options.verbose && console.log(`   Creating working dir ${options.workingDir}`);
         }
-        if (options.steps.includes("assemble")) {
-            options.verbose && console.log("** ASSEMBLE **");
-            if (!fse.pathExistsSync(options.manifestPath)) {
-                throw new Error("Cannot run assemble without first originating content");
-            }
-            await assemblePdfs(options);
+        fse.mkdirsSync(options.workingDir);
+        await originatePdfs(options);
+    }
+    if (options.steps.includes("assemble")) {
+        options.verbose && console.log("** ASSEMBLE **");
+        if (!fse.pathExistsSync(options.manifestPath)) {
+            throw new Error("Cannot run assemble without first originating content");
         }
-    } catch (error) {
-        console.error(`An error occurred: ${error.message}`);
+        await assemblePdfs(options);
     }
 }
 

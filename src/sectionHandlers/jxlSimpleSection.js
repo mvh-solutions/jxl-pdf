@@ -28,7 +28,7 @@ const doJxlSimpleSection = async ({section, templates, bookCode, options}) => {
                 pivotIds.add(noteId);
             }
         }
-        const notesRows = fse.readFileSync(path.join('data', config.notes, `${bookCode}.tsv`)).toString().split("\n");
+        const notesRows = fse.readFileSync(path.join('data', options.configContent.notes, `${bookCode}.tsv`)).toString().split("\n");
         for (const notesRow of notesRows) {
             const cells = notesRow.split('\t');
             if (pivotIds.has(cells[4])) {

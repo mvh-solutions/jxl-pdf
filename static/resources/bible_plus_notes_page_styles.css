@@ -22,7 +22,7 @@
 body {
     font-size: 9pt;
     line-height: 10pt;
-    font-family: "Gentium Book Plus", serif;
+    font-family: %%BODYFONT%%;
 }
 
 p {
@@ -31,6 +31,7 @@ p {
 }
 
 h1 {
+    font-family: %%HEADINGFONT%%;
     font-size: 14pt;
     line-height: 20pt;
     font-weight: bold;
@@ -77,6 +78,7 @@ h1 {
     font-weight: bold;
 }
 .note {
+    font-family: %%FOOTNOTEFONT%%;
     display: list-item;
     font-size: 7pt;
     line-height: 9pt;

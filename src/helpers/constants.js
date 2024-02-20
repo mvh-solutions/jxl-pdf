@@ -1,6 +1,7 @@
 const path = require('path');
 const os = require('os');
 const pageSizes = require('../../resources/pages.json');
+const fontSets = require('../../resources/fonts.json');
 
 const constants = {
     VERSION: "0.0.1",
@@ -13,7 +14,8 @@ const constants = {
         "ASSEMBLE": ["assemble"],
         "ALL": ["originate", "assemble"]
     },
-    PAGE_SIZES: pageSizes
+    PAGE_SIZES: pageSizes,
+    FONT_SETS: fontSets
 };
 
 module.exports = constants;

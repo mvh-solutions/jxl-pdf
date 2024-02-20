@@ -57,6 +57,12 @@ const VALIDATORS = {
             throw new commander.InvalidArgumentError(`'${stepOptName}' is not one of ${Object.keys(constants.STEPS_OPTIONS)}`)
         }
         return constants.STEPS_OPTIONS[stepOptName];
+    },
+    fonts: fontName => {
+        if (!(Object.keys(constants.FONT_SETS).includes(fontName))) {
+            throw new commander.InvalidArgumentError(`'${fontName}' is not one of ${Object.keys(constants.FONT_SETS)}`)
+        }
+        return constants.STEPS_OPTIONS[fontName];
     }
 };
 

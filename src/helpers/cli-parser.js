@@ -57,6 +57,12 @@ const parseCommandLineArguments = () => {
             VALIDATORS.steps,
             constants.STEPS_OPTIONS["ALL"]
         )
+        .option(
+            '-F, --fonts <fontsType>',
+            `The set of fonts to use. Options are ${Object.keys(constants.FONT_SETS).join(', ')}`,
+            VALIDATORS.fonts,
+            constants.FONT_SETS["allGentium"]
+        )
 
     program.parse(process.argv);
 

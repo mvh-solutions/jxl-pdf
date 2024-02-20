@@ -1,0 +1,44 @@
+{
+  "allGentium": {
+    "body": "\"Gentium Book Plus\", serif",
+    "heading": "\"Gentium Book Plus\", serif",
+    "footnotes": "\"Gentium Book Plus\", serif",
+    "greek": "\"Gentium Book Plus\", serif",
+    "hebrew": "\"Ezra SIL\", serif"
+  },
+  "allCharis": {
+    "body": "\"Charis SIL\", serif",
+    "heading": "\"Charis SIL\", serif",
+    "footnotes": "\"Charis SIL\", serif",
+    "greek": "\"Gentium Book Plus\", serif",
+    "hebrew": "\"Ezra SIL\", serif"
+  },
+  "allCardo": {
+    "body": "Cardo, serif",
+    "heading": "Cardo, serif",
+    "footnotes": "Cardo, serif",
+    "greek": "Cardo, serif",
+    "hebrew": "\"Ezra SIL\", serif"
+  },
+  "allRoboto": {
+    "body": "Roboto, sans-serif",
+    "heading": "Roboto, sans-serif",
+    "footnotes": "Roboto, sans-serif",
+    "greek": "\"Gentium Book Plus\", serif",
+    "hebrew": "\"Ezra SIL\", serif"
+  },
+  "allAndika": {
+    "body": "Andika, serif",
+    "heading": "Andika, serif",
+    "footnotes": "Andika, serif",
+    "greek": "Andika, serif",
+    "hebrew": "\"Ezra SIL\", serif"
+  },
+  "charisOpen": {
+    "body": "\"Charis SIL\", serif",
+    "heading": "\"Open Sans\", serif",
+    "footnotes": "\"Charis SIL\", serif",
+    "greek": "\"Gentium Book Plus\", serif",
+    "hebrew": "\"Ezra SIL\", serif"
+  }
+}

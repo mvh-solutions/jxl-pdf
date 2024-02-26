@@ -42,7 +42,7 @@ const VALIDATORS = {
     pageFormat: newVal => {
         const ucFormat = newVal.toUpperCase();
         if (!(ucFormat in constants.PAGE_SIZES)) {
-            throw new commander.InvalidArgumentError(`'${ucFormat}' is not one of ${Object.keys(constants.PAGE_SIZES)}`)
+            throw new commander.InvalidArgumentError(`'${ucFormat}' is not one of ${Object.keys(constants.PAGE_SIZES).join(', ')}`)
         }
         return constants.PAGE_SIZES[ucFormat];
     },
@@ -54,15 +54,15 @@ const VALIDATORS = {
     },
     steps: stepOptName => {
         if (!(Object.keys(constants.STEPS_OPTIONS).includes(stepOptName))) {
-            throw new commander.InvalidArgumentError(`'${stepOptName}' is not one of ${Object.keys(constants.STEPS_OPTIONS)}`)
+            throw new commander.InvalidArgumentError(`'${stepOptName}' is not one of ${Object.keys(constants.STEPS_OPTIONS).join(', ')}`)
         }
         return constants.STEPS_OPTIONS[stepOptName];
     },
     fonts: fontName => {
         if (!(Object.keys(constants.FONT_SETS).includes(fontName))) {
-            throw new commander.InvalidArgumentError(`'${fontName}' is not one of ${Object.keys(constants.FONT_SETS)}`)
+            throw new commander.InvalidArgumentError(`'${fontName}' is not one of ${Object.keys(constants.FONT_SETS).join(', ')}`)
         }
-        return constants.STEPS_OPTIONS[fontName];
+        return constants.FONT_SETS[fontName];
     }
 };
 

@@ -1,6 +1,15 @@
 {
+  "test": {
+    "body": "ani",
+    "body2": "purisa",
+    "heading": "kalimati",
+    "footnote": "karumbi",
+    "greek": "\"Gentium Book Plus\", serif",
+    "hebrew": "\"Ezra SIL\", serif"
+  },
   "allGentium": {
     "body": "\"Gentium Book Plus\", serif",
+    "body2": "\"Open Sans Condensed Light\", sans-serif",
     "heading": "\"Gentium Book Plus\", serif",
     "footnote": "\"Gentium Book Plus\", serif",
     "greek": "\"Gentium Book Plus\", serif",
@@ -8,6 +17,7 @@
   },
   "allCharis": {
     "body": "\"Charis SIL\", serif",
+    "body2": "\"Open Sans Condensed Light\", sans-serif",
     "heading": "\"Charis SIL\", serif",
     "footnote": "\"Charis SIL\", serif",
     "greek": "\"Gentium Book Plus\", serif",
@@ -15,6 +25,7 @@
   },
   "allCardo": {
     "body": "Cardo, serif",
+    "body2": "\"Open Sans Condensed Light\", sans-serif",
     "heading": "Cardo, serif",
     "footnote": "Cardo, serif",
     "greek": "Cardo, serif",
@@ -22,6 +33,7 @@
   },
   "allRoboto": {
     "body": "Roboto, sans-serif",
+    "body2": "\"Open Sans Condensed Light\", sans-serif",
     "heading": "Roboto, sans-serif",
     "footnote": "Roboto, sans-serif",
     "greek": "\"Gentium Book Plus\", serif",
@@ -29,6 +41,7 @@
   },
   "allAndika": {
     "body": "Andika, serif",
+    "body2": "\"Open Sans Condensed Light\", sans-serif",
     "heading": "Andika, serif",
     "footnote": "Andika, serif",
     "greek": "Andika, serif",
@@ -36,8 +49,9 @@
   },
   "charisOpen": {
     "body": "\"Charis SIL\", serif",
+    "body2": "\"Open Sans Condensed Light\", sans-serif",
     "heading": "\"Open Sans\", serif",
-    "footnotes": "\"Charis SIL\", serif",
+    "footnote": "\"Charis SIL\", serif",
     "greek": "\"Gentium Book Plus\", serif",
     "hebrew": "\"Ezra SIL\", serif"
   }

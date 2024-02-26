@@ -22,7 +22,7 @@
 body {
     font-size: 9pt;
     line-height: 10pt;
-    font-family: "Gentium Book Plus", serif;
+    font-family: %%BODYFONT%%;
 }
 
 p {
@@ -39,6 +39,7 @@ h1 {
     border-bottom: 2pt solid black;
     padding-bottom: 2pt;
     width: %%PAGEBODYWIDTH%%pt;
+    font-family: %%HEADINGFONT%%;
 }
 
 h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
@@ -49,6 +50,7 @@ h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
     margin: 0;
     width: %%PAGEBODYWIDTH%%pt;
     text-align: center;
+    font-family: %%HEADINGFONT%%;
 }
 
 .versoPage {
@@ -93,6 +95,7 @@ h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
     margin-bottom: 0pt;
     padding-left: 6pt;
     text-indent: -6pt;
+    font-family: %%FOOTNOTEFONT%%;
 }
 
 .note .b {
@@ -115,18 +118,22 @@ h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
 .head1 {
     display: inline-block;
     width: 200pt;
+    font-family: %%HEADINGFONT%%;
 }
 .head2 {
     display: inline-block;
     width: 332pt;
+    font-family: %%HEADINGFONT%%;
 }
 .head3 {
     display: inline-block;
     width: 200pt;
+    font-family: %%HEADINGFONT%%;
 }
 .head4 {
     display: inline-block;
     width: 188pt;
+    font-family: %%HEADINGFONT%%;
 }
 .cv {
     font-style: italic;
@@ -139,4 +146,5 @@ h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
     font-weight: bold;
     margin: 0;
     width: %%PAGEBODYWIDTH%%pt;
+    font-family: %%HEADINGFONT%%;
 }

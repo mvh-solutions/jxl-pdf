@@ -78,7 +78,7 @@ h1 {
     font-weight: bold;
 }
 .note {
-    font-family: %%FOOTNOTEFONT%%;
+    font-family: %%BODYFONT2%%;
     display: list-item;
     font-size: 7pt;
     line-height: 9pt;

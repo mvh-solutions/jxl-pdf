@@ -22,7 +22,7 @@
 body {
     font-size: 9pt;
     line-height: 10pt;
-    font-family: "Gentium Book Plus", serif;
+    font-family: %%BODYFONT%%;
 }
 
 p {
@@ -38,6 +38,7 @@ h1 {
     border-bottom: 2pt solid black;
     padding-bottom: 2pt;
     text-align: left;
+    font-family: %%HEADINGFONT%%;
 }
 
 .front {}
@@ -59,12 +60,14 @@ h1 {
     font-weight: bold;
     font-style: italic;
     text-align: left;
+    font-family: %%HEADINGFONT%%;
 }
 .half_page {
     break-before: page;
 }
 .half_page h2 {
     font-weight: bold;
+    font-family: %%HEADINGFONT%%;
 }
 .title_page {
     text-align: center;
@@ -76,28 +79,33 @@ h1 {
     font-size: 18pt;
     border: none;
     margin-bottom: 60pt;
+    font-family: %%HEADINGFONT%%;
 }
 
 .title_page > h3 {
     text-align: center;
     font-size: 14pt;
     border: none;
+    font-family: %%HEADINGFONT%%;
 }
 
 h3.pub_details {
     margin-top: 144pt;
     font-weight: normal;
     font-size: 12pt;
+    font-family: %%HEADINGFONT%%;
 }
 
 h3.pub_details2 {
     margin-top: 288pt;
     font-weight: normal;
     font-size: 12pt;
+    font-family: %%HEADINGFONT%%;
 }
 
 h3.descriptif {
     margin-bottom: 60pt;
+    font-family: %%HEADINGFONT%%;
 }
 
 p.resource {
@@ -130,6 +138,7 @@ p.small-gap {
     font-weight: bold;
     font-style: italic;
     text-align: left;
+    font-family: %%HEADINGFONT%%;
 }
 .mode_emploi {}
 
@@ -183,6 +192,7 @@ p.small-gap {
     padding-left: 1.2em;
     text-indent: -1.2em;
     text-align: left;
+    font-family: %%FOOTNOTEFONT%%;
 }
 
 .note .b {
@@ -241,15 +251,6 @@ p.small-gap {
     text-align: center;
     margin-bottom: 20pt;
     margin-top: 10pt;
-}
-.note {
-    font-size: 7pt;
-    line-height: 9pt;
-    text-align: justify;
-    float: footnote;
-    margin-bottom: 0pt;
-    padding-left: 6pt;
-    text-indent: -6pt;
 }
 ::footnote-call {
     font-weight: bold;

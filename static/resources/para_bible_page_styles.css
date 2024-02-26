@@ -24,7 +24,7 @@
 body {
     font-size: 9pt;
     line-height: 10pt;
-    font-family: "Gentium Book Plus", serif;
+    font-family: %%BODYFONT%%;
     text-align: justify;
     text-align-last: left;
 }
@@ -47,6 +47,7 @@ h1 {
     border-bottom: 2pt solid black;
     padding-bottom: 2pt;
     width: 388pt;
+    font-family: %%HEADINGFONT%%;
 }
 
 ::footnote-call {
@@ -75,6 +76,7 @@ h1 {
     font-size: 7pt;
     line-height: 10pt;
     float: footnote;
+    font-family: %%FOOTNOTEFONT%%;
 }
 .paras_usfm_hanging_graft {
 }
@@ -84,6 +86,7 @@ h1 {
     font-size: 20pt;
     line-height: 30pt;
     text-align: center;
+    font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_imt2 {
     font-weight: bold;
@@ -91,6 +94,7 @@ h1 {
     font-size: 14pt;
     line-height: 20pt;
     text-align: center;
+    font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_imt3 {
     font-weight: bold;
@@ -98,6 +102,7 @@ h1 {
     font-size: 12pt;
     line-height: 20pt;
     text-align: center;
+    font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_ip {
     text-indent: 12pt;
@@ -118,16 +123,19 @@ h1 {
     font-style: italic;
     font-size: 20pt;
     line-height: 30pt;
+    font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_is2 {
     font-style: italic;
     font-size: 14pt;
     line-height: 20pt;
+    font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_is3 {
     font-style: italic;
     font-size: 12pt;
     line-height: 20pt;
+    font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_li {
     list-style-type: disc;
@@ -153,14 +161,17 @@ h1 {
     font-size: 12pt;
     line-height: 20pt;
     font-style: italic;
+    font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_ms {
     font-size: 12pt;
     line-height: 20pt;
     font-weight: bold;
+    font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_ms2 {
     font-weight: bold;
+    font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_mt {
     font-weight: bold;
@@ -168,6 +179,7 @@ h1 {
     font-size: 20pt;
     line-height: 30pt;
     text-align: center;
+    font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_mt2 {
     font-weight: bold;
@@ -175,6 +187,7 @@ h1 {
     font-size: 14pt;
     line-height: 20pt;
     text-align: center;
+    font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_mt3 {
     font-weight: bold;
@@ -182,6 +195,7 @@ h1 {
     font-size: 12pt;
     line-height: 20pt;
     text-align: center;
+    font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_nb {
 }
@@ -230,25 +244,30 @@ h1 {
 }
 .paras_usfm_r {
     font-weight: bold;
+    font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_s {
     font-style: italic;
     font-size: 20pt;
     line-height: 30pt;
+    font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_s2 {
     font-style: italic;
     font-size: 14pt;
     line-height: 20pt;
+    font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_s3 {
     font-style: italic;
     font-size: 12pt;
     line-height: 20pt;
+    font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_sr {
     font-size: 12pt;
     line-height: 20pt;
+    font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_tr {
 }

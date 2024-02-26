@@ -37,12 +37,12 @@ const setupCSS = options => {
             ["HALFCOLUMNGAP", pageFormat.columnGap[spaceOption] / 2],
             ["2COLUMNWIDTH", (pageBodyWidth - pageFormat.columnGap[spaceOption]) / 2],
             ["3COLUMNWIDTH", (pageBodyWidth - (pageFormat.columnGap[spaceOption] * 2)) / 3],
-            ["BODYFONT", constants.FONT_SETS[options.fonts.body]],
-            ["HEADINGFONT", constants.FONT_SETS[options.fonts.heading]],
-            ["NOTEFONT", constants.FONT_SETS[options.fonts.note]],
-            ["FOOTNOTEFONT", constants.FONT_SETS[options.fonts.footnote]],
-            ["GREEKFONT", constants.FONT_SETS[options.fonts.greek]],
-            ["HEBREWFONT", constants.FONT_SETS[options.fonts.hebrew]],
+            ["BODYFONT", options.fonts.body],
+            ["BODYFONT2", options.fonts.body2 || options.fonts.body],
+            ["HEADINGFONT", options.fonts.heading],
+            ["FOOTNOTEFONT", options.fonts.footnote],
+            ["GREEKFONT", options.fonts.greek],
+            ["HEBREWFONT", options.fonts.hebrew],
         ]) {
             fileContent = setupOneCSS(fileContent, placeholder, "%%", value);
         }

@@ -19,7 +19,7 @@
 body {
     font-size: 9pt;
     line-height: 10pt;
-    font-family: "Gentium Book Plus", serif;
+    font-family: %%BODYFONT%%;
 }
 
 p {
@@ -36,6 +36,7 @@ h1 {
     border-bottom: 2pt solid black;
     padding-bottom: 2pt;
     width: %%PAGEBODYWIDTH%%pt;
+    font-family: %%HEADINGFONT%%;
 }
 
 h2.phraseN {
@@ -48,6 +49,7 @@ h2.phraseN {
     border-bottom: solid 1.5pt black;
     width: %%PAGEBODYWIDTH%%pt;
     text-align: left;
+    font-family: %%HEADINGFONT%%;
 }
 
 h2.sentenceRef {
@@ -60,10 +62,11 @@ h2.sentenceRef {
     border-bottom: solid 1.5pt black;
     width: %%PAGEBODYWIDTH%%pt;
     text-align: right;
+    font-family: %%HEADINGFONT%%;
 }
 
 .transAbbr {
-    font-family: "Gentium Book Plus", serif;
+    font-family: %%BODYFONT%%;
     font-weight: bold;
     font-style: italic;
     padding-right: 4pt;
@@ -124,7 +127,7 @@ h2.sentenceRef {
     margin: 0;
     padding: 0;
     padding-right: %%HALFCOLUMNGAP%%pt;
-
+    font-family: %%GREEKFONT%%;
 }
 
 .jxlGloss {

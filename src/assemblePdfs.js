@@ -3,12 +3,12 @@ const {
 } = require('pdf-lib');
 const {
     loadTemplate,
-    doPuppet
+    doPuppet,
+    constants
 } = require("./helpers");
 const fontKit = require('fontkit');
 const fse = require("fs-extra");
 const path = require("path");
-const {PAGE_SIZES} = require("./helpers/constants");
 
 /**
  * Generates HTML for page numbers and converts it to a PDF.
@@ -102,13 +102,13 @@ const makeFromDouble = async function (manifestStep, pageSize, fontBytes) {
         page1.drawPage(preamble, {
             xScale: 1,
             yScale: 1,
-            x: -(PAGE_SIZES.A3P.pageSize[1] - (pageSize[0] * 2)) / 2,
+            x: -(constants.PAGE_SIZES.A3P.pageSize[1] - (pageSize[0] * 2)) / 2,
             y: page1.getHeight() / 2 - pdfPageToCopy.getHeight() / 2,
         });
         page2.drawPage(preamble, {
             xScale: 1,
             yScale: 1,
-            x: -((PAGE_SIZES.A3P.pageSize[1] - (pageSize[0] * 2)) / 2 + pageSize[0]),
+            x: -((constants.PAGE_SIZES.A3P.pageSize[1] - (pageSize[0] * 2)) / 2 + pageSize[0]),
             y: page2.getHeight() / 2 - (pdfPageToCopy.getHeight() / 2),
         });
     }

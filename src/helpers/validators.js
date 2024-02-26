@@ -13,6 +13,7 @@ const commander = require('commander');
  * - pageFormat: Validates predefined page sizes.
  * - book: Checks for valid Paratext-style book code.
  * - steps: Validates processing steps options.
+ * - fonts: Validates predefined fonts for the output document.
  *
  * Usage: `VALIDATORS[key](value)` to validate each command-line option.
  */
@@ -54,13 +55,13 @@ const VALIDATORS = {
     },
     steps: stepOptName => {
         if (!(Object.keys(constants.STEPS_OPTIONS).includes(stepOptName))) {
-            throw new commander.InvalidArgumentError(`'${stepOptName}' is not one of ${Object.keys(constants.STEPS_OPTIONS).join(', ')}`)
+            throw new commander.InvalidArgumentError(`'${stepOptName}' is not one of ${Object.keys(constants.STEPS_OPTIONS).join(', ')}`);
         }
         return constants.STEPS_OPTIONS[stepOptName];
     },
     fonts: fontName => {
         if (!(Object.keys(constants.FONT_SETS).includes(fontName))) {
-            throw new commander.InvalidArgumentError(`'${fontName}' is not one of ${Object.keys(constants.FONT_SETS).join(', ')}`)
+            throw new commander.InvalidArgumentError(`'${fontName}' is not one of ${Object.keys(constants.FONT_SETS).join(', ')}`);
         }
         return constants.FONT_SETS[fontName];
     }

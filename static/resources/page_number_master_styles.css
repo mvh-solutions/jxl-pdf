@@ -13,7 +13,7 @@
 }
 body {
     font-size: 9pt;
-    font-family: "Gentium Book Plus", serif;
+    font-family: %%BODYFONT%%;
     text-align: center;
 }
 

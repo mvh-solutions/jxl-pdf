@@ -15,7 +15,7 @@
 body {
     font-size: 9pt;
     line-height: 10pt;
-    font-family: "Gentium Book Plus", serif;
+    font-family: %%BODYFONT%%;
 }
 
 p {

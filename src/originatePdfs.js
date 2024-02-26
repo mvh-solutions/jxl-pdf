@@ -1,5 +1,5 @@
 const path = require("path");
-const {loadTemplates, setupOneCSS, checkCssSubstitution} = require("./helpers");
+const { loadTemplates, setupOneCSS, checkCssSubstitution } = require("./helpers");
 const fse = require("fs-extra");
 const {
     do2ColumnSection,
@@ -12,7 +12,6 @@ const {
     doParaBibleSection,
     doBiblePlusNotesSection
 } = require("./sectionHandlers");
-
 const setupCSS = options => {
     const cssFilenames = fse.readdirSync(path.join(__dirname, "..", "static", "resources"))
         .filter(name => name.endsWith(".css"));
@@ -37,7 +36,13 @@ const setupCSS = options => {
             ["COLUMNGAP", pageFormat.columnGap[spaceOption]],
             ["HALFCOLUMNGAP", pageFormat.columnGap[spaceOption] / 2],
             ["2COLUMNWIDTH", (pageBodyWidth - pageFormat.columnGap[spaceOption]) / 2],
-            ["3COLUMNWIDTH", (pageBodyWidth - (pageFormat.columnGap[spaceOption] * 2)) / 3]
+            ["3COLUMNWIDTH", (pageBodyWidth - (pageFormat.columnGap[spaceOption] * 2)) / 3],
+            ["BODYFONT", options.fonts.body],
+            ["BODYFONT2", options.fonts.body2 || options.fonts.body],
+            ["HEADINGFONT", options.fonts.heading],
+            ["FOOTNOTEFONT", options.fonts.footnote],
+            ["GREEKFONT", options.fonts.greek],
+            ["HEBREWFONT", options.fonts.hebrew],
         ]) {
             fileContent = setupOneCSS(fileContent, placeholder, "%%", value);
         }

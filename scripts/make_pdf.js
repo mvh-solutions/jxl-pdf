@@ -5,7 +5,7 @@ const {
 const commander = require('commander');
 const fse = require('fs-extra');
 const path = require('path');
-const parseCommandLineArguments = require('../src/helpers/cli-parser');
+const { parseCommandLineArguments } = require('../src/helpers');
 
 const options = parseCommandLineArguments();
 

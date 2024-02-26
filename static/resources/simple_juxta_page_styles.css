@@ -22,7 +22,7 @@
 body {
     font-size: 9pt;
     line-height: 10pt;
-    font-family: "Gentium Book Plus", serif;
+    font-family: %%BODYFONT%%;
 }
 
 p {
@@ -39,6 +39,7 @@ h1 {
     border-bottom: 2pt solid black;
     padding-bottom: 2pt;
     width: %%PAGEBODYWIDTH%%pt;
+    font-family: %%HEADINGFONT%%;
 }
 
 h2.sentenceHeader {
@@ -49,6 +50,7 @@ h2.sentenceHeader {
     margin: 0;
     width: %%PAGEBODYWIDTH%%pt;
     text-align: center;
+    font-family: %%HEADINGFONT%%;
 }
 
 .phraseN {
@@ -87,6 +89,7 @@ h2.sentenceHeader {
     margin: 0;
     padding: 0;
     padding-right: %%HALFCOLUMNGAP%%pt;
+    font-family: %%GREEKFONT%%;
 }
 
 .jxlGloss {
@@ -136,6 +139,7 @@ h2.sentenceHeader {
     -webkit-column-break-inside: avoid;
     padding-left: 6pt;
     text-indent: -6pt;
+    font-family: %%FOOTNOTEFONT%%;
 }
 
 .note .b {

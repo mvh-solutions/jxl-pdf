@@ -63,6 +63,12 @@ const VALIDATORS = {
             throw new commander.InvalidArgumentError(`'${fontName}' is not one of ${Object.keys(constants.FONT_SETS).join(', ')}`)
         }
         return constants.FONT_SETS[fontName];
+    },
+    fontSizes: fontSizesName => {
+        if (!(Object.keys(constants.FONT_SIZES).includes(fontSizesName))) {
+            throw new commander.InvalidArgumentError(`'${fontSizesName}' is not one of ${Object.keys(constants.FONT_SIZES).join(', ')}`)
+        }
+        return constants.FONT_SIZES[fontSizesName];
     }
 };
 

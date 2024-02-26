@@ -62,6 +62,11 @@ const parseCommandLineArguments = () => {
             `The set of fonts to use. Options are ${Object.keys(constants.FONT_SETS).join(', ')}`,
             VALIDATORS.fonts,
             constants.FONT_SETS["allGentium"]
+        ).option(
+                    '-S, --fontSizes <fontSizesType>',
+                    `The set of font sizes to use. Options are ${Object.keys(constants.FONT_SIZES).join(', ')}`,
+                    VALIDATORS.fontSizes,
+                    constants.FONT_SIZES["9on10"]
         )
 
     program.parse(process.argv);

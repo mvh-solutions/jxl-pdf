@@ -1,5 +1,5 @@
 const path = require("path");
-const {loadTemplates, setupOneCSS, checkCssSubstitution, constants} = require("./helpers");
+const {loadTemplates, setupOneCSS, checkCssSubstitution} = require("./helpers");
 const fse = require("fs-extra");
 const {
     do2ColumnSection,
@@ -43,6 +43,30 @@ const setupCSS = options => {
             ["FOOTNOTEFONT", options.fonts.footnote],
             ["GREEKFONT", options.fonts.greek],
             ["HEBREWFONT", options.fonts.hebrew],
+            ["BODYFONTSIZE", options.fontSizes.body.font],
+            ["BODYLINEHEIGHT", options.fontSizes.body.height],
+            ["BODYHALFLINEHEIGHT", options.fontSizes.body.height],
+            ["BODYBOTTOMMARGIN", options.fontSizes.body.bottomMargin],
+            ["BODYBOTTOMBORDERWIDTH", options.fontSizes.body.bottomBorderWidth],
+            ["BODYBOTTOMPADDING", options.fontSizes.body.bottomPadding],
+            ["H3FONTSIZE", options.fontSizes.h3.font],
+            ["H3LINEHEIGHT", options.fontSizes.h3.height],
+            ["H3HALFLINEHEIGHT", options.fontSizes.h3.height],
+            ["H3BOTTOMMARGIN", options.fontSizes.h3.bottomMargin],
+            ["H3BOTTOMBORDERWIDTH", options.fontSizes.h3.bottomBorderWidth],
+            ["H3BOTTOMPADDING", options.fontSizes.h3.bottomPadding],
+            ["H2FONTSIZE", options.fontSizes.h2.font],
+            ["H2LINEHEIGHT", options.fontSizes.h2.height],
+            ["H2HALFLINEHEIGHT", options.fontSizes.h2.height],
+            ["H2BOTTOMMARGIN", options.fontSizes.h2.bottomMargin],
+            ["H2BOTTOMBORDERWIDTH", options.fontSizes.h2.bottomBorderWidth],
+            ["H2BOTTOMPADDING", options.fontSizes.h2.bottomPadding],
+            ["H1FONTSIZE", options.fontSizes.h1.font],
+            ["H1LINEHEIGHT", options.fontSizes.h1.height],
+            ["H1HALFLINEHEIGHT", options.fontSizes.h1.height],
+            ["H1BOTTOMMARGIN", options.fontSizes.h1.bottomMargin],
+            ["H1BOTTOMBORDERWIDTH", options.fontSizes.h1.bottomBorderWidth],
+            ["H1BOTTOMPADDING", options.fontSizes.h1.bottomPadding],
         ]) {
             fileContent = setupOneCSS(fileContent, placeholder, "%%", value);
         }

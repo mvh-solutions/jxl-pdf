@@ -20,8 +20,8 @@
 }
 
 body {
-    font-size: 9pt;
-    line-height: 10pt;
+    font-size: %%BODYFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
     font-family: %%BODYFONT%%;
 }
 
@@ -31,12 +31,12 @@ p {
 }
 
 h1 {
-    font-size: 14pt;
-    line-height: 15pt;
+    font-size: %%H1FONTSIZE%%pt;
+    line-height: %%H1LINEHEIGHT%%pt;
     font-weight: bold;
-    margin-bottom: 6pt;
-    border-bottom: 2pt solid black;
-    padding-bottom: 2pt;
+    margin-bottom: %%H1BOTTOMMARGIN%%pt;
+    border-bottom: %%H1BOTTOMBORDERWIDTH%%pt solid black;
+    padding-bottom: %%H1BOTTOMPADDING%%pt;
     text-align: left;
     font-family: %%HEADINGFONT%%;
 }
@@ -50,13 +50,13 @@ h1 {
 }
 
 .front_body p {
-    margin-bottom: 10pt;
+    margin-bottom: %%BODYLINEHEIGHT%%pt;
 }
 
 .front_body h2 {
-    margin-bottom: 10pt;
-    font-size: 9pt;
-    line-height: 10pt;
+    margin-bottom: %%BODYLINEHEIGHT%%pt;
+    font-size: %%BODYFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
     font-weight: bold;
     font-style: italic;
     text-align: left;
@@ -72,7 +72,7 @@ h1 {
 .title_page {
     text-align: center;
     font-size: 14pt;
-    line-height: 18pt;
+    line-height: 20pt;
 }
 .title_page > h1 {
     text-align: center;

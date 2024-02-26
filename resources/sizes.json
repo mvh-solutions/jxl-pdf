@@ -1,0 +1,62 @@
+{
+  "9on10": {
+    "body": {
+      "font": 9,
+      "height": 10,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h3": {
+      "font": 12,
+      "height": 20,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h2": {
+      "font": 15,
+      "height": 20,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h1": {
+      "font": 18,
+      "height": 20,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    }
+  },
+  "10on12": {
+    "body": {
+      "font": 10,
+      "height": 12,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h3": {
+      "font": 13,
+      "height": 24,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h2": {
+      "font": 18,
+      "height": 24,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h1": {
+      "font": 20,
+      "height": 20,
+      "bottomMargin": 6,
+      "bottomBorderWidth": 2,
+      "bottomPadding": 2
+    }
+  }
+}

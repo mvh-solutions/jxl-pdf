@@ -54,10 +54,12 @@ h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
 
 h2.verseRecordHeadLeft {
     text-align: left;
+    font-family: %%HEADINGFONT%%;
 }
 
 h2.verseRecordHeadRight {
     text-align: right;
+    font-family: %%HEADINGFONT%%;
 }
 
 .leftColumn {
@@ -104,6 +106,7 @@ h2.verseRecordHeadRight {
 ::footnote-marker {
     font-weight: bold;
 }
+
 .cv {
     font-style: italic;
     font-weight: bold;

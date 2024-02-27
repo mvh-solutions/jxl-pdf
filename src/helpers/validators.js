@@ -13,6 +13,7 @@ const commander = require('commander');
  * - pageFormat: Validates predefined page sizes.
  * - book: Checks for valid Paratext-style book code.
  * - steps: Validates processing steps options.
+ * - fonts: Validates predefined fonts for the output document.
  *
  * Usage: `VALIDATORS[key](value)` to validate each command-line option.
  */

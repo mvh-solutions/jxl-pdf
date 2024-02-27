@@ -1,5 +1,5 @@
 const path = require("path");
-const {loadTemplates, setupOneCSS, checkCssSubstitution} = require("./helpers");
+const { loadTemplates, setupOneCSS, checkCssSubstitution } = require("./helpers");
 const fse = require("fs-extra");
 const {
     do2ColumnSection,

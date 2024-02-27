@@ -20,8 +20,8 @@
 }
 
 body {
-    font-size: 9pt;
-    line-height: 10pt;
+    font-size: %%BODYFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
     font-family: %%BODYFONT%%;
 }
 
@@ -32,13 +32,13 @@ p {
 
 h1 {
     font-family: %%HEADINGFONT%%;
-    font-size: 14pt;
-    line-height: 20pt;
+    font-size: %%H1FONTSIZE%%pt;
+    line-height: %%H1LINEHEIGHT%%pt;
     font-weight: bold;
     margin: 0;
-    margin-bottom: 6pt;
-    border-bottom: 2pt solid black;
-    padding-bottom: 2pt;
+    margin-bottom: %%H1BOTTOMMARGIN%%pt;
+    border-bottom: %%H1BOTTOMBORDERWIDTH%%pt solid black;
+    padding-bottom: %%H1BOTTOMPADDING%%pt;
     width: %%PAGEBODYWIDTH%%pt;
 }
 
@@ -61,9 +61,9 @@ h1 {
     page-break-inside: avoid;
     vertical-align: top;
     display: flex;
-    padding-bottom: 4pt;
-    border-bottom: 1pt solid black;
-    margin-bottom: 5pt
+    padding-bottom: %%RULEPADDING%%pt;
+    border-bottom: %%RULEWIDTH%%pt solid black;
+    margin-bottom: %%RULEMARGIN%%pt
 }
 
 .col1, .col2 {
@@ -80,8 +80,8 @@ h1 {
 .note {
     font-family: %%BODYFONT2%%;
     display: list-item;
-    font-size: 7pt;
-    line-height: 9pt;
+    font-size: %%BODYFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
     text-align: justify;
     margin-bottom: 0pt;
     margin-left: 10pt;

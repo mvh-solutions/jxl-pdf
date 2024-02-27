@@ -20,8 +20,8 @@
 }
 
 body {
-    font-size: 9pt;
-    line-height: 10pt;
+    font-size: %%BODYFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
     font-family: %%BODYFONT%%;
 }
 
@@ -31,13 +31,13 @@ p {
 }
 
 h1 {
-    font-size: 14pt;
-    line-height: 20pt;
+    font-size: %%H1FONTSIZE%%pt;
+    line-height: %%H1LINEHEIGHT%%pt;
     font-weight: bold;
     margin: 0;
-    margin-bottom: 6pt;
-    border-bottom: 2pt solid black;
-    padding-bottom: 2pt;
+    margin-bottom: %%H1BOTTOMMARGIN%%pt;
+    border-bottom: %%H1BOTTOMBORDERWIDTH%%pt solid black;
+    padding-bottom: %%H1BOTTOMPADDING%%pt;
     width: %%PAGEBODYWIDTH%%pt;
     font-family: %%HEADINGFONT%%;
 }
@@ -60,10 +60,10 @@ h1 {
 
 ::footnote-call {
     font-weight: bold;
-    font-size: 70%;
+    font-size: %%FOOTNOTEFONTSIZE%%pt;
     vertical-align: baseline;
     position: relative;
-    top: -0.5em;
+    top: -%%FOOTNOTECALLEROFFSET%%pt;
     padding-left: 1pt;
 }
 
@@ -72,8 +72,8 @@ h1 {
 }
 
 .note {
-    font-size: 7pt;
-    line-height: 9pt;
+    font-size: %%FOOTNOTEFONTSIZE%%pt;
+    line-height: %%FOOTNOTELINEHEIGHT%%pt;
     text-align: justify;
     float: footnote;
     margin-bottom: 0pt;

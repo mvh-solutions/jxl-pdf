@@ -12,7 +12,7 @@
     margin-right: %%MARGINOUTER%%pt;
 }
 body {
-    font-size: 9pt;
+    font-size: %%BODYFONTSIZE%%pt;
     font-family: %%BODYFONT%%;
     text-align: center;
 }

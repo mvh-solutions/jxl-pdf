@@ -7,6 +7,13 @@
       "bottomBorderWidth": 0,
       "bottomPadding": 0
     },
+    "h4": {
+      "font": 10,
+      "height": 20,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
     "h3": {
       "font": 12,
       "height": 20,
@@ -27,6 +34,67 @@
       "bottomMargin": 0,
       "bottomBorderWidth": 0,
       "bottomPadding": 0
+    },
+    "footnote": {
+      "font": 7,
+      "height": 10,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "rule": {
+      "bottomMargin": 4,
+      "bottomBorderWidth": 1,
+      "bottomPadding": 5
+    }
+  },
+  "9on11": {
+    "body": {
+      "font": 9,
+      "height": 11,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h4": {
+      "font": 10,
+      "height": 22,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h3": {
+      "font": 12,
+      "height": 22,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h2": {
+      "font": 15,
+      "height": 22,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h1": {
+      "font": 18,
+      "height": 22,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "footnote": {
+      "font": 7,
+      "height": 11,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "rule": {
+      "bottomMargin": 5,
+      "bottomBorderWidth": 1,
+      "bottomPadding": 5
     }
   },
   "10on12": {
@@ -37,8 +105,15 @@
       "bottomBorderWidth": 0,
       "bottomPadding": 0
     },
+    "h4": {
+      "font": 12,
+      "height": 24,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
     "h3": {
-      "font": 13,
+      "font": 14,
       "height": 24,
       "bottomMargin": 0,
       "bottomBorderWidth": 0,
@@ -57,6 +132,67 @@
       "bottomMargin": 6,
       "bottomBorderWidth": 2,
       "bottomPadding": 2
+    },
+    "footnote": {
+      "font": 8,
+      "height": 12,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "rule": {
+      "bottomMargin": 5,
+      "bottomBorderWidth": 1,
+      "bottomPadding": 6
+    }
+  },
+  "12on14": {
+    "body": {
+      "font": 12,
+      "height": 14,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h4": {
+      "font": 14,
+      "height": 28,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h3": {
+      "font": 16,
+      "height": 28,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h2": {
+      "font": 20,
+      "height": 28,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h1": {
+      "font": 24,
+      "height": 28,
+      "bottomMargin": 6,
+      "bottomBorderWidth": 2,
+      "bottomPadding": 2
+    },
+    "footnote": {
+      "font": 10,
+      "height": 14,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "rule": {
+      "bottomMargin": 6,
+      "bottomBorderWidth": 1,
+      "bottomPadding": 7
     }
   }
 }

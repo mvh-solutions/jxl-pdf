@@ -20,8 +20,8 @@
 }
 
 body {
-    font-size: 9pt;
-    line-height: 10pt;
+    font-size: %%BODYFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
     font-family: %%BODYFONT%%;
 }
 
@@ -31,20 +31,20 @@ p {
 }
 
 h1 {
-    font-size: 14pt;
-    line-height: 20pt;
+    font-size: %%H1FONTSIZE%%pt;
+    line-height: %%H1LINEHEIGHT%%pt;
     font-weight: bold;
     margin: 0;
-    margin-bottom: 6pt;
-    border-bottom: 2pt solid black;
-    padding-bottom: 2pt;
+    margin-bottom: %%H1BOTTOMMARGIN%%pt;
+    border-bottom: %%H1BOTTOMBORDERWIDTH%%pt solid black;
+    padding-bottom: %%H1BOTTOMPADDING%%pt;
     width: %%PAGEBODYWIDTH%%pt;
     font-family: %%HEADINGFONT%%;
 }
 
 h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
-    font-size: 10pt;
-    line-height: 20pt;
+    font-size: %%H4FONTSIZE%%pt;
+    line-height: %%H4LINEHEIGHT%%pt;
     font-style: italic;
     font-weight: bold;
     margin: 0;
@@ -54,12 +54,10 @@ h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
 
 h2.verseRecordHeadLeft {
     text-align: left;
-    font-family: %%HEADINGFONT%%;
 }
 
 h2.verseRecordHeadRight {
     text-align: right;
-    font-family: %%HEADINGFONT%%;
 }
 
 .leftColumn {
@@ -106,34 +104,13 @@ h2.verseRecordHeadRight {
 ::footnote-marker {
     font-weight: bold;
 }
-
-.head1 {
-    display: inline-block;
-    width: 200pt;
-    font-family: %%HEADINGFONT%%;
-}
-.head2 {
-    display: inline-block;
-    width: 332pt;
-    font-family: %%HEADINGFONT%%;
-}
-.head3 {
-    display: inline-block;
-    width: 200pt;
-    font-family: %%HEADINGFONT%%;
-}
-.head4 {
-    display: inline-block;
-    width: 188pt;
-    font-family: %%HEADINGFONT%%;
-}
 .cv {
     font-style: italic;
     font-weight: bold;
 }
 .note {
-    font-size: 7pt;
-    line-height: 9pt;
+    font-size: %%FOOTNOTEFONTSIZE%%pt;
+    line-height: %%FOOTNOTELINEHEIGHT%%pt;
     text-align: justify;
     float: footnote;
     margin-bottom: 0pt;

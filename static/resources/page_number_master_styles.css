@@ -1,21 +1,6 @@
-@page {
-    size: %%PAGEWIDTH%%pt %%PAGEHEIGHT%%pt;
-    margin-bottom: 0;
-    margin-top: 0;
-}
-@page :left {
-    margin-left: %%MARGINOUTER%%pt;
-    margin-right: %%MARGININNER%%pt;
-}
-@page :right {
-    margin-left: %%MARGININNER%%pt;
-    margin-right: %%MARGINOUTER%%pt;
-}
-body {
-    font-size: %%BODYFONTSIZE%%pt;
-    font-family: %%BODYFONT%%;
-    text-align: center;
-}
+%%%ATPAGE%%%
+
+%%%BODY%%%
 
 .pagenum {
     padding-top: %%PAGENUMBERTOPMARGIN%%pt;

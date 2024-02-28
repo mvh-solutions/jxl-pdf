@@ -1,80 +1,12 @@
-@page {
-    size: %%PAGEWIDTH%%pt %%PAGEHEIGHT%%pt;
-    margin-bottom: %%MARGINBOTTOM%%pt;
-    margin-top: %%MARGINTOP%%pt;
-    @footnote {
-        float: bottom;
-        margin-top: %%FOOTEROFFSET%%pt;
-    }
-}
-@page :first {
-    margin-top: %%FIRSTPAGEMARGINTOP%%pt;
-}
-@page :left {
-    margin-left: %%MARGINOUTER%%pt;
-    margin-right: %%MARGININNER%%pt;
-}
-@page :right {
-    margin-left: %%MARGININNER%%pt;
-    margin-right: %%MARGINOUTER%%pt;
-}
+%%%ATPAGE%%%
 
-body {
-    font-size: %%BODYFONTSIZE%%pt;
-    line-height: %%BODYLINEHEIGHT%%pt;
-    font-family: %%BODYFONT%%;
-}
+%%%BODY%%%
 
-p {
-    margin: 0;
-    padding: 0;
-}
+%%%P%%%
 
-h1 {
-    font-size: %%H1FONTSIZE%%pt;
-    line-height: %%H1LINEHEIGHT%%pt;
-    font-weight: bold;
-    margin: 0;
-    margin-bottom: %%H1BOTTOMMARGIN%%pt;
-    border-bottom: %%H1BOTTOMBORDERWIDTH%%pt solid black;
-    padding-bottom: %%H1BOTTOMPADDING%%pt;
-    width: %%PAGEBODYWIDTH%%pt;
-    font-family: %%HEADINGFONT%%;
-}
+%%%H1%%%
 
-h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
-    font-size: %%H4FONTSIZE%%pt;
-    line-height: %%H4LINEHEIGHT%%pt;
-    font-style: italic;
-    font-weight: bold;
-    margin: 0;
-    width: %%2COLUMNWIDTH%%pt;
-    font-family: %%HEADINGFONT%%;
-}
-
-h2.verseRecordHeadLeft {
-    text-align: left;
-    font-family: %%HEADINGFONT%%;
-}
-
-h2.verseRecordHeadRight {
-    text-align: right;
-    font-family: %%HEADINGFONT%%;
-}
-
-.leftColumn {
-    display: inline-block;
-    width: %%2COLUMNWIDTH%%pt;
-    vertical-align: top;
-    margin-right: %%HALFCOLUMNGAP%%pt;
-}
-
-.rightColumn {
-    width: %%2COLUMNWIDTH%%pt;
-    display: inline-block;
-    vertical-align: top;
-    margin-left: %%HALFCOLUMNGAP%%pt;
-}
+%%%2COL%%%
 
 .verseRecord {
     page-break-inside: avoid;
@@ -94,34 +26,9 @@ h2.verseRecordHeadRight {
     text-indent: 1em;
 }
 
-::footnote-call {
-    font-weight: bold;
-    font-size: 70%;
-    vertical-align: baseline;
-    position: relative;
-    top: -0.5em;
-    padding-left: 1pt;
-}
-
-::footnote-marker {
-    font-weight: bold;
-}
-
 .cv {
     font-style: italic;
     font-weight: bold;
 }
-.note {
-    font-size: %%FOOTNOTEFONTSIZE%%pt;
-    line-height: %%FOOTNOTELINEHEIGHT%%pt;
-    text-align: justify;
-    float: footnote;
-    margin-bottom: 0pt;
-    padding-left: 6pt;
-    text-indent: -6pt;
-    font-family: %%FOOTNOTEFONT%%;
-}
 
-.note .b {
-    font-weight: bold;
-}
+%%%FOOTNOTE%%%

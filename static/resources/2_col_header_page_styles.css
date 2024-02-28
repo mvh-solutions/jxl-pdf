@@ -1,65 +1,12 @@
-@page {
-    size: %%PAGEWIDTH%%pt %%PAGEHEIGHT%%pt;
-    margin-bottom: %%MARGINBOTTOM%%pt;
-    margin-top: %%FIRSTPAGEMARGINTOP%%pt;
-}
-@page :left {
-    margin-left: %%MARGINOUTER%%pt;
-    margin-right: %%MARGININNER%%pt;
-}
-@page :right {
-    margin-left: %%MARGININNER%%pt;
-    margin-right: %%MARGINOUTER%%pt;
-}
+%%%ATPAGEHEADER%%%
 
-body {
-    font-size: %%BODYFONTSIZE%%pt;
-    line-height: %%BODYLINEHEIGHT%%pt;
-    font-family: %%BODYFONT%%;
-}
+%%%BODY%%%
 
-h1 {
-    font-size: %%H1FONTSIZE%%pt;
-    line-height: %%H1LINEHEIGHT%%pt;
-    font-weight: bold;
-    margin: 0;
-    margin-bottom: %%H1BOTTOMMARGIN%%pt;
-    border-bottom: %%H1BOTTOMBORDERWIDTH%%pt solid black;
-    padding-bottom: %%H1BOTTOMMARGIN%%pt;
-    width: %%PAGEBODYWIDTH%%pt;
-}
+%%%P%%%
 
-h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
-    font-size: %%H4FONTSIZE%%pt;
-    line-height: %%H4LINEHEIGHT%%pt;
-    font-style: italic;
-    font-weight: bold;
-    margin: 0;
-    width: %%2COLUMNWIDTH%%pt;
-}
+%%%H1%%%
 
-h2.verseRecordHeadLeft {
-    text-align: left;
-}
-
-h2.verseRecordHeadRight {
-    text-align: right;
-}
-
-.leftColumn {
-    display: inline-block;
-    width: %%2COLUMNWIDTH%%pt;
-    vertical-align: top;
-    margin-right: %%HALFCOLUMNGAP%%pt;
-}
-
-.rightColumn {
-    width: %%2COLUMNWIDTH%%pt;
-    height: 100%;
-    display: inline-block;
-    vertical-align: top;
-    margin-left: %%HALFCOLUMNGAP%%pt;
-}
+%%%2COL%%%
 
 .columnHeadings {
     page-break-inside: avoid;

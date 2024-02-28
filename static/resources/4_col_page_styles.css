@@ -1,67 +1,16 @@
-@page {
-    size: %%DOUBLEPAGEWIDTH%%pt %%PAGEHEIGHT%%pt;
-    margin-right: %%MARGINOUTER%%pt;
-    margin-left: %%MARGINOUTER%%pt;
-    margin-bottom: %%MARGINBOTTOM%%pt;
-    margin-top: %%MARGINTOP%%pt;
-
-    @top-center {
-    }
-
-    @footnote {
-        float: bottom;
-        columns: 2;
-        column-gap: %%DOUBLEMARGININNER%%pt;
-        margin-top: %%BODYLINEHEIGHT%%pt;
-    }
-}
+%%%ATDOUBLEPAGE%%%
 
 @page :first {
     margin-top: %%FIRSTPAGEMARGINTOP%%pt;
 }
-body {
-    font-size: %%BODYFONTSIZE%%pt;
-    line-height: %%BODYLINEHEIGHT%%pt;
-    font-family: %%BODYFONT%%;
-}
 
-p {
-    margin: 0;
-    padding: 0;
-}
+%%%BODY%%%
 
-h1 {
-    font-size: %%H1FONTSIZE%%pt;
-    line-height: %%H1LINEHEIGHT%%pt;
-    font-weight: bold;
-    margin: 0;
-    margin-bottom: %%H1BOTTOMMARGIN%%pt;
-    border-bottom: %%H1BOTTOMBORDERWIDTH%%pt solid black;
-    padding-bottom: %%H1BOTTOMPADDING%%pt;
-    width: %%PAGEBODYWIDTH%%pt;
-    font-family: %%HEADINGFONT%%;
-}
+%%%P%%%
 
-.versoPage {
-    display: inline-block;
-    width: %%PAGEBODYWIDTH%%pt;
-    vertical-align: top;
-    margin-right: %%MARGININNER%%pt;
-}
+%%%H1%%%
 
-.rectoPage {
-    width: %%PAGEBODYWIDTH%%pt;
-    height: 100%;
-    display: inline-block;
-    vertical-align: top;
-    margin-left: %%MARGININNER%%pt;
-}
-
-.verseRecord {
-    page-break-inside: avoid;
-    vertical-align: top;
-    display: flex;
-}
+%%%4COL%%%
 
 .col1, .col2, .col3, .col4 {
     vertical-align: top;
@@ -76,44 +25,10 @@ h1 {
 .col2, .col3, .col4 {
     text-indent: 1em;
 }
-.note {
-    font-size: %%FOOTNOTEFONTSIZE%%pt;
-    line-height: %%FOOTNOTELINEHEIGHT%%pt;
-    text-align: justify;
-    float: footnote;
-    margin-bottom: 0pt;
-    padding-left: 6pt;
-    text-indent: -6pt;
-    font-family: %%FOOTNOTEFONT%%;
-}
 
-.note .b {
-    font-weight: bold;
-}
-
-::footnote-call {
-    font-weight: bold;
-    font-size: 70%;
-    vertical-align: baseline;
-    position: relative;
-    top: -0.5em;
-    padding-left: 1pt;
-}
-
-::footnote-marker {
-    font-weight: bold;
-}
+%%%FOOTNOTE%%%
 
 .cv {
     font-style: italic;
     font-size: 80%;
-}
-h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
-    font-size: %%H4FONTSIZE%%pt;
-    line-height: %%H4LINEHEIGHT%%pt;
-    font-style: italic;
-    font-weight: bold;
-    margin: 0;
-    width: %%PAGEBODYWIDTH%%pt;
-    font-family: %%HEADINGFONT%%;
 }

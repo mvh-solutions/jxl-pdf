@@ -1,0 +1,20 @@
+@page {
+    size: %%PAGEWIDTH%%pt %%PAGEHEIGHT%%pt;
+    margin-bottom: %%MARGINBOTTOM%%pt;
+    margin-top: %%MARGINTOP%%pt;
+    @footnote {
+        float: bottom;
+        margin-top: %%FOOTEROFFSET%%pt;
+    }
+}
+@page :first {
+    margin-top: %%FIRSTPAGEMARGINTOP%%pt;
+}
+@page :left {
+    margin-left: %%MARGINOUTER%%pt;
+    margin-right: %%MARGININNER%%pt;
+}
+@page :right {
+    margin-left: %%MARGININNER%%pt;
+    margin-right: %%MARGINOUTER%%pt;
+}

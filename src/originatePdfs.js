@@ -13,10 +13,22 @@ const {
     doBiblePlusNotesSection
 } = require("./sectionHandlers");
 const setupCSS = options => {
+    const cssFragments = {};
+    const cssFragmentFilenames = fse.readdirSync(path.join(__dirname, "..", "static", "cssFragments"))
+        .filter(name => name.endsWith(".css"));
+    for (const filename of cssFragmentFilenames) {
+        const fileContent = fse.readFileSync(path.join(__dirname, "..", "static", "cssFragments", filename)).toString();
+        const contentKey = filename.split('.')[0].replace(/%/g, "");
+        cssFragments[contentKey] = fileContent;
+    }
     const cssFilenames = fse.readdirSync(path.join(__dirname, "..", "static", "resources"))
         .filter(name => name.endsWith(".css"));
     for (const filename of cssFilenames) {
         let fileContent = fse.readFileSync(path.join(__dirname, "..", "static", "resources", filename)).toString();
+        for (const [fragKey, fragContent] of Object.entries(cssFragments)) {
+            fileContent = setupOneCSS(fileContent, fragKey, "%%%", fragContent);
+        }
+        checkCssSubstitution(filename, fileContent,"%%%");
         const pageFormat = options.pageFormat;
         const spaceOption = 0; // MAKE THIS CONFIGURABLE
         const pageBodyWidth = pageFormat.pageSize[0] - (pageFormat.margins.inner[spaceOption] + pageFormat.margins.outer[spaceOption]);

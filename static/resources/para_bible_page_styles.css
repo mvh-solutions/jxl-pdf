@@ -1,26 +1,5 @@
-@page {
-    size: %%PAGEWIDTH%%pt %%PAGEHEIGHT%%pt;
-    margin-bottom: %%MARGINBOTTOM%%pt;
-    margin-top: %%MARGINTOP%%pt;
-    @footnote {
-        float: bottom;
-        margin-top: %%FOOTEROFFSET%%pt;
-    }
-}
-@page :first {
-    margin-top: %%FIRSTPAGEMARGINTOP%%pt;
-}
-@page :left {
-    margin-left: %%MARGINOUTER%%pt;
-    margin-right: %%MARGININNER%%pt;
-}
-@page :right {
-    margin-left: %%MARGININNER%%pt;
-    margin-right: %%MARGINOUTER%%pt;
-}
-@footnote {
-    float: bottom;
-}
+%%%ATPAGE%%%
+
 body {
     font-size: %%BODYFONTSIZE%%pt;
     line-height: %%BODYLINEHEIGHT%%pt;
@@ -33,22 +12,9 @@ div.chapters {
     columns: 2;
 }
 
-p {
-    margin: 0;
-    padding: 0;
-}
+%%%P%%%
 
-h1 {
-    font-size: %%H1FONTSIZE%%pt;
-    line-height: %%H1LINEHEIGHT%%pt;
-    font-weight: bold;
-    margin: 0;
-    margin-bottom: %%H1BOTTOMMARGIN%%pt;
-    border-bottom: %%H1BOTTOMBORDERWIDTH%%pt solid black;
-    padding-bottom: %%H1BOTTOMPADDING%%pt;
-    width: %%PAGEBODYWIDTH%%pt;
-    font-family: %%HEADINGFONT%%;
-}
+%%%H1%%%
 
 ::footnote-call {
     font-weight: bold;

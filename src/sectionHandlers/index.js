@@ -1,4 +1,5 @@
 const doFrontSection = require('./frontSection');
+const doMarkdownSection = require('./markdownSection');
 const doBookNoteSection = require('./bookNoteSection');
 const do4ColumnSpreadSection = require('./4ColumnSpreadSection');
 const doJxlSpreadSection = require('./jxlSpreadSection');
@@ -10,6 +11,7 @@ const doBiblePlusNotesSection = require("./biblePlusNotesSection");
 
 module.exports = {
     doFrontSection,
+    doMarkdownSection,
     doBookNoteSection,
     do4ColumnSpreadSection,
     doJxlSpreadSection,

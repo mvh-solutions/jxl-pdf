@@ -10,7 +10,8 @@ const {
     doJxlSimpleSection,
     doBcvBibleSection,
     doParaBibleSection,
-    doBiblePlusNotesSection
+    doBiblePlusNotesSection,
+    doMarkdownSection
 } = require("./sectionHandlers");
 const setupCSS = options => {
     const cssFragments = {};
@@ -151,6 +152,11 @@ const originatePdfs = async options => {
         switch (section.type) {
             case "front":
                 await doFrontSection(
+                    {section, templates, bookCode, options}
+                );
+                break;
+            case "markdown":
+                await doMarkdownSection(
                     {section, templates, bookCode, options}
                 );
                 break;

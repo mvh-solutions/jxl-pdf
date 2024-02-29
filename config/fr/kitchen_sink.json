@@ -4,6 +4,14 @@
   "notesFormat": "tsv9",
   "sections": [
     {
+      "id": "blabla",
+      "type": "markdown",
+      "path": "fra_markdown/blabla",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
       "id": "emploi",
       "type": "front",
       "path": "fra_front/mode_emploi",

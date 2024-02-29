@@ -8,6 +8,8 @@ const constants = {
     VERSION: "0.0.1",
     DEFAULT_WORKING_DIR: path.resolve(path.join(os.homedir(), ".jxlpdf/working")),
     DEFAULT_PAGE_SIZE: "EXECUTIVE",
+    DEFAULT_FONT_SET: "allGentium",
+    DEFAULT_FONT_SIZE: "9on10",
     STEPS_OPTIONS: {
         "ARGSONLY": [],
         "CLEAR": ["clear"],

@@ -2,13 +2,18 @@ const commander = require('commander');
 const VALIDATORS = require('./validators');
 const constants = require('./constants');
 
+function showDefaultStr(obj, defaultVal) {
+    if(process.argv.indexOf("--help") != -1 || process.argv.indexOf("-h") != -1) return defaultVal;
+    return obj;
+}
+
 const parseCommandLineArguments = () => {
     const program = new commander.Command();
 
     program
         .name('jxl-pdf')
         .description('Versatile, print-ready PDFs, from industry-standard source files, in Javascript')
-        .version(constants.VERSION)
+        .version(constants.VERSION);
 
     program
         .requiredOption(
@@ -49,25 +54,25 @@ const parseCommandLineArguments = () => {
             '-p, --page-format <spec>',
             `One of ${Object.keys(constants.PAGE_SIZES).join(', ')}`,
             VALIDATORS.pageFormat,
-            constants.PAGE_SIZES[constants.DEFAULT_PAGE_SIZE]
+            showDefaultStr(constants.PAGE_SIZES[constants.DEFAULT_PAGE_SIZE], constants.DEFAULT_PAGE_SIZE)
         )
         .option(
             '-s, --steps <stepsType>',
             `The processing steps that will take place. Options are ${Object.keys(constants.STEPS_OPTIONS).join(', ')}`,
             VALIDATORS.steps,
-            constants.STEPS_OPTIONS["ALL"]
+            showDefaultStr(constants.STEPS_OPTIONS["ALL"], "ALL")
         )
         .option(
             '-F, --fonts <fontsType>',
             `The set of fonts to use. Options are ${Object.keys(constants.FONT_SETS).join(', ')}`,
             VALIDATORS.fonts,
-            constants.FONT_SETS["allGentium"]
+            showDefaultStr(constants.FONT_SETS[constants.DEFAULT_FONT_SET], constants.DEFAULT_FONT_SET)
         ).option(
-                    '-S, --fontSizes <fontSizesType>',
-                    `The set of font sizes to use. Options are ${Object.keys(constants.FONT_SIZES).join(', ')}`,
-                    VALIDATORS.fontSizes,
-                    constants.FONT_SIZES["9on10"]
-        )
+            '-S, --fontSizes <fontSizesType>',
+            `The set of font sizes to use. The name indicates the body font size and line spacing (in point) (format : {body font}on{line spacing}). Options are ${Object.keys(constants.FONT_SIZES).join(', ')}`,
+            VALIDATORS.fontSizes,
+            showDefaultStr(constants.FONT_SIZES[constants.DEFAULT_FONT_SIZE], constants.DEFAULT_FONT_SIZE)
+        );
 
     program.parse(process.argv);
 

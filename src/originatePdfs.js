@@ -11,7 +11,8 @@ const {
     doBcvBibleSection,
     doParaBibleSection,
     doBiblePlusNotesSection,
-    doMarkdownSection
+    doMarkdownSection,
+    doObsSection
 } = require("./sectionHandlers");
 const setupCSS = options => {
     const cssFragments = {};
@@ -157,6 +158,11 @@ const originatePdfs = async options => {
                 break;
             case "markdown":
                 await doMarkdownSection(
+                    {section, templates, bookCode, options}
+                );
+                break;
+            case "obs":
+                await doObsSection(
                     {section, templates, bookCode, options}
                 );
                 break;

@@ -1,0 +1,27 @@
+%%%ATPAGE%%%
+
+%%%BODY%%%
+
+%%%H1%%%
+
+h2 {
+    font-family: %%HEADINGFONT%%;
+    font-size:%%H2FONTSIZE%%pt;
+    line-height:%%H2LINEHEIGHT%%pt;
+}
+h3 {
+    font-family: %%HEADINGFONT%%;
+    font-size: %%H3FONTSIZE%%pt;
+    line-height: %%H3LINEHEIGHT%%pt;
+}
+h4 {
+    font-family: %%HEADINGFONT%%;
+    font-size:%%H4FONTSIZE%%pt;
+    line-height:%%H4LINEHEIGHT%%pt;
+}
+p {
+    margin-top: %%BODYLINEHEIGHT%%pt;
+    margin-bottom: %%BODYLINEHEIGHT%%pt;
+}
+
+%%%FOOTNOTE%%%

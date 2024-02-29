@@ -1,0 +1,29 @@
+h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
+    font-size: %%H4FONTSIZE%%pt;
+    line-height: %%H4LINEHEIGHT%%pt;
+    font-style: italic;
+    font-weight: bold;
+    margin: 0;
+    width: %%PAGEBODYWIDTH%%pt;
+    font-family: %%HEADINGFONT%%;
+}
+.versoPage {
+    display: inline-block;
+    width: %%PAGEBODYWIDTH%%pt;
+    vertical-align: top;
+    margin-right: %%MARGININNER%%pt;
+}
+
+.rectoPage {
+    width: %%PAGEBODYWIDTH%%pt;
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: %%MARGININNER%%pt;
+}
+
+.verseRecord {
+    page-break-inside: avoid;
+    vertical-align: top;
+    display: flex;
+}

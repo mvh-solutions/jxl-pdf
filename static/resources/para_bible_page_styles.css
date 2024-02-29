@@ -1,29 +1,8 @@
-@page {
-    size: %%PAGEWIDTH%%pt %%PAGEHEIGHT%%pt;
-    margin-bottom: %%MARGINBOTTOM%%pt;
-    margin-top: %%MARGINTOP%%pt;
-    @footnote {
-        float: bottom;
-        margin-top: %%FOOTEROFFSET%%pt;
-    }
-}
-@page :first {
-    margin-top: %%FIRSTPAGEMARGINTOP%%pt;
-}
-@page :left {
-    margin-left: %%MARGINOUTER%%pt;
-    margin-right: %%MARGININNER%%pt;
-}
-@page :right {
-    margin-left: %%MARGININNER%%pt;
-    margin-right: %%MARGINOUTER%%pt;
-}
-@footnote {
-    float: bottom;
-}
+%%%ATPAGE%%%
+
 body {
-    font-size: 9pt;
-    line-height: 10pt;
+    font-size: %%BODYFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
     font-family: %%BODYFONT%%;
     text-align: justify;
     text-align-last: left;
@@ -33,26 +12,13 @@ div.chapters {
     columns: 2;
 }
 
-p {
-    margin: 0;
-    padding: 0;
-}
+%%%P%%%
 
-h1 {
-    font-size: 14pt;
-    line-height: 20pt;
-    font-weight: bold;
-    margin: 0;
-    margin-bottom: 6pt;
-    border-bottom: 2pt solid black;
-    padding-bottom: 2pt;
-    width: 388pt;
-    font-family: %%HEADINGFONT%%;
-}
+%%%H1%%%
 
 ::footnote-call {
     font-weight: bold;
-    font-size: 70%;
+    font-size: %%FOOTNOTEFONTSIZE%%;
     vertical-align: baseline;
     position: relative;
     top: -0.5em;
@@ -73,8 +39,8 @@ h1 {
     font-style: italic;
 }
 .paras_usfm_f {
-    font-size: 7pt;
-    line-height: 10pt;
+    font-size: %%FOOTNOTEFONTSIZE%%pt;
+    line-height: %%FOOTNOTELINEHEIGHT%%pt;
     float: footnote;
     font-family: %%FOOTNOTEFONT%%;
 }
@@ -83,24 +49,24 @@ h1 {
 .paras_usfm_imt {
     font-weight: bold;
     font-style: italic;
-    font-size: 20pt;
-    line-height: 30pt;
+    font-size: %%H1FONTSIZE%%pt;
+    line-height: %%H1LINEHEIGHT%%pt;
     text-align: center;
     font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_imt2 {
     font-weight: bold;
     font-style: italic;
-    font-size: 14pt;
-    line-height: 20pt;
+    font-size: %%H2FONTSIZE%%pt;
+    line-height: %%H2LINEHEIGHT%%pt;
     text-align: center;
     font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_imt3 {
     font-weight: bold;
     font-style: italic;
-    font-size: 12pt;
-    line-height: 20pt;
+    font-size: %%H3FONTSIZE%%pt;
+    line-height: %%H3LINEHEIGHT%%pt;
     text-align: center;
     font-family: %%HEADINGFONT%%;
 }
@@ -116,25 +82,25 @@ h1 {
 }
 .paras_usfm_iot {
     font-weight: bold;
-    font-size: 12pt;
-    line-height: 20pt;
+    font-size: %%H4FONTSIZE%%pt;
+    line-height: %%H4LINEHEIGHT%%pt;
 }
 .paras_usfm_is {
     font-style: italic;
-    font-size: 20pt;
-    line-height: 30pt;
+    font-size: %%H1FONTSIZE%%pt;
+    line-height: %%H1LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_is2 {
     font-style: italic;
-    font-size: 14pt;
-    line-height: 20pt;
+    font-size: %%H2FONTSIZE%%pt;
+    line-height: %%H2LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_is3 {
     font-style: italic;
-    font-size: 12pt;
-    line-height: 20pt;
+    font-size: %%H3FONTSIZE%%pt;
+    line-height: %%H3LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_li {
@@ -158,14 +124,14 @@ h1 {
     padding-left: 12pt;
 }
 .paras_usfm_mr {
-    font-size: 12pt;
-    line-height: 20pt;
+    font-size: %%H4FONTSIZE%%pt;
+    line-height: %%H4LINEHEIGHT%%pt;
     font-style: italic;
     font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_ms {
-    font-size: 12pt;
-    line-height: 20pt;
+    font-size: %%H4FONTSIZE%%pt;
+    line-height: %%H4LINEHEIGHT%%pt;
     font-weight: bold;
     font-family: %%HEADINGFONT%%;
 }
@@ -176,24 +142,24 @@ h1 {
 .paras_usfm_mt {
     font-weight: bold;
     font-style: italic;
-    font-size: 20pt;
-    line-height: 30pt;
+    font-size: %%H1FONTSIZE%%pt;
+    line-height: %%H1LINEHEIGHT%%pt;
     text-align: center;
     font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_mt2 {
     font-weight: bold;
     font-style: italic;
-    font-size: 14pt;
-    line-height: 20pt;
+    font-size: %%H2FONTSIZE%%pt;
+    line-height: %%H2LINEHEIGHT%%pt;
     text-align: center;
     font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_mt3 {
     font-weight: bold;
     font-style: italic;
-    font-size: 12pt;
-    line-height: 20pt;
+    font-size: %%H3FONTSIZE%%pt;
+    line-height: %%H3LINEHEIGHT%%pt;
     text-align: center;
     font-family: %%HEADINGFONT%%;
 }
@@ -236,8 +202,8 @@ h1 {
 }
 .paras_usfm_qa {
     font-weight: bold;
-    font-size: 14pt;
-    line-height: 30pt;
+    font-size: %%H1FONTSIZE%%pt;
+    line-height: %%H1LINEHEIGHT%%pt;
 }
 .paras_usfm_qr {
     text-align: right;
@@ -248,32 +214,34 @@ h1 {
 }
 .paras_usfm_s {
     font-style: italic;
-    font-size: 20pt;
-    line-height: 30pt;
+    font-size: %%H1FONTSIZE%%pt;
+    line-height: %%H1LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_s2 {
     font-style: italic;
-    font-size: 14pt;
-    line-height: 20pt;
+    font-size: %%H2FONTSIZE%%pt;
+    line-height: %%H2LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_s3 {
     font-style: italic;
-    font-size: 12pt;
-    line-height: 20pt;
+    font-size: %%H3FONTSIZE%%pt;
+    line-height: %%H3LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_sr {
-    font-size: 12pt;
-    line-height: 20pt;
+    font-size: %%H3FONTSIZE%%pt;
+    line-height: %%H3LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_tr {
 }
 .paras_usfm_x {
-    font-size: 7pt;
-    line-height: 10pt;
+    font-size: %%FOOTNOTEFONTSIZE%%pt;
+    line-height: %%FOOTNOTELINEHEIGHT%%pt;
+    float: footnote;
+    font-family: %%FOOTNOTEFONT%%;
 }
 /* marks CSS format : */
 .marks_default {
@@ -293,7 +261,7 @@ p:has(.marks_chapter_label) {
 }
 .marks_verses_label {
     font-weight: bold;
-    font-size: 7pt;
+    font-size: 70%;
     line-height: 1;
     margin-right: 2pt;
     vertical-align: top;

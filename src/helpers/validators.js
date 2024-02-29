@@ -55,15 +55,21 @@ const VALIDATORS = {
     },
     steps: stepOptName => {
         if (!(Object.keys(constants.STEPS_OPTIONS).includes(stepOptName))) {
-            throw new commander.InvalidArgumentError(`'${stepOptName}' is not one of ${Object.keys(constants.STEPS_OPTIONS).join(', ')}`);
+            throw new commander.InvalidArgumentError(`'${stepOptName}' is not one of ${Object.keys(constants.STEPS_OPTIONS).join(', ')}`)
         }
         return constants.STEPS_OPTIONS[stepOptName];
     },
     fonts: fontName => {
         if (!(Object.keys(constants.FONT_SETS).includes(fontName))) {
-            throw new commander.InvalidArgumentError(`'${fontName}' is not one of ${Object.keys(constants.FONT_SETS).join(', ')}`);
+            throw new commander.InvalidArgumentError(`'${fontName}' is not one of ${Object.keys(constants.FONT_SETS).join(', ')}`)
         }
         return constants.FONT_SETS[fontName];
+    },
+    fontSizes: fontSizesName => {
+        if (!(Object.keys(constants.FONT_SIZES).includes(fontSizesName))) {
+            throw new commander.InvalidArgumentError(`'${fontSizesName}' is not one of ${Object.keys(constants.FONT_SIZES).join(', ')}`)
+        }
+        return constants.FONT_SIZES[fontSizesName];
     }
 };
 

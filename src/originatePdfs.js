@@ -13,10 +13,22 @@ const {
     doBiblePlusNotesSection
 } = require("./sectionHandlers");
 const setupCSS = options => {
+    const cssFragments = {};
+    const cssFragmentFilenames = fse.readdirSync(path.join(__dirname, "..", "static", "cssFragments"))
+        .filter(name => name.endsWith(".css"));
+    for (const filename of cssFragmentFilenames) {
+        const fileContent = fse.readFileSync(path.join(__dirname, "..", "static", "cssFragments", filename)).toString();
+        const contentKey = filename.split('.')[0].replace(/%/g, "");
+        cssFragments[contentKey] = fileContent;
+    }
     const cssFilenames = fse.readdirSync(path.join(__dirname, "..", "static", "resources"))
         .filter(name => name.endsWith(".css"));
     for (const filename of cssFilenames) {
         let fileContent = fse.readFileSync(path.join(__dirname, "..", "static", "resources", filename)).toString();
+        for (const [fragKey, fragContent] of Object.entries(cssFragments)) {
+            fileContent = setupOneCSS(fileContent, fragKey, "%%%", fragContent);
+        }
+        checkCssSubstitution(filename, fileContent,"%%%");
         const pageFormat = options.pageFormat;
         const spaceOption = 0; // MAKE THIS CONFIGURABLE
         const pageBodyWidth = pageFormat.pageSize[0] - (pageFormat.margins.inner[spaceOption] + pageFormat.margins.outer[spaceOption]);
@@ -43,6 +55,47 @@ const setupCSS = options => {
             ["FOOTNOTEFONT", options.fonts.footnote],
             ["GREEKFONT", options.fonts.greek],
             ["HEBREWFONT", options.fonts.hebrew],
+            ["BODYFONTSIZE", options.fontSizes.body.font],
+            ["BODYLINEHEIGHT", options.fontSizes.body.height],
+            ["DOUBLEBODYLINEHEIGHT", options.fontSizes.body.height * 2],
+            ["BODYHALFLINEHEIGHT", options.fontSizes.body.height],
+            ["BODYBOTTOMMARGIN", options.fontSizes.body.bottomMargin],
+            ["BODYBOTTOMBORDERWIDTH", options.fontSizes.body.bottomBorderWidth],
+            ["BODYBOTTOMPADDING", options.fontSizes.body.bottomPadding],
+            ["H4FONTSIZE", options.fontSizes.h4.font],
+            ["H4LINEHEIGHT", options.fontSizes.h4.height],
+            ["H4HALFLINEHEIGHT", options.fontSizes.h4.height],
+            ["H4BOTTOMMARGIN", options.fontSizes.h4.bottomMargin],
+            ["H4BOTTOMBORDERWIDTH", options.fontSizes.h4.bottomBorderWidth],
+            ["H4BOTTOMPADDING", options.fontSizes.h4.bottomPadding],
+            ["H3FONTSIZE", options.fontSizes.h3.font],
+            ["H3LINEHEIGHT", options.fontSizes.h3.height],
+            ["H3HALFLINEHEIGHT", options.fontSizes.h3.height],
+            ["H3BOTTOMMARGIN", options.fontSizes.h3.bottomMargin],
+            ["H3BOTTOMBORDERWIDTH", options.fontSizes.h3.bottomBorderWidth],
+            ["H3BOTTOMPADDING", options.fontSizes.h3.bottomPadding],
+            ["H2FONTSIZE", options.fontSizes.h2.font],
+            ["H2LINEHEIGHT", options.fontSizes.h2.height],
+            ["H2HALFLINEHEIGHT", options.fontSizes.h2.height],
+            ["H2BOTTOMMARGIN", options.fontSizes.h2.bottomMargin],
+            ["H2BOTTOMBORDERWIDTH", options.fontSizes.h2.bottomBorderWidth],
+            ["H2BOTTOMPADDING", options.fontSizes.h2.bottomPadding],
+            ["H1FONTSIZE", options.fontSizes.h1.font],
+            ["H1LINEHEIGHT", options.fontSizes.h1.height],
+            ["H1HALFLINEHEIGHT", options.fontSizes.h1.height],
+            ["H1BOTTOMMARGIN", options.fontSizes.h1.bottomMargin],
+            ["H1BOTTOMBORDERWIDTH", options.fontSizes.h1.bottomBorderWidth],
+            ["H1BOTTOMPADDING", options.fontSizes.h1.bottomPadding],
+            ["FOOTNOTEFONTSIZE", options.fontSizes.footnote.font],
+            ["FOOTNOTELINEHEIGHT", options.fontSizes.footnote.height],
+            ["FOOTNOTEHALFLINEHEIGHT", options.fontSizes.footnote.height],
+            ["FOOTNOTEBOTTOMMARGIN", options.fontSizes.footnote.bottomMargin],
+            ["FOOTNOTEBOTTOMBORDERWIDTH", options.fontSizes.footnote.bottomBorderWidth],
+            ["FOOTNOTEBOTTOMPADDING", options.fontSizes.footnote.bottomPadding],
+            ["FOOTNOTECALLEROFFSET", options.fontSizes.body.font - options.fontSizes.footnote.font],
+            ["RULEPADDING", options.fontSizes.rule.bottomPadding],
+            ["RULEWIDTH", options.fontSizes.rule.bottomBorderWidth],
+            ["RULEMARGIN", options.fontSizes.rule.bottomMargin],
         ]) {
             fileContent = setupOneCSS(fileContent, placeholder, "%%", value);
         }

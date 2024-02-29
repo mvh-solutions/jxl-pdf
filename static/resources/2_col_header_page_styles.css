@@ -1,125 +1,16 @@
-@page {
-    size: %%PAGEWIDTH%%pt %%PAGEHEIGHT%%pt;
-    margin-bottom: %%MARGINBOTTOM%%pt;
-    margin-top: %%FIRSTPAGEMARGINTOP%%pt;
-}
-@page :left {
-    margin-left: %%MARGINOUTER%%pt;
-    margin-right: %%MARGININNER%%pt;
-}
-@page :right {
-    margin-left: %%MARGININNER%%pt;
-    margin-right: %%MARGINOUTER%%pt;
-}
+%%%ATPAGEHEADER%%%
 
-body {
-    font-size: 9pt;
-    line-height: 10pt;
-    font-family: %%BODYFONT%%;
-}
+%%%BODY%%%
 
-p {
-    margin: 0;
-    padding: 0;
-}
+%%%P%%%
 
-h1 {
-    font-size: 14pt;
-    line-height: 20pt;
-    font-weight: bold;
-    margin: 0;
-    margin-bottom: 6pt;
-    border-bottom: 2pt solid black;
-    padding-bottom: 2pt;
-    width: %%PAGEBODYWIDTH%%pt;
-}
+%%%H1%%%
 
-h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
-    font-size: 10pt;
-    line-height: 20pt;
-    font-style: italic;
-    font-weight: bold;
-    margin: 0;
-    width: %%2COLUMNWIDTH%%pt;
-}
-
-h2.verseRecordHeadLeft {
-    text-align: left;
-}
-
-h2.verseRecordHeadRight {
-    text-align: right;
-}
-
-.leftColumn {
-    display: inline-block;
-    width: %%2COLUMNWIDTH%%pt;
-    vertical-align: top;
-    margin-right: %%HALFCOLUMNGAP%%pt;
-}
-
-.rightColumn {
-    width: %%2COLUMNWIDTH%%pt;
-    height: 100%;
-    display: inline-block;
-    vertical-align: top;
-    margin-left: %%HALFCOLUMNGAP%%pt;
-}
-
-.verseRecord {
-    page-break-inside: avoid;
-    vertical-align: top;
-    display: inline-flex;
-}
+%%%2COL%%%
 
 .columnHeadings {
     page-break-inside: avoid;
     break-after: page;
     vertical-align: top;
     display: inline-flex;
-}
-
-.col1, .col2 {
-    vertical-align: top;
-    display: inline-block;
-    width: %%2COLUMNWIDTH%%pt;
-    text-align: justify;
-}
-
-.col2 {
-    margin-right: 12pt;
-}
-
-::footnote-call {
-    font-weight: bold;
-    font-size: 70%;
-    vertical-align: baseline;
-    position: relative;
-    top: -0.5em;
-    padding-left: 1pt;
-}
-
-::footnote-marker {
-    font-weight: bold;
-}
-
-.head1 {
-    display: inline-block;
-    width: 200pt;
-}
-.head2 {
-    display: inline-block;
-    width: 332pt;
-}
-.head3 {
-    display: inline-block;
-    width: 200pt;
-}
-.head4 {
-    display: inline-block;
-    width: 188pt;
-}
-.cv {
-    font-style: italic;
-    font-size: 7pt;
 }

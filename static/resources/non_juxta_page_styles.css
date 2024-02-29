@@ -1,45 +1,10 @@
-@page {
-    size: %%PAGEWIDTH%%pt %%PAGEHEIGHT%%pt;
-    margin-bottom: %%MARGINBOTTOM%%pt;
-    margin-top: %%MARGINTOP%%pt;
-    @footnote {
-        float: bottom;
-        margin-top: %%FOOTEROFFSET%%pt;
-    }
-}
-@page :first {
-    margin-top: %%FIRSTPAGEMARGINTOP%%pt;
-}
-@page :left {
-    margin-left: %%MARGINOUTER%%pt;
-    margin-right: %%MARGININNER%%pt;
-}
-@page :right {
-    margin-left: %%MARGININNER%%pt;
-    margin-right: %%MARGINOUTER%%pt;
-}
+%%%ATPAGE%%%
 
-body {
-    font-size: 9pt;
-    line-height: 10pt;
-    font-family: %%BODYFONT%%;
-}
+%%%BODY%%%
 
-p {
-    margin: 0;
-    padding: 0;
-}
+%%%P%%%
 
-h1 {
-    font-size: 14pt;
-    line-height: 15pt;
-    font-weight: bold;
-    margin-bottom: 6pt;
-    border-bottom: 2pt solid black;
-    padding-bottom: 2pt;
-    text-align: left;
-    font-family: %%HEADINGFONT%%;
-}
+%%%H1%%%
 
 .front {}
 
@@ -50,13 +15,13 @@ h1 {
 }
 
 .front_body p {
-    margin-bottom: 10pt;
+    margin-bottom: %%BODYLINEHEIGHT%%pt;
 }
 
 .front_body h2 {
-    margin-bottom: 10pt;
-    font-size: 9pt;
-    line-height: 10pt;
+    margin-bottom: %%BODYLINEHEIGHT%%pt;
+    font-size: %%BODYFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
     font-weight: bold;
     font-style: italic;
     text-align: left;
@@ -72,7 +37,7 @@ h1 {
 .title_page {
     text-align: center;
     font-size: 14pt;
-    line-height: 18pt;
+    line-height: 20pt;
 }
 .title_page > h1 {
     text-align: center;
@@ -186,60 +151,7 @@ p.small-gap {
     columns: 1;
 }
 
-.note {
-    font-size: 7pt;
-    line-height: 10pt;
-    padding-left: 1.2em;
-    text-indent: -1.2em;
-    text-align: left;
-    font-family: %%FOOTNOTEFONT%%;
-}
-
-.note .b {
-    font-weight: bold;
-}
-
-.note_n {
-    font-weight: bold;
-    font-size: 6pt;
-    vertical-align: top;
-}
-
-.note_h2, .note_h3, .note_h4, .note_body {
-    margin-bottom: 10pt;
-}
-
-.note_h2, .note_h3, .note_h4 {
-    -webkit-column-break-after: avoid;
-}
-
-.note_h2 {
-    font-weight: bold;
-}
-
-.note_h3 {
-    margin-top: 10px;
-    font-style: italic;
-}
-
-.note_h4 {
-    font-style: italic;
-}
-
-.note_body {
-    text-align: left;
-}
-
-.note_list1 {
-    padding-left: 2em;
-}
-
-.note_list2 {
-    display: list-item;
-    list-style-type: circle;
-    list-style-position: inside;
-    padding-left: 4em;
-}
+%%%FOOTNOTE%%%
 
 .exp {
     font-size: 70%;
@@ -251,18 +163,6 @@ p.small-gap {
     text-align: center;
     margin-bottom: 20pt;
     margin-top: 10pt;
-}
-::footnote-call {
-    font-weight: bold;
-    font-size: 70%;
-    vertical-align: baseline;
-    position: relative;
-    top: -0.5em;
-    padding-left: 1pt;
-}
-
-::footnote-marker {
-    font-weight: bold;
 }
 h2 {
     -webkit-column-break-after: avoid;

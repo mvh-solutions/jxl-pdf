@@ -1,46 +1,10 @@
-@page {
-    size: %%PAGEWIDTH%%pt %%PAGEHEIGHT%%pt;
-    margin-bottom: %%MARGINBOTTOM%%pt;
-    margin-top: %%MARGINTOP%%pt;
-    @footnote {
-        float: bottom;
-        margin-top: %%FOOTEROFFSET%%pt;
-    }
-}
-@page :first {
-    margin-top: %%FIRSTPAGEMARGINTOP%%pt;
-}
-@page :left {
-    margin-left: %%MARGINOUTER%%pt;
-    margin-right: %%MARGININNER%%pt;
-}
-@page :right {
-    margin-left: %%MARGININNER%%pt;
-    margin-right: %%MARGINOUTER%%pt;
-}
+%%%ATPAGE%%%
 
-body {
-    font-size: 9pt;
-    line-height: 10pt;
-    font-family: %%BODYFONT%%;
-}
+%%%BODY%%%
 
-p {
-    margin: 0;
-    padding: 0;
-}
+%%%P%%%
 
-h1 {
-    font-family: %%HEADINGFONT%%;
-    font-size: 14pt;
-    line-height: 20pt;
-    font-weight: bold;
-    margin: 0;
-    margin-bottom: 6pt;
-    border-bottom: 2pt solid black;
-    padding-bottom: 2pt;
-    width: %%PAGEBODYWIDTH%%pt;
-}
+%%%H1%%%
 
 .leftColumn {
     display: inline-block;
@@ -61,9 +25,9 @@ h1 {
     page-break-inside: avoid;
     vertical-align: top;
     display: flex;
-    padding-bottom: 4pt;
-    border-bottom: 1pt solid black;
-    margin-bottom: 5pt
+    padding-bottom: %%RULEPADDING%%pt;
+    border-bottom: %%RULEWIDTH%%pt solid black;
+    margin-bottom: %%RULEMARGIN%%pt
 }
 
 .col1, .col2 {
@@ -80,8 +44,8 @@ h1 {
 .note {
     font-family: %%BODYFONT2%%;
     display: list-item;
-    font-size: 7pt;
-    line-height: 9pt;
+    font-size: %%BODYFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
     text-align: justify;
     margin-bottom: 0pt;
     margin-left: 10pt;

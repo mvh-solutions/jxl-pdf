@@ -9,12 +9,6 @@ const do4ColumnSpreadSection = async ({section, templates, bookCode, options}) =
     const bookName = getBookName(pk, options.configContent.docIdForNames, bookCode);
     const cvTexts = getCVTexts(bookCode, pk);
     const notes = section.showNotes ? bcvNotes(options.configContent, bookCode) : {};
-    /*
-    fse.writeFileSync(
-        path.join(outputPath, outputDirName, 'pdf', "cv.json"),
-        JSON.stringify(cvTexts, null, 2)
-    );
-     */
     const verses = [];
     verses.push(templates['4_column_spread_title'].replace('%%BOOKNAME%%', bookName));
     const headerHtml = templates['4_column_header_page']

@@ -1,78 +1,16 @@
-@page {
-    size: %%DOUBLEPAGEWIDTH%%pt %%PAGEHEIGHT%%pt;
-    margin-right: %%MARGINOUTER%%pt;
-    margin-left: %%MARGINOUTER%%pt;
-    margin-bottom: %%MARGINBOTTOM%%pt;
-    margin-top: %%MARGINTOP%%pt;
-
-    @top-center {
-    }
-
-    @footnote {
-        float: bottom;
-        columns: 2;
-        column-gap: %%DOUBLEMARGININNER%%pt;
-        margin-top: 10pt;
-    }
-}
+%%%ATDOUBLEPAGE%%%
 
 @page :first {
     margin-top: %%FIRSTPAGEMARGINTOP%%pt;
 }
-body {
-    font-size: 9pt;
-    line-height: 10pt;
-    font-family: %%BODYFONT%%;
-}
 
-p {
-    margin: 0;
-    padding: 0;
-}
+%%%BODY%%%
 
-h1 {
-    font-size: 14pt;
-    line-height: 20pt;
-    font-weight: bold;
-    margin: 0;
-    margin-bottom: 6pt;
-    border-bottom: 2pt solid black;
-    padding-bottom: 2pt;
-    width: %%PAGEBODYWIDTH%%pt;
-    font-family: %%HEADINGFONT%%;
-}
+%%%P%%%
 
-h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
-    font-size: 7pt;
-    line-height: 10pt;
-    font-style: italic;
-    font-weight: normal;
-    margin: 0;
-    width: %%PAGEBODYWIDTH%%pt;
-    text-align: center;
-    font-family: %%HEADINGFONT%%;
-}
+%%%H1%%%
 
-.versoPage {
-    display: inline-block;
-    width: %%PAGEBODYWIDTH%%pt;
-    vertical-align: top;
-    margin-right: %%MARGININNER%%pt;
-}
-
-.rectoPage {
-    width: %%PAGEBODYWIDTH%%pt;
-    height: 100%;
-    display: inline-block;
-    vertical-align: top;
-    margin-left: %%MARGININNER%%pt;
-}
-
-.verseRecord {
-    page-break-inside: avoid;
-    vertical-align: top;
-    display: flex;
-}
+%%%4COL%%%
 
 .col1, .col2, .col3, .col4 {
     vertical-align: top;
@@ -87,64 +25,10 @@ h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
 .col2, .col3, .col4 {
     text-indent: 1em;
 }
-.note {
-    font-size: 7pt;
-    line-height: 9pt;
-    text-align: justify;
-    float: footnote;
-    margin-bottom: 0pt;
-    padding-left: 6pt;
-    text-indent: -6pt;
-    font-family: %%FOOTNOTEFONT%%;
-}
 
-.note .b {
-    font-weight: bold;
-}
+%%%FOOTNOTE%%%
 
-::footnote-call {
-    font-weight: bold;
-    font-size: 70%;
-    vertical-align: baseline;
-    position: relative;
-    top: -0.5em;
-    padding-left: 1pt;
-}
-
-::footnote-marker {
-    font-weight: bold;
-}
-
-.head1 {
-    display: inline-block;
-    width: 200pt;
-    font-family: %%HEADINGFONT%%;
-}
-.head2 {
-    display: inline-block;
-    width: 332pt;
-    font-family: %%HEADINGFONT%%;
-}
-.head3 {
-    display: inline-block;
-    width: 200pt;
-    font-family: %%HEADINGFONT%%;
-}
-.head4 {
-    display: inline-block;
-    width: 188pt;
-    font-family: %%HEADINGFONT%%;
-}
 .cv {
     font-style: italic;
-    font-size: 7pt;
-}
-h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
-    font-size: 10pt;
-    line-height: 20pt;
-    font-style: italic;
-    font-weight: bold;
-    margin: 0;
-    width: %%PAGEBODYWIDTH%%pt;
-    font-family: %%HEADINGFONT%%;
+    font-size: 80%;
 }

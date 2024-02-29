@@ -1,80 +1,12 @@
-@page {
-    size: %%PAGEWIDTH%%pt %%PAGEHEIGHT%%pt;
-    margin-bottom: %%MARGINBOTTOM%%pt;
-    margin-top: %%MARGINTOP%%pt;
-    @footnote {
-        float: bottom;
-        margin-top: %%FOOTEROFFSET%%pt;
-    }
-}
-@page :first {
-    margin-top: %%FIRSTPAGEMARGINTOP%%pt;
-}
-@page :left {
-    margin-left: %%MARGINOUTER%%pt;
-    margin-right: %%MARGININNER%%pt;
-}
-@page :right {
-    margin-left: %%MARGININNER%%pt;
-    margin-right: %%MARGINOUTER%%pt;
-}
+%%%ATPAGE%%%
 
-body {
-    font-size: 9pt;
-    line-height: 10pt;
-    font-family: %%BODYFONT%%;
-}
+%%%BODY%%%
 
-p {
-    margin: 0;
-    padding: 0;
-}
+%%%P%%%
 
-h1 {
-    font-size: 14pt;
-    line-height: 20pt;
-    font-weight: bold;
-    margin: 0;
-    margin-bottom: 6pt;
-    border-bottom: 2pt solid black;
-    padding-bottom: 2pt;
-    width: %%PAGEBODYWIDTH%%pt;
-    font-family: %%HEADINGFONT%%;
-}
+%%%H1%%%
 
-h2.verseRecordHeadLeft, h2.verseRecordHeadRight {
-    font-size: 10pt;
-    line-height: 20pt;
-    font-style: italic;
-    font-weight: bold;
-    margin: 0;
-    width: %%2COLUMNWIDTH%%pt;
-    font-family: %%HEADINGFONT%%;
-}
-
-h2.verseRecordHeadLeft {
-    text-align: left;
-    font-family: %%HEADINGFONT%%;
-}
-
-h2.verseRecordHeadRight {
-    text-align: right;
-    font-family: %%HEADINGFONT%%;
-}
-
-.leftColumn {
-    display: inline-block;
-    width: %%2COLUMNWIDTH%%pt;
-    vertical-align: top;
-    margin-right: %%HALFCOLUMNGAP%%pt;
-}
-
-.rightColumn {
-    width: %%2COLUMNWIDTH%%pt;
-    display: inline-block;
-    vertical-align: top;
-    margin-left: %%HALFCOLUMNGAP%%pt;
-}
+%%%2COL%%%
 
 .verseRecord {
     page-break-inside: avoid;
@@ -94,54 +26,9 @@ h2.verseRecordHeadRight {
     text-indent: 1em;
 }
 
-::footnote-call {
-    font-weight: bold;
-    font-size: 70%;
-    vertical-align: baseline;
-    position: relative;
-    top: -0.5em;
-    padding-left: 1pt;
-}
-
-::footnote-marker {
-    font-weight: bold;
-}
-
-.head1 {
-    display: inline-block;
-    width: 200pt;
-    font-family: %%HEADINGFONT%%;
-}
-.head2 {
-    display: inline-block;
-    width: 332pt;
-    font-family: %%HEADINGFONT%%;
-}
-.head3 {
-    display: inline-block;
-    width: 200pt;
-    font-family: %%HEADINGFONT%%;
-}
-.head4 {
-    display: inline-block;
-    width: 188pt;
-    font-family: %%HEADINGFONT%%;
-}
 .cv {
     font-style: italic;
     font-weight: bold;
 }
-.note {
-    font-size: 7pt;
-    line-height: 9pt;
-    text-align: justify;
-    float: footnote;
-    margin-bottom: 0pt;
-    padding-left: 6pt;
-    text-indent: -6pt;
-    font-family: %%FOOTNOTEFONT%%;
-}
 
-.note .b {
-    font-weight: bold;
-}
+%%%FOOTNOTE%%%

@@ -2,11 +2,14 @@ const path = require('path');
 const os = require('os');
 const pageSizes = require('../../resources/pages.json');
 const fontSets = require('../../resources/fonts.json');
+const fontSizes = require('../../resources/sizes.json');
 
 const constants = {
     VERSION: "0.0.1",
     DEFAULT_WORKING_DIR: path.resolve(path.join(os.homedir(), ".jxlpdf/working")),
     DEFAULT_PAGE_SIZE: "EXECUTIVE",
+    DEFAULT_FONT_SET: "allGentium",
+    DEFAULT_FONT_SIZE: "9on10",
     STEPS_OPTIONS: {
         "ARGSONLY": [],
         "CLEAR": ["clear"],
@@ -15,7 +18,8 @@ const constants = {
         "ALL": ["originate", "assemble"]
     },
     PAGE_SIZES: pageSizes,
-    FONT_SETS: fontSets
+    FONT_SETS: fontSets,
+    FONT_SIZES: fontSizes
 };
 
 module.exports = constants;

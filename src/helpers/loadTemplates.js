@@ -9,6 +9,7 @@ const TEMPLATE_NAMES = [
     'non_juxta_page',
     'markdown_page',
     'obs_page',
+    'obs_plus_notes_page',
     '4_column_spread_page',
     '4_column_spread_verse',
     '4_column_spread_title',

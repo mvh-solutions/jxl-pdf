@@ -1,5 +1,4 @@
 h1 {
-    page-break-before: recto;
     font-size: %%H1FONTSIZE%%pt;
     line-height: %%H1LINEHEIGHT%%pt;
     font-weight: bold;

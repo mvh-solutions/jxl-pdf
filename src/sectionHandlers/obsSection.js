@@ -3,7 +3,7 @@ const path = require("path");
 const {doPuppet} = require("../helpers");
 const marked = require('marked');
 const DOMPurify = require('isomorphic-dompurify');
-const doMarkdownSection = async ({section, templates, bookCode, options}) => {
+const doObsSection = async ({section, templates, bookCode, options}) => {
     let markdowns = [];
     for (const mdName of fse.readdirSync(path.resolve(path.join('data', `${section.path}`)))) {
         const [name, suffix] = mdName.split('.');
@@ -41,4 +41,4 @@ const doMarkdownSection = async ({section, templates, bookCode, options}) => {
         pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
     });
 }
-module.exports = doMarkdownSection;
+module.exports = doObsSection;

@@ -69,6 +69,11 @@
             ]
           ]
         ]
+      },
+      "obsPlusNotes": {
+        "cssValues": [
+          ["IMGWIDTH", [60]]
+        ]
       }
     }
   },
@@ -141,6 +146,11 @@
               360
             ]
           ]
+        ]
+      },
+      "obsPlusNotes": {
+        "cssValues": [
+          ["IMGWIDTH", [70]]
         ]
       }
     }

@@ -28,4 +28,29 @@ p {
     margin-bottom: %%BODYLINEHEIGHT%%pt;
 }
 
-%%%FOOTNOTE%%%
+img {
+    float: right;
+    width: %%3COLUMNWIDTH%%pt;
+    padding-left: %%BODYLINEHEIGHT%%pt;
+    padding-bottom: %%BODYLINEHEIGHT%%pt;
+}
+
+.storysection {
+    page-break-inside: avoid;
+    overflow: auto;
+}
+
+.storypara {
+    font-weight: bold;
+}
+
+.storynotes {
+    font-family: %%BODYFONT2%%
+}
+
+p.note {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 12pt;
+    text-indent: -12pt;
+}

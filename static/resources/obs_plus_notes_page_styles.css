@@ -30,7 +30,7 @@ p {
 
 img {
     float: right;
-    width: %%3COLUMNWIDTH%%pt;
+    width: %IMGWIDTH%pt;
     padding-left: %%BODYLINEHEIGHT%%pt;
     padding-bottom: %%BODYLINEHEIGHT%%pt;
 }

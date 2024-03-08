@@ -18,7 +18,10 @@ const doObsPlusNotesSection = async ({section, templates, bookCode, options}) =>
     let markdowns = [];
     for (const mdName of fse.readdirSync(path.resolve(path.join('data', `${section.obsPath}`)))) {
         const [name, suffix] = mdName.split('.');
-        const storyNotes = getObsNotes(section.obsNotesPath, `${parseInt(name)}:0`);
+        let storyNotes = "";
+	if (section.obsNotesPath) {
+	    storyNotes = getObsNotes(section.obsNotesPath, `${parseInt(name)}:0`);
+	}
         if (suffix !== 'md' || !parseInt(name)) {
             continue;
         }
@@ -31,6 +34,7 @@ const doObsPlusNotesSection = async ({section, templates, bookCode, options}) =>
         let markdown = DOMPurify.sanitize(
             marked.parse(fse.readFileSync(path.resolve(path.join('data', `${section.obsPath}/${mdName}`))).toString())
         );
+	if (section.obsNotesPath) {
         markdown = markdown.replace(/<\/h1>/g, `</h1><section class=\"storynotes\">\n${storyNotes}\n</section>\n`);
         markdown = markdown.replace(/<p><img/g, "<section class=\"storysection\">\n<p class=\"storypara\"><img");
         markdown = markdown.replace(/jpg"><\/p>\n<p>/g, "jpg\">");
@@ -41,7 +45,9 @@ const doObsPlusNotesSection = async ({section, templates, bookCode, options}) =>
             markdown = markdown.replace("%%%%NOTES%%%%", getObsNotes(section.obsNotesPath, noteParaRef));
             noteParaN++;
         }
+	}
         markdowns.push(markdown + "\n</section>");
+
     }
     fse.writeFileSync(
         path.join(

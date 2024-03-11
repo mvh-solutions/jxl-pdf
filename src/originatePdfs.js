@@ -10,7 +10,10 @@ const {
     doJxlSimpleSection,
     doBcvBibleSection,
     doParaBibleSection,
-    doBiblePlusNotesSection
+    doBiblePlusNotesSection,
+    doMarkdownSection,
+    doObsSection,
+    doObsPlusNotesSection
 } = require("./sectionHandlers");
 const setupCSS = options => {
     const cssFragments = {};
@@ -32,6 +35,7 @@ const setupCSS = options => {
         const pageFormat = options.pageFormat;
         const spaceOption = 0; // MAKE THIS CONFIGURABLE
         const pageBodyWidth = pageFormat.pageSize[0] - (pageFormat.margins.inner[spaceOption] + pageFormat.margins.outer[spaceOption]);
+        const pageBodyHeight = pageFormat.pageSize[1] - (pageFormat.margins.top[spaceOption] + pageFormat.margins.bottom[spaceOption]);
         for (const [placeholder, value] of [
             ["PAGEWIDTH", pageFormat.pageSize[0]],
             ["PAGEBODYWIDTH", pageBodyWidth],
@@ -44,7 +48,7 @@ const setupCSS = options => {
             ["MARGININNER", pageFormat.margins.inner[spaceOption]],
             ["DOUBLEMARGININNER", pageFormat.margins.inner[spaceOption] * 2],
             ["MARGINOUTER", pageFormat.margins.outer[spaceOption]],
-            ["PAGENUMBERTOPMARGIN", (pageFormat.pageSize[1] + pageFormat.footerOffset[spaceOption]) - pageFormat.margins.bottom[spaceOption]],
+            ["PAGENUMBERTOPMARGIN", pageBodyHeight + pageFormat.margins.top[spaceOption] + pageFormat.footerOffset[spaceOption]],
             ["COLUMNGAP", pageFormat.columnGap[spaceOption]],
             ["HALFCOLUMNGAP", pageFormat.columnGap[spaceOption] / 2],
             ["2COLUMNWIDTH", (pageBodyWidth - pageFormat.columnGap[spaceOption]) / 2],
@@ -151,6 +155,21 @@ const originatePdfs = async options => {
         switch (section.type) {
             case "front":
                 await doFrontSection(
+                    {section, templates, bookCode, options}
+                );
+                break;
+            case "markdown":
+                await doMarkdownSection(
+                    {section, templates, bookCode, options}
+                );
+                break;
+            case "obs":
+                await doObsSection(
+                    {section, templates, bookCode, options}
+                );
+                break;
+            case "obsPlusNotes":
+                await doObsPlusNotesSection(
                     {section, templates, bookCode, options}
                 );
                 break;

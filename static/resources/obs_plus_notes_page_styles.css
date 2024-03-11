@@ -1,0 +1,56 @@
+%%%ATPAGE%%%
+
+%%%BODY%%%
+
+%%%H1%%%
+
+h1 {
+    page-break-before: recto;
+}
+
+h2 {
+    font-family: %%HEADINGFONT%%;
+    font-size:%%H2FONTSIZE%%pt;
+    line-height:%%H2LINEHEIGHT%%pt;
+}
+h3 {
+    font-family: %%HEADINGFONT%%;
+    font-size: %%H3FONTSIZE%%pt;
+    line-height: %%H3LINEHEIGHT%%pt;
+}
+h4 {
+    font-family: %%HEADINGFONT%%;
+    font-size:%%H4FONTSIZE%%pt;
+    line-height:%%H4LINEHEIGHT%%pt;
+}
+p {
+    margin-top: %%BODYLINEHEIGHT%%pt;
+    margin-bottom: %%BODYLINEHEIGHT%%pt;
+}
+
+img {
+    float: right;
+    width: %IMGWIDTH%pt;
+    padding-left: %%BODYLINEHEIGHT%%pt;
+    padding-bottom: %%BODYLINEHEIGHT%%pt;
+}
+
+.storysection {
+    page-break-inside: avoid;
+    overflow: auto;
+}
+
+.storypara {
+    font-weight: bold;
+}
+
+.storynotes {
+    font-family: %%BODYFONT2%%
+}
+
+p.note {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 12pt;
+    text-indent: -12pt;
+}

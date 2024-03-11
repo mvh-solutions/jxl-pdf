@@ -4,6 +4,35 @@
   "notesFormat": "tsv9",
   "sections": [
     {
+      "id": "blabla",
+      "type": "markdown",
+      "path": "fra_markdown/blabla",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "id": "obsPlusNotes",
+      "type": "obsPlusNotes",
+      "obsPath": "fra_obs",
+      "obsNotesPath": "fra_obstn",
+      "firstStory": 3,
+      "lastStory": 4,
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "id": "obs",
+      "type": "obs",
+      "path": "fra_obs",
+      "firstStory": 5,
+      "lastStory": 6,
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
       "id": "emploi",
       "type": "front",
       "path": "fra_front/mode_emploi",

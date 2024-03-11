@@ -54,5 +54,13 @@
     "footnote": "\"Charis SIL\", serif",
     "greek": "\"Gentium Book Plus\", serif",
     "hebrew": "\"Ezra SIL\", serif"
+  },
+  "notoNaskh": {
+    "body": "\"Noto Naskh Arabic\", serif",
+    "body2": "\"Noto Naskh Arabic\", sans-serif",
+    "heading": "\"Noto Naskh Arabic\", serif",
+    "footnote": "\"Noto Naskh Arabic\", serif",
+    "greek": "\"Gentium Book Plus\", serif",
+    "hebrew": "\"Ezra SIL\", serif"
   }
 }

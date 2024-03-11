@@ -7,6 +7,8 @@
     "commander": "^11.1.0",
     "fontkit": "^2.0.2",
     "fs-extra": "^11.2.0",
+    "isomorphic-dompurify": "^2.4.0",
+    "marked": "^12.0.0",
     "os": "^0.1.2",
     "path": "^0.12.7",
     "pdf-lib": "^1.17.1",

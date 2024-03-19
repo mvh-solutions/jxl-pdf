@@ -8,7 +8,7 @@ const {
 } = require("../helpers");
 
 const doJxlSimpleSection = async ({section, templates, bookCode, options}) => {
-    const jsonFile = fse.readJsonSync(path.resolve(path.join('data', section.jxl.path, `${bookCode}.json`)))
+    const jsonFile = fse.readJsonSync(path.resolve(path.join('data', section.jxl.path, `${bookCode}.json`)));
     const jxlJson = jsonFile.bookCode ? jsonFile.sentences : jsonFile;
     let pivotIds = new Set([]);
     const notes = {};

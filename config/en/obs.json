@@ -1,0 +1,70 @@
+{
+  "docIdForNames": "fra_lsg",
+  "notes": "fra_tn",
+  "notesFormat": "tsv9",
+  "sections": [
+    {
+      "id": "obsIntro",
+      "type": "markdown",
+      "path": "eng_markdown/obsIntro",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "id": "obsPlusNotes1",
+      "type": "obsPlusNotes",
+      "obsPath": "eng_obs",
+      "obsNotesPath": "eng_obstn",
+      "firstStory": 1,
+      "lastStory": 10,
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "id": "obsPlusNotes2",
+      "type": "obsPlusNotes",
+      "obsPath": "eng_obs",
+      "obsNotesPath": "eng_obstn",
+      "firstStory": 11,
+      "lastStory": 20,
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "id": "obsPlusNotes3",
+      "type": "obsPlusNotes",
+      "obsPath": "eng_obs",
+      "obsNotesPath": "eng_obstn",
+      "firstStory": 21,
+      "lastStory": 30,
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "id": "obsPlusNotes4",
+      "type": "obsPlusNotes",
+      "obsPath": "eng_obs",
+      "obsNotesPath": "eng_obstn",
+      "firstStory": 31,
+      "lastStory": 40,
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "id": "obsPlusNotes5",
+      "type": "obsPlusNotes",
+      "obsPath": "eng_obs",
+      "obsNotesPath": "eng_obstn",
+      "firstStory": 41,
+      "lastStory": 50,
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    }
+  ]
+}

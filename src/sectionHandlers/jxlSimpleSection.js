@@ -6,7 +6,7 @@ const {
     cleanNoteLine,
     doPuppet
 } = require("../helpers");
-
+const books = require("../../resources/books.json");
 const doJxlSimpleSection = async ({section, templates, bookCode, options}) => {
     const jsonFile = fse.readJsonSync(path.resolve(path.join('data', section.jxl.path, `${bookCode}.json`)));
     const jxlJson = jsonFile.bookCode ? jsonFile.sentences : jsonFile;
@@ -59,7 +59,7 @@ const doJxlSimpleSection = async ({section, templates, bookCode, options}) => {
         let jxlRows = [];
         let sentenceNotes = [];
         for (const [chunkN, chunk] of sentenceJson.chunks.entries()) {
-            const greek = chunk.source.map(s => s.content).join(' ');
+            const source = chunk.source.map(s => s.content).join(' ');
             const gloss = chunk.gloss;
             let noteFound = false;
             if (notePivot[`${sentenceN + 1}`] && notePivot[`${sentenceN + 1}`][`${chunkN + 1}`]) {
@@ -73,8 +73,10 @@ const doJxlSimpleSection = async ({section, templates, bookCode, options}) => {
                     );
                 }
             }
+            const bookTestament = books[bookCode];
             const row = templates.jxlRow
-                .replace('%%GREEK%%', greek)
+                .replace('%%SOURCE%%', source)
+                .replace('%%SOURCECLASS%%', bookTestament === "OT" ? "jxlHebrew" : "jxlGreek")
                 .replace('%%GLOSS%%', gloss.replace(/\*([^*]+)\*/g, (m, m1) => `<i>${m1}</i>`))
                 .replace('%%NOTECALLERS%%', (noteFound ? `${sentenceNotes.map(note => `<p class="note">${note}</p>`).join('')}` : ""));
             jxlRows.push(row);

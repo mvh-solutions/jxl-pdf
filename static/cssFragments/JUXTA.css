@@ -10,6 +10,18 @@
     font-family: %%GREEKFONT%%;
 }
 
+.jxlHebrew {
+    width: %%2COLUMNWIDTH%%pt;
+    text-align: right;
+    line-height: %%BODYLINEHEIGHT%%pt;
+    font-size: %%BODYFONTSIZE%%pt;
+    vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    padding-right: %%HALFCOLUMNGAP%%pt;
+    font-family: %%HEBREWFONT%%;
+}
+
 .jxlGloss {
     width: %%2COLUMNWIDTH%%pt;
     line-height: %%BODYLINEHEIGHT%%pt;

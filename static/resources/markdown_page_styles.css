@@ -8,18 +8,18 @@
 
 h2 {
     font-family: %%HEADINGFONT%%;
-    font-size:%% H2FONTSIZE%% pt;
-    line-height:%% H2LINEHEIGHT%% pt;
+    font-size:%% H2FONTSIZE%%pt;
+    line-height:%% H2LINEHEIGHT%%pt;
 }
 h3 {
     font-family: %%HEADINGFONT%%;
-    font-size:%% H3FONTSIZE%% pt;
-    line-height:%% H3LINEHEIGHT%% pt;
+    font-size:%% H3FONTSIZE%%pt;
+    line-height:%% H3LINEHEIGHT%%pt;
 }
 h4 {
     font-family: %%HEADINGFONT%%;
-    font-size:%% H4FONTSIZE%% pt;
-    line-height:%% H4LINEHEIGHT%% pt;
+    font-size:%% H4FONTSIZE%%pt;
+    line-height:%% H4LINEHEIGHT%%pt;
 }
 
 %%%FOOTNOTE%%%

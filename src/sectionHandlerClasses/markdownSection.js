@@ -8,6 +8,10 @@ const Section = require('./section');
 
 class MarkdownSection extends Section {
 
+    requiresBook() {
+        return false;
+    }
+
     async doSection({section, templates, bookCode, options}) {
         fse.writeFileSync(
             path.join(

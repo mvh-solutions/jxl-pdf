@@ -5,6 +5,10 @@ const Section = require('./section');
 
 class bookNoteSection extends Section {
 
+    requiresBook() {
+        return true;
+    }
+
     async doSection({section, templates, bookCode, options}) {
         const notes = {};
         const notesRows = fse.readFileSync(path.join('data', options.configContent.notes, `${bookCode}.tsv`)).toString().split("\n");

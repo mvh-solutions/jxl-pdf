@@ -6,6 +6,10 @@ const Section = require('./section');
 
 class fourColumnSpreadSection extends Section {
 
+    requiresBook() {
+        return true;
+    }
+
     async doSection({section, templates, bookCode, options}) {
         if (!section.texts || section.texts.length !== 4) {
             throw new Error("4 Column Spread Section requires exactly 4 text definitions");

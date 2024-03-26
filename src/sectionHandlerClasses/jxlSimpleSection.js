@@ -11,6 +11,10 @@ const Section = require('./section');
 
 class jxlSimpleSection extends Section {
 
+    requiresBook() {
+        return true;
+    }
+
     async doSection({section, templates, bookCode, options}) {
         const jsonFile = fse.readJsonSync(path.resolve(path.join('data', section.jxl.path, `${bookCode}.json`)));
         const jxlJson = jsonFile.bookCode ? jsonFile.sentences : jsonFile;

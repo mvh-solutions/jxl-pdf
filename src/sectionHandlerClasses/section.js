@@ -6,6 +6,10 @@
 
 class Section {
 
+    requiresBook() {
+        throw new Error("Method 'requiresBook' is not implemented for 'Section' abstract class");
+    }
+
     constructor() {
         if (this.constructor === Section) {
             throw new Error("Abstract class 'Section' may not be instantiated");

@@ -17,6 +17,10 @@ const getObsNotes = (notesPath, notesRef) => {
 
 class obsPlusNotesSection extends Section {
 
+    requiresBook() {
+        return false;
+    }
+
     async doSection({section, templates, bookCode, options}) {
         let markdowns = [];
         for (const mdName of fse.readdirSync(path.resolve(path.join('data', `${section.obsPath}`)))) {

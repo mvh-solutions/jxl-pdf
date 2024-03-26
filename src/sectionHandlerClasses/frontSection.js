@@ -5,6 +5,10 @@ const Section = require('./section');
 
 class frontSection extends Section {
 
+    requiresBook() {
+        return false;
+    }
+
     async doSection({section, templates, bookCode, options}) {
         fse.writeFileSync(
             path.join(

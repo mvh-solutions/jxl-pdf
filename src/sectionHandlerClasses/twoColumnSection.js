@@ -5,6 +5,10 @@ const Section = require('./section');
 
 class TwoColumnSection extends Section {
 
+    requiresBook() {
+        return true;
+    }
+
     async doSection ({section, templates, bookCode, options}) {
         if (!section.texts || section.texts.length !== 2) {
             throw new Error("2 Column Section requires exactly 2 text definitions");

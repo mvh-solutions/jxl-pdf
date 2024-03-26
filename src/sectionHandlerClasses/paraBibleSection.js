@@ -7,6 +7,10 @@ const Section = require('./section');
 
 class paraBibleSection extends Section {
 
+    requiresBook() {
+        return true;
+    }
+
     async doSection({section, templates, bookCode, options}) {
         const pk = pkWithDocs(bookCode, [section.text], options.verbose);
         const bookName = getBookName(pk, section.text.id, bookCode);

@@ -2,19 +2,19 @@ const path = require("path");
 const { loadTemplates, setupOneCSS, checkCssSubstitution } = require("./helpers");
 const fse = require("fs-extra");
 const {
-    do2ColumnSection,
-    do4ColumnSpreadSection,
-    doBookNoteSection,
-    doFrontSection,
-    doJxlSpreadSection,
-    doJxlSimpleSection,
-    doBcvBibleSection,
-    doParaBibleSection,
-    doBiblePlusNotesSection,
-    doMarkdownSection,
-    doObsSection,
-    doObsPlusNotesSection
-} = require("./sectionHandlers");
+    TwoColumnSection,
+    FourColumnSpreadSection,
+    BookNoteSection,
+    FrontSection,
+    JxlSpreadSection,
+    JxlSimpleSection,
+    BcvBibleSection,
+    ParaBibleSection,
+    BiblePlusNotesSection,
+    MarkdownSection,
+    ObsSection,
+    ObsPlusNotesSection
+} = require("./sectionHandlerClasses");
 const setupCSS = options => {
     const cssFragments = {};
     const cssFragmentFilenames = fse.readdirSync(path.join(__dirname, "..", "static", "cssFragments"))
@@ -154,70 +154,70 @@ const originatePdfs = async options => {
         }
         switch (section.type) {
             case "front":
-                await doFrontSection(
+                await new FrontSection().doSection(
                     {section, templates, bookCode, options}
                 );
                 break;
             case "markdown":
-                await doMarkdownSection(
+                await new MarkdownSection().doSection(
                     {section, templates, bookCode, options}
                 );
                 break;
             case "obs":
-                await doObsSection(
+                await new ObsSection().doSection(
                     {section, templates, bookCode, options}
                 );
                 break;
             case "obsPlusNotes":
-                await doObsPlusNotesSection(
+                await new ObsPlusNotesSection().doSection(
                     {section, templates, bookCode, options}
                 );
                 break;
             case "jxlSpread":
                 checkBookCode(section.id);
-                await doJxlSpreadSection(
+                await new JxlSpreadSection().doSection(
                     {section, templates, bookCode, options}
                 );
                 break;
             case "jxlSimple":
                 checkBookCode(section.id);
-                await doJxlSimpleSection(
+                await new JxlSimpleSection().doSection(
                     {section, templates, bookCode, options}
                 );
                 break;
             case "4ColumnSpread":
                 checkBookCode(section.id);
-                await do4ColumnSpreadSection(
+                await new FourColumnSpreadSection().doSection(
                     {section, templates, bookCode, options}
                 );
                 break;
             case "2Column":
                 checkBookCode(section.id);
-                await do2ColumnSection(
+                await new TwoColumnSection().doSection(
                     {section, templates, bookCode, options}
                 );
                 break;
             case "bookNote":
                 checkBookCode(section.id);
-                await doBookNoteSection(
+                await new BookNoteSection().doSection(
                     {section, templates, bookCode, options}
                 );
                 break;
             case "bcvBible":
                 checkBookCode(section.id);
-                await doBcvBibleSection(
+                await new BcvBibleSection().doSection(
                     {section, templates, bookCode, options}
                 );
                 break;
             case "paraBible":
                 checkBookCode(section.id);
-                await doParaBibleSection(
+                await new ParaBibleSection().doSection(
                     {section, templates, bookCode, options}
                 );
                 break;
             case "biblePlusNotes":
                 checkBookCode(section.id);
-                await doBiblePlusNotesSection(
+                await new BiblePlusNotesSection().doSection(
                     {section, templates, bookCode, options}
                 );
                 break;

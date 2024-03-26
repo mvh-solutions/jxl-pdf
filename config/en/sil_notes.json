@@ -1,0 +1,44 @@
+{
+  "docIdForNames": "fra_lsg",
+  "notes": "fra_tn",
+  "notesFormat": "tsv9",
+  "sections": [
+    {
+      "type": "setBook",
+      "source": "literal",
+      "bookCode": "PHP"
+    },
+    {
+      "id": "intro",
+      "type": "markdown",
+      "path": "eng_silnotes/intro",
+      "styles": "non_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "id": "english_juxta",
+      "type": "jxlSimple",
+      "styles": "simple_juxta_page_styles",
+      "startOn": "recto",
+      "showPageNumber": true,
+      "firstSentence": 2,
+      "lastSentence": 3,
+      "jxl": {
+        "path": "eng_jxl"
+      }
+    },
+    {
+      "id": "french_juxta",
+      "type": "jxlSimple",
+      "styles": "simple_juxta_page_styles",
+      "startOn": "verso",
+      "showPageNumber": true,
+      "firstSentence": 2,
+      "lastSentence": 3,
+      "jxl": {
+        "path": "fra_jxl"
+      }
+    }
+  ]
+}

@@ -2,24 +2,37 @@
 
 %%%BODY%%%
 
-%%%P%%%
-
 %%%H1%%%
 
 h2 {
+    margin: 0;
+    margin-top: %%BODYLINEHEIGHT%%pt;
+    padding: 0;
     font-family: %%HEADINGFONT%%;
-    font-size:%% H2FONTSIZE%%pt;
-    line-height:%% H2LINEHEIGHT%%pt;
+    font-size:%%H2FONTSIZE%%pt;
+    line-height:%%H2LINEHEIGHT%%pt;
 }
 h3 {
+    margin: 0;
+    margin-top: %%BODYLINEHEIGHT%%pt;
+    padding: 0;
     font-family: %%HEADINGFONT%%;
-    font-size:%% H3FONTSIZE%%pt;
-    line-height:%% H3LINEHEIGHT%%pt;
+    font-size:%%H3FONTSIZE%%pt;
+    line-height:%%H3LINEHEIGHT%%pt;
 }
 h4 {
+    margin: 0;
+    margin-top: %%BODYLINEHEIGHT%%pt;
+    padding: 0;
     font-family: %%HEADINGFONT%%;
-    font-size:%% H4FONTSIZE%%pt;
-    line-height:%% H4LINEHEIGHT%%pt;
+    font-size:%%H4FONTSIZE%%pt;
+    line-height:%%H4LINEHEIGHT%%pt;
+}
+
+p {
+    margin: 0;
+    margin-bottom: %%BODYLINEHEIGHT%%pt;
+    padding: 0;
 }
 
 %%%FOOTNOTE%%%

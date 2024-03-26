@@ -1,5 +1,9 @@
 # Voici du markdown
 
+Voici un peu de texte.
+
+Et voici encore du texte.
+
 ## Quelques simplicités
 
 - Simple à taper

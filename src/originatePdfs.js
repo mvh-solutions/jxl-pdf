@@ -1,20 +1,35 @@
 const path = require("path");
-const { loadTemplates, setupOneCSS, checkCssSubstitution } = require("./helpers");
+const {loadTemplates, setupOneCSS, checkCssSubstitution} = require("./helpers");
 const fse = require("fs-extra");
 const {
-    do2ColumnSection,
-    do4ColumnSpreadSection,
-    doBookNoteSection,
-    doFrontSection,
-    doJxlSpreadSection,
-    doJxlSimpleSection,
-    doBcvBibleSection,
-    doParaBibleSection,
-    doBiblePlusNotesSection,
-    doMarkdownSection,
-    doObsSection,
-    doObsPlusNotesSection
-} = require("./sectionHandlers");
+    TwoColumnSection,
+    FourColumnSpreadSection,
+    BookNoteSection,
+    FrontSection,
+    JxlSpreadSection,
+    JxlSimpleSection,
+    BcvBibleSection,
+    ParaBibleSection,
+    BiblePlusNotesSection,
+    MarkdownSection,
+    ObsSection,
+    ObsPlusNotesSection
+} = require("./sectionHandlerClasses");
+
+const sectionHandlers = {
+    front: new FrontSection(),
+    markdown: new MarkdownSection(),
+    obs: new ObsSection(),
+    obsPlusNotes: new ObsPlusNotesSection(),
+    jxlSpread: new JxlSpreadSection(),
+    jxlSimple: new JxlSimpleSection(),
+    "4ColumnSpread": new FourColumnSpreadSection(),
+    "2Column": new TwoColumnSection(),
+    bookNote: new BookNoteSection(),
+    bcvBible: new BcvBibleSection(),
+    paraBible: new ParaBibleSection(),
+    biblePlusNotes: new BiblePlusNotesSection()
+};
 const setupCSS = options => {
     const cssFragments = {};
     const cssFragmentFilenames = fse.readdirSync(path.join(__dirname, "..", "static", "cssFragments"))
@@ -31,7 +46,7 @@ const setupCSS = options => {
         for (const [fragKey, fragContent] of Object.entries(cssFragments)) {
             fileContent = setupOneCSS(fileContent, fragKey, "%%%", fragContent);
         }
-        checkCssSubstitution(filename, fileContent,"%%%");
+        checkCssSubstitution(filename, fileContent, "%%%");
         const pageFormat = options.pageFormat;
         const spaceOption = 0; // MAKE THIS CONFIGURABLE
         const pageBodyWidth = pageFormat.pageSize[0] - (pageFormat.margins.inner[spaceOption] + pageFormat.margins.outer[spaceOption]);
@@ -103,7 +118,7 @@ const setupCSS = options => {
         ]) {
             fileContent = setupOneCSS(fileContent, placeholder, "%%", value);
         }
-        checkCssSubstitution(filename, fileContent,"%%");
+        checkCssSubstitution(filename, fileContent, "%%");
         fse.writeFileSync(path.join(options.workingDir, "html", "resources", filename), fileContent);
     }
     options.verbose && console.log(`   ${cssFilenames.length} CSS file(s) customized`);
@@ -152,78 +167,14 @@ const originatePdfs = async options => {
                 for: section.id.replace('%%bookCode%%', bookCode)
             });
         }
-        switch (section.type) {
-            case "front":
-                await doFrontSection(
-                    {section, templates, bookCode, options}
-                );
-                break;
-            case "markdown":
-                await doMarkdownSection(
-                    {section, templates, bookCode, options}
-                );
-                break;
-            case "obs":
-                await doObsSection(
-                    {section, templates, bookCode, options}
-                );
-                break;
-            case "obsPlusNotes":
-                await doObsPlusNotesSection(
-                    {section, templates, bookCode, options}
-                );
-                break;
-            case "jxlSpread":
-                checkBookCode(section.id);
-                await doJxlSpreadSection(
-                    {section, templates, bookCode, options}
-                );
-                break;
-            case "jxlSimple":
-                checkBookCode(section.id);
-                await doJxlSimpleSection(
-                    {section, templates, bookCode, options}
-                );
-                break;
-            case "4ColumnSpread":
-                checkBookCode(section.id);
-                await do4ColumnSpreadSection(
-                    {section, templates, bookCode, options}
-                );
-                break;
-            case "2Column":
-                checkBookCode(section.id);
-                await do2ColumnSection(
-                    {section, templates, bookCode, options}
-                );
-                break;
-            case "bookNote":
-                checkBookCode(section.id);
-                await doBookNoteSection(
-                    {section, templates, bookCode, options}
-                );
-                break;
-            case "bcvBible":
-                checkBookCode(section.id);
-                await doBcvBibleSection(
-                    {section, templates, bookCode, options}
-                );
-                break;
-            case "paraBible":
-                checkBookCode(section.id);
-                await doParaBibleSection(
-                    {section, templates, bookCode, options}
-                );
-                break;
-            case "biblePlusNotes":
-                checkBookCode(section.id);
-                await doBiblePlusNotesSection(
-                    {section, templates, bookCode, options}
-                );
-                break;
-            default:
-                throw new Error(`Unknown section type '${section.type}' (id '${section.id}')`);
+        const sectionHandler = sectionHandlers[section.type];
+        if (!sectionHandler) {
+            throw new Error(`Unknown section type '${section.type}' (id '${section.id}')`);
         }
+        if (sectionHandler.requiresBook()) {
+            checkBookCode(section.id);
+        }
+        await sectionHandler.doSection({section, templates, bookCode, options});
         manifest.push({
             id: section.id.replace('%%bookCode%%', bookCode),
             type: section.type,

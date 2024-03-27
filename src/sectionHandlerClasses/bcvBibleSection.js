@@ -1,4 +1,13 @@
-const {pkWithDocs, getBookName, getCVTexts, cleanNoteLine, bcvNotes, doPuppet, setupOneCSS, checkCssSubstitution} = require("../helpers");
+const {
+    pkWithDocs,
+    getBookName,
+    getCVTexts,
+    cleanNoteLine,
+    bcvNotes,
+    doPuppet,
+    setupOneCSS,
+    checkCssSubstitution
+} = require("../helpers");
 const fse = require("fs-extra");
 const path = require("path");
 const Section = require('./section');
@@ -7,6 +16,69 @@ class bcvBibleSection extends Section {
 
     requiresBook() {
         return true;
+    }
+
+    signature() {
+        return {
+            sectionType: "bcvBible",
+            requiresBook: true,
+            fields: [
+                {
+                    id: "startOn",
+                    label: {
+                        en: "Start Page Side",
+                        fr: "Côté pour première page"
+                    },
+                    typeEnum: ["recto", "verso", "either"],
+                    nValues: [1, 1]
+                },
+                {
+                    id: "showPageNumber",
+                    label: {
+                        en: "Show Page Number",
+                        fr: "Afficher numéro de page"
+                    },
+                    typeName: "boolean",
+                    nValues: [1, 1]
+                },
+                {
+                    id: "notes",
+                    label: {
+                        en: "Notes Source",
+                        fr: "Source pour notes"
+                    },
+                    typeName: "tNotes",
+                    nValues: [0, 1]
+                },
+                {
+                    id: "scriptureText",
+                    label: {
+                        en: "Scripture Text Label",
+                        "fr": "Etiquette pour texte biblique"
+                    },
+                    typeName: "string",
+                    nValues: [1, 1]
+                },
+                {
+                    id: "scriptureSrc",
+                    label: {
+                        en: "Scripture Text Label",
+                        "fr": "Etiquette pour texte biblique"
+                    },
+                    typeName: "translationText",
+                    nValues: [1, 1]
+                },
+                {
+                    id: "scriptureType",
+                    label: {
+                        en: "Scripture Text Type",
+                        "fr": "Type de texte biblique"
+                    },
+                    typeEnum: ["greek", "hebrew", "translation"],
+                    nValues: [1, 1]
+                },
+            ]
+        };
     }
 
     async doSection({section, templates, bookCode, options}) {

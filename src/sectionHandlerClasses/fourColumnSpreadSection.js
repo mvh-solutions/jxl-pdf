@@ -10,6 +10,79 @@ class fourColumnSpreadSection extends Section {
         return true;
     }
 
+    signature() {
+        return {
+            sectionType: "bcvBible",
+            requiresBook: true,
+            fields: [
+                {
+                    id: "startOn",
+                    label: {
+                        en: "Start Page Side",
+                        fr: "Côté pour première page"
+                    },
+                    typeLiteral: "verso",
+                    nValues: [1, 1]
+                },
+                {
+                    id: "showPageNumber",
+                    label: {
+                        en: "Show Page Number",
+                        fr: "Afficher numéro de page"
+                    },
+                    typeName: "boolean",
+                    nValues: [1, 1]
+                },
+                {
+                    id: "notes",
+                    label: {
+                        en: "Notes Source",
+                        fr: "Source pour notes"
+                    },
+                    typeName: "tNotes",
+                    nValues: [0, 1]
+                },
+                {
+                    id: "scripture",
+                    label: {
+                        en: "Scripture Texts",
+                        fr: "Textes bibliques"
+                    },
+                    nValues: [1, 5],
+                    typeSpec: [
+                        {
+                            id: "scripture#Text",
+                            label: {
+                                en: "Scripture # Text Label",
+                                "fr": "Etiquette pour texte biblique #"
+                            },
+                            typeName: "string",
+                            nValues: [1, 1]
+                        },
+                        {
+                            id: "scripture#Src",
+                            label: {
+                                en: "Scripture # Text Label",
+                                "fr": "Etiquette pour texte biblique #"
+                            },
+                            typeName: "translationText",
+                            nValues: [1, 1]
+                        },
+                        {
+                            id: "scripture#Type",
+                            label: {
+                                en: "Scripture # Text Type",
+                                "fr": "Type de texte biblique #"
+                            },
+                            typeEnum: ["greek", "hebrew", "translation"],
+                            nValues: [1, 1]
+                        },
+                    ]
+                }
+            ]
+        };
+    }
+
     async doSection({section, templates, bookCode, options}) {
         if (!section.texts || section.texts.length !== 4) {
             throw new Error("4 Column Spread Section requires exactly 4 text definitions");

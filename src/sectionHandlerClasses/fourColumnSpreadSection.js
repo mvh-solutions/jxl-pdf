@@ -62,8 +62,8 @@ class fourColumnSpreadSection extends Section {
                         {
                             id: "scripture#Src",
                             label: {
-                                en: "Scripture # Text Label",
-                                "fr": "Etiquette pour texte biblique #"
+                                en: "Source # Text Label",
+                                "fr": "Source pour texte biblique #"
                             },
                             typeName: "translationText",
                             nValues: [1, 1]
@@ -74,7 +74,29 @@ class fourColumnSpreadSection extends Section {
                                 en: "Scripture # Text Type",
                                 "fr": "Type de texte biblique #"
                             },
-                            typeEnum: ["greek", "hebrew", "translation"],
+                            typeEnum: [
+                                {
+                                    id: "greek",
+                                    label: {
+                                        en: "Greek",
+                                        fr: "Grec"
+                                    },
+                                },
+                                {
+                                    id: "hebrew",
+                                    label: {
+                                        en: "Hebrew",
+                                        fr: "Hébreu"
+                                    },
+                                },
+                                {
+                                    id: "translation",
+                                    label: {
+                                        en: "Translation",
+                                        fr: "Traduction"
+                                    },
+                                }
+                            ],
                             nValues: [1, 1]
                         },
                     ]

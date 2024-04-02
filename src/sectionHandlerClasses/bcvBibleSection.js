@@ -29,7 +29,29 @@ class bcvBibleSection extends Section {
                         en: "Start Page Side",
                         fr: "Côté pour première page"
                     },
-                    typeEnum: ["recto", "verso", "either"],
+                    typeEnum: [
+                        {
+                            id: "recto",
+                            label: {
+                                en: "Recto",
+                                fr: "Recto"
+                            },
+                        },
+                        {
+                            id: "verso",
+                            label: {
+                                en: "Verso",
+                                fr: "Verso"
+                            },
+                        },
+                        {
+                            id: "either",
+                            label: {
+                                en: "Next Page",
+                                fr: "Page suivante"
+                            },
+                        }
+                    ],
                     nValues: [1, 1]
                 },
                 {
@@ -74,7 +96,29 @@ class bcvBibleSection extends Section {
                         en: "Scripture Text Type",
                         "fr": "Type de texte biblique"
                     },
-                    typeEnum: ["greek", "hebrew", "translation"],
+                    typeEnum: [
+                        {
+                            id: "greek",
+                            label: {
+                                en: "Greek",
+                                fr: "Grec"
+                            },
+                        },
+                        {
+                            id: "hebrew",
+                            label: {
+                                en: "Hebrew",
+                                fr: "Hébreu"
+                            },
+                        },
+                        {
+                            id: "translation",
+                            label: {
+                                en: "Translation",
+                                fr: "Traduction"
+                            },
+                        }
+                    ],
                     nValues: [1, 1]
                 },
             ]

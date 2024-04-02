@@ -12,7 +12,7 @@ class fourColumnSpreadSection extends Section {
 
     signature() {
         return {
-            sectionType: "bcvBible",
+            sectionType: "4ColumnSpread",
             requiresBook: true,
             fields: [
                 {

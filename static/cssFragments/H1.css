@@ -7,5 +7,6 @@ h1 {
     border-bottom: %%H1BOTTOMBORDERWIDTH%%pt solid black;
     padding-bottom: %%H1BOTTOMMARGIN%%pt;
     width: %%PAGEBODYWIDTH%%pt;
-    font-family: %%HEADINGFONT%%
+    font-family: %%HEADINGFONT%%;
+    break-after: avoid;
 }

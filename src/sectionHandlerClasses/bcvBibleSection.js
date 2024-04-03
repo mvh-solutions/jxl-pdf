@@ -84,8 +84,8 @@ class bcvBibleSection extends Section {
                 {
                     id: "scriptureSrc",
                     label: {
-                        en: "Scripture Text Label",
-                        "fr": "Etiquette pour texte biblique"
+                        en: "Scripture Text Source",
+                        "fr": "Source pour texte biblique"
                     },
                     typeName: "translationText",
                     nValues: [1, 1]

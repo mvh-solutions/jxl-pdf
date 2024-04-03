@@ -62,7 +62,7 @@ class fourColumnSpreadSection extends Section {
                         {
                             id: "scripture#Src",
                             label: {
-                                en: "Source # Text Label",
+                                en: "Source # Text Source",
                                 "fr": "Source pour texte biblique #"
                             },
                             typeName: "translationText",

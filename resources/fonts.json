@@ -1,5 +1,9 @@
 {
   "test": {
+    "label": {
+      "en": "Test (horrible)",
+      "fr": "Test ( horrible )"
+    },
     "body": "ani",
     "body2": "purisa",
     "heading": "kalimati",
@@ -8,6 +12,10 @@
     "hebrew": "\"Ezra SIL\", serif"
   },
   "allGentium": {
+    "label": {
+      "en": "All Gentium",
+      "fr": "Gentium partout"
+    },
     "body": "\"Gentium Book Plus\", serif",
     "body2": "\"Open Sans Condensed Light\", sans-serif",
     "heading": "\"Gentium Book Plus\", serif",
@@ -16,6 +24,10 @@
     "hebrew": "\"Ezra SIL\", serif"
   },
   "allCharis": {
+    "label": {
+      "en": "All Charis",
+      "fr": "Charis partout"
+    },
     "body": "\"Charis SIL\", serif",
     "body2": "\"Open Sans Condensed Light\", sans-serif",
     "heading": "\"Charis SIL\", serif",
@@ -24,6 +36,10 @@
     "hebrew": "\"Ezra SIL\", serif"
   },
   "allCardo": {
+    "label": {
+      "en": "All Cardo",
+      "fr": "Cardo partout"
+    },
     "body": "Cardo, serif",
     "body2": "\"Open Sans Condensed Light\", sans-serif",
     "heading": "Cardo, serif",
@@ -32,6 +48,10 @@
     "hebrew": "\"Ezra SIL\", serif"
   },
   "allRoboto": {
+    "label": {
+      "en": "All Roboto",
+      "fr": "Roboto partout"
+    },
     "body": "Roboto, sans-serif",
     "body2": "\"Open Sans Condensed Light\", sans-serif",
     "heading": "Roboto, sans-serif",
@@ -40,6 +60,10 @@
     "hebrew": "\"Ezra SIL\", serif"
   },
   "allAndika": {
+    "label": {
+      "en": "All Andika",
+      "fr": "Andika partout"
+    },
     "body": "Andika, serif",
     "body2": "\"Open Sans Condensed Light\", sans-serif",
     "heading": "Andika, serif",
@@ -48,6 +72,10 @@
     "hebrew": "\"Ezra SIL\", serif"
   },
   "charisOpen": {
+    "label": {
+      "en": "Charis body, Open Sans headings",
+      "fr": "Texte du corps en Charis, titres en Open Sans"
+    },
     "body": "\"Charis SIL\", serif",
     "body2": "\"Open Sans Condensed Light\", sans-serif",
     "heading": "\"Open Sans\", serif",
@@ -56,6 +84,10 @@
     "hebrew": "\"Ezra SIL\", serif"
   },
   "notoNaskh": {
+    "label": {
+      "en": "Noto Naskh ( for Arabic/Persian scripts )",
+      "fr": "Noto Naskh ( pour des textes en Arabe ou Perse )"
+    },
     "body": "\"Noto Naskh Arabic\", serif",
     "body2": "\"Noto Naskh Arabic\", sans-serif",
     "heading": "\"Noto Naskh Arabic\", serif",

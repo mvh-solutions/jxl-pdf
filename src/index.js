@@ -1,7 +1,3 @@
-const originatePdfs = require("./originatePdfs");
-const assemblePdfs = require("./assemblePdfs");
+const PdfGen = require('./PdfGen');
 
-module.exports = {
-    originatePdfs,
-    assemblePdfs
-};
+module.exports = {PdfGen};

@@ -48,7 +48,7 @@ class fourColumnSpreadSection extends Section {
                         en: "Scripture Texts",
                         fr: "Textes bibliques"
                     },
-                    nValues: [1, 5],
+                    nValues: [4, 4],
                     typeSpec: [
                         {
                             id: "scripture#Text",

@@ -130,9 +130,7 @@ class bcvBibleSection extends Section {
         const bookName = getBookName(pk, section.text.id, bookCode);
         const cvTexts = getCVTexts(bookCode, pk);
         const notes = section.showNotes ? bcvNotes(options.configContent, bookCode) : {};
-        const verses = [
-            `<h1>${bookName}</h1>`
-        ];
+        const verses = [`<h1>${bookName}</h1>`];
         for (const cvRecord of cvTexts) {
             const verseHtml = templates['bcv_bible_verse']
                 .replace("%%CV%%", cvRecord.cv)

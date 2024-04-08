@@ -12,6 +12,64 @@ class MarkdownSection extends Section {
         return false;
     }
 
+    signature() {
+        return {
+            sectionType: "markdown",
+            requiresBook: true,
+            fields: [
+                {
+                    id: "startOn",
+                    label: {
+                        en: "Start Page Side",
+                        fr: "Côté pour première page"
+                    },
+                    typeEnum: [
+                        {
+                            id: "recto",
+                            label: {
+                                en: "Recto",
+                                fr: "Recto"
+                            },
+                        },
+                        {
+                            id: "verso",
+                            label: {
+                                en: "Verso",
+                                fr: "Verso"
+                            },
+                        },
+                        {
+                            id: "either",
+                            label: {
+                                en: "Next Page",
+                                fr: "Page suivante"
+                            },
+                        }
+                    ],
+                    nValues: [1, 1]
+                },
+                {
+                    id: "showPageNumber",
+                    label: {
+                        en: "Show Page Number",
+                        fr: "Afficher numéro de page"
+                    },
+                    typeName: "boolean",
+                    nValues: [1, 1]
+                },
+                {
+                    id: "md",
+                    label: {
+                        en: "Markdown Source",
+                        fr: "Source pour markdown"
+                    },
+                    typeName: "md",
+                    nValues: [1, 1]
+                },
+            ]
+        }
+    }
+
     async doSection({section, templates, bookCode, options}) {
         fse.writeFileSync(
             path.join(

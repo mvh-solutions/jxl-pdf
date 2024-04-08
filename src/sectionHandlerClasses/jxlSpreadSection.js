@@ -20,6 +20,119 @@ class jxlSpreadSection extends Section {
         return true;
     }
 
+    signature() {
+        return {
+            sectionType: "jxlSpread",
+            requiresBook: true,
+            fields: [
+                {
+                    id: "startOn",
+                    label: {
+                        en: "Start Page Side",
+                        fr: "Côté pour première page"
+                    },
+                    typeLiteral: "verso",
+                    nValues: [1, 1]
+                },
+                {
+                    id: "showPageNumber",
+                    label: {
+                        en: "Show Page Number",
+                        fr: "Afficher numéro de page"
+                    },
+                    typeName: "boolean",
+                    nValues: [1, 1]
+                },
+                {
+                    id: "notes",
+                    label: {
+                        en: "Notes Source",
+                        fr: "Source pour notes"
+                    },
+                    typeName: "tNotes",
+                    nValues: [0, 1]
+                },
+                {
+                    id: "firstSentence",
+                    label: {
+                        en: "First Sentence Number",
+                        fr: "N° de première phrase"
+                    },
+                    typeName: "integer",
+                    nValues: [0, 1]
+                },
+                {
+                    id: "lastSentence",
+                    label: {
+                        en: "Last Sentence Number",
+                        fr: "N° de dernière phrase"
+                    },
+                    typeName: "integer",
+                    nValues: [0, 1]
+                },
+                {
+                    id: "lhs",
+                    label: {
+                        en: "Scripture Texts",
+                        fr: "Textes bibliques"
+                    },
+                    nValues: [1, 5],
+                    typeSpec: [
+                        {
+                            id: "scripture#Text",
+                            label: {
+                                en: "Scripture # Text Label",
+                                "fr": "Etiquette pour texte biblique #"
+                            },
+                            typeName: "string",
+                            nValues: [1, 1]
+                        },
+                        {
+                            id: "scripture#Src",
+                            label: {
+                                en: "Source # Text Source",
+                                "fr": "Source pour texte biblique #"
+                            },
+                            typeName: "translationText",
+                            nValues: [1, 1]
+                        },
+                        {
+                            id: "scripture#Type",
+                            label: {
+                                en: "Scripture # Text Type",
+                                "fr": "Type de texte biblique #"
+                            },
+                            typeEnum: [
+                                {
+                                    id: "greek",
+                                    label: {
+                                        en: "Greek",
+                                        fr: "Grec"
+                                    },
+                                },
+                                {
+                                    id: "hebrew",
+                                    label: {
+                                        en: "Hebrew",
+                                        fr: "Hébreu"
+                                    },
+                                },
+                                {
+                                    id: "translation",
+                                    label: {
+                                        en: "Translation",
+                                        fr: "Traduction"
+                                    },
+                                }
+                            ],
+                            nValues: [1, 1]
+                        },
+                    ]
+                }
+            ]
+        };
+    }
+
     async doSection({section, templates, bookCode, options}) {
         const jsonFile = fse.readJsonSync(path.resolve(path.join('data', section.jxl.path, `${bookCode}.json`)));
         const jxlJson = jsonFile.bookCode ? jsonFile.sentences : jsonFile;

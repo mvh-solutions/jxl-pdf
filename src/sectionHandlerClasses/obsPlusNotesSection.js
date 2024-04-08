@@ -21,6 +21,91 @@ class obsPlusNotesSection extends Section {
         return false;
     }
 
+    signature() {
+        return {
+            sectionType: "obsPlusNotes",
+            requiresBook: true,
+            fields: [
+                {
+                    id: "startOn",
+                    label: {
+                        en: "Start Page Side",
+                        fr: "Côté pour première page"
+                    },
+                    typeEnum: [
+                        {
+                            id: "recto",
+                            label: {
+                                en: "Recto",
+                                fr: "Recto"
+                            },
+                        },
+                        {
+                            id: "verso",
+                            label: {
+                                en: "Verso",
+                                fr: "Verso"
+                            },
+                        },
+                        {
+                            id: "either",
+                            label: {
+                                en: "Next Page",
+                                fr: "Page suivante"
+                            },
+                        }
+                    ],
+                    nValues: [1, 1]
+                },
+                {
+                    id: "showPageNumber",
+                    label: {
+                        en: "Show Page Number",
+                        fr: "Afficher numéro de page"
+                    },
+                    typeName: "boolean",
+                    nValues: [1, 1]
+                },
+                {
+                    id: "obs",
+                    label: {
+                        en: "OBS Source",
+                        fr: "Source pour OBS"
+                    },
+                    typeName: "obs",
+                    nValues: [1, 1]
+                },
+                {
+                    id: "firstStory",
+                    label: {
+                        en: "First Story Number",
+                        fr: "N° de première histoire OBS"
+                    },
+                    typeName: "integer",
+                    nValues: [0, 1]
+                },
+                {
+                    id: "lastStory",
+                    label: {
+                        en: "Last Story Number",
+                        fr: "N° de dernière histoire OBS"
+                    },
+                    typeName: "integer",
+                    nValues: [0, 1]
+                },
+                {
+                    id: "notes",
+                    label: {
+                        en: "Notes Source",
+                        fr: "Source pour notes"
+                    },
+                    typeName: "obsNotes",
+                    nValues: [1, 1]
+                },
+            ]
+        }
+    }
+
     async doSection({section, templates, bookCode, options}) {
         let markdowns = [];
         for (const mdName of fse.readdirSync(path.resolve(path.join('data', `${section.obsPath}`)))) {

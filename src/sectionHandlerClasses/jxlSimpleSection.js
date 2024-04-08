@@ -15,6 +15,82 @@ class jxlSimpleSection extends Section {
         return true;
     }
 
+    signature() {
+        return {
+            sectionType: "jxlSimple",
+            requiresBook: true,
+            fields: [
+                {
+                    id: "startOn",
+                    label: {
+                        en: "Start Page Side",
+                        fr: "Côté pour première page"
+                    },
+                    typeEnum: [
+                        {
+                            id: "recto",
+                            label: {
+                                en: "Recto",
+                                fr: "Recto"
+                            },
+                        },
+                        {
+                            id: "verso",
+                            label: {
+                                en: "Verso",
+                                fr: "Verso"
+                            },
+                        },
+                        {
+                            id: "either",
+                            label: {
+                                en: "Next Page",
+                                fr: "Page suivante"
+                            },
+                        }
+                    ],
+                    nValues: [1, 1]
+                },
+                {
+                    id: "showPageNumber",
+                    label: {
+                        en: "Show Page Number",
+                        fr: "Afficher numéro de page"
+                    },
+                    typeName: "boolean",
+                    nValues: [1, 1]
+                },
+                {
+                    id: "jxl",
+                    label: {
+                        en: "Juxta Source",
+                        fr: "Source pour Juxta"
+                    },
+                    typeName: "juxta",
+                    nValues: [1, 1]
+                },
+                {
+                    id: "firstSentence",
+                    label: {
+                        en: "First Sentence Number",
+                        fr: "N° de première phrase"
+                    },
+                    typeName: "integer",
+                    nValues: [0, 1]
+                },
+                {
+                    id: "lastSentence",
+                    label: {
+                        en: "Last Sentence Number",
+                        fr: "N° de dernière phrase"
+                    },
+                    typeName: "integer",
+                    nValues: [0, 1]
+                },
+            ]
+        }
+    }
+
     async doSection({section, templates, bookCode, options}) {
         const jsonFile = fse.readJsonSync(path.resolve(path.join('data', section.jxl.path, `${bookCode}.json`)));
         const jxlJson = jsonFile.bookCode ? jsonFile.sentences : jsonFile;

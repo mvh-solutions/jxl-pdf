@@ -176,10 +176,10 @@ const makeSuperimposed = async function (manifestStep, superimposePdf) {
  */
 const assemblePdfs = async function (options) {
     const fontBytes = fse.readFileSync('./fonts/GentiumBookPlus-Regular.ttf');
-    const manifest = fse.readJsonSync(path.join(options.workingDir, 'manifest.json'));
     const pdfDoc = await PDFDocument.create();
     pdfDoc.registerFontkit(fontKit);
     await pdfDoc.embedFont(fontBytes);
+    const manifest = fse.readJsonSync(path.join(options.workingDir, 'manifest.json'));
     let showPageNumbersArray = [];
     // Store original PDFs in manifest dictionary
     options.verbose && console.log(`      Augment manifest`);

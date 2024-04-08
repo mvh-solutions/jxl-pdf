@@ -60,7 +60,7 @@
           },
           "config": {
             "showWordAtts": false,
-            "showTitles": false,
+            "showTitles": true,
             "showHeadings": true,
             "showIntroductions": true,
             "showFootnotes": true,

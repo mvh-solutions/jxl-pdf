@@ -1,5 +1,9 @@
 {
   "9on10": {
+    "label": {
+      "en": "9pt on 10pt grid",
+      "fr": "9 pt sur grille de 10 pt"
+    },
     "body": {
       "font": 9,
       "height": 10,
@@ -49,6 +53,10 @@
     }
   },
   "9on11": {
+    "label": {
+      "en": "9pt on 11pt grid",
+      "fr": "9 pt sur grille de 11 pt"
+    },
     "body": {
       "font": 9,
       "height": 11,
@@ -98,6 +106,10 @@
     }
   },
   "10on12": {
+    "label": {
+      "en": "10pt on 12pt grid",
+      "fr": "10 pt sur grille de 12 pt"
+    },
     "body": {
       "font": 10,
       "height": 12,
@@ -147,6 +159,10 @@
     }
   },
   "12on14": {
+    "label": {
+      "en": "12pt on 14pt grid",
+      "fr": "12 pt sur grille de 14 pt"
+    },
     "body": {
       "font": 12,
       "height": 14,

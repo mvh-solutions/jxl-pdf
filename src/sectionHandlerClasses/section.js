@@ -17,7 +17,7 @@ class Section {
     }
 
     signature() {
-        throw new Error("Method 'signature' is not implemented for 'Section' abstract class");
+        return {};
     }
 
     doSection() {

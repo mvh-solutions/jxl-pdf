@@ -69,7 +69,7 @@ class PdfGen {
         return await _assemblePdfs(this.options);
     }
 
-    handlerInfo() {
+    static handlerInfo() {
         const ret = {};
         Object.entries(handlers)
             .forEach(h => {
@@ -79,7 +79,7 @@ class PdfGen {
         return ret;
     }
 
-    pageInfo() {
+    static pageInfo() {
         return {
             fonts,
             pages,

@@ -11,7 +11,7 @@ const doPuppet = async ({htmlPath, pdfPath, verbose=false}) => {
         const minStableSizeIterations = 3;
 
         while (checkCounts++ <= maxChecks) {
-            let html = await page.content();
+            let html = page.content();
             let currentHTMLSize = html.length;
             if (lastHTMLSize !== 0 && currentHTMLSize === lastHTMLSize)
                 countStableSizeIterations++;

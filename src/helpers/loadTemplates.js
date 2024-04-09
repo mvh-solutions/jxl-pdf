@@ -39,7 +39,7 @@ const TEMPLATE_NAMES = [
 const loadTemplates = () => {
     const templates = {};
     for (const templateName of TEMPLATE_NAMES) {
-        templates[templateName] = fse.readFileSync(path.join('src', 'templates', templateName + '.html')).toString();
+        templates[templateName] = fse.readFileSync(path.resolve(path.join(__dirname, '..', 'templates', templateName + '.html'))).toString();
     }
     return templates;
 }
@@ -48,7 +48,7 @@ const loadTemplate = (templateName) => {
     if(!TEMPLATE_NAMES.includes(templateName)) {
         throw new Error("Illegal template name :" + templateName);
     }
-    return fse.readFileSync(path.join('src', 'templates', templateName + '.html')).toString();
+    return fse.readFileSync(path.resolve(path.join(__dirname, '..', 'templates', templateName + '.html'))).toString();
 }
 
 module.exports = {

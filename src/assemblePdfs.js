@@ -175,7 +175,7 @@ const makeSuperimposed = async function (manifestStep, superimposePdf) {
  *   - verbose: Boolean to enable verbose logging.
  */
 const assemblePdfs = async function (options) {
-    const fontBytes = fse.readFileSync('./fonts/GentiumBookPlus-Regular.ttf');
+    const fontBytes = fse.readFileSync(path.resolve(path.join(__dirname, '..', 'fonts/GentiumBookPlus-Regular.ttf')));
     const pdfDoc = await PDFDocument.create();
     pdfDoc.registerFontkit(fontKit);
     await pdfDoc.embedFont(fontBytes);

@@ -36,11 +36,15 @@ for (const [nSentence, sentence] of jxlJson.entries()) {
     }
 }
 // Find overlapping ranges within each sentence (since UI doesn't allow moving chunks between sentences)
+// Also collect unique cvs for later
+
+const uniqueCvs = new Set([]);
 const overlaps = [];
-for (const [nSentence, sentence] of Object.entries(sentenceCvs)) {
+for (const sentence of Object.values(sentenceCvs)) {
     const sentenceEntries = Object.entries(sentence);
     for (let nSentenceEntry = 0; nSentenceEntry < sentenceEntries.length - 1; nSentenceEntry++) {
         const [cv, occs] = sentenceEntries[nSentenceEntry];
+        uniqueCvs.add(cv);
         for (let nSentenceEntry2 = nSentenceEntry + 1; nSentenceEntry2 < sentenceEntries.length; nSentenceEntry2++) {
             if (nSentenceEntry === nSentenceEntry2) {
                 continue;
@@ -67,11 +71,42 @@ for (const [nSentence, sentence] of Object.entries(sentenceCvs)) {
     }
 }
 
-const verseStarts = {};
+// Iterate to add verses intersecting with a verse range into that verse range
+let changed = null;
+do {
+    changed = false;
+    for (const overlap of overlaps) {
+        const overlapArray = Array.from(overlap);
+        const chapter = parseInt(overlapArray[0].split(':')[0]);
+        let minV = 200;
+        let maxV = 0;
+        for (const v of overlapArray.map(c => parseInt(c.split(':')[1]))) {
+            if (v < minV) {
+                minV = v;
+            }
+            if (v > maxV) {
+                maxV = v;
+            }
+        }
+        for (const uniqueCv of Array.from(uniqueCvs)) {
+            const [uniqueChapter, uniqueVerse] = uniqueCv.split(":").map(val => parseInt(val));
+            if (
+                chapter === uniqueChapter &&
+                uniqueVerse > minV &&
+                uniqueVerse < maxV &&
+                !overlap.has(uniqueCv)
+            ) {
+                overlap.add(uniqueCv);
+                changed = true;
+            }
+        }
+    }
+} while (changed);
 
+// Produce final JSON with the sentence/chunk/word position at which to display each verse or verse range
 let cv = "";
 let ret = [];
-for (const [nSentence, sentence] of jxlJson.entries()) {
+for (const sentence of jxlJson) {
     ret.push({});
     for (const [nChunkSource, chunkSources] of sentence.chunks.map(c => c.source).entries()) {
         for (const [nChunkWord, chunkWordCv] of chunkSources.map(cs => cs.cv).entries()) {

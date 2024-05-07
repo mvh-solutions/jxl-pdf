@@ -4,5 +4,7 @@
     "pages": "A4P",
     "sizes": "10on12"
   },
-  "sections": []
+  "sections": [
+    {}
+  ]
 }

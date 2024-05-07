@@ -98,12 +98,24 @@ class PdfGen {
                     continue;
                 }
                 if (!globalSpecKeys[globalKey].includes(configOb.global[globalKey])) {
-                    console.log("fail")
                     const globalSpecKeysString = globalSpecKeys[globalKey]
                         .map(v => `'${v}'`)
                         .join(", ");
                     ret.push(`Unexpected value '${configOb.global[globalKey]}' for global key '${globalKey}'. Expected one of ${globalSpecKeysString}`);
                     skip = true;
+                }
+            }
+        }
+        // Sections checks
+        if (!skip) {
+            const sections = configOb.sections;
+            if (sections.length === 0) {
+                ret.push("Top-level section has zero length");
+            } else {
+                let sectionN = 0;
+                while (sectionN < sections.length) {
+                    console.log("section", sectionN);
+                    sectionN++;
                 }
             }
         }

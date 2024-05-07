@@ -6,8 +6,8 @@
 
 class Section {
 
-    requiresBook() {
-        throw new Error("Method 'requiresBook' is not implemented for 'Section' abstract class");
+    requiresWrapper() {
+        throw new Error("Method 'requiresWrapper' is not implemented for 'Section' abstract class");
     }
 
     constructor() {

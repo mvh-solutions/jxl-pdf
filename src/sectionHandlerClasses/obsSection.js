@@ -7,14 +7,14 @@ const Section = require('./section');
 
 class obsSection extends Section {
 
-    requiresBook() {
-        return false;
+    requiresWrapper() {
+        return ["obs"];
     }
 
     signature() {
         return {
             sectionType: "obs",
-            requiresBook: true,
+            requiresWrapper: this.requiresWrapper(),
             fields: [
                 {
                     id: "startOn",

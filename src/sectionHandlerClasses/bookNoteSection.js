@@ -5,14 +5,14 @@ const Section = require('./section');
 
 class bookNoteSection extends Section {
 
-    requiresBook() {
-        return true;
+    requiresWrapper() {
+        return ["bcv"];
     }
 
     signature() {
         return {
             sectionType: "bookNote",
-            requiresBook: true,
+            requiresWrapper: this.requiresWrapper(),
             fields: [
                 {
                     id: "startOn",

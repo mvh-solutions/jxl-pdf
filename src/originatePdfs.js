@@ -140,11 +140,25 @@ const originatePdfs = async options => {
         }
     }
 
+    const checkObsCode = (sectionId) => {
+        if (!obsCode) {
+            throw new Error(`obsCode not set for section '${sectionId}`);
+        }
+    }
+
+    const checkJuxtaCode = (sectionId) => {
+        if (!juxtaCode) {
+            throw new Error(`juxtaCode not set for section '${sectionId}`);
+        }
+    }
+
     const templates = loadTemplates();
 
     let links = [];
     let manifest = [];
     let bookCode = null;
+    let obsCode = null;
+    let juxtaCode = null;
 
     const doSection = async (section, nested) => {
         options.verbose && nested && console.log(`   Section ${section.id.replace('%%bookCode%%', bookCode)} (${section.type} in setBooks)`);
@@ -171,9 +185,17 @@ const originatePdfs = async options => {
         if (!sectionHandler) {
             throw new Error(`Unknown section type '${section.type}' (id '${section.id}')`);
         }
-        if (sectionHandler.requiresBook()) {
+        if (sectionHandler.requiresWrapper().includes("bcv")) {
             checkBookCode(section.id);
         }
+        /*
+        if (sectionHandler.requiresWrapper().includes("obs")) {
+            checkObsCode(section.id);
+        }
+        if (sectionHandler.requiresWrapper().includes("juxta")) {
+            checkJuxtaCode(section.id);
+        }
+         */
         await sectionHandler.doSection({section, templates, bookCode, options});
         manifest.push({
             id: section.id.replace('%%bookCode%%', bookCode),

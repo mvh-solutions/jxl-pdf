@@ -61,6 +61,55 @@ class PdfGen {
         }
     }
 
+    validateConfig(configOb) {
+        const ret = [];
+        let skip = false;
+        // Top-level checks, abort on first error
+        if (typeof configOb !== "object" || Array.isArray(configOb)) {
+            ret.push("config is not an object");
+            skip = true;
+        }
+        if (!skip && !("global" in configOb)) {
+            ret.push("config has no 'global' key");
+            skip = true;
+        }
+        if (!skip && (!(typeof configOb.global === "object")) || Array.isArray(configOb.global)) {
+            ret.push("config 'global' value is not an object");
+            skip = true;
+        }
+        if (!skip && !configOb.sections) {
+            ret.push("config has no 'sections' key");
+            skip = true;
+        }
+        if (!skip && !Array.isArray(configOb.sections)) {
+            ret.push("config 'sections' value is not an array");
+            skip = true;
+        }
+        // globals checks, abort at end on error
+        if (!skip) {
+            const globalSpecKeys = Object.fromEntries(
+                Object.entries(this.constructor.pageInfo())
+                    .map(([k, v]) => [k, Object.keys(v)])
+            );
+            for (const globalKey of Object.keys(configOb.global)) {
+                if (!globalSpecKeys[globalKey]) {
+                    ret.push(`Unexpected global key '${globalKey}'`);
+                    skip = true;
+                    continue;
+                }
+                if (!globalSpecKeys[globalKey].includes(configOb.global[globalKey])) {
+                    console.log("fail")
+                    const globalSpecKeysString = globalSpecKeys[globalKey]
+                        .map(v => `'${v}'`)
+                        .join(", ");
+                    ret.push(`Unexpected value '${configOb.global[globalKey]}' for global key '${globalKey}'. Expected one of ${globalSpecKeysString}`);
+                    skip = true;
+                }
+            }
+        }
+        return ret;
+    }
+
     async originatePdfs() {
         return await _originatePdfs(this.options);
     }

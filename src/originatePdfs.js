@@ -1,35 +1,8 @@
 const path = require("path");
 const {loadTemplates, setupOneCSS, checkCssSubstitution} = require("./helpers");
+const {sectionHandlerLookup} = require('./sectionHandlerLookup');
 const fse = require("fs-extra");
-const {
-    TwoColumnSection,
-    FourColumnSpreadSection,
-    BookNoteSection,
-    FrontSection,
-    JxlSpreadSection,
-    JxlSimpleSection,
-    BcvBibleSection,
-    ParaBibleSection,
-    BiblePlusNotesSection,
-    MarkdownSection,
-    ObsSection,
-    ObsPlusNotesSection
-} = require("./sectionHandlerClasses");
 
-const sectionHandlers = {
-    front: new FrontSection(),
-    markdown: new MarkdownSection(),
-    obs: new ObsSection(),
-    obsPlusNotes: new ObsPlusNotesSection(),
-    jxlSpread: new JxlSpreadSection(),
-    jxlSimple: new JxlSimpleSection(),
-    "4ColumnSpread": new FourColumnSpreadSection(),
-    "2Column": new TwoColumnSection(),
-    bookNote: new BookNoteSection(),
-    bcvBible: new BcvBibleSection(),
-    paraBible: new ParaBibleSection(),
-    biblePlusNotes: new BiblePlusNotesSection()
-};
 const setupCSS = options => {
     const cssFragments = {};
     const cssFragmentFilenames = fse.readdirSync(path.join(__dirname, "..", "static", "cssFragments"))
@@ -145,6 +118,8 @@ const originatePdfs = async options => {
     let links = [];
     let manifest = [];
     let bookCode = null;
+    let obsCode = null;
+    let juxtaCode = null;
 
     const doSection = async (section, nested) => {
         options.verbose && nested && console.log(`   Section ${section.id.replace('%%bookCode%%', bookCode)} (${section.type} in setBooks)`);
@@ -167,11 +142,11 @@ const originatePdfs = async options => {
                 for: section.id.replace('%%bookCode%%', bookCode)
             });
         }
-        const sectionHandler = sectionHandlers[section.type];
+        const sectionHandler = sectionHandlerLookup[section.type];
         if (!sectionHandler) {
             throw new Error(`Unknown section type '${section.type}' (id '${section.id}')`);
         }
-        if (sectionHandler.requiresBook()) {
+        if (sectionHandler.requiresWrapper().includes("bcv")) {
             checkBookCode(section.id);
         }
         await sectionHandler.doSection({section, templates, bookCode, options});

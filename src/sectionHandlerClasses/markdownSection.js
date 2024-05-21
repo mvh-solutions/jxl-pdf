@@ -8,14 +8,14 @@ const Section = require('./section');
 
 class MarkdownSection extends Section {
 
-    requiresBook() {
-        return false;
+    requiresWrapper() {
+        return [];
     }
 
     signature() {
         return {
             sectionType: "markdown",
-            requiresBook: true,
+            requiresWrapper: this.requiresWrapper(),
             fields: [
                 {
                     id: "startOn",

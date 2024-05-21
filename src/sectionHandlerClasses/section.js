@@ -6,8 +6,8 @@
 
 class Section {
 
-    requiresBook() {
-        throw new Error("Method 'requiresBook' is not implemented for 'Section' abstract class");
+    requiresWrapper() {
+        throw new Error("Method 'requiresWrapper' is not implemented for 'Section' abstract class");
     }
 
     constructor() {
@@ -22,10 +22,6 @@ class Section {
 
     doSection() {
         throw new Error("Method 'doSection' is not implemented for 'Section' abstract class");
-    }
-
-    formatSectionJson(values) {
-        console.log(JSON.stringify(values, null, 2));
     }
 
 }

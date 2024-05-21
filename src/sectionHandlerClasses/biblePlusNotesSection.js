@@ -14,14 +14,14 @@ const Section = require('./section');
 
 class biblePlusNotesSection extends Section {
 
-    requiresBook() {
-        return true;
+    requiresWrapper() {
+        return ["bcv"];
     }
 
     signature() {
         return {
             sectionType: "biblePlusNotes",
-            requiresBook: true,
+            requiresWrapper: this.requiresWrapper(),
             fields: [
                 {
                     id: "startOn",

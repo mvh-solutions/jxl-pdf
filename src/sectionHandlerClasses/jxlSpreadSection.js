@@ -16,14 +16,14 @@ const Section = require('./section');
 
 class jxlSpreadSection extends Section {
 
-    requiresBook() {
-        return true;
+    requiresWrapper() {
+        return ["bcv"];
     }
 
     signature() {
         return {
             sectionType: "jxlSpread",
-            requiresBook: true,
+            requiresWrapper: this.requiresWrapper(),
             fields: [
                 {
                     id: "startOn",

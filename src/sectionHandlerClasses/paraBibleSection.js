@@ -7,14 +7,14 @@ const Section = require('./section');
 
 class paraBibleSection extends Section {
 
-    requiresBook() {
-        return true;
+    requiresWrapper() {
+        return ["bcv"];
     }
 
     signature() {
         return {
             sectionType: "paraBible",
-            requiresBook: true,
+            requiresWrapper: this.requiresWrapper(),
             fields: [
                 {
                     id: "startOn",

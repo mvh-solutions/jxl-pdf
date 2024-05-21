@@ -1,0 +1,208 @@
+{
+  "global": {
+    "fonts": "allGentium",
+    "pages": "a4p",
+    "sizes": "9on10"
+  },
+  "sections": [
+    {
+      "id": "blabla",
+      "type": "markdown",
+      "path": "fra_markdown/blabla",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "id": "",
+      "type": "obsWrapper",
+      "ranges": [
+        "1-10",
+        "14-15"
+      ],
+      "sections": [
+        {
+          "id": "obsPlusNotes",
+          "type": "obsPlusNotes",
+          "obsPath": "fra_obs",
+          "obsNotesPath": "fra_obstn",
+          "startOn": "recto",
+          "showPageNumber": true
+        },
+        {
+          "id": "obs",
+          "type": "obs",
+          "path": "fra_obs",
+          "startOn": "recto",
+          "showPageNumber": true
+        }
+      ]
+    },
+    {
+      "id": "emploi",
+      "type": "front",
+      "path": "fra_front/mode_emploi",
+      "startOn": "recto",
+      "showPageNumber": true
+    },
+    {
+      "type": "bcvWrapper",
+      "ranges": [
+        "JUD",
+        "TIT"
+      ],
+      "sections": [
+        {
+          "id": "byPara_%%bookCode%%",
+          "type": "paraBible",
+          "startOn": "recto",
+          "showPageNumber": true,
+          "text": {
+            "label": "ULT",
+            "type": "trans",
+            "id": "fra_lsg"
+          },
+          "config": {
+            "showWordAtts": false,
+            "showTitles": true,
+            "showHeadings": true,
+            "showIntroductions": true,
+            "showFootnotes": true,
+            "showXrefs": true,
+            "showParaStyles": true,
+            "showCharacterMarkup": true,
+            "showChapterLabels": true,
+            "showVersesLabels": true
+          }
+        },
+        {
+          "id": "bible_plus_notes_%%bookCode%%",
+          "type": "biblePlusNotes",
+          "startOn": "recto",
+          "showPageNumber": true,
+          "showNotes": true,
+          "text": {
+            "label": "Littérale",
+            "type": "trans",
+            "id": "fra_tlx"
+          }
+        },
+        {
+          "id": "bible_%%bookCode%%",
+          "type": "bcvBible",
+          "startOn": "recto",
+          "showPageNumber": true,
+          "showNotes": true,
+          "text": {
+            "label": "Littérale",
+            "type": "trans",
+            "id": "fra_tlx"
+          }
+        },
+        {
+          "id": "bookNotes_%%bookCode%%",
+          "type": "bookNote",
+          "startOn": "recto",
+          "showPageNumber": true
+        },
+        {
+          "id": "fourColumn_%%bookCode%%",
+          "type": "4ColumnSpread",
+          "startOn": "verso",
+          "showPageNumber": true,
+          "showNotes": true,
+          "texts": [
+            {
+              "label": "Segond 1910",
+              "type": "trans",
+              "id": "fra_lsg"
+            },
+            {
+              "label": "Grec",
+              "type": "greek",
+              "id": "grc_ugnt"
+            },
+            {
+              "label": "Littérale",
+              "type": "trans",
+              "id": "fra_tlx"
+            },
+            {
+              "label": "Sémantique",
+              "type": "trans",
+              "id": "fra_tsx"
+            }
+          ]
+        },
+        {
+          "id": "twoColumn_%%bookCode%%",
+          "type": "2Column",
+          "startOn": "recto",
+          "showPageNumber": true,
+          "showNotes": true,
+          "texts": [
+            {
+              "label": "Littérale",
+              "type": "trans",
+              "id": "fra_tlx"
+            },
+            {
+              "label": "Sémantique",
+              "type": "trans",
+              "id": "fra_tsx"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "juxtaWrapper",
+      "sentences": ["1-5"],
+      "sections": [
+        {
+          "id": "simple_juxta_%%bookCode%%",
+          "type": "jxlSimple",
+
+          "startOn": "recto",
+          "showPageNumber": true,
+          "jxl": {
+            "path": "fra_jxl"
+          }
+        },
+        {
+          "id": "juxta_%%bookCode%%",
+          "type": "jxlSpread",
+          "startOn": "verso",
+          "showPageNumber": true,
+          "jxl": {
+            "path": "fra_jxl",
+            "notes": {
+              "pivot": "jxl2note"
+            }
+          },
+          "lhs": [
+            {
+              "label": "SEGOND 1910",
+              "type": "trans",
+              "id": "fra_lsg"
+            },
+            {
+              "label": "GREC",
+              "type": "greek",
+              "id": "grc_ugnt"
+            },
+            {
+              "label": "LITTÉRALE",
+              "type": "trans",
+              "id": "fra_tlx"
+            },
+            {
+              "label": "SÉMANTIQUE",
+              "type": "trans",
+              "id": "fra_tsx"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

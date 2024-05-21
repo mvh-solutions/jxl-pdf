@@ -17,14 +17,14 @@ const getObsNotes = (notesPath, notesRef) => {
 
 class obsPlusNotesSection extends Section {
 
-    requiresBook() {
-        return false;
+    requiresWrapper() {
+        return ["obs"];
     }
 
     signature() {
         return {
             sectionType: "obsPlusNotes",
-            requiresBook: true,
+            requiresWrapper: this.requiresWrapper(),
             fields: [
                 {
                     id: "startOn",

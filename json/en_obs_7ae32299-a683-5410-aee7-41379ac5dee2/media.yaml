@@ -1,0 +1,59 @@
+projects:
+- identifier: 'obs'
+  version: '8'
+  media:
+  - identifier: 'pdf'
+    version: '8'
+    contributor: []
+    url: 'https://cdn.door43.org/en/Door43-Catalog/en_obs/v8/pdf/en_obs_v8.pdf'
+  - identifier: 'docx'
+    version: '1'
+    contributor: []
+    url: 'https://cdn.door43.org/en/obs/v8/docx/en_obs-v8.docx'
+  - identifier: 'odt'
+    version: '1'
+    contributor: []
+    url: 'https://cdn.door43.org/en/obs/v8/odt/en_obs-v8.odt'
+  - identifier: 'epub'
+    version: '1'
+    contributor: []
+    url: 'https://cdn.door43.org/en/obs/v8/epub/en_obs-v8.epub'
+  - identifier: 'mp3'
+    version: '1'
+    contributor:
+    - 'Narrator: Brad Harrington'
+    - 'Checker: Ben Jore'
+    - 'Engineer: Brad Harrington'
+    quality:
+    - '128kbps'
+    - '64kbps'
+    - '32kbps'
+    chapter_url: 'https://cdn.door43.org/en/obs/v6/{quality}/en_obs_{chapter}_{quality}.mp3'
+    url: 'https://cdn.door43.org/en/obs/v6/{quality}/en_obs_v6_mp3_{quality}.zip'
+  - identifier: 'mp4'
+    version: '1'
+    contributor: []
+    quality:
+    - '720p'
+    - '360p'
+    chapter_url: 'https://filedn.com/lD0GfuMvTstXgqaJfpLL87S/en/obs/v6/{quality}/en_obs_{chapter}_{quality}.mp4'
+    url: 'https://filedn.com/lD0GfuMvTstXgqaJfpLL87S/en/obs/v6/en_obs_v6_{quality}.zip'
+  - identifier: '3gp'
+    version: '1'
+    contributor: []
+    quality:
+    - '3GP'
+    chapter_url: 'https://filedn.com/lD0GfuMvTstXgqaJfpLL87S/en/obs/v6/{quality}/en_obs_{chapter}_{quality}.mp4'
+    url: 'https://filedn.com/lD0GfuMvTstXgqaJfpLL87S/en/obs/v6/en_obs_v6_{quality}.zip'
+  - identifier: 'youtube'
+    version: '1'
+    contributor: []
+    url: 'https://www.youtube.com/playlist?list=PLa3_fZSWwn6BA0eElhJ1_xosy6P3nMeIb'
+  - identifier: 'bloom'
+    version: '1'
+    contributor: []
+    url: 'http://bloomlibrary.org/browse/detail/2nbAvDqoQJ'
+  - identifier: 'door43'
+    version: '{latest}'
+    contributor: []
+    url: 'https://door43.org/u/Door43-Catalog/en_obs/'

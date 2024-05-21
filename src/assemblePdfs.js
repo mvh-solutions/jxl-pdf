@@ -218,7 +218,7 @@ const assemblePdfs = async function (options) {
 
         // Add blank pages to the documents to respect start side
         const nextPageSide = numPages % 2 === 0 ? "recto" : "verso";
-        if (nextPageSide !== manifestStep.startOn) {
+        if (manifestStep.startOn !== "either" && nextPageSide !== manifestStep.startOn) {
             options.verbose && console.log(`            Add blank page to start on ${nextPageSide}`);
             pdfDoc.addPage(options.pageFormat.pageSize);
             numPages += 1;

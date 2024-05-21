@@ -24,10 +24,6 @@ class Section {
         throw new Error("Method 'doSection' is not implemented for 'Section' abstract class");
     }
 
-    formatSectionJson(values) {
-        console.log(JSON.stringify(values, null, 2));
-    }
-
 }
 
 module.exports = Section;

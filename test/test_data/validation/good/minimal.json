@@ -5,6 +5,9 @@
     "sizes": "10on12"
   },
   "sections": [
-    {}
+    {
+      "id": "foo",
+      "type": "bcvBible"
+    }
   ]
 }

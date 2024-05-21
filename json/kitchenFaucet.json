@@ -1,7 +1,7 @@
 {
   "global": {
     "fonts": "allGentium",
-    "pages": "a4p",
+    "pages": "A4P",
     "sizes": "9on10"
   },
   "sections": [
@@ -10,9 +10,10 @@
       "storyRanges": ["1-10", "14-15"],
       "sections": [
         {
+          "id": "67481a98-1759-11ef-b34d-1326466935f3",
           "type": "obs",
           "content": {
-            "showPageNumber": true,
+            "showPageNumber": [true],
             "obs": "./en_obs_7ae32299-a683-5410-aee7-41379ac5dee2/content",
             "startOn": "recto"
           }
@@ -24,13 +25,14 @@
       "books": ["TIT"],
       "sections": [
         {
+          "id": "70c5370e-1759-11ef-a265-3f9733a76a6b",
           "type": "bcvBible",
           "content": {
             "showPageNumber": true,
             "notes": "",
             "scriptureText": "En ueb",
             "scriptureSrc": "./en_ueb_7700d5f3-ec20-5f91-92e0-d2923a591603",
-            "startOn": "recto",
+            "startOn": ["recto"],
             "scriptureType": "translation"
           }
         }

@@ -1,6 +1,6 @@
 {
   "EXECUTIVE": {
-    "name": {
+    "label": {
       "en": "Executive"
     },
     "pageSize": [
@@ -78,7 +78,7 @@
     }
   },
   "A4P": {
-    "name": {
+    "label": {
       "en": "A4 Portrait"
     },
     "pageSize": [
@@ -156,7 +156,7 @@
     }
   },
   "A3P": {
-    "name": {
+    "label": {
       "en": "A4 Portrait"
     },
     "pageSize": [
@@ -166,7 +166,7 @@
     ]
   },
   "A5P": {
-    "name": {
+    "label": {
       "en": "A5 Portrait"
     },
     "pageSize": [
@@ -175,7 +175,7 @@
     ]
   },
   "A6P": {
-    "name": {
+    "label": {
       "en": "A6 Portrait"
     },
     "pageSize": [
@@ -184,7 +184,7 @@
     ]
   },
   "FOLIO": {
-    "name": {
+    "label": {
       "en": "Folio"
     },
     "pageSize": [
@@ -193,7 +193,7 @@
     ]
   },
   "LEGAL": {
-    "name": {
+    "label": {
       "en": "Folio"
     },
     "pageSize": [
@@ -202,7 +202,7 @@
     ]
   },
   "LETTER": {
-    "name": {
+    "label": {
       "en": "Letter"
     },
     "pageSize": [
@@ -211,7 +211,7 @@
     ]
   },
   "TABLOID": {
-    "name": {
+    "label": {
       "en": "Tabloid"
     },
     "pageSize": [

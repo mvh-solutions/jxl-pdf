@@ -8,11 +8,12 @@
     {
       "id": "blabla",
       "type": "markdown",
-      "path": "./data/fra_markdown/blabla",
+      "path": "fra_markdown/blabla",
       "startOn": "recto",
       "showPageNumber": true
     },
     {
+      "id": "",
       "type": "obsWrapper",
       "ranges": [
         "1-10",
@@ -22,15 +23,15 @@
         {
           "id": "obsPlusNotes",
           "type": "obsPlusNotes",
-          "obsPath": "./data/fra_obs",
-          "obsNotesPath": "./data/fra_obstn",
+          "obsPath": "fra_obs",
+          "obsNotesPath": "fra_obstn",
           "startOn": "recto",
           "showPageNumber": true
         },
         {
           "id": "obs",
           "type": "obs",
-          "path": "./data/fra_obs",
+          "path": "fra_obs",
           "startOn": "recto",
           "showPageNumber": true
         }
@@ -39,7 +40,7 @@
     {
       "id": "emploi",
       "type": "front",
-      "path": "./data/fra_front/mode_emploi",
+      "path": "fra_front/mode_emploi",
       "startOn": "recto",
       "showPageNumber": true
     },
@@ -164,7 +165,7 @@
           "startOn": "recto",
           "showPageNumber": true,
           "jxl": {
-            "path": "./data/fra_jxl"
+            "path": "fra_jxl"
           }
         },
         {
@@ -173,9 +174,9 @@
           "startOn": "verso",
           "showPageNumber": true,
           "jxl": {
-            "path": "./data/fra_jxl",
+            "path": "fra_jxl",
             "notes": {
-              "pivot": "./data/jxl2note"
+              "pivot": "jxl2note"
             }
           },
           "lhs": [

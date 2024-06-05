@@ -1,0 +1,24 @@
+{
+  "global": {
+    "pages": "A4P",
+    "fonts": "allGentium",
+    "sizes": "9on11"
+  },
+  "sections": [
+    {
+      "type": "obsWrapper",
+      "id": "309c2bd2-1d50-4c32-a66a-e85363196e80",
+      "sections": [
+        {
+          "id": "199369f6-c92a-4133-92fb-f82d71382487",
+          "type": "obs",
+          "content": {
+            "startOn": "recto",
+            "showPageNumber": true,
+            "obs": "./en_obs_7ae32299-a683-5410-aee7-41379ac5dee2/content"
+          }
+        }
+      ]
+    }
+  ]
+}

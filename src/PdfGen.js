@@ -6,6 +6,8 @@ const sizes = require('../resources/sizes.json');
 const handlers = require('./sectionHandlerClasses');
 const {sectionHandlerLookup} = require('./sectionHandlerLookup');
 const fse = require("fs-extra");
+const path = require("path");
+const os = require("os");
 
 class PdfGen {
 
@@ -32,8 +34,22 @@ class PdfGen {
     }
 
     async doPdf() {
-        const options = this.options;
+        const workingDir = path.resolve(path.join(os.homedir(), ".jxlpdf/working"));
+        const options = {
+            pdfPath: path.join(workingDir, "pdf"),
+            htmlPath: path.join(workingDir, "html", "pages"),
+            manifestPath: path.join(workingDir, "manifest.json"),
+            steps: ["originate", "assemble"],
+            workingDir,
+            pageFormat: pages[this.options.global.pages],
+            fonts: fonts[this.options.global.fonts],
+            fontSizes: sizes[this.options.global.sizes],
+            configContent: this.options,
+        };
+        this.options = options;
+        console.log(options);
         // Check that output file will not accidentally overwrite an existing file
+/*
         if (fse.pathExistsSync(options.output) && !options.forceOverwrite) {
             throw new Error(`Output path '${options.output}' would be overwritten but 'forceOverwrite' flag is not set.`);
         }
@@ -47,7 +63,7 @@ class PdfGen {
         } catch (err) {
             throw new Error(`Could not read config file ${options.config} as JSON: ${err.message}`);
         }
-
+*/
         // In CLEAR mode, delete working dir and exit
         if (options.steps.includes("clear")) {
             options.verbose && console.log("** CLEAR **");

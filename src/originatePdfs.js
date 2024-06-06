@@ -122,7 +122,7 @@ const originatePdfs = async options => {
     let juxtaCode = null;
 
     const doSection = async (section, nested) => {
-        options.verbose && nested && console.log(`   Section ${section.id.replace('%%bookCode%%', bookCode)} (${section.type} in setBooks)`);
+        options.verbose && nested && console.log(`   Section ${section.id.replace('%%bookCode%%', bookCode)} (${section.type} in wrapper)`);
         if (section.forceSkip) {
             options.verbose && console.log(`      Force skip in config file; continuing...`);
             return;
@@ -149,14 +149,7 @@ const originatePdfs = async options => {
         if (sectionHandler.requiresWrapper().includes("bcv")) {
             checkBookCode(section.id);
         }
-        await sectionHandler.doSection({section, templates, bookCode, options});
-        manifest.push({
-            id: section.id.replace('%%bookCode%%', bookCode),
-            type: section.type,
-            startOn: section.startOn,
-            showPageNumber: section.showPageNumber,
-            makeFromDouble: ["jxlSpread", "4ColumnSpread"].includes(section.type)
-        });
+        await sectionHandler.doSection({section, templates, bookCode, manifest, options});
         if (section.forceQuit) {
             console.log("** Force quit in config file **");
             process.exit(0);
@@ -167,22 +160,13 @@ const originatePdfs = async options => {
         options.verbose && console.log(`   Section ${section.id ? `${section.id} (${section.type})` : section.type}`);
 
         switch (section.type) {
-            case "setBook":
-                if (section.source && section.source === "cli" && options.book) {
-                    bookCode = options.book;
-                } else if (section.source && section.source === "literal" && section.bookCode) {
-                    bookCode = section.bookCode;
-                } else {
-                    throw new Error(`Could not set bookCode using '${JSON.stringify(section)}': maybe you need to provide a bookCode at the command line?`);
-                }
-                options.verbose && console.log(`      bookCode = ${bookCode} (from 'setBook')`);
-                break;
-            case "setBooks":
-                for (const bc of section.bookCodes) {
-                    bookCode = bc;
-                    options.verbose && console.log(`      bookCode = ${bookCode} (from 'setBooks')`);
+            case "obsWrapper":
+                options.verbose && console.log(`      obsRanges`);
+                for (const obsRange of section.ranges) {
+                    options.verbose && console.log(`      obsRange = ${obsRange}`);
+                    const [firstStory, lastStory] = obsRange.split('-').map(n => parseInt(n));
                     for (const section2 of section.sections) {
-                        await doSection(section2, true);
+                        await doSection({...section2, firstStory, lastStory}, true);
                     }
                     bookCode = null;
                 }

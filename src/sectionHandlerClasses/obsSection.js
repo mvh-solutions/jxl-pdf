@@ -87,9 +87,9 @@ class obsSection extends Section {
         }
     }
 
-    async doSection({section, templates, bookCode, options}) {
-        let markdowns = [];
-        for (const mdName of fse.readdirSync(path.resolve(path.join('data', `${section.path}`)))) {
+    async doSection({section, templates, manifest, options}) {
+        let isFirst = true;
+        for (const mdName of fse.readdirSync(path.resolve(section.content.obs))) {
             const [name, suffix] = mdName.split('.');
             if (suffix !== 'md' || !parseInt(name)) {
                 continue;
@@ -100,30 +100,35 @@ class obsSection extends Section {
             if (section.lastStory && parseInt(name) > section.lastStory) {
                 continue;
             }
-            markdowns.push(
-                DOMPurify.sanitize(
-                    marked.parse(fse.readFileSync(path.resolve(path.join('data', `${section.path}/${mdName}`))).toString())
-                )
+            const markdown = DOMPurify.sanitize(
+                    marked.parse(fse.readFileSync(path.resolve(`${section.content.obs}/${mdName}`)).toString())
             );
+            fse.writeFileSync(
+                path.join(options.htmlPath, `${section.id}_${name}.html`),
+                templates['obs_page']
+                    .replace(
+                        "%%TITLE%%",
+                        `${section.id.replace('%%bookCode%%', name)} - ${section.type}`
+                    )
+                    .replace(
+                        "%%BODY%%",
+                        markdown
+                    )
+            );
+            await doPuppet({
+                verbose: options.verbose,
+                htmlPath: path.join(options.htmlPath, `${section.id}_${name}.html`),
+                pdfPath: path.join(options.pdfPath, `${section.id}_${name}.pdf`)
+            });
+            manifest.push({
+                id: `${section.id}_${name}`,
+                type: section.type,
+                startOn: isFirst ? section.startOn : "either",
+                showPageNumber: section.showPageNumber,
+                makeFromDouble: false
+            });
+            isFirst = false;
         }
-        fse.writeFileSync(
-            path.join(
-                options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
-            templates['obs_page']
-                .replace(
-                    "%%TITLE%%",
-                    `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`
-                )
-                .replace(
-                    "%%BODY%%",
-                    markdowns.join('\n\n')
-                )
-        );
-        await doPuppet({
-            verbose: options.verbose,
-            htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
-            pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
-        });
     }
 }
 module.exports = obsSection;

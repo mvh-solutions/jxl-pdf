@@ -249,7 +249,7 @@ const assemblePdfs = async function (options) {
     // Serialize the PDFDocument to bytes (a Uint8Array)
     const pdfBytes = await pdfDocWithPageNum.save();
     fse.writeFileSync(options.output, pdfBytes);
-    options.verbose && console.log(`   Assembled PDF (with ${pdfDocWithPageNum.getPageCount()} pages) written to ${options.output}`);
+    options.verbose && console.log(`   Assembled PDF (with ${pdfDocWithPageNum.getPageCount()} pages, ${Math.floor(pdfBytes.length / (1024 * 1024))} Mb) written to ${options.output}`);
 }
 
 module.exports = assemblePdfs;

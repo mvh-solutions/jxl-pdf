@@ -36,6 +36,7 @@ class PdfGen {
     async doPdf() {
         const workingDir = path.resolve(path.join(os.homedir(), ".jxlpdf/working"));
         const options = {
+            verbose: true,
             pdfPath: path.join(workingDir, "pdf"),
             htmlPath: path.join(workingDir, "html", "pages"),
             manifestPath: path.join(workingDir, "manifest.json"),
@@ -45,9 +46,9 @@ class PdfGen {
             fonts: fonts[this.options.global.fonts],
             fontSizes: sizes[this.options.global.sizes],
             configContent: this.options,
+            output: "/home/mark/PDFGEN_OUT.pdf"
         };
         this.options = options;
-        console.log(options);
         // Check that output file will not accidentally overwrite an existing file
 /*
         if (fse.pathExistsSync(options.output) && !options.forceOverwrite) {

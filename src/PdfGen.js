@@ -247,7 +247,6 @@ class PdfGen {
     }
 
     static validateSectionField(fieldId, fieldContent, fieldSpec, errors, sectionId, sectionN, checkPaths=false) {
-        console.log(fieldId, checkPaths)
         const normalizedContent = Array.isArray(fieldContent) ? fieldContent : [fieldContent];
         if (normalizedContent.length < fieldSpec.nValues[0] || normalizedContent.length > fieldSpec.nValues[1]) {
             errors.push(`${normalizedContent.length} values for field '${fieldId}' in Section '${sectionId}' (#${sectionN}) - expected ${fieldSpec.nValues[0]}-${fieldSpec.nValues[1]} value(s)`);

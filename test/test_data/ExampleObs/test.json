@@ -18,6 +18,16 @@
             "showPageNumber": true,
             "obs": "/home/mark/repos/mvh-solutions/jxl-pdf/test/test_data/ExampleObs/en_obs_7ae32299-a683-5410-aee7-41379ac5dee2/content"
           }
+        },
+        {
+          "id": "199369f6-c92a-4133-92fb-f82d71382999",
+          "type": "obsPlusNotes",
+          "content": {
+            "startOn": "recto",
+            "showPageNumber": true,
+            "obs": "/home/mark/repos/mvh-solutions/jxl-pdf/test/test_data/ExampleObs/en_obs_7ae32299-a683-5410-aee7-41379ac5dee2/content",
+            "notes": "/home/mark/repos/mvh-solutions/jxl-pdf/test/test_data/ExampleObs/en_obs_7ae32299-a683-5410-aee7-41379ac5dee2"
+          }
         }
       ]
     }

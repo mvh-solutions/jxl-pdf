@@ -70,7 +70,7 @@ class MarkdownSection extends Section {
         }
     }
 
-    async doSection({section, templates, bookCode, options}) {
+    async doSection({section, templates, bookCode, manifest, options}) {
         fse.writeFileSync(
             path.join(
                 options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
@@ -82,7 +82,7 @@ class MarkdownSection extends Section {
                 .replace(
                     "%%BODY%%",
                     DOMPurify.sanitize(
-                        marked.parse(fse.readFileSync(path.resolve(path.join('data', `${section.path}.md`))).toString())
+                        marked.parse(fse.readFileSync(path.resolve(path.join(`${section.content.md}`))).toString())
                     )
                 )
         );
@@ -90,6 +90,13 @@ class MarkdownSection extends Section {
             verbose: options.verbose,
             htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
             pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
+        });
+        manifest.push({
+            id: `${section.id}`,
+            type: section.type,
+            startOn: section.startOn,
+            showPageNumber: section.showPageNumber,
+            makeFromDouble: false
         });
     }
 }

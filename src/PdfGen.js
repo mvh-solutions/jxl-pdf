@@ -214,6 +214,10 @@ class PdfGen {
             }
         }
         const signatureFieldIds = signature.fields.map(f => f.id);
+        if (!section.content) {
+            errors.push(`No content for section '${section.id}' (#${sectionN})`);
+            return false;
+        }
         for (const sectionFieldId of Object.keys(section.content)) {
             if (!signatureFieldIds.includes(sectionFieldId)) {
                 errors.push(`Unexpected field '${sectionFieldId}' in Section '${section.id}' of type '${section.type}' (#${sectionN})`);
@@ -265,7 +269,7 @@ class PdfGen {
                     errors.push(`${badValues.length} value(s) of field '${fieldId}' in Section '${sectionId}' (#${sectionN}) are not strings`);
                     return false;
                 }
-            } else if (["obs", "tNotes", "translationText"].includes(fieldSpec.typeName)) {
+            } else if (["obs", "tNotes", "translationText", "md"].includes(fieldSpec.typeName)) {
                 const badValues = normalizedContent.filter(c => typeof c !== "string");
                 if (badValues.length > 0) {
                     errors.push(`${badValues.length} value(s) of field '${fieldId}' in Section '${sectionId}' (#${sectionN}) are not path strings`);

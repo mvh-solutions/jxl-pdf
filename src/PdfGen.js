@@ -12,6 +12,10 @@ const os = require("os");
 class PdfGen {
 
     constructor(options) {
+        const errors = PdfGen.validateConfig(options);
+        if (errors.length > 0) {
+            throw new Error(`Validation errors for config file:\n${errors.map(e => `  - ${e}`).join('\n')}`);
+        }
         this.options = options;
     }
 
@@ -97,7 +101,7 @@ class PdfGen {
         }
     }
 
-    validateConfig(configOb) {
+    static validateConfig(configOb) {
         const ret = [];
         let skip = false;
         // Top-level checks, abort on first error
@@ -124,7 +128,7 @@ class PdfGen {
         // globals checks, abort at end on error
         if (!skip) {
             const globalSpecKeys = Object.fromEntries(
-                Object.entries(this.constructor.pageInfo())
+                Object.entries(PdfGen.pageInfo())
                     .map(([k, v]) => [k, Object.keys(v)])
             );
             for (const globalKey of Object.keys(configOb.global)) {
@@ -166,7 +170,7 @@ class PdfGen {
                             wrapperOnly[key] = value;
                         }
                         for (const subSection of section.sections) {
-                            if (!this.validateSection(subSection, wrapperOnly, ret, sectionN)) {
+                            if (!PdfGen.validateSection(subSection, wrapperOnly, ret, sectionN)) {
                              skip = true;
                              break;
                             }
@@ -183,7 +187,7 @@ class PdfGen {
         return ret;
     }
 
-    validateSection(section, wrapper, errors, sectionN) {
+    static validateSection(section, wrapper, errors, sectionN) {
         if (!section.id) {
             errors.push(`Section has no id (#${sectionN})`);
             return false;
@@ -226,7 +230,7 @@ class PdfGen {
         let foundError = false;
         for (const [key, value] of Object.entries(section.content)) {
             if (
-                !this.validateSectionField(
+                !PdfGen.validateSectionField(
                     key,
                     value,
                     signature.fields.filter(f => f.id === key)[0],
@@ -241,7 +245,7 @@ class PdfGen {
         return !foundError;
     }
 
-    validateSectionField(fieldId, fieldContent, fieldSpec, errors, sectionId, sectionN) {
+    static validateSectionField(fieldId, fieldContent, fieldSpec, errors, sectionId, sectionN) {
         const normalizedContent = Array.isArray(fieldContent) ? fieldContent : [fieldContent];
         if (normalizedContent.length < fieldSpec.nValues[0] || normalizedContent.length > fieldSpec.nValues[1]) {
             errors.push(`${normalizedContent.length} values for field '${fieldId}' in Section '${sectionId}' (#${sectionN}) - expected ${fieldSpec.nValues[0]}-${fieldSpec.nValues[1]} value(s)`);

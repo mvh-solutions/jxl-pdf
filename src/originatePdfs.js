@@ -166,7 +166,7 @@ const originatePdfs = async options => {
                     options.verbose && console.log(`      obsRange = ${obsRange}`);
                     const [firstStory, lastStory] = obsRange.split('-').map(n => parseInt(n));
                     for (const section2 of section.sections) {
-                        await doSection({...section2, firstStory, lastStory}, true);
+                        await doSection({...section2, firstStory, lastStory: lastStory || firstStory}, true);
                     }
                     bookCode = null;
                 }

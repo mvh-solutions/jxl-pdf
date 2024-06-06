@@ -12,7 +12,7 @@ const os = require("os");
 class PdfGen {
 
     constructor(options) {
-        const errors = PdfGen.validateConfig(options);
+        const errors = PdfGen.validateConfig(options, true);
         if (errors.length > 0) {
             throw new Error(`Validation errors for config file:\n${errors.map(e => `  - ${e}`).join('\n')}`);
         }
@@ -101,7 +101,7 @@ class PdfGen {
         }
     }
 
-    static validateConfig(configOb) {
+    static validateConfig(configOb, checkPaths=false) {
         const ret = [];
         let skip = false;
         // Top-level checks, abort on first error
@@ -157,7 +157,7 @@ class PdfGen {
                 while (sectionN < sections.length && !skip) {
                     const section = sections[sectionN];
                     if (sectionHandlerLookup[section.type]) { // A section
-                        if (!this.validateSection(section, null, ret, sectionN)) {
+                        if (!this.validateSection(section, null, ret, sectionN, checkPaths)) {
                             skip = true;
                             break;
                         }
@@ -170,7 +170,7 @@ class PdfGen {
                             wrapperOnly[key] = value;
                         }
                         for (const subSection of section.sections) {
-                            if (!PdfGen.validateSection(subSection, wrapperOnly, ret, sectionN)) {
+                            if (!PdfGen.validateSection(subSection, wrapperOnly, ret, sectionN, checkPaths)) {
                              skip = true;
                              break;
                             }
@@ -187,7 +187,7 @@ class PdfGen {
         return ret;
     }
 
-    static validateSection(section, wrapper, errors, sectionN) {
+    static validateSection(section, wrapper, errors, sectionN, checkPaths=false) {
         if (!section.id) {
             errors.push(`Section has no id (#${sectionN})`);
             return false;
@@ -236,7 +236,8 @@ class PdfGen {
                     signature.fields.filter(f => f.id === key)[0],
                     errors,
                     section.id,
-                    sectionN
+                    sectionN,
+                    checkPaths
                 )
             ) {
                 foundError = true;
@@ -245,7 +246,8 @@ class PdfGen {
         return !foundError;
     }
 
-    static validateSectionField(fieldId, fieldContent, fieldSpec, errors, sectionId, sectionN) {
+    static validateSectionField(fieldId, fieldContent, fieldSpec, errors, sectionId, sectionN, checkPaths=false) {
+        console.log(fieldId, checkPaths)
         const normalizedContent = Array.isArray(fieldContent) ? fieldContent : [fieldContent];
         if (normalizedContent.length < fieldSpec.nValues[0] || normalizedContent.length > fieldSpec.nValues[1]) {
             errors.push(`${normalizedContent.length} values for field '${fieldId}' in Section '${sectionId}' (#${sectionN}) - expected ${fieldSpec.nValues[0]}-${fieldSpec.nValues[1]} value(s)`);
@@ -264,11 +266,17 @@ class PdfGen {
                     errors.push(`${badValues.length} value(s) of field '${fieldId}' in Section '${sectionId}' (#${sectionN}) are not strings`);
                     return false;
                 }
-            } else if (["ob", "tNotes", "translationText"].includes(fieldSpec.typeName) && typeof fieldContent !== "string") {
+            } else if (["obs", "tNotes", "translationText"].includes(fieldSpec.typeName)) {
                 const badValues = normalizedContent.filter(c => typeof c !== "string");
                 if (badValues.length > 0) {
                     errors.push(`${badValues.length} value(s) of field '${fieldId}' in Section '${sectionId}' (#${sectionN}) are not path strings`);
                     return false;
+                }
+                if (checkPaths) {
+                    const unresolvedValues = normalizedContent.filter(c => !fse.pathExistsSync(c));
+                    if (unresolvedValues.length > 0) {
+                        errors.push(`${unresolvedValues.length} value(s) of field '${fieldId}' in Section '${sectionId}' (#${sectionN}) could not be resolved in the FS: ${unresolvedValues.map(p => `'${p}'`).join(',')}`);
+                    }
                 }
             }
         }

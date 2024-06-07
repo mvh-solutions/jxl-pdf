@@ -86,6 +86,12 @@ class MarkdownSection extends Section {
                     )
                 )
         );
+        section.doPdfCallback && section.doPdfCallback({
+            type: "pdf",
+            level: 3,
+            msg: `Originating PDF ${path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)} for Markdown'`,
+            args: [path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)]
+        });
         await doPuppet({
             verbose: options.verbose,
             htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),

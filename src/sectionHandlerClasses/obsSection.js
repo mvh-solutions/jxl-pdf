@@ -115,6 +115,12 @@ class obsSection extends Section {
                         markdown
                     )
             );
+            section.doPdfCallback && section.doPdfCallback({
+                type: "pdf",
+                level: 3,
+                msg: `Originating PDF ${path.join(options.pdfPath, `${section.id}_${name}.pdf}`)} for OBS story '${mdName}'`,
+                args: [`${path.join(options.pdfPath, `${section.id}_${name}.pdf`)}`, mdName]
+            });
             await doPuppet({
                 verbose: options.verbose,
                 htmlPath: path.join(options.htmlPath, `${section.id}_${name}.html`),

@@ -178,13 +178,13 @@ const originatePdfs = async (options, doPdfCallback=null) => {
                             msg: `Wrapped section ${section2.type}`,
                             args: [section2.type, obsRange]
                         });
-                        await doSection({...section2, firstStory, lastStory: lastStory || firstStory}, true);
+                        await doSection({...section2, firstStory, lastStory: lastStory || firstStory, doPdfCallback}, true);
                     }
                     bookCode = null;
                 }
                 break;
             default:
-                await doSection(section, false);
+                await doSection({...section, doPdfCallback}, false);
         }
     }
     fse.writeFileSync(

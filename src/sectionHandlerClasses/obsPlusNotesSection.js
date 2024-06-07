@@ -106,7 +106,7 @@ class obsPlusNotesSection extends Section {
         }
     }
 
-    async doSection({section, templates, bookCode, manifest, options}) {
+    async doSection({section, templates, bookCode, manifest, options, doPdfCallback}) {
         let isFirst = false;
         for (const mdName of fse.readdirSync(path.resolve(section.content.obs))) {
             const [name, suffix] = mdName.split('.');
@@ -158,6 +158,12 @@ class obsPlusNotesSection extends Section {
                         markdown
                     )
             );
+            section.doPdfCallback && section.doPdfCallback({
+                type: "pdf",
+                level: 3,
+                msg: `Originating PDF ${path.join(options.pdfPath, `${section.id}_${name}.pdf}`)} for OBSPlusNotes story '${mdName}'`,
+                args: [`${path.join(options.pdfPath, `${section.id}_${name}.pdf`)}`, mdName]
+            });
             await doPuppet({
                 verbose: options.verbose,
                 htmlPath: path.join(options.htmlPath, `${section.id}_${name}.html`),

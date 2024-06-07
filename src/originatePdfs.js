@@ -97,7 +97,7 @@ const setupCSS = options => {
     options.verbose && console.log(`   ${cssFilenames.length} CSS file(s) customized`);
 }
 
-const originatePdfs = async options => {
+const originatePdfs = async (options, doPdfCallback=null) => {
     // Set up workspace - options.workingDir should already exist
     fse.mkdirsSync(options.htmlPath);
     fse.mkdirsSync(path.join(options.workingDir, "html", "resources"));
@@ -158,6 +158,12 @@ const originatePdfs = async options => {
 
     for (const section of options.configContent.sections) {
         options.verbose && console.log(`   Section ${section.id ? `${section.id} (${section.type})` : section.type}`);
+        doPdfCallback && doPdfCallback({
+            type: "section",
+            level: 1,
+            msg: `Section or wrapper ${section.type}`,
+            args: [section.type]
+        });
 
         switch (section.type) {
             case "obsWrapper":
@@ -166,6 +172,12 @@ const originatePdfs = async options => {
                     options.verbose && console.log(`      obsRange = ${obsRange}`);
                     const [firstStory, lastStory] = obsRange.split('-').map(n => parseInt(n));
                     for (const section2 of section.sections) {
+                        doPdfCallback && doPdfCallback({
+                            type: "wrappedSection",
+                            level: 2,
+                            msg: `Wrapped section ${section2.type}`,
+                            args: [section2.type, obsRange]
+                        });
                         await doSection({...section2, firstStory, lastStory: lastStory || firstStory}, true);
                     }
                     bookCode = null;

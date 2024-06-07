@@ -174,7 +174,7 @@ const makeSuperimposed = async function (manifestStep, superimposePdf) {
  *   - pageFormat: Format specification for pages in the PDF.
  *   - verbose: Boolean to enable verbose logging.
  */
-const assemblePdfs = async function (options) {
+const assemblePdfs = async function (options, doPdfCallback) {
     const fontBytes = fse.readFileSync(path.resolve(path.join(__dirname, '..', 'fonts/GentiumBookPlus-Regular.ttf')));
     const pdfDoc = await PDFDocument.create();
     pdfDoc.registerFontkit(fontKit);
@@ -193,7 +193,13 @@ const assemblePdfs = async function (options) {
 
     let numPages = 0;
     options.verbose && console.log(`      Manifest steps`);
-    for (const manifestStep of manifest) {
+    for (const [n, manifestStep] of manifest.entries()) {
+        doPdfCallback && doPdfCallback({
+            type: "manifest",
+            level: 1,
+            msg: `Assembling PDF ${n + 1} of ${manifest.length}`,
+            args: [n, manifest.length, manifestStep.id]
+        });
         // Loop over non-superimpose steps
         if (manifestStep.type === "superimpose") {
             continue
@@ -239,6 +245,12 @@ const assemblePdfs = async function (options) {
 
     // Generate page numbers PDF and merge with content PDF
     options.verbose && console.log(`   Add page numbers`);
+    doPdfCallback && doPdfCallback({
+        type: "pageNumbers",
+        level: 1,
+        msg: `Generate Page Numbers`,
+        args: []
+    });
     const pdfDocWithPageNum = await makePageNumber({
         options,
         pdfDoc,
@@ -250,6 +262,12 @@ const assemblePdfs = async function (options) {
     const pdfBytes = await pdfDocWithPageNum.save();
     fse.writeFileSync(options.output, pdfBytes);
     options.verbose && console.log(`   Assembled PDF (with ${pdfDocWithPageNum.getPageCount()} pages, ${Math.floor(pdfBytes.length / (1024 * 1024))} Mb) written to ${options.output}`);
+    doPdfCallback && doPdfCallback({
+        type: "writeOutput",
+        level: 0,
+        msg: `Writing out assembled PDF to ${options.output}`,
+        args: [options.output]
+    });
 }
 
 module.exports = assemblePdfs;

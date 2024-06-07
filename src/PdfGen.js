@@ -314,11 +314,11 @@ class PdfGen {
     }
 
     async originatePdfs() {
-        return await _originatePdfs(this.options);
+        return await _originatePdfs(this.options, this.doPdfCallback);
     }
 
     async assemblePdfs() {
-        return await _assemblePdfs(this.options);
+        return await _assemblePdfs(this.options, this.doPdfCallback);
     }
 }
 

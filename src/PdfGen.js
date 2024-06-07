@@ -38,19 +38,22 @@ class PdfGen {
     }
 
     async doPdf() {
-        const workingDir = path.resolve(path.join(os.homedir(), ".jxlpdf/working"));
+        const workingDir = this.options.global.workingDir || path.resolve(path.join(os.homedir(), ".jxlpdf/working"));
+        if (!this.options.global.outputPath) {
+            throw new Error("Must provide an outputPath in doPdf()");
+        }
         const options = {
-            verbose: true,
+            verbose: this.options.global.verbose || false,
+            workingDir,
             pdfPath: path.join(workingDir, "pdf"),
             htmlPath: path.join(workingDir, "html", "pages"),
             manifestPath: path.join(workingDir, "manifest.json"),
             steps: ["originate", "assemble"],
-            workingDir,
             pageFormat: pages[this.options.global.pages],
             fonts: fonts[this.options.global.fonts],
             fontSizes: sizes[this.options.global.sizes],
             configContent: this.options,
-            output: "/home/mark/PDFGEN_OUT.pdf"
+            output: this.options.global.outputPath
         };
         this.options = options;
         // Check that output file will not accidentally overwrite an existing file
@@ -132,6 +135,9 @@ class PdfGen {
                     .map(([k, v]) => [k, Object.keys(v)])
             );
             for (const globalKey of Object.keys(configOb.global)) {
+                if (["verbose", "workingDir", "outputPath"].includes(globalKey)) {
+                    continue;
+                }
                 if (!globalSpecKeys[globalKey]) {
                     ret.push(`Unexpected global key '${globalKey}'`);
                     skip = true;

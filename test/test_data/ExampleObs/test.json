@@ -1,5 +1,8 @@
 {
   "global": {
+    "workingDir": "/home/mark/.jxlpdf/working",
+    "outputPath": "/home/mark/Downloads/TEMP_JXL.pdf",
+    "verbose": true,
     "pages": "A4P",
     "fonts": "allGentium",
     "sizes": "9on11"
@@ -18,7 +21,8 @@
       "type": "obsWrapper",
       "id": "309c2bd2-1d50-4c32-a66a-e85363196e80",
       "ranges": [
-        "1-3"
+        "1",
+        "2-3"
       ],
       "sections": [
         {

@@ -11,12 +11,13 @@ const os = require("os");
 
 class PdfGen {
 
-    constructor(options) {
+    constructor(options, doPdfCallback=null) {
         const errors = PdfGen.validateConfig(options, true);
         if (errors.length > 0) {
             throw new Error(`Validation errors for config file:\n${errors.map(e => `  - ${e}`).join('\n')}`);
         }
         this.options = options;
+        this.doPdfCallback = doPdfCallback;
     }
 
     static handlerInfo() {
@@ -86,6 +87,11 @@ class PdfGen {
 
         if (options.steps.includes("originate")) {
             options.verbose && console.log("** ORIGINATE **");
+            this.doPdfCallback && this.doPdfCallback({
+                type: "step",
+                msg: "Originating Content",
+                args: ["originate"]
+            });
             if (fse.pathExistsSync(options.workingDir)) {
                 options.verbose && console.log(`   Deleting working dir ${options.workingDir}`);
                 fse.removeSync(options.workingDir);
@@ -97,6 +103,11 @@ class PdfGen {
         }
         if (options.steps.includes("assemble")) {
             options.verbose && console.log("** ASSEMBLE **");
+            this.doPdfCallback && this.doPdfCallback({
+                type: "step",
+                msg: "Assembling Content",
+                args: ["assemblegit st"]
+            });
             if (!fse.pathExistsSync(options.manifestPath)) {
                 throw new Error("Cannot run assemble without first originating content");
             }

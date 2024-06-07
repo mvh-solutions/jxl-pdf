@@ -2,7 +2,7 @@
   "global": {
     "workingDir": "/home/mark/.jxlpdf/working",
     "outputPath": "/home/mark/Downloads/TEMP_JXL.pdf",
-    "verbose": true,
+    "verbose": false,
     "pages": "A4P",
     "fonts": "allGentium",
     "sizes": "9on11"

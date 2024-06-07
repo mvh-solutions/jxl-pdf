@@ -89,6 +89,7 @@ class PdfGen {
             options.verbose && console.log("** ORIGINATE **");
             this.doPdfCallback && this.doPdfCallback({
                 type: "step",
+                level: 0,
                 msg: "Originating Content",
                 args: ["originate"]
             });
@@ -105,8 +106,9 @@ class PdfGen {
             options.verbose && console.log("** ASSEMBLE **");
             this.doPdfCallback && this.doPdfCallback({
                 type: "step",
+                level: 0,
                 msg: "Assembling Content",
-                args: ["assemblegit st"]
+                args: ["assemble"]
             });
             if (!fse.pathExistsSync(options.manifestPath)) {
                 throw new Error("Cannot run assemble without first originating content");

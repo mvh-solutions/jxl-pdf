@@ -1,6 +1,6 @@
 {
   "name": "jxl-pdf",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "description": "Printable PDFs from Sundesmos Juxtalinear JSON",
   "main": "src/index.js",
   "dependencies": {

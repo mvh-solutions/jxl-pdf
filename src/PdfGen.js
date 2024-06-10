@@ -243,7 +243,7 @@ class PdfGen {
             }
         }
         for (const requiredFieldId of signature.fields.filter(f => f.nValues[0] > 0).map(f => f.id)) {
-            if (!section.content[requiredFieldId]) {
+            if (section.content[requiredFieldId] === undefined) {
                 errors.push(`Missing field '${requiredFieldId}' in Section '${section.id}' of type '${section.type}' (#${sectionN})`);
             }
         }

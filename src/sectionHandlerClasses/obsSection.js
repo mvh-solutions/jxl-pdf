@@ -65,25 +65,7 @@ class obsSection extends Section {
                     typeName: "obs",
                     nValues: [1, 1]
                 },
-                {
-                    id: "firstStory",
-                    label: {
-                        en: "First Story Number",
-                        fr: "N° de première histoire OBS"
-                    },
-                    typeName: "integer",
-                    nValues: [0, 1]
-                },
-                {
-                    id: "lastStory",
-                    label: {
-                        en: "Last Story Number",
-                        fr: "N° de dernière histoire OBS"
-                    },
-                    typeName: "integer",
-                    nValues: [0, 1]
-                },
-            ]
+             ]
         }
     }
 

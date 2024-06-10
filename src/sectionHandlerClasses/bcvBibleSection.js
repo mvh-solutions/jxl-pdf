@@ -125,30 +125,34 @@ class bcvBibleSection extends Section {
         };
     }
 
-    async doSection({section, templates, bookCode, options}) {
-        const pk = pkWithDocs(bookCode, [section.text], options.verbose);
-        const bookName = getBookName(pk, section.text.id, bookCode);
-        const cvTexts = getCVTexts(bookCode, pk);
-        const notes = section.showNotes ? bcvNotes(options.configContent, bookCode) : {};
+    async doSection({section, templates, manifest, options}) {
+        if (!section.bcvRange) {
+            throw new Error(`No bcvRange found for section ${section.id}`);
+        }
+        const pk = pkWithDocs(section.bcvRange, [{id: "xxx_yyy", path: section.content.scriptureSrc}], options.verbose);
+        const bookName = getBookName(pk, "xxx_yyy", section.bcvRange);
+        const cvTexts = getCVTexts(section.bcvRange, pk);
+        const notes = section.showNotes ? bcvNotes(options.configContent, section.bcvRange) : {};
         const verses = [`<h1>${bookName}</h1>`];
         for (const cvRecord of cvTexts) {
             const verseHtml = templates['bcv_bible_verse']
                 .replace("%%CV%%", cvRecord.cv)
                 .replace(
                     '%%VERSECONTENT%%',
-                    `${cvRecord.texts[section.text.id] || "-"}${(notes[cvRecord.cv] || [])
+                    `${cvRecord.texts["xxx_yyy"] || "-"}${(notes[cvRecord.cv] || [])
                         .map(nr => cleanNoteLine(nr))
                         .map(note => `<p class="note">${note}</p>`)
                         .join('\n')}`
                 );
             verses.push(verseHtml);
         }
+        const qualified_id = `${section.id}_${section.bcvRange}`;
         fse.writeFileSync(
-            path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
+            path.join(options.htmlPath, `${qualified_id}.html`),
             templates['bcv_bible_page']
                 .replace(
                     "%%TITLE%%",
-                    `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`
+                    `${qualified_id} - ${section.type}`
                 )
                 .replace(
                     "%%BODY%%",
@@ -169,8 +173,15 @@ class bcvBibleSection extends Section {
         fse.writeFileSync(cssPath, css);
         await doPuppet({
             verbose: options.verbose,
-            htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
-            pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
+            htmlPath: path.join(options.htmlPath, `${qualified_id}.html`),
+            pdfPath: path.join(options.pdfPath, `${qualified_id}.pdf`)
+        });
+        manifest.push({
+            id: qualified_id,
+            type: section.type,
+            startOn: section.startOn,
+            showPageNumber: section.showPageNumber,
+            makeFromDouble: false
         });
     }
 }

@@ -265,8 +265,8 @@ const assemblePdfs = async function (options, doPdfCallback) {
     doPdfCallback && doPdfCallback({
         type: "writeOutput",
         level: 0,
-        msg: `Writing out assembled PDF to ${options.output}`,
-        args: [options.output]
+        msg: `Writing out assembled PDF to ${options.output} (${pdfDocWithPageNum.getPageCount()}) page(s)`,
+        args: [options.output, pdfDocWithPageNum.getPageCount()]
     });
 }
 

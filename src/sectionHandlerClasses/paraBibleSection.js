@@ -87,26 +87,41 @@ class paraBibleSection extends Section {
         };
     }
 
-    async doSection({section, templates, bookCode, options}) {
-        const pk = pkWithDocs(bookCode, [section.text], options.verbose);
-        const bookName = getBookName(pk, section.text.id, bookCode);
-        const notes = section.showNotes ? bcvNotes(config, bookCode) : {};
+    async doSection({section, templates, manifest, options}) {
+        if (!section.bcvRange) {
+            throw new Error(`No bcvRange found for section ${section.id}`);
+        }
+        const sectionConfig = {
+            "showWordAtts": false,
+                "showTitles": false,
+                "showHeadings": true,
+                "showIntroductions": true,
+                "showFootnotes": true,
+                "showXrefs": true,
+                "showParaStyles": true,
+                "showCharacterMarkup": true,
+                "showChapterLabels": true,
+                "showVersesLabels": true
+        }
+
+        const pk = pkWithDocs(section.bcvRange, [{id: "xxx_yyy", path: section.content.scriptureSrc}], options.verbose);
+        const bookName = getBookName(pk, "xxx_yyy", section.bcvRange);
+        const notes = section.showNotes ? bcvNotes(config, section.bcvRange) : {};
         const docId = pk.gqlQuerySync('{documents { id } }').data.documents[0].id;
         const actions = render.sofria2web.renderActions.sofria2WebActions;
         const renderers = render.sofria2web.sofria2html.renderers;
         const cl = new SofriaRenderFromProskomma({proskomma: pk, actions: actions, debugLevel: 0})
         const output = {};
-        const sectionConfig = section.config;
         sectionConfig.renderers = renderers;
         sectionConfig.selectedBcvNotes = [];
-
-        cl.renderDocument({docId, config: section.config, output});
+        const qualified_id = `${section.id}_${section.bcvRange}`;
+        cl.renderDocument({docId, config: sectionConfig, output});
         fse.writeFileSync(
-            path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
+            path.join(options.htmlPath, `${qualified_id}.html`),
             templates['para_bible_page']
                 .replace(
                     "%%TITLE%%",
-                    `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`
+                    `${qualified_id} - ${section.type}`
                 )
                 .replace(
                     "%%BODY%%",
@@ -119,8 +134,15 @@ class paraBibleSection extends Section {
         );
         await doPuppet({
             verbose: options.verbose,
-            htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
-            pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
+            htmlPath: path.join(options.htmlPath, `${qualified_id}.html`),
+            pdfPath: path.join(options.pdfPath, `${qualified_id}.pdf`)
+        });
+        manifest.push({
+            id: `${qualified_id}`,
+            type: section.type,
+            startOn: section.startOn,
+            showPageNumber: section.showPageNumber,
+            makeFromDouble: false
         });
     }
 }

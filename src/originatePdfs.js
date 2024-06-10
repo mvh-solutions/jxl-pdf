@@ -117,39 +117,34 @@ const originatePdfs = async (options, doPdfCallback=null) => {
 
     let links = [];
     let manifest = [];
-    let bookCode = null;
-    let obsCode = null;
-    let juxtaCode = null;
+    let wrapperRange = null;
 
     const doSection = async (section, nested) => {
-        options.verbose && nested && console.log(`   Section ${section.id.replace('%%bookCode%%', bookCode)} (${section.type} in wrapper)`);
+        options.verbose && nested && console.log(`   Section ${section.id.replace('%%bookCode%%', wrapperRange)} (${section.type} in wrapper)`);
         if (section.forceSkip) {
             options.verbose && console.log(`      Force skip in config file; continuing...`);
             return;
         }
         links.push(
             templates['web_index_page_link']
-                .replace(/%%ID%%/g, section.id.replace('%%bookCode%%', bookCode))
+                .replace(/%%ID%%/g, section.id.replace('%%bookCode%%', wrapperRange))
         );
         if (["4ColumnSpread", "2Column"].includes(section.type)) {
             links.push(
                 templates['web_index_page_link']
-                    .replace(/%%ID%%/g, `${section.id.replace('%%bookCode%%', bookCode)}_superimpose`)
+                    .replace(/%%ID%%/g, `${section.id.replace('%%bookCode%%', wrapperRange)}_superimpose`)
             );
             manifest.push({
-                id: `${section.id.replace('%%bookCode%%', bookCode)}_superimpose`,
+                id: `${section.id.replace('%%bookCode%%', wrapperRange)}_superimpose`,
                 type: "superimpose",
-                for: section.id.replace('%%bookCode%%', bookCode)
+                for: section.id.replace('%%bookCode%%', wrapperRange)
             });
         }
         const sectionHandler = sectionHandlerLookup[section.type];
         if (!sectionHandler) {
             throw new Error(`Unknown section type '${section.type}' (id '${section.id}')`);
         }
-        if (sectionHandler.requiresWrapper().includes("bcv")) {
-            checkBookCode(section.id);
-        }
-        await sectionHandler.doSection({section, templates, bookCode, manifest, options});
+        await sectionHandler.doSection({section, templates, wrapperRange, manifest, options});
         if (section.forceQuit) {
             console.log("** Force quit in config file **");
             process.exit(0);
@@ -180,7 +175,21 @@ const originatePdfs = async (options, doPdfCallback=null) => {
                         });
                         await doSection({...section2, firstStory, lastStory: lastStory || firstStory, doPdfCallback}, true);
                     }
-                    bookCode = null;
+                }
+                break;
+            case "bcvWrapper":
+                options.verbose && console.log(`      bcvRanges`);
+                for (const bcvRange of section.ranges) {
+                    options.verbose && console.log(`      bcvRange = ${bcvRange}`);
+                    for (const section2 of section.sections) {
+                        doPdfCallback && doPdfCallback({
+                            type: "wrappedSection",
+                            level: 2,
+                            msg: `Wrapped section ${section2.type}`,
+                            args: [section2.type, bcvRange]
+                        });
+                        await doSection({...section2, bcvRange, doPdfCallback}, true);
+                    }
                 }
                 break;
             default:

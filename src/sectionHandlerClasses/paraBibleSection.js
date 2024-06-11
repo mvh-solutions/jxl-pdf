@@ -22,7 +22,7 @@ class paraBibleSection extends Section {
                         en: "Start Page Side",
                         fr: "Côté pour première page"
                     },
-                    typeLiteral: "verso",
+                    typeLiteral: "recto",
                     nValues: [1, 1]
                 },
                 {

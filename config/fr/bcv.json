@@ -1,0 +1,58 @@
+{
+  "docIdForNames": "fra_psle",
+  "notes": null,
+  "notesFormat": "tsv9",
+  "sections": [
+    {
+      "type": "setBooks",
+      "bookCodes": [
+        "MRK"
+      ],
+      "sections": [
+        {
+          "id": "bcv",
+          "type": "bcvBible",
+          "startOn": "recto",
+          "styles": "bcv_bible_page_styles",
+          "showPageNumber": true,
+          "showNotes": false,
+          "text": {
+            "label": "PSLE",
+            "type": "trans",
+            "id": "fra_psle"
+          }
+        },
+        {
+          "id": "fourColumn",
+          "type": "4ColumnSpread",
+          "startOn": "verso",
+          "styles": "4_column_spread_page_styles",
+          "showPageNumber": true,
+          "showNotes": false,
+          "texts": [
+            {
+              "label": "Grec",
+              "type": "greek",
+              "id": "grc_ugnt"
+            },
+            {
+              "label": "ULT",
+              "type": "trans",
+              "id": "eng_ult"
+            },
+            {
+              "label": "LSG 1910",
+              "type": "trans",
+              "id": "fra_lsg"
+            },
+            {
+              "label": "PSLE",
+              "type": "trans",
+              "id": "fra_psle"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

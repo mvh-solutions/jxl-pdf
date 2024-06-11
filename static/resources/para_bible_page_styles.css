@@ -18,10 +18,10 @@ div.chapters {
 
 ::footnote-call {
     font-weight: bold;
-    font-size: %%FOOTNOTEFONTSIZE%%;
+    font-size: %%FOOTNOTEFONTSIZE%%pt;
     vertical-align: baseline;
     position: relative;
-    top: -0.5em;
+    top: -0.25em;
     padding-left: 1pt;
 }
 

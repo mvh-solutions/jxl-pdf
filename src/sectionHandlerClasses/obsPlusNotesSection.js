@@ -154,8 +154,8 @@ class obsPlusNotesSection extends Section {
             manifest.push({
                 id: `${section.id}_${name}`,
                 type: section.type,
-                startOn: isFirst ? section.startOn : "either",
-                showPageNumber: section.showPageNumber,
+                startOn: isFirst ? section.content.startOn : "either",
+                showPageNumber: section.content.showPageNumber,
                 makeFromDouble: false
             });
             isFirst = false;

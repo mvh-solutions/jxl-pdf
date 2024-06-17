@@ -12,6 +12,7 @@ const path = require("path");
 
 /**
  * Generates HTML for page numbers and converts it to a PDF.
+ * Does this 100 pages at a time because of weird Puppeteer 180-page limit
  * @param {Object} params - Parameters for generating page numbers.
  *   - options: Object - Configuration options including paths and verbose flag.
  *   - numPages: number - Total number of pages.
@@ -23,23 +24,41 @@ const doPageNumber = async ({
 }) => {
     const masterTemplate = loadTemplate('page_number_master');
     const pageNumTemplate = loadTemplate('page_number_page');
-    const pageNumbersHtml = [...Array(numPages).keys()]
+    // All pages
+    let pageNumbersHtmls = [...Array(numPages).keys()]
         .map((pageNum) => pageNumTemplate
-            .replace('%%PAGENUM%%', pageNum + 1)).join('');
-    fse.writeFileSync(
-        path.resolve(path.join(options.htmlPath, '__pageNumbers.html')),
-        masterTemplate
-        .replace(
-            "%%CONTENT%%",
-            pageNumbersHtml
-        )
-    );
+            .replace('%%PAGENUM%%', pageNum + 1));
+    let nPdfNumbersWorkingFiles = 0;
+    const pageNumbersPaths = [];
+    // Make PDFs of slices of page numbers
+    while (pageNumbersHtmls.length > 0) {
+        nPdfNumbersWorkingFiles++;
+        fse.writeFileSync(
+            path.resolve(path.join(options.htmlPath, `__pageNumbers_${nPdfNumbersWorkingFiles}_.html`)),
+            masterTemplate
+                .replace(
+                    "%%CONTENT%%",
+                    pageNumbersHtmls.slice(0, 100).join('')
+                )
+        );
+        const pageNumbersWorkingFilePath = path.resolve(path.join(options.pdfPath, `__pageNumbers_${nPdfNumbersWorkingFiles}_.pdf`));
+        pageNumbersPaths.push(pageNumbersWorkingFilePath);
+        await doPuppet({
+            verbose: options.verbose,
+            htmlPath: path.join(options.htmlPath, `__pageNumbers_${nPdfNumbersWorkingFiles}_.html`),
+            pdfPath: pageNumbersWorkingFilePath
+        });
+        pageNumbersHtmls = pageNumbersHtmls.slice(100);
+    }
+    // Assemble slice PDFs
     const pageNumbersPdfPath = path.resolve(path.join(options.pdfPath, '__pageNumbers.pdf'));
-    await doPuppet({
-        verbose: options.verbose,
-        htmlPath: path.join(options.htmlPath, `__pageNumbers.html`),
-        pdfPath: pageNumbersPdfPath
-    });
+    const pnPdf = await PDFDocument.load(fse.readFileSync(pageNumbersPaths[0]));
+    for (const mergeablePath of pageNumbersPaths.slice(1)) {
+        const mergeablePDF = await PDFDocument.load(fse.readFileSync(mergeablePath));
+        const copiedPages = await pnPdf.copyPages(mergeablePDF, mergeablePDF.getPageIndices());
+        copiedPages.forEach(page => pnPdf.addPage(page));
+    }
+    fse.writeFileSync(pageNumbersPdfPath, await pnPdf.save());
     return pageNumbersPdfPath;
 }
 

@@ -6,7 +6,7 @@
     {
       "type": "setBooks",
       "bookCodes": [
-        "MRK"
+        "PHP"
       ],
       "sections": [
         {
@@ -23,10 +23,10 @@
           }
         },
         {
-          "id": "fourColumn",
-          "type": "4ColumnSpread",
-          "startOn": "verso",
-          "styles": "4_column_spread_page_styles",
+          "id": "twoColumn",
+          "type": "2Column",
+          "startOn": "recto",
+          "styles": "2_column_page_styles",
           "showPageNumber": true,
           "showNotes": false,
           "texts": [
@@ -34,16 +34,6 @@
               "label": "Grec",
               "type": "greek",
               "id": "grc_ugnt"
-            },
-            {
-              "label": "ULT",
-              "type": "trans",
-              "id": "eng_ult"
-            },
-            {
-              "label": "LSG 1910",
-              "type": "trans",
-              "id": "fra_lsg"
             },
             {
               "label": "PSLE",

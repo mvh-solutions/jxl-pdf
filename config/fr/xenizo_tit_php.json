@@ -38,17 +38,11 @@
     {
       "type": "setBooks",
       "bookCodes": [
+        "MRK",
         "PHP",
         "TIT"
       ],
       "sections": [
-        {
-          "id": "bookNotes_%%bookCode%%",
-          "type": "bookNote",
-          "styles": "non_juxta_page_styles",
-          "startOn": "recto",
-          "showPageNumber": true
-        },
         {
           "id": "juxta_%%bookCode%%",
           "type": "jxlSpread",
@@ -56,10 +50,7 @@
           "startOn": "verso",
           "showPageNumber": true,
           "jxl": {
-            "path": "fra_jxl",
-            "notes": {
-              "pivot": "jxl2note"
-            }
+            "path": "fra_jxl"
           },
           "lhs": [
             {
@@ -71,16 +62,6 @@
               "label": "GREC",
               "type": "greek",
               "id": "grc_ugnt"
-            },
-            {
-              "label": "LITTÉRALE",
-              "type": "trans",
-              "id": "fra_tlx"
-            },
-            {
-              "label": "SÉMANTIQUE",
-              "type": "trans",
-              "id": "fra_tsx"
             }
           ]
         }

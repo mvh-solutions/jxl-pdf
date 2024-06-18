@@ -11,7 +11,7 @@ const os = require("os");
 
 class PdfGen {
 
-    constructor(options, doPdfCallback=null) {
+    constructor(options, doPdfCallback = null) {
         const errors = PdfGen.validateConfig(options, true);
         if (errors.length > 0) {
             throw new Error(`Validation errors for config file:\n${errors.map(e => `  - ${e}`).join('\n')}`);
@@ -58,21 +58,21 @@ class PdfGen {
         };
         this.options = options;
         // Check that output file will not accidentally overwrite an existing file
-/*
-        if (fse.pathExistsSync(options.output) && !options.forceOverwrite) {
-            throw new Error(`Output path '${options.output}' would be overwritten but 'forceOverwrite' flag is not set.`);
-        }
+        /*
+                if (fse.pathExistsSync(options.output) && !options.forceOverwrite) {
+                    throw new Error(`Output path '${options.output}' would be overwritten but 'forceOverwrite' flag is not set.`);
+                }
 
-        // Attempt to read config file and add JSON to options
-        if (!(fse.pathExistsSync(options.config)) || !(fse.lstatSync(options.config).isFile())) {
-            throw new Error(`Config file path '${options.config}' does not exist or is not a file`);
-        }
-        try {
-            options.configContent = fse.readJsonSync(options.config);
-        } catch (err) {
-            throw new Error(`Could not read config file ${options.config} as JSON: ${err.message}`);
-        }
-*/
+                // Attempt to read config file and add JSON to options
+                if (!(fse.pathExistsSync(options.config)) || !(fse.lstatSync(options.config).isFile())) {
+                    throw new Error(`Config file path '${options.config}' does not exist or is not a file`);
+                }
+                try {
+                    options.configContent = fse.readJsonSync(options.config);
+                } catch (err) {
+                    throw new Error(`Could not read config file ${options.config} as JSON: ${err.message}`);
+                }
+        */
         // In CLEAR mode, delete working dir and exit
         if (options.steps.includes("clear")) {
             options.verbose && console.log("** CLEAR **");
@@ -94,6 +94,9 @@ class PdfGen {
                 args: ["originate"]
             });
             if (fse.pathExistsSync(options.workingDir)) {
+                if (!/[A-Za-z]{2}/.test(options.workingDir)) {
+                    throw new Error(`Working dir '${options.workingDir} looks dangerous to delete - quitting'`);
+                }
                 options.verbose && console.log(`   Deleting working dir ${options.workingDir}`);
                 fse.removeSync(options.workingDir);
             } else {
@@ -117,7 +120,7 @@ class PdfGen {
         }
     }
 
-    static validateConfig(configOb, checkPaths=false) {
+    static validateConfig(configOb, checkPaths = false) {
         const ret = [];
         let skip = false;
         // Top-level checks, abort on first error
@@ -190,8 +193,8 @@ class PdfGen {
                         }
                         for (const subSection of section.sections) {
                             if (!PdfGen.validateSection(subSection, wrapperOnly, ret, sectionN, checkPaths)) {
-                             skip = true;
-                             break;
+                                skip = true;
+                                break;
                             }
                         }
                     } else {
@@ -206,7 +209,7 @@ class PdfGen {
         return ret;
     }
 
-    static validateSection(section, wrapper, errors, sectionN, checkPaths=false) {
+    static validateSection(section, wrapper, errors, sectionN, checkPaths = false) {
         if (!section.id) {
             errors.push(`Section has no id (#${sectionN})`);
             return false;
@@ -237,28 +240,38 @@ class PdfGen {
             errors.push(`No content for section '${section.id}' (#${sectionN})`);
             return false;
         }
-        for (const sectionFieldId of Object.keys(section.content)) {
+        return PdfGen.validateSectionFields(
+            {signatureFields: signature.fields, sectionId: section.id, sectionN, sectionContent: section.content, errors, checkPaths}
+        );
+    }
+
+    static validateSectionFields({signatureFields, sectionId, sectionN, sectionContent, errors, checkPaths = false}) {
+        console.log("sigFields", signatureFields)
+        console.log("sectionCont", sectionContent)
+        const signatureFieldIds = signatureFields.map(f => f.id);
+        for (const sectionFieldId of Object.keys(sectionContent)) {
+            console.log('-', sectionFieldId);
             if (!signatureFieldIds.includes(sectionFieldId)) {
-                errors.push(`Unexpected field '${sectionFieldId}' in Section '${section.id}' of type '${section.type}' (#${sectionN})`);
+                errors.push(`Unexpected field '${sectionFieldId}' in Section '${sectionId}' (#${sectionN})`);
             }
         }
-        for (const requiredFieldId of signature.fields.filter(f => f.nValues[0] > 0).map(f => f.id)) {
-            if (section.content[requiredFieldId] === undefined) {
-                errors.push(`Missing field '${requiredFieldId}' in Section '${section.id}' of type '${section.type}' (#${sectionN})`);
+        for (const requiredFieldId of signatureFields.filter(f => f.nValues[0] > 0).map(f => f.id)) {
+            if (sectionContent[requiredFieldId] === undefined) {
+                errors.push(`Missing field '${requiredFieldId}' in Section '${sectionId}' (#${sectionN})`);
             }
         }
         if (errors.length > 0) {
             return false;
         }
         let foundError = false;
-        for (const [key, value] of Object.entries(section.content)) {
+        for (const [key, value] of Object.entries(sectionContent)) {
             if (
                 !PdfGen.validateSectionField(
                     key,
                     value,
-                    signature.fields.filter(f => f.id === key)[0],
+                    signatureFields.filter(f => f.id === key)[0],
                     errors,
-                    section.id,
+                    sectionId,
                     sectionN,
                     checkPaths
                 )
@@ -267,9 +280,11 @@ class PdfGen {
             }
         }
         return !foundError;
+
     }
 
-    static validateSectionField(fieldId, fieldContent, fieldSpec, errors, sectionId, sectionN, checkPaths=false) {
+    static validateSectionField(fieldId, fieldContent, fieldSpec, errors, sectionId, sectionN, checkPaths = false) {
+        console.log("fieldId", fieldId)
         const normalizedContent = Array.isArray(fieldContent) ? fieldContent : [fieldContent];
         if (normalizedContent.length < fieldSpec.nValues[0] || normalizedContent.length > fieldSpec.nValues[1]) {
             errors.push(`${normalizedContent.length} values for field '${fieldId}' in Section '${sectionId}' (#${sectionN}) - expected ${fieldSpec.nValues[0]}-${fieldSpec.nValues[1]} value(s)`);
@@ -310,7 +325,25 @@ class PdfGen {
                 return false;
             }
         }
-        return true;
+        if (fieldSpec.typeSpec) {
+            let foundError = false;
+            for (const fieldContentItem of fieldContent) {
+                const fieldReport = PdfGen.validateSectionFields(
+                    {
+                        signatureFields: fieldSpec.typeSpec,
+                        sectionId,
+                        sectionN,
+                        sectionContent: fieldContentItem,
+                        errors,
+                        checkPaths: false
+                    }
+                );
+                if (fieldReport) {
+                    foundError = true;
+                }
+            }
+            return !foundError;
+        }
     }
 
     async originatePdfs() {

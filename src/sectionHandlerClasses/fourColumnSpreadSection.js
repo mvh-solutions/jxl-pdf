@@ -51,7 +51,7 @@ class fourColumnSpreadSection extends Section {
                     nValues: [4, 4],
                     typeSpec: [
                         {
-                            id: "scripture#Text",
+                            id: "text",
                             label: {
                                 en: "Scripture # Text Label",
                                 "fr": "Etiquette pour texte biblique #"
@@ -60,7 +60,7 @@ class fourColumnSpreadSection extends Section {
                             nValues: [1, 1]
                         },
                         {
-                            id: "scripture#Src",
+                            id: "src",
                             label: {
                                 en: "Source # Text Source",
                                 "fr": "Source pour texte biblique #"
@@ -69,7 +69,7 @@ class fourColumnSpreadSection extends Section {
                             nValues: [1, 1]
                         },
                         {
-                            id: "scripture#Type",
+                            id: "type",
                             label: {
                                 en: "Scripture # Text Type",
                                 "fr": "Type de texte biblique #"
@@ -106,9 +106,6 @@ class fourColumnSpreadSection extends Section {
     }
 
     async doSection({section, templates, bookCode, options}) {
-        if (!section.texts || section.texts.length !== 4) {
-            throw new Error("4 Column Spread Section requires exactly 4 text definitions");
-        }
         const pk = pkWithDocs(bookCode, section.texts, options.verbose);
         const bookName = getBookName(pk, options.configContent.docIdForNames, bookCode);
         const cvTexts = getCVTexts(bookCode, pk);

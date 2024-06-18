@@ -335,7 +335,7 @@ class PdfGen {
                         sectionN,
                         sectionContent: fieldContentItem,
                         errors,
-                        checkPaths: false
+                        checkPaths: true
                     }
                 );
                 if (fieldReport) {

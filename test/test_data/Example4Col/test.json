@@ -4,7 +4,7 @@
         "fonts": "allGentium",
         "pages": "A4P",
         "sizes": "9on10",
-        "outputPath": "./test,pdf",
+        "outputPath": "/home/mark/Downloads/test.pdf",
         "workingDir":"/home/mark/.jxlpdf/working"
         
     },
@@ -26,22 +26,22 @@
                         {
                             "text": "test 1",
                             "type": "translation",
-                            "src": "./en_ult_c3d88f5b-ec77-5743-85ef-375231344a4c"
+                            "src": "/home/mark/repos/mvh-solutions/jxl-pdf/test/test_data/Example4Col/en_ult_c3d88f5b-ec77-5743-85ef-375231344a4c"
                             },
                        {
                             "text": "test 2",
                             "type": "translation",
-                            "src": "./en_ult_c3d88f5b-ec77-5743-85ef-375231344a4c"
+                            "src": "/home/mark/repos/mvh-solutions/jxl-pdf/test/test_data/Example4Col/en_ult_c3d88f5b-ec77-5743-85ef-375231344a4c"
                             },
                        {
                             "text": "test 3",
                             "type": "translation",
-                            "src": "./en_ult_c3d88f5b-ec77-5743-85ef-375231344a4c"
+                            "src": "/home/mark/repos/mvh-solutions/jxl-pdf/test/test_data/Example4Col/en_ult_c3d88f5b-ec77-5743-85ef-375231344a4c"
                             },
                        {
                             "text": "test 4",
                             "type": "translation",
-                            "src": "./en_ult_c3d88f5b-ec77-5743-85ef-375231344a4c"
+                            "src": "/home/mark/repos/mvh-solutions/jxl-pdf/test/test_data/Example4Col/en_ult_c3d88f5b-ec77-5743-85ef-375231344a4c"
                             }
                          ],
                         "notes": "/home/mark/repos/mvh-solutions/jxl-pdf/test/test_data/Example4Col/en_tn_unfoldingWord_v80"

@@ -105,38 +105,48 @@ class fourColumnSpreadSection extends Section {
         };
     }
 
-    async doSection({section, templates, bookCode, options}) {
-        const pk = pkWithDocs(bookCode, section.texts, options.verbose);
-        const bookName = getBookName(pk, options.configContent.docIdForNames, bookCode);
-        const cvTexts = getCVTexts(bookCode, pk);
-        const notes = section.showNotes ? bcvNotes(options.configContent, bookCode) : {};
+    async doSection({section, templates, manifest, options}) {
+        const docSpecs = [];
+        let scriptureN = 0;
+        for (const scripture of section.content.scripture) {
+            docSpecs.push({id: `xxx_yyy${scriptureN}`, path: scripture.src});
+            scriptureN++;
+        }
+        const pk = pkWithDocs(
+            section.bcvRange,
+            docSpecs,
+            options.verbose
+        );
+        const bookName = getBookName(pk, "xxx_yyy0", section.bcvRange);
+        const cvTexts = getCVTexts(section.bcvRange, pk);
+        const notes = section.showNotes ? bcvNotes(options.configContent, section.bcvRange) : {};
         const verses = [];
         verses.push(templates['4_column_spread_title'].replace('%%BOOKNAME%%', bookName));
         const headerHtml = templates['4_column_header_page']
             .replace(
                 "%%TITLE%%",
-                `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`
+                `${section.id.replace('%%bookCode%%', section.bcvRange)} - ${section.type}`
             )
-            .replace(/%%TRANS1TITLE%%/g, section.texts[0].label)
-            .replace(/%%TRANS2TITLE%%/g, section.texts[1].label)
-            .replace(/%%TRANS3TITLE%%/g, section.texts[2].label)
-            .replace(/%%TRANS4TITLE%%/g, section.texts[3].label);
+            .replace(/%%TRANS1TITLE%%/g, section.content.scripture[0].text)
+            .replace(/%%TRANS2TITLE%%/g, section.content.scripture[1].text)
+            .replace(/%%TRANS3TITLE%%/g, section.content.scripture[2].text)
+            .replace(/%%TRANS4TITLE%%/g, section.content.scripture[3].text)
         fse.writeFileSync(
-            path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.html`),
+            path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', section.bcvRange)}_superimpose.html`),
             headerHtml
         );
         await doPuppet({
             verbose: options.verbose,
-            htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.html`),
-            pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.pdf`)
+            htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', section.bcvRange)}_superimpose.html`),
+            pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', section.bcvRange)}_superimpose.pdf`)
         });
         verses.push(`
 <section class="columnHeadings">
     <section class="versoPage">
-        <h2 class="verseRecordHeadLeft"><span style="float: left">${section.texts[0].label}</span>&nbsp;<span style="float: right">${section.texts[1].label}</span></h2>
+        <h2 class="verseRecordHeadLeft"><span style="float: left">${section.content.scripture[0].text}</span>&nbsp;<span style="float: right">${section.content.scripture[1].text}</span></h2>
     </section>
     <section class="rectoPage">
-        <h2 class="verseRecordHeadRight"><span style="float: left">${section.texts[2].label}</span>&nbsp;<span style="float: right">${section.texts[3].label}</span></h2>
+        <h2 class="verseRecordHeadRight"><span style="float: left">${section.content.scripture[2].text}</span>&nbsp;<span style="float: right">${section.content.scripture[3].text}</span></h2>
     </section>
 </section>
 `);
@@ -144,23 +154,24 @@ class fourColumnSpreadSection extends Section {
             const verseHtml = templates['4_column_spread_verse']
                 .replace(
                     '%%VERSOCOLUMNS%%',
-                    `<div class="col1"><span class="cv">${cvRecord.cv.endsWith(":1") ? `${bookName}&nbsp;` : ""}${cvRecord.cv}</span> ${cvRecord.texts[section.texts[0].id] || "-"}</div><div class="col2">${cvRecord.texts[section.texts[1].id] || "-"}</div>`
+                    `<div class="col1"><span class="cv">${cvRecord.cv.endsWith(":1") ? `${bookName}&nbsp;` : ""}${cvRecord.cv}</span> ${cvRecord.texts["xxx_yyy0"] || "-"}</div><div class="col2">${cvRecord.texts["xxx_yyy1"] || "-"}</div>`
                 )
                 .replace(
                     '%%RECTOCOLUMNS%%',
-                    `<div class="col3">${cvRecord.texts[section.texts[2].id] || "-"}</div><div class="col4">${cvRecord.texts[section.texts[3].id] || "-"}${(notes[cvRecord.cv] || [])
+                    `<div class="col3">${cvRecord.texts["xxx_yyy2"] || "-"}</div><div class="col4">${cvRecord.texts["xxx_yyy3"] || "-"}${(notes[cvRecord.cv] || [])
                         .map(nr => cleanNoteLine(nr))
                         .map(note => `<p class="note">${note}</p>`)
                         .join('\n')}</div>`
                 );
             verses.push(verseHtml);
         }
+        const qualified_id = `${section.id}_${section.bcvRange}`;
         fse.writeFileSync(
-            path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
+            path.join(options.htmlPath, `${qualified_id.replace('%%bookCode%%', section.bcvRange)}.html`),
             templates['4_column_spread_page']
                 .replace(
                     "%%TITLE%%",
-                    `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`
+                    `${qualified_id.replace('%%bookCode%%', section.bcvRange)} - ${section.type}`
                 )
                 .replace(
                     "%%VERSES%%",
@@ -173,8 +184,15 @@ class fourColumnSpreadSection extends Section {
         );
         await doPuppet({
             verbose: options.verbose,
-            htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
-            pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
+            htmlPath: path.join(options.htmlPath, `${qualified_id.replace('%%bookCode%%', section.bcvRange)}.html`),
+            pdfPath: path.join(options.pdfPath, `${qualified_id.replace('%%bookCode%%', section.bcvRange)}.pdf`)
+        });
+        manifest.push({
+            id: `${qualified_id}`,
+            type: section.type,
+            startOn: section.content.startOn,
+            showPageNumber: section.content.showPageNumber,
+            makeFromDouble: true
         });
     }
 }

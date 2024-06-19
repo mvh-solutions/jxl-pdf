@@ -19,13 +19,14 @@ const getBookName = (pk, docSetId, bookCode) => {
 }
 
 const pkWithDocs = (bookCode, docSpecs, verbose=false) => {
+    console.log("bookCode", bookCode)
     const pk = new Proskomma();
     verbose && console.log("     Loading USFM into Proskomma");
     for (const docSpec of docSpecs) {
         verbose && console.log(`       ${docSpec.id}`);
         const matchingBookUsfm = fse.readdirSync(path.resolve(docSpec.path)).filter(f => f.includes(bookCode)) [0];
         if (!matchingBookUsfm) {
-            throw new Error(`No match for bookCode '${bookCode}' in section ${section.id} in directory '${docSpec.path}'`)
+            throw new Error(`No match for bookCode '${bookCode}' in ${docSpec.id} in directory '${docSpec.path}'`)
         }
         const contentString = fse.readFileSync(path.resolve(path.join(docSpec.path, `${matchingBookUsfm}`))).toString();
         const [lang, abbr] = docSpec.id.split('_');

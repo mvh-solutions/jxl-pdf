@@ -46,15 +46,6 @@
                          ],
                         "notes": "/home/mark/repos/mvh-solutions/jxl-pdf/test/test_data/Example4Col/en_tn_unfoldingWord_v80"
                     }
-                },
-                {
-                    "id": "7f02017e-64cd-49d2-be45-4bd82447584b",
-                    "type": "bookNote",
-                    "content": {
-                        "startOn": "verso",
-                        "showPageNumber": true,
-                        "notes": "/home/mark/repos/mvh-solutions/jxl-pdf/test/test_data/Example4Col/en_tn_unfoldingWord_v80"
-                    }
                 }
             ]
         }

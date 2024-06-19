@@ -246,11 +246,8 @@ class PdfGen {
     }
 
     static validateSectionFields({signatureFields, sectionId, sectionN, sectionContent, errors, checkPaths = false}) {
-        console.log("sigFields", signatureFields)
-        console.log("sectionCont", sectionContent)
         const signatureFieldIds = signatureFields.map(f => f.id);
         for (const sectionFieldId of Object.keys(sectionContent)) {
-            console.log('-', sectionFieldId);
             if (!signatureFieldIds.includes(sectionFieldId)) {
                 errors.push(`Unexpected field '${sectionFieldId}' in Section '${sectionId}' (#${sectionN})`);
             }
@@ -284,7 +281,6 @@ class PdfGen {
     }
 
     static validateSectionField(fieldId, fieldContent, fieldSpec, errors, sectionId, sectionN, checkPaths = false) {
-        console.log("fieldId", fieldId)
         const normalizedContent = Array.isArray(fieldContent) ? fieldContent : [fieldContent];
         if (normalizedContent.length < fieldSpec.nValues[0] || normalizedContent.length > fieldSpec.nValues[1]) {
             errors.push(`${normalizedContent.length} values for field '${fieldId}' in Section '${sectionId}' (#${sectionN}) - expected ${fieldSpec.nValues[0]}-${fieldSpec.nValues[1]} value(s)`);

@@ -71,8 +71,9 @@ class bookNoteSection extends Section {
         const notes = section.content.notes ? bcvNotes(section.content.notes, section.bcvRange) : {};
         const introNotes = notes["front:intro"] ? notes["front:intro"].join('\n\n'): "";
         const [title, body] = formatNote(introNotes, templates);
+        const qualified_id = `${section.id}_${section.bcvRange}`;
         fse.writeFileSync(
-            path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', section.bcvRange)}.html`),
+            path.join(options.htmlPath, `${qualified_id}.html`),
             templates['non_juxta_page']
                 .replace(
                     "%%TITLE%%",
@@ -85,11 +86,11 @@ class bookNoteSection extends Section {
         );
         await doPuppet({
             verbose: options.verbose,
-            htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', section.bcvRange)}.html`),
-            pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', section.bcvRange)}.pdf`)
+            htmlPath: path.join(options.htmlPath, `${qualified_id}.html`),
+            pdfPath: path.join(options.pdfPath, `${qualified_id}.pdf`)
         });
         manifest.push({
-            id: section.id.replace('%%bookCode%%', section.bcvRange),
+            id: qualified_id,
             type: section.type,
             startOn: section.content.startOn,
             showPageNumber: section.content.showPageNumber,

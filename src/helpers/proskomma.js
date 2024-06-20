@@ -19,7 +19,6 @@ const getBookName = (pk, docSetId, bookCode) => {
 }
 
 const pkWithDocs = (bookCode, docSpecs, verbose=false) => {
-    console.log("bookCode", bookCode)
     const pk = new Proskomma();
     verbose && console.log("     Loading USFM into Proskomma");
     for (const docSpec of docSpecs) {

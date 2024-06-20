@@ -125,24 +125,22 @@ class biblePlusNotesSection extends Section {
         }
     }
 
-    async doSection({section, templates, bookCode, options}) {
-        const pk = pkWithDocs(bookCode, [section.text], options.verbose);
-        const bookName = getBookName(pk, section.text.id, bookCode);
-        const cvTexts = getCVTexts(bookCode, pk);
-        if (!section.showNotes) {
-            throw new Error("BiblePlusNotes section requires notes");
-        }
-        const notes = bcvNotes(options.configContent, bookCode);
+    async doSection({section, templates, manifest, options}) {
+        const pk = pkWithDocs(section.bcvRange, [{id: "xxx_yyy", path: section.content.scriptureSrc}], options.verbose);
+        const bookName = getBookName(pk, "xxx_yyy", section.bcvRange);
+        const cvTexts = getCVTexts(section.bcvRange, pk);
+        const notes = bcvNotes(section.content.notes, section.bcvRange);
         const verses = [
             `<h1>${bookName}</h1>`
         ];
+        const qualified_id = `${section.id}_${section.bcvRange}`;
         for (const cvRecord of cvTexts) {
             const verseHtml = templates['bible_plus_notes_verse']
-                .replace("%%TRANS1TITLE%%", section.text.label)
-                .replace("%%TRANS2TITLE%%", section.text.label)
+                .replace("%%TRANS1TITLE%%", section.content.scriptureText)
+                .replace("%%TRANS2TITLE%%", section.content.scriptureText)
                 .replace(
                     '%%LEFTCOLUMN%%',
-                    `<div class="col1"><span class="cv">${cvRecord.cv}</span> ${cvRecord.texts[section.text.id] || "-"}</div>`
+                    `<div class="col1"><span class="cv">${cvRecord.cv}</span> ${cvRecord.texts["xxx_yyy"] || "-"}</div>`
                 )
                 .replace(
                     '%%RIGHTCOLUMN%%',
@@ -154,11 +152,11 @@ class biblePlusNotesSection extends Section {
             verses.push(verseHtml);
         }
         fse.writeFileSync(
-            path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
+            path.join(options.htmlPath, `${qualified_id}.html`),
             templates['bible_plus_notes_page']
                 .replace(
                     "%%TITLE%%",
-                    `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`
+                    `${qualified_id} - ${section.type}`
                 )
                 .replace(
                     "%%BODY%%",
@@ -179,8 +177,15 @@ class biblePlusNotesSection extends Section {
         fse.writeFileSync(cssPath, css);
         await doPuppet({
             verbose: options.verbose,
-            htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
-            pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
+            htmlPath: path.join(options.htmlPath, `${qualified_id}.html`),
+            pdfPath: path.join(options.pdfPath, `${qualified_id}.pdf`)
+        });
+        manifest.push({
+            id: `${qualified_id}`,
+            type: section.type,
+            startOn: section.content.startOn,
+            showPageNumber: section.content.showPageNumber,
+            makeFromDouble: false
         });
     }
 }

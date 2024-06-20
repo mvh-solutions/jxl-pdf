@@ -11,7 +11,11 @@ const cleanNoteLine = noteLine => noteLine
     .replace(/\[(.+?)\]\(.+?\)/g, "$1")
 
 const formatNote = (noteRecord, templates) => {
-    const noteText = noteRecord.split(/\\n\\n/);
+    const noteText = noteRecord
+        .replace(/\\n/g, "\nSPLIT\n")
+        .split("\nSPLIT\n")
+        .map(l => l.trim())
+        .map(l => l.replace(/^\*/, '-'))
     const noteHeading = noteText[0].replace(/^# +/, "");
     let noteParas = [];
     for (const noteLine of noteText.slice(1)) {

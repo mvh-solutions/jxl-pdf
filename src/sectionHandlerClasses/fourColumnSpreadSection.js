@@ -122,6 +122,7 @@ class fourColumnSpreadSection extends Section {
         const notes = section.showNotes ? bcvNotes(options.configContent, section.bcvRange) : {};
         const verses = [];
         verses.push(templates['4_column_spread_title'].replace('%%BOOKNAME%%', bookName));
+        const qualified_id = `${section.id}_${section.bcvRange}`;
         const headerHtml = templates['4_column_header_page']
             .replace(
                 "%%TITLE%%",
@@ -165,7 +166,6 @@ class fourColumnSpreadSection extends Section {
                 );
             verses.push(verseHtml);
         }
-        const qualified_id = `${section.id}_${section.bcvRange}`;
         fse.writeFileSync(
             path.join(options.htmlPath, `${qualified_id.replace('%%bookCode%%', section.bcvRange)}.html`),
             templates['4_column_spread_page']

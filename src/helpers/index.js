@@ -28,7 +28,8 @@ const {
 const {
     cleanNoteLine,
     maybeChapterNotes,
-    bcvNotes
+    bcvNotes,
+    formatNote
 } = require('./notes');
 
 const {
@@ -56,6 +57,7 @@ module.exports = {
     cleanNoteLine,
     maybeChapterNotes,
     bcvNotes,
+    formatNote,
     getBookName,
     pkWithDocs,
     doPuppet

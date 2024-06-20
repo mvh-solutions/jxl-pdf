@@ -1,6 +1,6 @@
 const fse = require("fs-extra");
 const path = require("path");
-const {maybeChapterNotes, doPuppet} = require("../helpers");
+const {formatNote, doPuppet, bcvNotes} = require("../helpers");
 const Section = require('./section');
 
 class bookNoteSection extends Section {
@@ -67,33 +67,35 @@ class bookNoteSection extends Section {
         }
     }
 
-    async doSection({section, templates, bookCode, options}) {
-        const notes = {};
-        const notesRows = fse.readFileSync(path.join('data', options.configContent.notes, `${bookCode}.tsv`)).toString().split("\n");
-        for (const notesRow of notesRows) {
-            const cells = notesRow.split('\t');
-            if (cells[1] === "front" && cells[2] === "intro") {
-                const noteKey = `${cells[1]}_${cells[2]}`;
-                notes[noteKey] = cells[6];
-            }
-        }
+    async doSection({section, templates, manifest, options}) {
+        const notes = section.content.notes ? bcvNotes(section.content.notes, section.bcvRange) : {};
+        const introNotes = notes["front:intro"] ? notes["front:intro"].join('\n\n'): "";
+        const [title, body] = formatNote(introNotes, templates);
         fse.writeFileSync(
-            path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
+            path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', section.bcvRange)}.html`),
             templates['non_juxta_page']
                 .replace(
                     "%%TITLE%%",
-                    `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`
+                    title
                 )
                 .replace(
                     "%%BODY%%",
-                    maybeChapterNotes("front", "book", notes, templates, options.verbose)
+                    `<h1>${title}</h1>\n\n${body}`
                 )
         );
         await doPuppet({
             verbose: options.verbose,
-            htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
-            pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
+            htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', section.bcvRange)}.html`),
+            pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', section.bcvRange)}.pdf`)
         });
+        manifest.push({
+            id: section.id.replace('%%bookCode%%', section.bcvRange),
+            type: section.type,
+            startOn: section.content.startOn,
+            showPageNumber: section.content.showPageNumber,
+            makeFromDouble: false
+        });
+
     }
 }
 

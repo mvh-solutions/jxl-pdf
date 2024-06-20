@@ -10,6 +10,35 @@ const cleanNoteLine = noteLine => noteLine
     .replace(/\*([^*]+)\*/g, (m, m1) => `<i>${m1}</i>`)
     .replace(/\[(.+?)\]\(.+?\)/g, "$1")
 
+const formatNote = (noteRecord, templates) => {
+    const noteText = noteRecord.split(/\\n\\n/);
+    const noteHeading = noteText[0].replace(/^# +/, "");
+    let noteParas = [];
+    for (const noteLine of noteText.slice(1)) {
+        let paraClass = "note_body";
+        if (noteLine.startsWith("####")) {
+            paraClass = "note_h4"
+        } else if (noteLine.startsWith("###")) {
+            paraClass = "note_h3"
+        } else if (noteLine.startsWith("##")) {
+            paraClass = "note_h2"
+        } else if (noteLine.trim().startsWith("-")) {
+            paraClass = "note_list2"
+        } else if (/^[0-9]+\./.test(noteLine.trim())) {
+            paraClass = "note_list1"
+        }
+        noteParas.push(
+            templates.markdownPara
+                .replace("%%CLASS%%", paraClass)
+                .replace(
+                    "%%NOTE%%",
+                    cleanNoteLine(noteLine)
+                )
+        );
+    }
+    return [noteHeading, noteParas.join('\n')];
+
+}
 const maybeChapterNotes = (chapterN, noteType, notes, templates, verbose=false) => {
     const chapterNoteRecord = notes[`${chapterN}_intro`];
     if (chapterNoteRecord) {
@@ -47,12 +76,16 @@ const maybeChapterNotes = (chapterN, noteType, notes, templates, verbose=false) 
     }
 }
 
-const bcvNotes = (config, bookCode) => {
+const bcvNotes = (notesPath, bookCode) => {
     const notes = {};
-    const notesRows = fse.readFileSync(path.join('data', config.notes, `${bookCode}.tsv`)).toString().split("\n");
+    const fileWithBook = fse.readdirSync(notesPath).filter(p => p.includes(bookCode))[0];
+    if (!fileWithBook) {
+        throw new Error(`No notes for ${bookCode} found in bcvNotes`);
+    }
+    const notesRows = fse.readFileSync(path.join(notesPath, fileWithBook)).toString().split("\n");
     for (const notesRow of notesRows) {
         const cells = notesRow.split('\t');
-        const rowKey = `${cells[1]}:${cells[2]}`;
+        const rowKey = cells[0];
         if (!(rowKey in notes)) {
             notes[rowKey] = [];
         }
@@ -65,5 +98,6 @@ const bcvNotes = (config, bookCode) => {
 module.exports = {
     cleanNoteLine,
     maybeChapterNotes,
-    bcvNotes
+    bcvNotes,
+    formatNote
 }

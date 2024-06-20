@@ -132,7 +132,7 @@ class bcvBibleSection extends Section {
         const pk = pkWithDocs(section.bcvRange, [{id: "xxx_yyy", path: section.content.scriptureSrc}], options.verbose);
         const bookName = getBookName(pk, "xxx_yyy", section.bcvRange);
         const cvTexts = getCVTexts(section.bcvRange, pk);
-        const notes = section.showNotes ? bcvNotes(options.configContent, section.bcvRange) : {};
+        const notes = section.content.notes ? bcvNotes(section.content.notes, section.bcvRange) : {};
         const verses = [`<h1>${bookName}</h1>`];
         for (const cvRecord of cvTexts) {
             const verseHtml = templates['bcv_bible_verse']

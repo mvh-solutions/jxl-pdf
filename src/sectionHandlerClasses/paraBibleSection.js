@@ -204,7 +204,7 @@ class paraBibleSection extends Section {
         }
         const pk = pkWithDocs(section.bcvRange, [{id: "xxx_yyy", path: section.content.scriptureSrc}], options.verbose);
         const bookName = getBookName(pk, "xxx_yyy", section.bcvRange);
-        const notes = section.showNotes ? bcvNotes(config, section.bcvRange) : {};
+        const notes = section.content.notes ? bcvNotes(section.content.notes, section.bcvRange) : {};
         const docId = pk.gqlQuerySync('{documents { id } }').data.documents[0].id;
         const actions = render.sofria2web.renderActions.sofria2WebActions;
         const renderers = render.sofria2web.sofria2html.renderers;

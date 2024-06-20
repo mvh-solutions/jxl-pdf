@@ -1,0 +1,21 @@
+{
+  "global": {
+    "fonts": "allGentium",
+    "pages": "A4P",
+    "sizes": "9on10",
+    "outputPath": "/home/mark/Downloads/test_pdf.pdf",
+    "workingDir": "/home/mark/.jxlpdf/working"
+  },
+  "sections": [
+    {
+      "id": "e218dae1-71b9-4a22-be0c-4136cd9ed51c",
+      "type": "pdf",
+      "content": {
+        "startOn": "recto",
+        "showPageNumber": true,
+        "pdf": "/home/mark/repos/mvh-solutions/jxl-pdf/test/test_data/Example4Col/funky_cover.pdf"
+      }
+    }
+  ]
+}
+

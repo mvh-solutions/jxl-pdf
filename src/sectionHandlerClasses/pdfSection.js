@@ -3,7 +3,7 @@ const path = require("path");
 const {doPuppet} = require("../helpers");
 const Section = require('./section');
 
-class frontSection extends Section {
+class pdfSection extends Section {
 
     requiresWrapper() {
         return [];
@@ -55,37 +55,37 @@ class frontSection extends Section {
                     nValues: [1, 1]
                 },
                 {
-                    id: "html",
+                    id: "pdf",
                     label: {
-                        en: "HTML Source",
-                        fr: "Source pour HTML"
+                        en: "External PDF Source",
+                        fr: "Source pour PDF externe"
                     },
-                    typeName: "html",
+                    typeName: "pdf",
                     nValues: [1, 1]
                 },
             ]
         }
     }
 
-    async doSection({section, templates, bookCode, options}) {
+    async doSection({section, templates, manifest, options}) {
+        const pdfContent = fse.readFileSync(section.content.pdf);
         fse.writeFileSync(
-            path.join(
-                options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
-            templates['non_juxta_page']
-                .replace(
-                    "%%TITLE%%",
-                    `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`
-                )
-                .replace(
-                    "%%BODY%%",
-                    fse.readFileSync(path.resolve(path.join('data', `${section.path}.html`))).toString()
-                )
+            path.join(options.pdfPath, `${section.id}.pdf`),
+            pdfContent
         );
-        await doPuppet({
-            verbose: options.verbose,
-            htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
-            pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
+        section.doPdfCallback && section.doPdfCallback({
+            type: "pdfImport",
+            level: 3,
+            msg: `Importing PDF ${path.join(options.pdfPath, `${section.id}.pdf}`)}'`,
+            args: [`${path.join(options.pdfPath, `${section.id}.pdf`)}`]
+        });
+        manifest.push({
+            id: `${section.id}`,
+            type: section.type,
+            startOn: section.content.startOn,
+            showPageNumber: section.content.showPageNumber,
+            makeFromDouble: false
         });
     }
 }
-module.exports = frontSection;
+module.exports = pdfSection;

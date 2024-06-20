@@ -2,7 +2,7 @@ const {
     TwoColumnSection,
     FourColumnSpreadSection,
     BookNoteSection,
-    FrontSection,
+    PdfSection,Section,
     JxlSpreadSection,
     JxlSimpleSection,
     BcvBibleSection,
@@ -14,7 +14,7 @@ const {
 } = require("./sectionHandlerClasses");
 
 const sectionHandlerLookup = {
-    front: new FrontSection(),
+    pdf: new PdfSection(),
     markdown: new MarkdownSection(),
     obs: new ObsSection(),
     obsPlusNotes: new ObsPlusNotesSection(),

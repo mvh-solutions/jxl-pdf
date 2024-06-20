@@ -100,8 +100,8 @@ class MarkdownSection extends Section {
         manifest.push({
             id: `${section.id}`,
             type: section.type,
-            startOn: section.startOn,
-            showPageNumber: section.showPageNumber,
+            startOn: section.content.startOn,
+            showPageNumber: section.content.showPageNumber,
             makeFromDouble: false
         });
     }

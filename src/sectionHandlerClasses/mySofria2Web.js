@@ -314,7 +314,7 @@ const sofria2WebActions = {
         {
             description: "Handle zaln word-like atts",
             test: ({context}) => context.sequences[0].element.subType === "usfm:zaln",
-            action: ({context, workspace}) => {
+            action: ({config, context, workspace}) => {
 
                 const atts = context.sequences[0].element.atts;
                 const standardAtts = {};
@@ -324,13 +324,7 @@ const sofria2WebActions = {
                     }
                 }
                 workspace.currentIndex += 1
-                workspace.paraContentStack.unshift(
-                    {
-                        subType: context.sequences[0].element.subType,
-                        atts: standardAtts,
-                        content: []
-                    }
-                );
+                workspace.paraContentStack[0].content.push(config.renderers.milestone("usfm:zaln", standardAtts));
                 return false;
             }
         },
@@ -339,12 +333,15 @@ const sofria2WebActions = {
         {
             description: "Handle zaln word-like atts",
             test: ({context}) => context.sequences[0].element.subType === "usfm:zaln",
-            action: ({config, workspace}) => {
-                const popped = workspace.paraContentStack.shift();
-                workspace.paraContentStack[0].content.push(config.renderers.wWrapper(
-                    (workspace.settings.showWordAtts ? popped.atts : {}),
-                    popped.content.join('')
-                ));
+            action: ({config, context, workspace}) => {
+                const atts = context.sequences[0].element.atts;
+                const standardAtts = {};
+                for (const [key, value] of Object.entries(atts)) {
+                    if (["x-strong", "x-lemma", "x-morph", "x-content"].includes(key)) {
+                        standardAtts[key.split('-')[1]] = value;
+                    }
+                }
+                workspace.paraContentStack[0].content.push(config.renderers.milestone("usfm:zaln", standardAtts));
                 return false;
             }
         },

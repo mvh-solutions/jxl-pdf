@@ -37,6 +37,7 @@ const renderers = {
                         </div>`
         ).join('')
         }</span>`,
+    milestone: (tags, atts) => "", // Do not write milestones in HTML for now.
     mergeParas: paras => paras.join('\n'),
     row: (content) => {
         return (`<tr>${content.join("")}</tr>`)

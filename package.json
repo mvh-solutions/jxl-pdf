@@ -12,8 +12,8 @@
     "os": "^0.1.2",
     "path": "^0.12.7",
     "pdf-lib": "^1.17.1",
-    "proskomma-core": "^0.10.4",
-    "proskomma-json-tools": "^0.8.4",
+    "proskomma-core": "^0.10.7",
+    "proskomma-json-tools": "^0.8.12",
     "puppeteer": "^21.6.1",
     "text-diff": "^1.0.1"
   },

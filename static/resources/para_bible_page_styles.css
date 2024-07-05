@@ -217,23 +217,27 @@ div.chapters {
     font-size: %%H1FONTSIZE%%pt;
     line-height: %%H1LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
+    text-align: "left"
 }
 .paras_usfm_s2 {
     font-style: italic;
     font-size: %%H2FONTSIZE%%pt;
     line-height: %%H2LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
+    text-align: "left"
 }
 .paras_usfm_s3 {
     font-style: italic;
     font-size: %%H3FONTSIZE%%pt;
     line-height: %%H3LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
+    text-align: "left"
 }
 .paras_usfm_sr {
     font-size: %%H3FONTSIZE%%pt;
     line-height: %%H3LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
+    text-align: "left"
 }
 .paras_usfm_tr {
 }
@@ -309,6 +313,18 @@ p:has(.marks_chapter_label) {
 }
 .wrappers_usfm_qs {
     font-style: italic;
+}
+.wrappers_usfm_pn {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: #777;
+    text-decoration-thickness: 1pt;
+}
+.wrappers_usfm_png {
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-decoration-color: #777;
+    text-decoration-thickness: 1pt;
 }
 .wrappers_usfm_sc {
     font-size: smaller;

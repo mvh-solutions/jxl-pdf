@@ -8,13 +8,16 @@ body {
     text-align-last: left;
 }
 
-div.chapters {
+section.chapters {
     columns: 2;
 }
 
 %%%P%%%
 
-%%%H1%%%
+h1, h2, h3, h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
 ::footnote-call {
     font-weight: bold;
@@ -53,6 +56,8 @@ div.chapters {
     line-height: %%H1LINEHEIGHT%%pt;
     text-align: center;
     font-family: %%HEADINGFONT%%;
+    page-break-after: avoid;
+    break-after: avoid;
 }
 .paras_usfm_imt2 {
     font-weight: bold;
@@ -61,6 +66,8 @@ div.chapters {
     line-height: %%H2LINEHEIGHT%%pt;
     text-align: center;
     font-family: %%HEADINGFONT%%;
+    page-break-after: avoid;
+    break-after: avoid;
 }
 .paras_usfm_imt3 {
     font-weight: bold;
@@ -69,6 +76,8 @@ div.chapters {
     line-height: %%H3LINEHEIGHT%%pt;
     text-align: center;
     font-family: %%HEADINGFONT%%;
+    page-break-after: avoid;
+    break-after: avoid;
 }
 .paras_usfm_ip {
     text-indent: 12pt;
@@ -90,18 +99,24 @@ div.chapters {
     font-size: %%H1FONTSIZE%%pt;
     line-height: %%H1LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
+    page-break-after: avoid;
+    break-after: avoid;
 }
 .paras_usfm_is2 {
     font-style: italic;
     font-size: %%H2FONTSIZE%%pt;
     line-height: %%H2LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
+    page-break-after: avoid;
+    break-after: avoid;
 }
 .paras_usfm_is3 {
     font-style: italic;
     font-size: %%H3FONTSIZE%%pt;
     line-height: %%H3LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
+    page-break-after: avoid;
+    break-after: avoid;
 }
 .paras_usfm_li {
     list-style-type: disc;
@@ -119,6 +134,9 @@ div.chapters {
     text-indent: -12pt;
 }
 .paras_usfm_m {
+    page-break-before: avoid;
+    break-before: avoid-column;
+    break-inside: auto;
 }
 .paras_usfm_mi {
     padding-left: 12pt;
@@ -128,16 +146,22 @@ div.chapters {
     line-height: %%H4LINEHEIGHT%%pt;
     font-style: italic;
     font-family: %%HEADINGFONT%%;
+    page-break-after: avoid;
+    break-after: avoid;
 }
 .paras_usfm_ms {
     font-size: %%H4FONTSIZE%%pt;
     line-height: %%H4LINEHEIGHT%%pt;
     font-weight: bold;
     font-family: %%HEADINGFONT%%;
+    page-break-after: avoid;
+    break-after: avoid;
 }
 .paras_usfm_ms2 {
     font-weight: bold;
     font-family: %%HEADINGFONT%%;
+    page-break-after: avoid;
+    break-after: avoid;
 }
 .paras_usfm_mt {
     font-weight: bold;
@@ -146,6 +170,8 @@ div.chapters {
     line-height: %%H1LINEHEIGHT%%pt;
     text-align: center;
     font-family: %%HEADINGFONT%%;
+    page-break-after: avoid;
+    break-after: avoid;
 }
 .paras_usfm_mt2 {
     font-weight: bold;
@@ -154,6 +180,8 @@ div.chapters {
     line-height: %%H2LINEHEIGHT%%pt;
     text-align: center;
     font-family: %%HEADINGFONT%%;
+    page-break-after: avoid;
+    break-after: avoid;
 }
 .paras_usfm_mt3 {
     font-weight: bold;
@@ -162,11 +190,14 @@ div.chapters {
     line-height: %%H3LINEHEIGHT%%pt;
     text-align: center;
     font-family: %%HEADINGFONT%%;
+    page-break-after: avoid;
+    break-after: avoid;
 }
 .paras_usfm_nb {
 }
 .paras_usfm_p {
     text-indent: 12pt;
+    break-inside: auto;
 }
 .paras_usfm_pc {
     text-align: center;
@@ -187,18 +218,26 @@ div.chapters {
     padding-left: 12pt;
     text-align: left;
     line-height: 10pt;
+    font-size: %%BODYFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
 }
 .paras_usfm_q2 {
     padding-left: 24pt;
     text-align: left;
+    font-size: %%BODYFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
 }
 .paras_usfm_q3 {
     padding-left: 36pt;
     text-align: left;
+    font-size: %%BODYFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
 }
 .paras_usfm_q4 {
     padding-left: 48pt;
     text-align: left;
+    font-size: %%BODYFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
 }
 .paras_usfm_qa {
     font-weight: bold;
@@ -211,33 +250,43 @@ div.chapters {
 .paras_usfm_r {
     font-weight: bold;
     font-family: %%HEADINGFONT%%;
+    page-break-after: avoid;
+    break-after: avoid;
 }
 .paras_usfm_s {
-    font-style: italic;
-    font-size: %%H1FONTSIZE%%pt;
-    line-height: %%H1LINEHEIGHT%%pt;
-    font-family: %%HEADINGFONT%%;
-    text-align: "left"
-}
-.paras_usfm_s2 {
     font-style: italic;
     font-size: %%H2FONTSIZE%%pt;
     line-height: %%H2LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
-    text-align: "left"
+    text-align: left;
+    page-break-after: avoid;
+    break-after: avoid-column;
 }
-.paras_usfm_s3 {
+.paras_usfm_s2 {
     font-style: italic;
     font-size: %%H3FONTSIZE%%pt;
     line-height: %%H3LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
-    text-align: "left"
+    text-align: left;
+    page-break-after: avoid;
+    break-after: avoid-column;
+}
+.paras_usfm_s3 {
+    font-style: italic;
+    font-size: %%H4FONTSIZE%%pt;
+    line-height: %%H4LINEHEIGHT%%pt;
+    font-family: %%HEADINGFONT%%;
+    text-align: left;
+    page-break-after: avoid;
+    break-after: avoid-column;
 }
 .paras_usfm_sr {
     font-size: %%H3FONTSIZE%%pt;
     line-height: %%H3LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
-    text-align: "left"
+    text-align: left;
+    page-break-after: avoid;
+    break-after: avoid-column;
 }
 .paras_usfm_tr {
 }
@@ -325,6 +374,9 @@ p:has(.marks_chapter_label) {
     text-decoration-style: dashed;
     text-decoration-color: #777;
     text-decoration-thickness: 1pt;
+}
+.wrappers_usfm_qt {
+    font-style: italic;
 }
 .wrappers_usfm_sc {
     font-size: smaller;

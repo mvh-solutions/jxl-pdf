@@ -1,8 +1,8 @@
 {
   "global": {
     "fonts": "allGentium",
-    "pages": "A4P",
-    "sizes": "9on10",
+    "pages": "EXECUTIVE",
+    "sizes": "9on11",
     "outputPath": "/home/mark/Downloads/psle.pdf",
     "workingDir": "/home/mark/.jxlpdf/working",
     "verbose": false
@@ -36,17 +36,6 @@
             "showCharacterMarkup": true,
             "showChapterLabels": true,
             "showVersesLabels": true                    }
-        },
-        {
-          "id": "4a663359-0726-4cb1-8b5a-ecf0f9978cab",
-          "type": "bcvBible",
-          "content": {
-            "startOn": "recto",
-            "showPageNumber": true,
-            "scriptureText": "bcvBible",
-            "scriptureSrc": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_psle",
-            "scriptureType": "translation"
-          }
         }
       ]
     }

@@ -34,6 +34,7 @@ const sofria2WebActions = {
                 workspace.footnoteNo = 1;
                 workspace.bookCode = context.document.metadata.document.bookCode;
                 workspace.chapter = 0;
+                workspace.foundPara = false;
 
             },
         }
@@ -183,6 +184,10 @@ const sofria2WebActions = {
             description: "Initialise content stack",
             test: () => true,
             action: ({config, context, workspace}) => {
+                if (context.sequences[0].type !== "title" && !workspace.foundPara) {
+                    workspace.webParas.push(config.renderers.startChapters());
+                    workspace.foundPara = true;
+                }
                 workspace.currentIndex += 1
                 const block = context.sequences[0].block;
                 workspace.paraContentStack.unshift(
@@ -385,9 +390,13 @@ const sofria2WebActions = {
     ],
     endDocument: [
         {
-            description: "Build JSX",
+            description: "Build output",
             test: () => true,
             action: ({config, workspace, output}) => {
+                if (workspace.foundPara) {
+                    workspace.webParas.push(config.renderers.endChapters());
+                    workspace.foundPara = true;
+                }
                 output.paras = config.renderers.mergeParas(workspace.webParas);
             }
         }

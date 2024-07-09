@@ -287,11 +287,36 @@ class PdfGen {
             return false;
         }
         if (fieldSpec.typeName) {
+            if (!["boolean", "number", "string", "obs", "tNotes", "translationText", "md"].includes(fieldSpec.typeName)) {
+                errors.push(`Unknown typeName '${fieldSpec.typeName}' in Section '${sectionId}' (#${sectionN})`);
+                return false;
+            }
             if (fieldSpec.typeName === "boolean") {
                 const badValues = normalizedContent.filter(c => !!c !== c);
                 if (badValues.length > 0) {
                     errors.push(`${badValues.length} value(s) of field '${fieldId}' in Section '${sectionId}' (#${sectionN}) are not booleans`);
                     return false;
+                }
+            }
+            if (fieldSpec.typeName === "number") {
+                let badValues = normalizedContent.filter(c => typeof c !== "number");
+                if (badValues.length > 0) {
+                    errors.push(`${badValues.length} value(s) of field '${fieldId}' in Section '${sectionId}' (#${sectionN}) are not numbers`);
+                    return false;
+                }
+                if (fieldSpec.minValue) {
+                    badValues = normalizedContent.filter(c => c < fieldSpec.minValue);
+                    if (badValues.length > 0) {
+                        errors.push(`${badValues.length} value(s) of field '${fieldId}' in Section '${sectionId}' (#${sectionN}) are < minValue ${fieldSpec.minValue}`);
+                        return false;
+                    }
+                }
+                if (fieldSpec.maxValue) {
+                    badValues = normalizedContent.filter(c => c > fieldSpec.maxValue);
+                    if (badValues.length > 0) {
+                        errors.push(`${badValues.length} value(s) of field '${fieldId}' in Section '${sectionId}' (#${sectionN}) are > maxValue ${fieldSpec.maxValue}`);
+                        return false;
+                    }
                 }
             } else if (fieldSpec.typeName === "string") {
                 const badValues = normalizedContent.filter(c => typeof c !== "string");

@@ -87,12 +87,14 @@ class paraBibleSection extends Section {
                 },
                 {
                     id: "nColumns",
-                    typeName: "integer",
+                    typeName: "number",
                     label: {
                         en: "Number of columns",
                         fr: "Nombre de colonnes"
                     },
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    minValue: 1,
+                    maxValue: 3
                 },
                 {
                     id: "showWordAtts",

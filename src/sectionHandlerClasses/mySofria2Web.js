@@ -289,6 +289,7 @@ const sofria2WebActions = {
                     workspace.currentIndex
                 );
                 workspace.paraContentStack[0].content.push(toPush);
+                if (workspace.settings.showGlossaryStar) {workspace.paraContentStack[0].content.push("<span class=\"glossary_star\">*</span>")}
                 return false;
             }
         },

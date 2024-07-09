@@ -17,11 +17,10 @@
       ],
       "sections": [
         {
-
           "id": "ba5c63b1-2377-42b8-b032-38ff9007b72f",
           "type": "paraBible",
           "content": {
-            "startOn":"recto",
+            "startOn": "recto",
             "showPageNumber": true,
             "scriptureText": "para Bible",
             "scriptureSrc": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_psle",
@@ -35,7 +34,9 @@
             "showParaStyles": true,
             "showCharacterMarkup": true,
             "showChapterLabels": true,
-            "showVersesLabels": true                    }
+            "showVersesLabels": true,
+            "showFirstVerseLabel": false
+          }
         }
       ]
     }

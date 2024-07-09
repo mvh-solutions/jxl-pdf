@@ -183,6 +183,15 @@ class paraBibleSection extends Section {
                         fr: "Afficher numéros de versets"
                     },
                     nValues: [1, 1]
+                },
+                {
+                    id: "showFirstVerseLabel",
+                    typeName: "boolean",
+                    label: {
+                        en: "Show Verse Number for v1",
+                        fr: "Afficher numéro de verset pour v1"
+                    },
+                    nValues: [1, 1]
                 }
             ]
         };
@@ -202,7 +211,8 @@ class paraBibleSection extends Section {
             "showParaStyles": section.content.showParaStyles,
             "showCharacterMarkup": section.content.showCharacterMarkup,
             "showChapterLabels": section.content.showChapterLabels,
-            "showVersesLabels": section.content.showVersesLabels
+            "showVersesLabels": section.content.showVersesLabels,
+            "showFirstVerseLabel": section.content.showFirstVerseLabel
         }
         const pk = pkWithDocs(section.bcvRange, [{id: "xxx_yyy", path: section.content.scriptureSrc}], options.verbose);
         const bookName = getBookName(pk, "xxx_yyy", section.bcvRange);

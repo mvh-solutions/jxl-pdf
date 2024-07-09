@@ -6,9 +6,10 @@ const defaultSettings = {
     showXrefs: true,
     showChapterLabels: true,
     showVersesLabels: true,
+    showFirstVerseLabel: false,
     showCharacterMarkup: true,
     showParaStyles: true,
-    selectedBcvNotes: []
+    selectedBcvNotes: [],
 }
 
 const sofria2WebActions = {
@@ -379,6 +380,9 @@ const sofria2WebActions = {
                     workspace.chapter = element.atts.number;
                     workspace.paraContentStack[0].content.push(config.renderers.chapter_label(element.atts.number, workspace.currentIndex));
                 } else if (element.subType === "verses_label" && workspace.settings.showVersesLabels) {
+                    if (element.atts.number === "1" && !workspace.settings.showFirstVerseLabel) {
+                        return false;
+                    }
                     let bcv = [];
                     if (config.selectedBcvNotes.length > 0) {
                         bcv = [workspace.bookCode, workspace.chapter, element.atts.number]

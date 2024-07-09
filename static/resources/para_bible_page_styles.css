@@ -9,7 +9,6 @@ body {
 }
 
 section.chapters {
-    columns: 2;
     column-fill: balance;
 }
 

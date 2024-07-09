@@ -49,7 +49,7 @@ const renderers = {
         ).join('')
         }</span>`,
     milestone: (tags, atts) => "", // Do not write milestones in HTML for now.
-    startChapters: () => "<section class=\"chapters\">",
+    startChapters: nCols => `<section class="chapters" style="columns: ${nCols}">`,
     endChapters: () => "</section>",
     mergeParas: paras => paras.join('\n'),
     row: (content) => {

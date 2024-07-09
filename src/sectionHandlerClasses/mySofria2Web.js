@@ -186,7 +186,7 @@ const sofria2WebActions = {
             test: () => true,
             action: ({config, context, workspace}) => {
                 if (context.sequences[0].type !== "title" && !workspace.foundPara) {
-                    workspace.webParas.push(config.renderers.startChapters());
+                    workspace.webParas.push(config.renderers.startChapters(workspace.settings.nColumns));
                     workspace.foundPara = true;
                 }
                 workspace.currentIndex += 1

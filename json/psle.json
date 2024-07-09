@@ -35,7 +35,8 @@
             "showCharacterMarkup": true,
             "showChapterLabels": true,
             "showVersesLabels": true,
-            "showFirstVerseLabel": false
+            "showFirstVerseLabel": false,
+            "nColumns": 3
           }
         }
       ]

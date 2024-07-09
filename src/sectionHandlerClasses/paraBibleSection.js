@@ -86,6 +86,15 @@ class paraBibleSection extends Section {
                     nValues: [1, 1]
                 },
                 {
+                    id: "nColumns",
+                    typeName: "integer",
+                    label: {
+                        en: "Number of columns",
+                        fr: "Nombre de colonnes"
+                    },
+                    nValues: [1, 1]
+                },
+                {
                     id: "showWordAtts",
                     typeLiteral: false,
                     label: {
@@ -212,7 +221,8 @@ class paraBibleSection extends Section {
             "showCharacterMarkup": section.content.showCharacterMarkup,
             "showChapterLabels": section.content.showChapterLabels,
             "showVersesLabels": section.content.showVersesLabels,
-            "showFirstVerseLabel": section.content.showFirstVerseLabel
+            "showFirstVerseLabel": section.content.showFirstVerseLabel,
+            "nColumns": section.content.nColumns
         }
         const pk = pkWithDocs(section.bcvRange, [{id: "xxx_yyy", path: section.content.scriptureSrc}], options.verbose);
         const bookName = getBookName(pk, "xxx_yyy", section.bcvRange);

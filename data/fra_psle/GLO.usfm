@@ -1,94 +1,98 @@
 \id GLO - Pain sur les eaux
-\mt Glossaire
-\c 1
-\cp A
-\p \k Alliance\k*~:
-\p \k Ange\k*~:
-\p \k Annoncer\k*~: κηρύσσω (\tl kērussō\tl*)
-\p \k Apparence\k*~:
-\p \k Apôtre\k*~:
-\cp B
-\p \k Baptême\k*~: βαπτίζω (\tl baptizō\tl*)
-\p \k Blasphème\k*~: βλασφημέω (blasfēmeō)
-\p \k Bonne Nouvelle\k*~: voir Evangile
-\p \k Bureau des impôts\k*~:
-\cp C
-\p \k Chair\k*~:
-\p \k Changement de direction\k*~: μετάνοια (\tl metanoia\tl*)
-\p \k Christ\k*~: Χριστός (\tl christos\tl*)
-\p \k Circoncision\k*~:
-\p \k Collecteur d'impôts\k*~:
-\cp D
-\p \k Disciple\k*~: μαθητής (\tl mathētēs\tl*)
-\p \k Démon\k*~:
-\p \k Démonisé\k*~: δαιμονίζομαι (\tl daimonizomai\tl*)
-\p \k Les Douze\k*~:
-\cp E
-\p \k Écriture\k*~:
-\p \k Enseigner\k*~:
-\p \k Esclave\k*~:
-\p \k Esprit Saint\k*~: πνεύματι ἁγίῳ
-\p \k Esprit impur\k*~: πνεύματι ἀκαθάρτῳ
-\p \k Espérance\k*~:
-\p \k Évangile\k*~: εὐαγγέλιον (\tl euangelion\tl*)
-\p \k Eviter les extrêmes\k*~:
-\cp F
-\p \k Fils de Dieu\k*~:
-\p \k Fils de l'Homme\k*~: υἱὸς τοῦ ἀνθρώπου
-\p \k Foi\k*~:
-\cp G
-\p \k Gestionnaire\k*~:
-\p \k Gloire\k*~:
-\p \k Glorifier\k*~:
-\p \k Gourde en peau\k*~: ἀσκός (\tl askos\tl*)
-\p \k Grâce\k*~:
-\p \k Géhenne\k*~:
-\cp H
-\p \k Hérodien\k*~:
-\cp I
-\p \k Insulter Dieu\k*~: voir Blasphème
-\cp J
-\p \k Juste\k*~:
-\cp L
-\p \k Loi\k*~:
-\p \k Louange\k*~:
-\p \k Lépreux\k*~:
-\cp M
-\p \k Messie\k*~:
-\p \k Miracle\k*~:
-\p \k Mis à part\k*~: ἅγιος
-\cp O
-\p \k Les Onze\k*~: voir Les Douze
-\cp P
-\p \k Parabole\k*~:
-\p \k Pardon\k*~:
-\p \k Parole\k*~:
-\p \k Pharisien\k*~: Φαρισαῖος (\tl farisaios\tl*)
-\p \k Proclamer\k*~: voir annoncer
-\p \k Prophète\k*~: προφήτης (\tl profētēs\tl*)
-\p \k Prétoire\k*~:
-\p \k Prêcher\k*~:
-\p \k Prêtre\k*~:
-\p \k Pur\k*~: καθαρίζω (\tl katharizō\tl*)
-\p \k Pâque\k*~:
-\p \k Pécheur\k*~:
-\p \k Péché\k*~: ἁμαρτία (\tl hamartia\tl*)
-\cp R
-\p \k Responsable\k*~:
-\p \k Royaume de Dieu\k*~: βασιλεία τοῦ θεοῦ
-\p \k Résurrection\k*~:
-\cp S
-\p \k Sabbat\k*~: σάββατον (\tl sabbaton\tl*)
-\p \k Sacrifice\k*~:
-\p \k Sadducéens\k*~:
-\p \k Saint\k*~: voir Mis à part
-\p \k Salut\k*~:
-\p \k Sanhédrin\k*~:
-\p \k Le Satan\k*~: Σατανᾶς (\tl satanas\tl*)
-\p \k Scribe\k*~: οἱ γραμματεῖς
-\p \k Seigneur\k*~: κύριος (\tl kurios\tl*)
-\p \k Serviteur\k*~:
-\p \k Synagogue\k*~: συναγωγή (\tl sunagōgē\tl*)
-\cp V
-\p \k Vie éternelle\k*~:
-
+\h Glossaire
+\toc1 Glossaire
+\toc2 Glossaire
+\toc3 Glo
+\imt Glossaire
+\im Ce glossaire n'est nullement censé remplacer les nombreuses oeuvres de référence existantes telles que des dictionaires bibliques, des lexiques ou des commentaires. Nous avons créé une entrée de glossaire dans deux cas~:
+\ili quand le choix de traduction de \sc psle\sc* ne suit pas la tradition de traduction de français ('Bonne Nouvelle' au lieu de 'Evangile'),
+\ili quand il s'agit d'un terme technique qui n'est pas expliqué dans le texte biblique ('sanhédrin') ou qui a un sens précis dans les récits bibliques ('pécheur').
+\im La forme 'dictionnaire' des termes grecques ainsi que leur translittération peuvent aider le lecteur à poursuivre sa recherche dans des ressources théologiques.
+\is A
+\im \k Alliance\k*~: traduit le mot grec διαθήκη (\tl diathékè\tl*). [Accord comme entre Dieu et son peuple en AT]
+\im \k Ange\k*~: traduit le mot grec ἄγγελος (\tl angelos\tl*). [Messager]
+\im \k Annoncer\k*~: traduit les mots grecs κηρύσσω (\tl kerusso\tl*)~; λαλέω (\tl laléo\tl*) en \xt Mc 2.2\xt*, \xt Mc 4.33\xt* et \xt Ph 1.14\xt*, où il est complété par le nom λόγος (\tl logos\tl*) pour éviter des lourdeurs stylistiques en français~; προλέγω (\tl prolégo\tl*) en \xt Mc 13.23\xt*~; et ἀπαγγέλλω (\tl apangello\tl*) en \xt 16.10|MRK 16:10\xt* et \xt 16.13|MRK 13:10\xt*.
+\im \k Apparence\k*~: traduit le mot grec μορφή (\tl morphé\tl*). [traits visibles]
+\im \k Apôtre\k*~: traduit le mot grec ἀπόστολος (\tl apostolos\tl*). [des envoyés]
+\is B
+\im \k Baptême\k*~: traduit le mot grec βάπτισμα (\tl baptisma\tl*). [Immersion ds eau avec chants Vineyard en arrière plan]
+\im \k Blasphème\k*~: traduit le mot grec βλασφημία (\tl blasphémia\tl*). [Toujours Dieu ?]
+\im \k Bonne Nouvelle\k*~: voir Évangile.
+\im \k Bureau des impôts\k*~: traduit le mot grec τελώνιον (\tl telonion\tl*). C'est le lieu où les gens devaient payer leurs impôts.
+\is C
+\im \k Chair\k*~: traduit le mot grec σάρξ (\tl sarx\tl*). [Parfois corps, 'viande', parfois figuratif pour Paul]
+\im \k Changement de comportement\k*~: traduit le mot grec μετάνοια (\tl metanoia\tl*). [Traduction historique - repentance]
+\im \k Christ\k*~: traduit le mot grec Χριστός (\tl christos\tl*). [oint, Messie]
+\im \k Circoncision\k*~: traduit le mot grec περιτομή (\tl peritomé\tl*). [Utiliser par Paul pour décrire un groupe - juifs ou chréiens judaïsants]
+\im \k Collecteur d'impôts\k*~: traduit le mot grec τελώνης (\tl telonès\tl*).
+\is D
+\im \k Disciple\k*~: traduit le mot grec μαθητής (\tl mathétès\tl*). [Qqn qu suit un autre, typiquement Jésus ou Jean dans le NT]
+\im \k Démon\k*~: traduit le mot grec δαιμόνιον (\tl daimonion\tl*).
+\im \k Démonisé\k*~: traduit le verbe grec δαιμονίζομαι (\tl daimonizomai\tl*).
+\im \k Les Douze\k*~: traduit le mot grec δώδεκα (\tl dodeka\tl*). C'est ainsi que Marc appelle souvent les douze apôtres. Après la mort de Judas Iscariot, les auteurs du Nouveau Testament parlent parfois des Onze apôtres.
+\is E
+\im \k Écriture\k*~: traduit le mot grec γραφή (\tl graphé\tl*). Cette expression désigne les textes saints de l'Ancien Testament, pour les Juifs.
+\im \k Enseigner\k*~: traduit le verbe grec διδάσκω (\tl didasko\tl*).
+\im \k Esclave\k*~: traduit le mot grec δοῦλος (\tl doulos\tl*). [Utiliser systematiquement pour ce mot grec. Mais comprend aussi un serviteur de bas niveau]
+\im \k Esprit Saint\k*~: traduit les mots grecs πνεῦμα ἅγιον (\tl pneuma hagion\tl*).
+\im \k Esprit impur\k*~: traduit les mots grecs πνεῦμα ἀκάθαρτον (\tl pneuma akatharton\tl*).
+\im \k Espérance\k*~: traduit le mot grec ἐλπίς (\tl elpis\tl*). Ce mot désigne la chose que l'on espère.
+\im \k Évangile\k*~: traduit le mot grec εὐαγγέλιον (\tl euangelion\tl*). Ce mot est composé de deux mots qui signifient «~bonne nouvelle~». Nous l'avons souvent traduit «~bonne nouvelle~», et nous avons préféré le traduire «~évangile~» dans les lettres de Paul.
+\im \k Éviter les extrêmes\k*~: traduit le mot grec σώφρων (\tl sophron\tl*). Un homme σώφρων est un homme mesuré, raisonnable, qui agit avec modération et sans excès.
+\is F
+\im \k Fils de Dieu\k*~: traduit les mots grecs υἱὸς θεοῦ (\tl huios theou\tl*).
+\im \k Fils de l'Homme\k*~: traduit les mots grecs υἱὸς τοῦ ἀνθρώπου (\tl huios tou anthropou\tl*). Cette expression provient de l'Ancien Testament (Daniel 7.13). Dans le Nouveau Testament, elle désigne Jésus-Christ.
+\im \k Foi\k*~: traduit le mot grec πίστις (\tl pistis\tl*). [aussi croire etc]
+\is G
+\im \k Gestionnaire\k*~: traduit le mot grec διάκονος (\tl diakonos\tl*). Le gestionnaire est celui qui s'occupe des besoins matériels des croyants dans une église. [=> Serviteur. Traduction historique diacre]
+\im \k Gloire\k*~: traduit le mot grec δόξα (\tl doxa\tl*). Dans la Bible, la gloire de Dieu désigne l'éclat lumineux et brillant qui l'accompagne quand il se manifeste.
+\im \k Glorifier\k*~: traduit le verbe grec δοξάζω (\tl doxazo\tl*). Glorifier quelque chose, c'est dire des choses honorables sur elle, parler de sa grandeur, de son éclat, de sa majesté.
+\im \k Gourde en peau\k*~: traduit le mot grec ἀσκός (\tl askos\tl*). [Traduction historique: outre]
+\im \k Grâce\k*~: traduit le mot grec χάρις (\tl charis\tl*). La grâce de Dieu, c'est la bienveillance et l'amour dont il fait preuve envers les croyants ; c'est aussi les marques de cette bienveillance (paix, salut, santé, joie, etc.).
+\im \k Géhenne\k*~: traduit le mot grec γέεννα (\tl geenna\tl*). C'est un autre nom pour l'enfer, c'est-à-dire le lieu où se retrouvent les morts. [Littéralement un déchet à Jérusalem]
+\is H
+\im \k Hérodiens\k*~: traduit le mot grec Ἡρῳδιανοί (\tl Hérodianoi\tl*). Ce sont des partisans de la lignée du roi Hérode. Comme les pharisiens et les sadducéens, on les voit souvent hostiles à Jésus et à ses enseignements.
+\is I
+\im \k Insulter Dieu\k*~: traduit le verbe grec βλασφημέω (\tl blasphémeo\tl*). Voir Blasphème.
+\is J
+\im \k Juste\k*~: traduit le mot grec δίκαιος (\tl dikaios\tl*). On est juste quand on obéit à Dieu et qu'on satisfait à toutes ses exigences.
+\is L
+\im \k Loi\k*~: traduit les mots grecs νόμος (\tl nomos\tl*) et ἐντολή (\tl entolè\tl*). Il s'agit des lois et des commandements que Dieu a donnés au peuple juif par l'intermédiaire de Moïse. Elles sont enregistrées dans l'Ancien Testament ; dans la religion juive, il est important d'obéir à la Loi autant que possible.
+\im \k Louange\k*~: traduit le mot grec ἔπαινος (\tl épainos\tl*).
+\im \k Lépreux\k*~: traduit le mot grec λεπρός (\tl lepros\tl*). C'est quelqu'un qui souffre d'une grave maladie de la peau.
+\s M
+\im \k Miracle\k*~: traduit les mots grecs δύναμις (\tl dunamis\tl*), θαυμαστός (\tl thaumastos\tl*) et τέρας (\tl teras\tl*).
+\im \k Mis à part\k*~: traduit le mot grec ἅγιος (\tl hagios\tl*) quand celui-ci ne désigne pas l'Esprit de Dieu. [Traduction historique 'saint']
+\is O
+\im \k Les Onze\k*~: traduit le mot grec ἕνδεκα (\tl hendeka\tl*). Voir Les Douze.
+\is P
+\im \k Parabole\k*~: traduit le mot grec παραβολή (\tl parabolè\tl*). C'est une sorte de fable, une histoire fictive racontée par quelqu'un pour transmettre un message caché à son public : Jésus raconte de nombreuses paraboles pour enseigner les foules et ses disciples.
+\im \k Pardon\k*~: traduit le mot grec ἄφεσις (\tl aphesis\tl*).
+\im \k Parole\k*~: traduit le mot grec λόγος (\tl logos\tl*). [Mot très bateau mais aussi utilisation précise]
+\im \k Pharisien\k*~: traduit le mot grec Φαρισαῖος (\tl pharisaios\tl*). Secte juive, souvent en conflit avec Jésus.
+\im \k Prophète\k*~: traduit le mot grec προφήτης (\tl profétès\tl*).
+\im \k Prétoire\k*~: traduit le mot grec πραιτώριον (\tl praitorion\tl*). C'est le palais où habitait un souverain. Les soldats qui le protégeaient s'y réunissaient.
+\im \k Prêcher\k*~: traduit le mot grec κηρύσσω (\tl kerusso\tl*).
+\im \k Prêtre\k*~: traduit le mot grec ἱερεύς (\tl hiereus\tl*). Un prêtre est quelqu'un qui accomplit les rites religieux pour le service de Dieu. Ils avaient beaucoup d'autorité dans la société du temps de Jésus. Ils avaient à leur tête un chef, parfois appelé grand-prêtre : nous l'avons appelé simplement «~chef des prêtres~».
+\im \k Pur\k*~: traduit le mot grec καθαρός (\tl katharos\tl*). Une personne est pure quand elle est rituellement propre.
+\im \k Pâque\k*~: traduit le mot grec πάσχα (\tl pascha\tl*). C'est la fête au cours de laquelle les Juifs se rappellent que Dieu les a libérés d'Égypte.
+\im \k Pécheur\k*~: traduit le mot grec ἁμαρτωλός (\tl hamartolos\tl*). Quelqu'un qui commet un péché est un pécheur. Marc appelle souvent les voleurs, les prostituées, les bandits, etc. des pécheurs.
+\im \k Péché\k*~: ce mot traduit deux mots grecs. Quand il traduit le mot ἁμάρτημα (\tl hamartéma\tl*), il désigne quelque chose de mal que quelqu'un peut faire et qui constitue une désobéissance à Dieu : par exemple, le vol, le mensonge ou l'adultère. Quand il traduit le mot ἁμαρτία (\tl hamartia\tl*), il désigne plutôt l'état de celui qui pèche.
+\is R
+\im \k Responsable\k*~: ce mot traduit deux mots grecs. Quand il traduit ἐπίσκοπος (\tl episkopos\tl*), comme dans \xt Ph 1.1\xt* et \xt Ti 1.7\xt*, il désigne les personnes qui gèrent l'église, et qui s'occupent des croyants. Quand il traduit le mot ἀρχή (\tl arché\tl*), comme dans \xt Ti 3.1\xt*, il désigne plutôt une autorité politique. [Traduction historique éveque]
+\im \k Royaume de Dieu\k*~: traduit les mots grecs βασιλεία τοῦ θεοῦ (\tl basileia tou theou\tl*). [ègne divin annoncé par Jésus]
+\im \k Résurrection\k*~: traduit le mot grec ἀνάστασις (\tl anastasis\tl*). C'est le fait qu'un mort revienne à la vie.
+\is S
+\im \k Sabbat\k*~: traduit le mot grec σάββατον (\tl sabbaton\tl*). [Journée de repos avec Dieu commandé ds AT]
+\im \k Sacrifice\k*~: traduit le mot grec θυσία (\tl thusia\tl*). La Loi de Dieu commande aux Juifs de pratiquer plusieurs types de sacrifices. Il s'agit souvent de brûler à Dieu des parties d'un animal, ou des végétaux. Un de ces sacrifices consistait à brûler entièrement l'offrande : on appelle cela un holocauste, traduit «~sacrifice par le feu~» en \xt Mc 12.33\xt*.
+\im \k Sadducéens\k*~: traduit le mot grec Σαδδουκαῖος (\tl Saddoukaios\tl*). [Une secte juive qui débat avec Jésus]
+\im \k Saint\k*~: traduit le mot grec ἅγιος (\tl hagios\tl*). Nous avons réservé le mot «~saint~» à l'Esprit de Dieu. Pour l'emploi de ce mot appliqué aux humains ou aux anges, voir Mis à part.
+\im \k Salut\k*~: traduit le mot grec σωτηρία (\tl sotéria\tl*).
+\im \k Sanhédrin\k*~: traduit le mot grec συνέδριον (\tl sunedrion\tl*). [Conseil suprème des juifs à Jérusalem]
+\im \k Le Satan\k*~: traduit le mot grec Σατανᾶς (\tl satanas\tl*). [Pourquoi article?]
+\im \k Scribe\k*~: traduit le mot grec γραμματεύς (\tl grammateus\tl*). [Juristes religieux]
+\im \k Seigneur\k*~: traduit le mot grec κύριος (\tl kurios\tl*). [Aussi César]
+\im \k Serviteur\k*~: traduit les mots grecs δοῦλος (\tl doulos\tl*) et διάκονος (\tl diakonos\tl*). [utiliser uniquement pour diakonos]
+\im \k Synagogue\k*~: traduit le mot grec συναγωγή (\tl sunagogé\tl*). [Culte/lieu de Culte juif à l'extérieur du Temple]
+\is V
+\im \k Vie éternelle\k*~: traduit les mots grecs ζωή αἰώνιος (\tl zoé aionios\tl*).

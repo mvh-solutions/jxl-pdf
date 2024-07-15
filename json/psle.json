@@ -1,8 +1,8 @@
 {
   "global": {
     "fonts": "allGentium",
-    "pages": "A4P",
-    "sizes": "10on12",
+    "pages": "A3P",
+    "sizes": "9on11",
     "outputPath": "/home/mark/Downloads/psle.pdf",
     "workingDir": "/home/mark/.jxlpdf/working",
     "verbose": false

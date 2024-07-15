@@ -157,13 +157,81 @@
   },
   "A3P": {
     "label": {
-      "en": "A4 Portrait"
+      "en": "A3 Portrait"
     },
     "pageSize": [
       841.89,
-      1190,
-      5
-    ]
+      1190
+    ],
+    "margins": {
+      "top": [
+        84
+      ],
+      "firstPageTop": [
+        56
+      ],
+      "bottom": [
+        70
+      ],
+      "outer": [
+        62
+      ],
+      "inner": [
+        102
+      ]
+    },
+    "footerOffset": [
+      10
+    ],
+    "columnGap": [
+      12
+    ],
+    "sections": {
+      "front": {},
+      "bookNote": {},
+      "4ColumnSpread": {},
+      "jxlSpread": {},
+      "jxlSimple": {},
+      "2Column": {},
+      "bcvBible": {
+        "cssValues": [
+          [
+            "CVCOLUMNWIDTH",
+            [
+              70
+            ]
+          ],
+          [
+            "VERSECOLUMNWIDTH",
+            [
+              606
+            ]
+          ]
+        ]
+      },
+      "paraBible": {},
+      "biblePlusNotes": {
+        "cssValues": [
+          [
+            "SCRIPTURECOLUMNWIDTH",
+            [
+              152
+            ]
+          ],
+          [
+            "NOTESCOLUMNWIDTH",
+            [
+              510
+            ]
+          ]
+        ]
+      },
+      "obsPlusNotes": {
+        "cssValues": [
+          ["IMGWIDTH", [10]]
+        ]
+      }
+    }
   },
   "A5P": {
     "label": {
@@ -172,7 +240,76 @@
     "pageSize": [
       419.53,
       595.28
-    ]
+    ],
+    "margins": {
+      "top": [
+        42
+      ],
+      "firstPageTop": [
+        28
+      ],
+      "bottom": [
+        35
+      ],
+      "outer": [
+        31
+      ],
+      "inner": [
+        51
+      ]
+    },
+    "footerOffset": [
+      10
+    ],
+    "columnGap": [
+      12
+    ],
+    "sections": {
+      "front": {},
+      "bookNote": {},
+      "4ColumnSpread": {},
+      "jxlSpread": {},
+      "jxlSimple": {},
+      "2Column": {},
+      "bcvBible": {
+        "cssValues": [
+          [
+            "CVCOLUMNWIDTH",
+            [
+              35
+            ]
+          ],
+          [
+            "VERSECOLUMNWIDTH",
+            [
+              303
+            ]
+          ]
+        ]
+      },
+      "paraBible": {},
+      "biblePlusNotes": {
+        "cssValues": [
+          [
+            "SCRIPTURECOLUMNWIDTH",
+            [
+              76
+            ]
+          ],
+          [
+            "NOTESCOLUMNWIDTH",
+            [
+              255
+            ]
+          ]
+        ]
+      },
+      "obsPlusNotes": {
+        "cssValues": [
+          ["IMGWIDTH", [50]]
+        ]
+      }
+    }
   },
   "A6P": {
     "label": {
@@ -181,42 +318,75 @@
     "pageSize": [
       297.64,
       419.53
-    ]
-  },
-  "FOLIO": {
-    "label": {
-      "en": "Folio"
+    ],
+    "margins": {
+      "top": [
+        30
+      ],
+      "firstPageTop": [
+        10
+      ],
+      "bottom": [
+        25
+      ],
+      "outer": [
+        22
+      ],
+      "inner": [
+        36
+      ]
     },
-    "pageSize": [
-      612,
-      936
-    ]
-  },
-  "LEGAL": {
-    "label": {
-      "en": "Folio"
-    },
-    "pageSize": [
-      612,
-      1008
-    ]
-  },
-  "LETTER": {
-    "label": {
-      "en": "Letter"
-    },
-    "pageSize": [
-      612,
-      792
-    ]
-  },
-  "TABLOID": {
-    "label": {
-      "en": "Tabloid"
-    },
-    "pageSize": [
-      792,
-      1224
-    ]
+    "footerOffset": [
+      10
+    ],
+    "columnGap": [
+      12
+    ],
+    "sections": {
+      "front": {},
+      "bookNote": {},
+      "4ColumnSpread": {},
+      "jxlSpread": {},
+      "jxlSimple": {},
+      "2Column": {},
+      "bcvBible": {
+        "cssValues": [
+          [
+            "CVCOLUMNWIDTH",
+            [
+              25
+            ]
+          ],
+          [
+            "VERSECOLUMNWIDTH",
+            [
+              215
+            ]
+          ]
+        ]
+      },
+      "paraBible": {},
+      "biblePlusNotes": {
+        "cssValues": [
+          [
+            "SCRIPTURECOLUMNWIDTH",
+            [
+              53
+            ]
+          ],
+          [
+            "NOTESCOLUMNWIDTH",
+            [
+              180
+            ]
+          ]
+        ]
+      },
+      "obsPlusNotes": {
+        "cssValues": [
+          ["IMGWIDTH", [35]]
+        ]
+      }
+    }
   }
 }

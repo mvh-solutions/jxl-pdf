@@ -191,6 +191,11 @@ class PdfGen {
                             }
                             wrapperOnly[key] = value;
                         }
+                        if (!wrapperOnly["ranges"]) {
+                            ret.push(`Wrapper type '${section.type} requires ranges at '${section.id ? ` near section ${section.id} ` : ""}(#${sectionN})`);
+                            skip = true;
+                            break;
+                        }
                         for (const subSection of section.sections) {
                             if (!PdfGen.validateSection(subSection, wrapperOnly, ret, sectionN, checkPaths)) {
                                 skip = true;

@@ -1,0 +1,45 @@
+{
+  "global": {
+    "fonts": "allGentium",
+    "pages": "A4P",
+    "sizes": "12on14",
+    "outputPath": "/home/mark/Downloads/psle.pdf",
+    "workingDir": "/home/mark/.jxlpdf/working",
+    "verbose": false
+  },
+  "sections": [
+    {
+      "type": "bcvWrapper",
+      "ranges": [
+        "FRT",
+        "GLO"
+      ],
+      "sections": [
+        {
+          "id": "ba5c63b1-2377-42b8-b032-38ff9007b72f",
+          "type": "paraBible",
+          "content": {
+            "startOn": "recto",
+            "showPageNumber": true,
+            "scriptureText": "para Bible",
+            "scriptureSrc": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_psle",
+            "scriptureType": "translation",
+            "showWordAtts": false,
+            "showTitles": true,
+            "showHeadings": true,
+            "showIntroductions": true,
+            "showFootnotes": true,
+            "showXrefs": true,
+            "showParaStyles": true,
+            "showCharacterMarkup": true,
+            "showChapterLabels": true,
+            "showVersesLabels": true,
+            "showFirstVerseLabel": false,
+            "nColumns": 1,
+            "showGlossaryStar": true
+          }
+        }
+      ]
+    }
+  ]
+}

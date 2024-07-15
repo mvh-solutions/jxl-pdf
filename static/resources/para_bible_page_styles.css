@@ -10,16 +10,22 @@ body {
 
 section.chapters {
     column-fill: balance;
+    page-break-before: avoid;
+    page-break-inside: auto;
+    -webkit-column-break-inside: auto;
 }
 
 %%%P%%%
 
+h1 {
+    page-break-after: avoid;
+}
+
 h1, h2, h3, h4 {
     margin-top: 0;
     margin-bottom: 0;
+    break-after: avoid-column;
     -webkit-column-break-after: avoid;
-    page-break-after: avoid;
-    break-after: avoid;
 }
 
 ::footnote-call {
@@ -87,8 +93,6 @@ h1, h2, h3, h4 {
     line-height: %%H1LINEHEIGHT%%pt;
     text-align: center;
     font-family: %%HEADINGFONT%%;
-    page-break-after: avoid;
-    break-after: avoid;
 }
 .paras_usfm_imt2 {
     font-weight: normal;
@@ -97,8 +101,6 @@ h1, h2, h3, h4 {
     line-height: %%H2LINEHEIGHT%%pt;
     text-align: center;
     font-family: %%HEADINGFONT%%;
-    page-break-after: avoid;
-    break-after: avoid;
 }
 .paras_usfm_imt3 {
     font-weight: normal;
@@ -107,8 +109,6 @@ h1, h2, h3, h4 {
     line-height: %%H3LINEHEIGHT%%pt;
     text-align: center;
     font-family: %%HEADINGFONT%%;
-    page-break-after: avoid;
-    break-after: avoid;
 }
 .paras_usfm_ip {
     text-indent: 12pt;
@@ -130,24 +130,18 @@ h1, h2, h3, h4 {
     font-size: %%H2FONTSIZE%%pt;
     line-height: %%H2LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
-    page-break-after: avoid;
-    break-after: avoid;
 }
 .paras_usfm_is2 {
     font-style: italic;
     font-size: %%H3FONTSIZE%%pt;
     line-height: %%H3LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
-    page-break-after: avoid;
-    break-after: avoid;
 }
 .paras_usfm_is3 {
     font-style: italic;
     font-size: %%H4FONTSIZE%%pt;
     line-height: %%H4LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
-    page-break-after: avoid;
-    break-after: avoid;
 }
 .paras_usfm_li {
     display: list-item;
@@ -171,9 +165,7 @@ h1, h2, h3, h4 {
     text-indent: -12pt;
 }
 .paras_usfm_m {
-    page-break-before: avoid;
     break-before: avoid-column;
-    break-inside: auto;
 }
 .paras_usfm_mi {
     padding-left: 12pt;
@@ -183,22 +175,16 @@ h1, h2, h3, h4 {
     line-height: %%H4LINEHEIGHT%%pt;
     font-style: italic;
     font-family: %%HEADINGFONT%%;
-    page-break-after: avoid;
-    break-after: avoid;
 }
 .paras_usfm_ms {
     font-size: %%H4FONTSIZE%%pt;
     line-height: %%H4LINEHEIGHT%%pt;
     font-weight: bold;
     font-family: %%HEADINGFONT%%;
-    page-break-after: avoid;
-    break-after: avoid;
 }
 .paras_usfm_ms2 {
     font-weight: bold;
     font-family: %%HEADINGFONT%%;
-    page-break-after: avoid;
-    break-after: avoid;
 }
 .paras_usfm_mt {
     font-weight: normal;
@@ -207,8 +193,6 @@ h1, h2, h3, h4 {
     line-height: %%H1LINEHEIGHT%%pt;
     text-align: center;
     font-family: %%HEADINGFONT%%;
-    page-break-after: avoid;
-    break-after: avoid;
 }
 .paras_usfm_mt2 {
     font-weight: normal;
@@ -217,8 +201,6 @@ h1, h2, h3, h4 {
     line-height: %%H2LINEHEIGHT%%pt;
     text-align: center;
     font-family: %%HEADINGFONT%%;
-    page-break-after: avoid;
-    break-after: avoid;
 }
 .paras_usfm_mt3 {
     font-weight: normal;
@@ -227,8 +209,6 @@ h1, h2, h3, h4 {
     line-height: %%H3LINEHEIGHT%%pt;
     text-align: center;
     font-family: %%HEADINGFONT%%;
-    page-break-after: avoid;
-    break-after: avoid;
 }
 .paras_usfm_nb {
 }
@@ -287,8 +267,6 @@ h1, h2, h3, h4 {
 .paras_usfm_r {
     font-weight: bold;
     font-family: %%HEADINGFONT%%;
-    page-break-after: avoid;
-    break-after: avoid;
 }
 .paras_usfm_s {
     font-style: italic;
@@ -296,8 +274,6 @@ h1, h2, h3, h4 {
     line-height: %%H2LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
     text-align: left;
-    page-break-after: avoid;
-    break-after: avoid-column;
 }
 .paras_usfm_s2 {
     font-style: italic;
@@ -305,8 +281,6 @@ h1, h2, h3, h4 {
     line-height: %%H3LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
     text-align: left;
-    page-break-after: avoid;
-    break-after: avoid-column;
 }
 .paras_usfm_s3 {
     font-style: italic;
@@ -314,16 +288,12 @@ h1, h2, h3, h4 {
     line-height: %%H4LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
     text-align: left;
-    page-break-after: avoid;
-    break-after: avoid-column;
 }
 .paras_usfm_sr {
     font-size: %%H3FONTSIZE%%pt;
     line-height: %%H3LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
     text-align: left;
-    page-break-after: avoid;
-    break-after: avoid-column;
 }
 .paras_usfm_tr {
 }

@@ -1,9 +1,9 @@
 {
   "global": {
     "fonts": "allGentium",
-    "pages": "A6P",
-    "sizes": "9on10",
-    "outputPath": "/home/mark/Downloads/psle.pdf",
+    "pages": "A4P",
+    "sizes": "10on12",
+    "outputPath": "/home/mark/Downloads/psle_periph.pdf",
     "workingDir": "/home/mark/.jxlpdf/working",
     "verbose": false
   },
@@ -11,8 +11,7 @@
     {
       "type": "bcvWrapper",
       "ranges": [
-        "FRT",
-        "GLO"
+        "FRT"
       ],
       "sections": [
         {

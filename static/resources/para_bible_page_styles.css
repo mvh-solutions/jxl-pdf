@@ -5,7 +5,7 @@ body {
     line-height: %%BODYLINEHEIGHT%%pt;
     font-family: %%BODYFONT%%;
     text-align: justify;
-    text-align-last: left;
+    text-align-last: start;
 }
 
 section.chapters {
@@ -24,7 +24,7 @@ h1 {
 h1, h2, h3, h4 {
     margin-top: 0;
     margin-bottom: 0;
-    break-after: avoid-column;
+    break-after: avoid;
     -webkit-column-break-after: avoid;
 }
 
@@ -37,7 +37,7 @@ h1, h2, h3, h4 {
 }
 
 ::footnote-marker {
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .glossary_star {
@@ -58,7 +58,7 @@ h1, h2, h3, h4 {
     font-size: %%FOOTNOTEFONTSIZE%%pt;
     line-height: %%FOOTNOTELINEHEIGHT%%pt;
     float: footnote;
-    font-family: %%FOOTNOTEFONT%%;
+    font-family: %%BODYFONT2%%;
 }
 .paras_usfm_hanging_graft {
 }
@@ -71,6 +71,7 @@ h1, h2, h3, h4 {
     list-style-position: inside;
     padding-left: 24pt;
     text-indent: -12pt;
+    font-family: %%BODYFONT2%%
 }
 .paras_usfm_ili2 {
     display: list-item;
@@ -78,6 +79,7 @@ h1, h2, h3, h4 {
     list-style-position: inside;
     padding-left: 36pt;
     text-indent: -12pt;
+    font-family: %%BODYFONT2%%
 }
 .paras_usfm_ili3 {
     display: list-item;
@@ -85,6 +87,10 @@ h1, h2, h3, h4 {
     list-style-type: circle;
     padding-left: 48pt;
     text-indent: -12pt;
+    font-family: %%BODYFONT2%%
+}
+.paras_usfm_im {
+    font-family: %%BODYFONT2%%
 }
 .paras_usfm_imt {
     font-weight: normal;
@@ -92,7 +98,7 @@ h1, h2, h3, h4 {
     font-size: %%H1FONTSIZE%%pt;
     line-height: %%H1LINEHEIGHT%%pt;
     text-align: center;
-    font-family: %%HEADINGFONT%%;
+    font-family: %%BODYFONT2%%;
 }
 .paras_usfm_imt2 {
     font-weight: normal;
@@ -100,7 +106,7 @@ h1, h2, h3, h4 {
     font-size: %%H2FONTSIZE%%pt;
     line-height: %%H2LINEHEIGHT%%pt;
     text-align: center;
-    font-family: %%HEADINGFONT%%;
+    font-family: %%BODYFONT2%%;
 }
 .paras_usfm_imt3 {
     font-weight: normal;
@@ -108,40 +114,47 @@ h1, h2, h3, h4 {
     font-size: %%H3FONTSIZE%%pt;
     line-height: %%H3LINEHEIGHT%%pt;
     text-align: center;
-    font-family: %%HEADINGFONT%%;
+    font-family: %%BODYFONT2%%;
 }
 .paras_usfm_ip {
     text-indent: 12pt;
+    font-family: %%BODYFONT2%%
 }
 .paras_usfm_ipi {
     padding-left: 12pt;
     text-indent: 12pt;
+    font-family: %%BODYFONT2%%
 }
 .paras_usfm_io {
     padding-left: 12pt;
+    font-family: %%BODYFONT2%%
 }
 .paras_usfm_iot {
     font-weight: bold;
     font-size: %%H4FONTSIZE%%pt;
     line-height: %%H4LINEHEIGHT%%pt;
+    font-family: %%BODYFONT2%%
 }
 .paras_usfm_is {
     font-style: italic;
     font-size: %%H2FONTSIZE%%pt;
     line-height: %%H2LINEHEIGHT%%pt;
-    font-family: %%HEADINGFONT%%;
+    font-family: %%BODYFONT2%%;
+    break-after: avoid;
 }
 .paras_usfm_is2 {
     font-style: italic;
     font-size: %%H3FONTSIZE%%pt;
     line-height: %%H3LINEHEIGHT%%pt;
-    font-family: %%HEADINGFONT%%;
+    font-family: %%BODYFONT2%%;
+    break-after: avoid;
 }
 .paras_usfm_is3 {
     font-style: italic;
     font-size: %%H4FONTSIZE%%pt;
     line-height: %%H4LINEHEIGHT%%pt;
-    font-family: %%HEADINGFONT%%;
+    font-family: %%BODYFONT2%%;
+    break-after: avoid;
 }
 .paras_usfm_li {
     display: list-item;

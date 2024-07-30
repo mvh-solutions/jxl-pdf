@@ -1,13 +1,31 @@
 {
   "global": {
-    "fonts": "allGentium",
-    "pages": "A3P",
-    "sizes": "9on11",
+    "fonts": "allAndika",
+    "pages": "A5P",
+    "sizes": "12on15",
     "outputPath": "/home/mark/Downloads/psle.pdf",
     "workingDir": "/home/mark/.jxlpdf/working",
     "verbose": false
   },
   "sections": [
+    {
+      "id": "title",
+      "type": "markdown",
+      "content": {
+        "startOn": "recto",
+        "showPageNumber": false,
+        "md": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_psle_periph/title.md"
+      }
+    },
+    {
+      "id": "half",
+      "type": "markdown",
+      "content": {
+        "startOn": "verso",
+        "showPageNumber": false,
+        "md": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_psle_periph/half.md"
+      }
+    },
     {
       "type": "bcvWrapper",
       "ranges": [
@@ -68,7 +86,7 @@
             "showChapterLabels": true,
             "showVersesLabels": true,
             "showFirstVerseLabel": false,
-            "nColumns": 2,
+            "nColumns": 1,
             "showGlossaryStar": true
           }
         }

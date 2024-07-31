@@ -191,7 +191,7 @@ class PdfGen {
                             }
                             wrapperOnly[key] = value;
                         }
-                        if (!wrapperOnly["ranges"]) {
+                        if (!wrapperOnly["ranges"] || !Array.isArray(wrapperOnly["ranges"]) || wrapperOnly["ranges"].length === 0) {
                             ret.push(`Wrapper type '${section.type} requires ranges at '${section.id ? ` near section ${section.id} ` : ""}(#${sectionN})`);
                             skip = true;
                             break;
@@ -240,7 +240,6 @@ class PdfGen {
                 return false;
             }
         }
-        const signatureFieldIds = signature.fields.map(f => f.id);
         if (!section.content) {
             errors.push(`No content for section '${section.id}' (#${sectionN})`);
             return false;

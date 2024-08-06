@@ -23,7 +23,8 @@
             "scriptureText": "para Bible",
             "scriptureSrc": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_psle",
             "scriptureType": "translation",
-            "notes": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_sq"
+            "notes": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_sq",
+            "notesWidth": 70
           }
         }
       ]

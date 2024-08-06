@@ -81,7 +81,7 @@ class biblePlusNotesBySentenceSection extends Section {
                     },
                     typeName: "number",
                     maxValue: 80,
-                    minValue: 30,
+                    minValue: 20,
                     nValues: [0, 1]
                 },
                 {
@@ -193,9 +193,11 @@ class biblePlusNotesBySentenceSection extends Section {
             } else {
                 seenCvs.add(sentenceRecord.cv);
             }
-            const verseHtml = templates['bible_plus_notes_verse']
+            const verseHtml = templates['bible_plus_notes_sentence']
                 .replace("%%TRANS1TITLE%%", section.content.scriptureText)
                 .replace("%%TRANS2TITLE%%", section.content.scriptureText)
+                .replace("%%SCRIPTUREWIDTH%%", 100 - (section.content.notesWidth || 70))
+                .replace("%%NOTEWIDTH%%", section.content.notesWidth || 70)
                 .replace(
                     '%%LEFTCOLUMN%%',
                     `<div class="col1"><span class="cv">${sentenceRecord.cv}</span> ${sentenceRecord.text || "-"}</div>`

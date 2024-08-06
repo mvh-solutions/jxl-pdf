@@ -23,6 +23,7 @@ const TEMPLATE_NAMES = [
     'para_bible_page',
     'bible_plus_notes_page',
     'bible_plus_notes_verse',
+    'bible_plus_notes_sentence',
     'web_index_page',
     'web_index_page_link',
     'sentence',

@@ -8,14 +8,12 @@
 
 .leftColumn {
     display: inline-block;
-    width: %SCRIPTURECOLUMNWIDTH%pt;
     vertical-align: top;
     margin-right: %%HALFCOLUMNGAP%%pt;
     text-align: left;
 }
 
 .rightColumn {
-    width: %NOTESCOLUMNWIDTH%pt;
     display: inline-block;
     vertical-align: top;
     margin-left: %%HALFCOLUMNGAP%%pt;

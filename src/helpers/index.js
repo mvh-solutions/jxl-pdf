@@ -26,6 +26,7 @@ const {
 } = require('./loadTemplates');
 
 const {
+    unpackCellRange,
     cleanNoteLine,
     maybeChapterNotes,
     bcvNotes,
@@ -54,6 +55,7 @@ module.exports = {
     getGreekContent,
     loadTemplates,
     loadTemplate,
+    unpackCellRange,
     cleanNoteLine,
     maybeChapterNotes,
     bcvNotes,

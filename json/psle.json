@@ -95,6 +95,7 @@
     {
       "type": "bcvWrapper",
       "ranges": [
+        "BAK",
         "GLO"
       ],
       "sections": [

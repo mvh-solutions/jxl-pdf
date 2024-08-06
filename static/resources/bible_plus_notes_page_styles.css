@@ -44,7 +44,9 @@
 .note {
     font-family: %%BODYFONT2%%;
     display: list-item;
-    font-size: %%BODYFONTSIZE%%pt;
+    list-style-type: lower-alpha;
+    list-style-position: inside;
+    font-size: %%FOOTNOTEFONTSIZE%%pt;
     line-height: %%BODYLINEHEIGHT%%pt;
     text-align: justify;
     margin-bottom: 0pt;

@@ -1,0 +1,32 @@
+{
+  "global": {
+    "fonts": "allCharis",
+    "pages": "A4P",
+    "sizes": "10on12",
+    "outputPath": "/home/mark/Downloads/psle_plus_questions.pdf",
+    "workingDir": "/home/mark/.jxlpdf/working",
+    "verbose": false
+  },
+  "sections": [
+    {
+      "type": "bcvWrapper",
+      "ranges": [
+        "TIT"
+      ],
+      "sections": [
+        {
+          "id": "ba5c63b1-2377-42b8-b032-38ff9007b72f",
+          "type": "biblePlusNotesBySentence",
+          "content": {
+            "startOn": "recto",
+            "showPageNumber": true,
+            "scriptureText": "para Bible",
+            "scriptureSrc": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_psle",
+            "scriptureType": "translation",
+            "notes": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_sq"
+          }
+        }
+      ]
+    }
+  ]
+}

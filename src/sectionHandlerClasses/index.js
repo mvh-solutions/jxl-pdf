@@ -10,6 +10,7 @@ const TwoColumnSection = require('./twoColumnSection');
 const BcvBibleSection = require("./bcvBibleSection");
 const ParaBibleSection = require("./paraBibleSection");
 const BiblePlusNotesSection = require("./biblePlusNotesSection");
+const BiblePlusNotesBySentenceSection = require("./biblePlusNotesBySentenceSection");
 
 module.exports = {
     PdfSection,
@@ -23,5 +24,6 @@ module.exports = {
     TwoColumnSection,
     BcvBibleSection,
     ParaBibleSection,
-    BiblePlusNotesSection
+    BiblePlusNotesSection,
+    BiblePlusNotesBySentenceSection
 }

@@ -71,7 +71,8 @@ h1, h2, h3, h4 {
     list-style-position: inside;
     padding-left: 24pt;
     text-indent: -12pt;
-    font-family: %%BODYFONT2%%
+    font-family: %%BODYFONT2%%;
+    break-inside: avoid;
 }
 .paras_usfm_ili2 {
     display: list-item;
@@ -79,7 +80,8 @@ h1, h2, h3, h4 {
     list-style-position: inside;
     padding-left: 36pt;
     text-indent: -12pt;
-    font-family: %%BODYFONT2%%
+    font-family: %%BODYFONT2%%;
+    break-inside: avoid;
 }
 .paras_usfm_ili3 {
     display: list-item;
@@ -87,7 +89,8 @@ h1, h2, h3, h4 {
     list-style-type: circle;
     padding-left: 48pt;
     text-indent: -12pt;
-    font-family: %%BODYFONT2%%
+    font-family: %%BODYFONT2%%;
+    break-inside: avoid;
 }
 .paras_usfm_im {
     font-family: %%BODYFONT2%%
@@ -302,7 +305,7 @@ h1, h2, h3, h4 {
     font-family: %%HEADINGFONT%%;
     text-align: left;
 }
-.paras_usfm_sr {
+paras_usfm_sr {
     font-size: %%H3FONTSIZE%%pt;
     line-height: %%H3LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
@@ -404,6 +407,9 @@ p:has(.marks_chapter_label) {
 .wrappers_usfm_sc {
     font-size: smaller;
     text-transform: uppercase;
+}
+.wrappers_usfm_sls {
+    font-family: %%GREEKFONT%%;
 }
 .wrappers_usfm_tl {
     font-style: italic;

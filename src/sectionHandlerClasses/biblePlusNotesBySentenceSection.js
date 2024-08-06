@@ -1,4 +1,5 @@
 const {
+    unpackCellRange,
     pkWithDocs,
     getBookName,
     getCVTexts,
@@ -12,7 +13,7 @@ const fse = require("fs-extra");
 const path = require("path");
 const Section = require('./section');
 
-class biblePlusNotesSection extends Section {
+class biblePlusNotesBySentenceSection extends Section {
 
     requiresWrapper() {
         return ["bcv"];
@@ -73,6 +74,17 @@ class biblePlusNotesSection extends Section {
                     nValues: [1, 1]
                 },
                 {
+                    id: "notesWidth",
+                    label: {
+                        en: "% width of notes",
+                        fr: "% largeur des notes"
+                    },
+                    typeName: "number",
+                    maxValue: 80,
+                    minValue: 30,
+                    nValues: [0, 1]
+                },
+                {
                     id: "scriptureText",
                     label: {
                         en: "Scripture Text Label",
@@ -126,25 +138,71 @@ class biblePlusNotesSection extends Section {
     }
 
     async doSection({section, templates, manifest, options}) {
+
+        const cvBySentence = (cvTexts, endSentenceRegex) => {
+
+            const emptyRecord = () => (
+                {
+                    textBits: [],
+                    text: "",
+                    cvBits: [],
+                    cv: ""
+                }
+            );
+
+            const completedRecord = rec => {
+                const printCv = `${rec.cvBits[0]}${rec.cvBits.length > 1 ? `-${rec.cvBits[rec.cvBits.length - 1].split(':')[1]}` : ""}`;
+                rec.cv = printCv;
+                rec.text = rec.textBits.join(" ");
+                delete rec.textBits;
+                return rec;
+            };
+
+            const ret = [];
+            let retRecord = emptyRecord();
+            for (const verseOb of cvTexts) {
+                retRecord.textBits.push(verseOb.texts.xxx_yyy);
+                for (const cvBit of unpackCellRange(verseOb.cv)) {
+                    retRecord.cvBits.push(cvBit);
+                }
+                const isEnd = endSentenceRegex.test(verseOb.texts.xxx_yyy);
+                if (isEnd) {
+                    ret.push(completedRecord(retRecord));
+                    retRecord = emptyRecord();
+                }
+            }
+            if (retRecord.textBits.length > 0) {
+                ret.push(completedRecord(retRecord));
+            }
+            return ret;
+        }
+
         const pk = pkWithDocs(section.bcvRange, [{id: "xxx_yyy", path: section.content.scriptureSrc}], options.verbose);
         const bookName = getBookName(pk, "xxx_yyy", section.bcvRange);
         const cvTexts = getCVTexts(section.bcvRange, pk);
+        const sentenceTexts = cvBySentence(cvTexts, RegExp(/[.?!]\s*(['"”’»)]\s*)*$/));
         const notes = bcvNotes(section.content.notes, section.bcvRange);
         const verses = [
             `<h1>${bookName}</h1>`
         ];
         const qualified_id = `${section.id}_${section.bcvRange}`;
-        for (const cvRecord of cvTexts) {
+        const seenCvs = new Set([]);
+        for (const sentenceRecord of sentenceTexts) {
+            if (seenCvs.has(sentenceRecord.cv)) {
+                continue;
+            } else {
+                seenCvs.add(sentenceRecord.cv);
+            }
             const verseHtml = templates['bible_plus_notes_verse']
                 .replace("%%TRANS1TITLE%%", section.content.scriptureText)
                 .replace("%%TRANS2TITLE%%", section.content.scriptureText)
                 .replace(
                     '%%LEFTCOLUMN%%',
-                    `<div class="col1"><span class="cv">${cvRecord.cv}</span> ${cvRecord.texts["xxx_yyy"] || "-"}</div>`
+                    `<div class="col1"><span class="cv">${sentenceRecord.cv}</span> ${sentenceRecord.text || "-"}</div>`
                 )
                 .replace(
                     '%%RIGHTCOLUMN%%',
-                    `<div class="col2">${(notes[cvRecord.cv] || [])
+                    `<div class="col2">${sentenceRecord.cvBits.map(cv => notes[cv] || []).reduce((a, b) => [...a, ...b])
                         .map(nr => cleanNoteLine(nr))
                         .map(note => `<p class="note">${note}</p>`)
                         .join('\n')}</div>`
@@ -190,4 +248,4 @@ class biblePlusNotesSection extends Section {
     }
 }
 
-module.exports = biblePlusNotesSection;
+module.exports = biblePlusNotesBySentenceSection;

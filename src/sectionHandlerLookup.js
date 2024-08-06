@@ -8,6 +8,7 @@ const {
     BcvBibleSection,
     ParaBibleSection,
     BiblePlusNotesSection,
+    BiblePlusNotesBySentenceSection,
     MarkdownSection,
     ObsSection,
     ObsPlusNotesSection
@@ -25,7 +26,8 @@ const sectionHandlerLookup = {
     bookNote: new BookNoteSection(),
     bcvBible: new BcvBibleSection(),
     paraBible: new ParaBibleSection(),
-    biblePlusNotes: new BiblePlusNotesSection()
+    biblePlusNotes: new BiblePlusNotesSection(),
+    biblePlusNotesBySentence: new BiblePlusNotesBySentenceSection()
 };
 
 module.exports = {sectionHandlerLookup};

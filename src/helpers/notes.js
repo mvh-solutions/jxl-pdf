@@ -43,7 +43,7 @@ const formatNote = (noteRecord, templates) => {
     return [noteHeading, noteParas.join('\n')];
 
 }
-const maybeChapterNotes = (chapterN, noteType, notes, templates, verbose=false) => {
+const maybeChapterNotes = (chapterN, noteType, notes, templates, verbose = false) => {
     const chapterNoteRecord = notes[`${chapterN}_intro`];
     if (chapterNoteRecord) {
         verbose && console.log(`     Notes for Chapter ${chapterN}`);
@@ -80,9 +80,27 @@ const maybeChapterNotes = (chapterN, noteType, notes, templates, verbose=false) 
     }
 }
 
+const unpackCellRange = cv => {
+    let ret = [];
+    const [chapter, verseRange] = cv.split(':');
+    if (!verseRange) {
+        return ret;
+    }
+    if (verseRange.includes('-')) {
+        let [fromV, toV] = verseRange.split('-');
+        while (fromV <= toV) {
+            ret.push(`${chapter}:${fromV}`);
+            fromV++;
+        }
+    } else {
+        ret.push(cv);
+    }
+    return ret;
+}
+
 const bcvNotes = (notesPath, bookCode) => {
     const notes = {};
-    const fileWithBook = fse.readdirSync(notesPath).filter(p => p.includes(bookCode))[0];
+    const fileWithBook = fse.readdirSync(notesPath).filter(p => p.includes(bookCode)).filter(p => !p.startsWith('.'))[0];
     if (!fileWithBook) {
         throw new Error(`No notes for ${bookCode} found in bcvNotes`);
     }
@@ -90,16 +108,21 @@ const bcvNotes = (notesPath, bookCode) => {
     for (const notesRow of notesRows) {
         const cells = notesRow.split('\t');
         const rowKey = cells[0];
+        let content = cells[5] || "";
+        if (content.slice(0, 1) === "\"") {
+            content = content.slice(1, content.length - 1).replace(/""/g, "\"");
+        }
         if (!(rowKey in notes)) {
             notes[rowKey] = [];
         }
-        notes[rowKey].push(cells[6]);
+        notes[rowKey].push(content);
     }
     return notes;
 }
 
 
 module.exports = {
+    unpackCellRange,
     cleanNoteLine,
     maybeChapterNotes,
     bcvNotes,

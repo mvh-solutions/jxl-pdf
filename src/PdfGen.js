@@ -367,8 +367,11 @@ class PdfGen {
                     foundError = true;
                 }
             }
-            return !foundError;
+            if (foundError) {
+                return false;
+            }
         }
+        return true;
     }
 
     async originatePdfs() {

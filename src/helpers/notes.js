@@ -98,7 +98,7 @@ const unpackCellRange = cv => {
     return ret;
 }
 
-const bcvNotes = (notesPath, bookCode) => {
+const bcvNotes = (notesPath, bookCode, excludeTags=[]) => {
     const notes = {};
     const fileWithBook = fse.readdirSync(notesPath).filter(p => p.includes(bookCode)).filter(p => !p.startsWith('.'))[0];
     if (!fileWithBook) {
@@ -107,6 +107,16 @@ const bcvNotes = (notesPath, bookCode) => {
     const notesRows = fse.readFileSync(path.join(notesPath, fileWithBook)).toString().split("\n");
     for (const notesRow of notesRows) {
         const cells = notesRow.split('\t');
+        let toExclude = false;
+        for (const tag of (cells[2] || "").split(",")) {
+            if (excludeTags.includes(tag)) {
+                toExclude = true;
+                break;
+            }
+        }
+        if (toExclude) {
+            continue;
+        }
         const rowKey = cells[0];
         let content = cells[5] || "";
         if (content.slice(0, 1) === "\"") {

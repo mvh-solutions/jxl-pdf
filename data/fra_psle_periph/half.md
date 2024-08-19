@@ -22,5 +22,5 @@ Mise en page par Mark Howe
 
 Imprimé en polices Andika et Charis de SIL
 
-Premier tirage, août 2024\
+Premier tirage, imprimé par Lulu, août 2024\
 ISBN 978-2-487838-00-0

@@ -35,6 +35,18 @@
     "greek": "\"Gentium Book Plus\", serif",
     "hebrew": "\"Ezra SIL\", serif"
   },
+  "allOpen": {
+    "label": {
+      "en": "All Open",
+      "fr": "Open partout"
+    },
+    "body": "\"Open Sans\", serif",
+    "body2": "\"Open Sans Condensed Light\", sans-serif",
+    "heading": "\"Open Sans\", serif",
+    "footnote": "\"Open Sans Condensed Light\", serif",
+    "greek": "\"Gentium Book Plus\", serif",
+    "hebrew": "\"Ezra SIL\", serif"
+  },
   "allCardo": {
     "label": {
       "en": "All Cardo",

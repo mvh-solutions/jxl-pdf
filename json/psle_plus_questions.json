@@ -1,8 +1,8 @@
 {
   "global": {
-    "fonts": "allCharis",
+    "fonts": "allOpen",
     "pages": "A4P",
-    "sizes": "10on12",
+    "sizes": "12on15",
     "outputPath": "/home/mark/Downloads/psle_plus_questions.pdf",
     "workingDir": "/home/mark/.jxlpdf/working",
     "verbose": false
@@ -15,16 +15,56 @@
       ],
       "sections": [
         {
-          "id": "ba5c63b1-2377-42b8-b032-38ff9007b72f",
-          "type": "biblePlusNotesBySentence",
+          "id": "byVerseInColumns",
+          "type": "biblePlusNotes",
           "content": {
             "startOn": "recto",
             "showPageNumber": true,
-            "scriptureText": "para Bible",
+            "scriptureText": "By Verse",
+            "scriptureSrc": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_psle",
+            "scriptureType": "translation",
+            "notes": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_sq"
+          }
+        },
+        {
+          "id": "bySentenceInColumns",
+          "type": "biblePlusNotes",
+          "content": {
+            "startOn": "recto",
+            "showPageNumber": true,
+            "scriptureText": "By Sentence",
             "scriptureSrc": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_psle",
             "scriptureType": "translation",
             "notes": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_sq",
-            "notesWidth": 70
+            "notesUnit": "sentence",
+            "notesWidth": 50
+          }
+        },
+        {
+          "id": "byVerseInRows",
+          "type": "biblePlusNotes",
+          "content": {
+            "startOn": "recto",
+            "showPageNumber": true,
+            "scriptureText": "By Verse",
+            "scriptureSrc": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_psle",
+            "scriptureType": "translation",
+            "notes": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_sq",
+            "notesPosition": "rows"
+          }
+        },
+        {
+          "id": "bySentenceInRows",
+          "type": "biblePlusNotes",
+          "content": {
+            "startOn": "recto",
+            "showPageNumber": true,
+            "scriptureText": "By Sentence",
+            "scriptureSrc": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_psle",
+            "scriptureType": "translation",
+            "notes": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_sq",
+            "notesUnit": "sentence",
+            "notesPosition": "rows"
           }
         }
       ]

@@ -243,16 +243,16 @@
     ],
     "margins": {
       "top": [
-        42
+        54
       ],
       "firstPageTop": [
-        28
+        40
       ],
       "bottom": [
         35
       ],
       "outer": [
-        31
+        41
       ],
       "inner": [
         51
@@ -282,7 +282,7 @@
           [
             "VERSECOLUMNWIDTH",
             [
-              303
+              292
             ]
           ]
         ]

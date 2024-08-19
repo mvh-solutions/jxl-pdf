@@ -34,3 +34,8 @@ Usage: `node scripts/make_pdfs.js [options]`
   **-s, --steps <stepsType>**: The processing steps that will take place. Options are ARGSONLY, CLEAR, ORIGINATE, ASSEMBLE, ALL (default: ["originate","assemble"])
   
   **-h, --help**: display help for command
+
+## To normalize PDF with vectorized text:
+```
+gs -dPDFA -dBATCH -dNOPAUSE -dNOCANCEL -dNOPROMPT -dNOSAFER -dQUIET -dPDFACompatibilityPolicy=1 -dNoOutputFonts -dLastPage=12 -sDEVICE=pdfwrite -sOutputFile=out.pdf in.pdf
+```

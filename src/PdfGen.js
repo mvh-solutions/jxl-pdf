@@ -291,7 +291,7 @@ class PdfGen {
             return false;
         }
         if (fieldSpec.typeName) {
-            if (!["boolean", "number", "string", "obs", "tNotes", "translationText", "md"].includes(fieldSpec.typeName)) {
+            if (!["boolean", "number", "string", "obs", "tNotes", "translationText", "md", "juxta"].includes(fieldSpec.typeName)) {
                 errors.push(`Unknown typeName '${fieldSpec.typeName}' in Section '${sectionId}' (#${sectionN})`);
                 return false;
             }
@@ -328,7 +328,7 @@ class PdfGen {
                     errors.push(`${badValues.length} value(s) of field '${fieldId}' in Section '${sectionId}' (#${sectionN}) are not strings`);
                     return false;
                 }
-            } else if (["obs", "tNotes", "translationText", "md"].includes(fieldSpec.typeName)) {
+            } else if (["obs", "tNotes", "translationText", "md", "juxta"].includes(fieldSpec.typeName)) {
                 const badValues = normalizedContent.filter(c => typeof c !== "string");
                 if (badValues.length > 0) {
                     errors.push(`${badValues.length} value(s) of field '${fieldId}' in Section '${sectionId}' (#${sectionN}) are not path strings`);

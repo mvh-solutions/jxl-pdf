@@ -87,18 +87,36 @@ class jxlSimpleSection extends Section {
                     typeName: "integer",
                     nValues: [0, 1]
                 },
+                {
+                    id: "notes",
+                    label: {
+                        en: "Notes Source",
+                        fr: "Source pour notes"
+                    },
+                    typeName: "tNotes",
+                    nValues: [0, 1]
+                },
+                {
+                    id: "notesPivot",
+                    label: {
+                        en: "Notes pivot table",
+                        fr: "Tableau croisé pour notes"
+                    },
+                    typeName: "tNotes",
+                    nValues: [0, 1]
+                },
             ]
         }
     }
 
-    async doSection({section, templates, bookCode, options}) {
-        const jsonFile = fse.readJsonSync(path.resolve(path.join('data', section.jxl.path, `${bookCode}.json`)));
+    async doSection({section, templates, manifest, options}) {
+        const jsonFile = fse.readJsonSync(path.resolve(path.join(section.content.jxl, section.bcvRange + ".json")));
         const jxlJson = jsonFile.bookCode ? jsonFile.sentences : jsonFile;
         let pivotIds = new Set([]);
         const notes = {};
         const notePivot = {};
-        if (section.jxl.notes && section.jxl.notes.pivot) {
-            const pivotRows = fse.readFileSync(path.join('data', section.jxl.notes.pivot, `${bookCode}.tsv`)).toString().split("\n");
+        if (section.content.notes && section.content.notesPivot) {
+            const pivotRows = fse.readFileSync(path.join(section.content.notesPivot, `${section.bcvRange}.tsv`)).toString().split("\n");
             for (const pivotRow of pivotRows) {
                 const cells = pivotRow.split("\t");
                 if (!cells[4] || cells[4].length === 0) {
@@ -113,7 +131,7 @@ class jxlSimpleSection extends Section {
                     pivotIds.add(noteId);
                 }
             }
-            const notesRows = fse.readFileSync(path.join('data', options.configContent.notes, `${bookCode}.tsv`)).toString().split("\n");
+            const notesRows = fse.readFileSync(path.join(section.content.notes, `${section.bcvRange}.tsv`)).toString().split("\n");
             for (const notesRow of notesRows) {
                 const cells = notesRow.split('\t');
                 if (pivotIds.has(cells[4])) {
@@ -122,15 +140,16 @@ class jxlSimpleSection extends Section {
             }
         }
 
-        const bookName = bookCode;
+        const bookName = section.bcvRange;
         let sentences = [];
         let chapterN = 0;
+        const qualified_id = `${section.id}_${section.bcvRange}`;
         options.verbose && console.log(`       Sentences`);
         for (const [sentenceN, sentenceJson] of jxlJson.entries()) {
-            if (section.firstSentence && (sentenceN + 1) < section.firstSentence) {
+            if (section.content.firstSentence && (sentenceN + 1) < section.content.firstSentence) {
                 continue;
             }
-            if (section.lastSentence && (sentenceN + 1) > section.lastSentence) {
+            if (section.content.lastSentence && (sentenceN + 1) > section.content.lastSentence) {
                 continue;
             }
             const cv = cvForSentence(sentenceJson);
@@ -157,7 +176,7 @@ class jxlSimpleSection extends Section {
                         );
                     }
                 }
-                const bookTestament = books[bookCode];
+                const bookTestament = books[section.bcvRange];
                 const row = templates.jxlRow
                     .replace('%%SOURCE%%', source)
                     .replace('%%SOURCECLASS%%', bookTestament === "OT" ? "jxlHebrew" : "jxlGreek")
@@ -182,15 +201,22 @@ class jxlSimpleSection extends Section {
             sentences.push(sentence);
         }
         fse.writeFileSync(
-            path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
+            path.join(options.htmlPath, `${qualified_id}.html`),
             templates['simple_juxta_page']
-                .replace('%%TITLE%%', `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`)
+                .replace('%%TITLE%%', `${section.id.replace('%%bookCode%%', section.bcvRange)} - ${section.type}`)
                 .replace('%%SENTENCES%%', sentences.join(''))
         );
         await doPuppet({
             verbose: options.verbose,
-            htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
-            pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
+            htmlPath: path.join(options.htmlPath, `${qualified_id}.html`),
+            pdfPath: path.join(options.pdfPath, `${qualified_id}.pdf`)
+        });
+        manifest.push({
+            id: qualified_id,
+            type: section.type,
+            startOn: section.content.startOn,
+            showPageNumber: section.content.showPageNumber,
+            makeFromDouble: false
         });
     }
 }

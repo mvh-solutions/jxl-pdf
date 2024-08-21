@@ -1,4 +1,12 @@
-const {pkWithDocs, getBookName, getCVTexts, cleanNoteLine, doPuppet, bcvNotes} = require("../helpers");
+const {
+    unpackCellRange,
+    pkWithDocs,
+    getBookName,
+    getCVTexts,
+    cleanNoteLine,
+    doPuppet,
+    bcvNotes
+} = require("../helpers");
 const fse = require("fs-extra");
 const path = require("path");
 
@@ -119,7 +127,7 @@ class fourColumnSpreadSection extends Section {
         );
         const bookName = getBookName(pk, "xxx_yyy0", section.bcvRange);
         const cvTexts = getCVTexts(section.bcvRange, pk);
-        const notes = section.showNotes ? bcvNotes(options.configContent, section.bcvRange) : {};
+        const notes = section.content.notes ? bcvNotes(section.content.notes, section.bcvRange) : {};
         const verses = [];
         verses.push(templates['4_column_spread_title'].replace('%%BOOKNAME%%', bookName));
         const qualified_id = `${section.id}_${section.bcvRange}`;
@@ -151,7 +159,13 @@ class fourColumnSpreadSection extends Section {
     </section>
 </section>
 `);
+        const seenCvs = new Set([]);
         for (const cvRecord of cvTexts) {
+            if (seenCvs.has(cvRecord.cv)) {
+                continue;
+            } else {
+                seenCvs.add(cvRecord.cv);
+            }
             const verseHtml = templates['4_column_spread_verse']
                 .replace(
                     '%%VERSOCOLUMNS%%',
@@ -159,7 +173,7 @@ class fourColumnSpreadSection extends Section {
                 )
                 .replace(
                     '%%RECTOCOLUMNS%%',
-                    `<div class="col3">${cvRecord.texts["xxx_yyy2"] || "-"}</div><div class="col4">${cvRecord.texts["xxx_yyy3"] || "-"}${(notes[cvRecord.cv] || [])
+                    `<div class="col3">${cvRecord.texts["xxx_yyy2"] || "-"}</div><div class="col4">${cvRecord.texts["xxx_yyy3"] || "-"}${unpackCellRange(cvRecord.cv).map(cv => notes[cv] || []).reduce((a, b) => [...a, ...b])
                         .map(nr => cleanNoteLine(nr))
                         .map(note => `<p class="note">${note}</p>`)
                         .join('\n')}</div>`

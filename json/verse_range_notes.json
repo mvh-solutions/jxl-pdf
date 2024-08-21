@@ -15,6 +15,58 @@
       ],
       "sections": [
         {
+          "id": "4ColWithNotes",
+          "type": "4ColumnSpread",
+          "content": {
+            "startOn": "verso",
+            "showPageNumber": true,
+            "scripture": [
+              {
+                "text": "1st Column",
+                "src": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_psle",
+                "type": "translation"
+              },
+              {
+                "text": "2nd Column",
+                "src": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_psle",
+                "type": "translation"
+              },
+              {
+                "text": "3rd Column",
+                "src": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_psle",
+                "type": "translation"
+              },
+              {
+                "text": "4th Column",
+                "src": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_psle",
+                "type": "translation"
+              }
+            ],
+            "notes": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_sq"
+          }
+        },
+        {
+          "id": "2ColWithNotes",
+          "type": "2Column",
+          "content": {
+            "startOn": "recto",
+            "showPageNumber": true,
+            "scripture": [
+              {
+                "text": "1st Column",
+                "src": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_psle",
+                "type": "translation"
+              },
+              {
+                "text": "2nd Column",
+                "src": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_psle",
+                "type": "translation"
+              }
+            ],
+            "notes": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_sq"
+          }
+        },
+        {
           "id": "bcvWithNotes",
           "type": "bcvBible",
           "content": {

@@ -1,4 +1,10 @@
-const {pkWithDocs, getBookName, bcvNotes, doPuppet} = require("../helpers");
+const {
+    unpackCellRange,
+    pkWithDocs,
+    getBookName,
+    bcvNotes,
+    doPuppet
+} = require("../helpers");
 const fse = require("fs-extra");
 const path = require("path");
 const {SofriaRenderFromProskomma, render} = require("proskomma-json-tools");
@@ -212,6 +218,15 @@ class paraBibleSection extends Section {
                         fr: "Afficher une étoile après des mot dans le glossaire"
                     },
                     nValues: [1, 1]
+                },
+                {
+                    id: "notes",
+                    typeName: "tNotes",
+                    label: {
+                        en: "External notes",
+                        fr: "Notes externes à la traduction"
+                    },
+                    nValues: [0, 1]
                 }
             ]
         };
@@ -244,8 +259,18 @@ class paraBibleSection extends Section {
         // const renderers = render.sofria2web.sofria2html.renderers;
         const cl = new SofriaRenderFromProskomma({proskomma: pk, actions: sofria2WebActions, debugLevel: 0})
         const output = {};
+        sectionConfig.selectedBcvNotes = ["foo"];
         sectionConfig.renderers = renderers;
-        sectionConfig.selectedBcvNotes = [];
+        sectionConfig.renderers.verses_label = (vn, bcv, _, currentIndex) => {
+            let ret = [];
+            const cv = `${bcv[1]}:${bcv[2]}`;
+            const verseNotes = (unpackCellRange(cv).map(cv => notes[cv] || []).reduce((a, b) => [...a, ...b])).map(n => n.replace(/ \?/g, "&nbsp;?").replace(/\*\*([^*]+)\*\*/g, '<i>$1</i>'));
+            if (verseNotes.length > 0) {
+                ret.push(`<span class="bcv_note"><b>${cv}</b>: ${verseNotes.join(' ')}</span>`);
+            }
+            ret.push(`<span class="marks_verses_label">${vn}</span>`);
+            return ret.join('\n');
+        }
         const qualified_id = `${section.id}_${section.bcvRange}`;
         cl.renderDocument({docId, config: sectionConfig, output});
         fse.writeFileSync(

@@ -29,8 +29,8 @@ h1, h2, h3, h4 {
 }
 
 ::footnote-call {
-    font-weight: bold;
-    font-size: %%FOOTNOTEFONTSIZE%%pt;
+    font-style: italic;
+    font-size: 0.5em;
     vertical-align: top;
     padding-left: 1pt;
     line-height: 1;
@@ -42,6 +42,21 @@ h1, h2, h3, h4 {
 
 .glossary_star {
     color: #777;
+}
+
+.bcv_note {
+    font-size: %%FOOTNOTEFONTSIZE%%pt;
+    line-height: %%FOOTNOTELINEHEIGHT%%pt;
+    float: footnote;
+    font-family: %%BODYFONT2%%;
+}
+
+.bcv_note::footnote-call {
+    content: none;
+}
+
+.bcv_note::footnote-marker {
+    content: none;
 }
 
 /* paras CSS format : */

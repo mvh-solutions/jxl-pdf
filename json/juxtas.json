@@ -15,6 +15,39 @@
       ],
       "sections": [
         {
+          "id": "juxtaSpread",
+          "type": "jxlSpread",
+          "content": {
+            "startOn": "verso",
+            "showPageNumber": true,
+            "jxl": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_jxl",
+            "lhs": [
+              {
+                "text": "SEGOND 1910",
+                "type": "translation",
+                "src": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_lsg"
+              },
+              {
+                "text": "GREC",
+                "type": "greek",
+                "src": "/home/mark/repos/mvh-solutions/jxl-pdf/data/grc_ugnt"
+              },
+              {
+                "text": "LITTÉRALE",
+                "type": "translation",
+                "src": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_tlx"
+              },
+              {
+                "text": "SÉMANTIQUE",
+                "type": "translation",
+                "src": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_tsx"
+              }
+            ],
+            "notes": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_tn",
+            "notesPivot": "/home/mark/repos/mvh-solutions/jxl-pdf/data/jxl2note"
+          }
+        },
+        {
           "id": "juxtaSimple",
           "type": "jxlSimple",
           "content": {

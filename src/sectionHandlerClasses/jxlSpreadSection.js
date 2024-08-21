@@ -44,6 +44,15 @@ class jxlSpreadSection extends Section {
                     nValues: [1, 1]
                 },
                 {
+                    id: "jxl",
+                    label: {
+                        en: "Juxta Source",
+                        fr: "Source pour Juxta"
+                    },
+                    typeName: "juxta",
+                    nValues: [1, 1]
+                },
+                {
                     id: "notes",
                     label: {
                         en: "Notes Source",
@@ -53,6 +62,15 @@ class jxlSpreadSection extends Section {
                     nValues: [0, 1]
                 },
                 {
+                    id: "notesPivot",
+                    label: {
+                        en: "Notes pivot table",
+                        fr: "Tableau croisé pour notes"
+                    },
+                    typeName: "tNotes",
+                    nValues: [0, 1]
+                },
+/*                {
                     id: "firstSentence",
                     label: {
                         en: "First Sentence Number",
@@ -70,6 +88,7 @@ class jxlSpreadSection extends Section {
                     typeName: "integer",
                     nValues: [0, 1]
                 },
+ */
                 {
                     id: "lhs",
                     label: {
@@ -79,7 +98,7 @@ class jxlSpreadSection extends Section {
                     nValues: [1, 5],
                     typeSpec: [
                         {
-                            id: "scripture#Text",
+                            id: "text",
                             label: {
                                 en: "Scripture # Text Label",
                                 "fr": "Etiquette pour texte biblique #"
@@ -88,7 +107,7 @@ class jxlSpreadSection extends Section {
                             nValues: [1, 1]
                         },
                         {
-                            id: "scripture#Src",
+                            id: "src",
                             label: {
                                 en: "Source # Text Source",
                                 "fr": "Source pour texte biblique #"
@@ -97,7 +116,7 @@ class jxlSpreadSection extends Section {
                             nValues: [1, 1]
                         },
                         {
-                            id: "scripture#Type",
+                            id: "type",
                             label: {
                                 en: "Scripture # Text Type",
                                 "fr": "Type de texte biblique #"
@@ -133,14 +152,14 @@ class jxlSpreadSection extends Section {
         };
     }
 
-    async doSection({section, templates, bookCode, options}) {
-        const jsonFile = fse.readJsonSync(path.resolve(path.join('data', section.jxl.path, `${bookCode}.json`)));
+    async doSection({section, templates, manifest, options}) {
+        const jsonFile = fse.readJsonSync(path.resolve(path.join(section.content.jxl, section.bcvRange + ".json")));
         const jxlJson = jsonFile.bookCode ? jsonFile.sentences : jsonFile;
         let pivotIds = new Set([]);
         const notes = {};
         const notePivot = {};
-        if (section.jxl.notes && section.jxl.notes.pivot) {
-            const pivotRows = fse.readFileSync(path.join('data', section.jxl.notes.pivot, `${bookCode}.tsv`)).toString().split("\n");
+        if (section.content.notes && section.content.notesPivot) {
+            const pivotRows = fse.readFileSync(path.join(section.content.notesPivot, `${section.bcvRange}.tsv`)).toString().split("\n");
             for (const pivotRow of pivotRows) {
                 const cells = pivotRow.split("\t");
                 if (!cells[4] || cells[4].length === 0) {
@@ -155,7 +174,7 @@ class jxlSpreadSection extends Section {
                     pivotIds.add(noteId);
                 }
             }
-            const notesRows = fse.readFileSync(path.join('data', options.configContent.notes, `${bookCode}.tsv`)).toString().split("\n");
+            const notesRows = fse.readFileSync(path.join(section.content.notes, `${section.bcvRange}.tsv`)).toString().split("\n");
             for (const notesRow of notesRows) {
                 const cells = notesRow.split('\t');
                 if (pivotIds.has(cells[4])) {
@@ -163,12 +182,23 @@ class jxlSpreadSection extends Section {
                 }
             }
         }
-
-        const pk = pkWithDocs(bookCode, section.lhs, options.verbose);
-        const bookName = getBookName(pk, options.configContent.docIdForNames, bookCode);
+        const docSpecs = [];
+        let scriptureN = 0;
+        for (const scripture of section.content.lhs) {
+            docSpecs.push({
+                id: `xxx_yyy${scriptureN}`,
+                path: scripture.src,
+                type: scripture.type,
+                text: scripture.text
+            });
+            scriptureN++;
+        }
+        const pk = pkWithDocs(section.bcvRange, docSpecs, options.verbose);
+        const bookName = getBookName(pk, "xxx_yyy0", section.bcvRange);
         let sentences = [];
         let chapterN = 0;
         options.verbose && console.log(`       Sentences`);
+        const qualified_id = `${section.id}_${section.bcvRange}`;
         for (const [sentenceN, sentenceJson] of jxlJson.entries()) {
             if (section.firstSentence && (sentenceN + 1) < section.firstSentence) {
                 continue;
@@ -185,15 +215,16 @@ class jxlSpreadSection extends Section {
             options.verbose && console.log(`         ${sentenceN + 1}`);
             let leftContent = [];
             let greekContent = null;
-            for (const content of section.lhs) {
-                const cvRecord = quoteForCv(pk, content, bookCode, cv);
+            for (const content of docSpecs) {
+                const cvRecord = quoteForCv(pk, content, section.bcvRange, cv);
                 if (cvRecord.type === "greek") {
                     greekContent = getGreekContent(sentenceJson.chunks);
                 }
             }
             let first = true;
-            for (const content of section.lhs) {
-                const cvRecord = quoteForCv(pk, content, bookCode, cv);
+            for (const content of docSpecs) {
+                console.log(content)
+                const cvRecord = quoteForCv(pk, content, section.bcvRange, cv);
                 let lhsText = sentenceJson.sourceString;
                 if (sentenceJson.forceTrans && cvRecord.type !== "greek") {
                     lhsText = sentenceJson.forceTrans[content.id];
@@ -202,7 +233,7 @@ class jxlSpreadSection extends Section {
                 }
                 let sentence = templates[`${first ? "first" : "other"}Left`]
                     .replace('%%LANGCLASS%%', cvRecord.type === "greek" ? "greekLeft" : "transLeft")
-                    .replace('%%LABEL%%', content.label)
+                    .replace('%%LABEL%%', content.text)
                     .replace('%%CONTENT%%', lhsText);
                 leftContent.push(sentence);
                 first = false;
@@ -224,7 +255,7 @@ class jxlSpreadSection extends Section {
                         );
                     }
                 }
-                const bookTestament = books[bookCode];
+                const bookTestament = books[section.bcvRange];
                 const row = templates.jxlRow
                     .replace('%%SOURCE%%', source)
                     .replace('%%SOURCECLASS%%', bookTestament === "OT" ? "jxlHebrew" : "jxlGreek")
@@ -250,15 +281,22 @@ class jxlSpreadSection extends Section {
             sentences.push(sentence);
         }
         fse.writeFileSync(
-            path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
+            path.join(options.htmlPath, `${qualified_id}.html`),
             templates['juxta_page']
-                .replace('%%TITLE%%', `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`)
+                .replace('%%TITLE%%', `${section.id.replace('%%bookCode%%', section.bcvRange)} - ${section.type}`)
                 .replace('%%SENTENCES%%', sentences.join(''))
         );
         await doPuppet({
             verbose: options.verbose,
-            htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
-            pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
+            htmlPath: path.join(options.htmlPath, `${qualified_id}.html`),
+            pdfPath: path.join(options.pdfPath, `${qualified_id}.pdf`)
+        });
+        manifest.push({
+            id: `${qualified_id}`,
+            type: section.type,
+            startOn: section.content.startOn,
+            showPageNumber: section.content.showPageNumber,
+            makeFromDouble: true
         });
     }
 }

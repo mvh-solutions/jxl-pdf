@@ -1,4 +1,5 @@
 const {
+    unpackCellRange,
     pkWithDocs,
     getBookName,
     getCVTexts,
@@ -134,12 +135,18 @@ class bcvBibleSection extends Section {
         const cvTexts = getCVTexts(section.bcvRange, pk);
         const notes = section.content.notes ? bcvNotes(section.content.notes, section.bcvRange) : {};
         const verses = [`<h1>${bookName}</h1>`];
+        const seenCvs = new Set([]);
         for (const cvRecord of cvTexts) {
+            if (seenCvs.has(cvRecord.cv)) {
+                continue;
+            } else {
+                seenCvs.add(cvRecord.cv);
+            }
             const verseHtml = templates['bcv_bible_verse']
                 .replace("%%CV%%", cvRecord.cv)
                 .replace(
                     '%%VERSECONTENT%%',
-                    `${cvRecord.texts["xxx_yyy"] || "-"}${(notes[cvRecord.cv] || [])
+                    `${cvRecord.texts["xxx_yyy"] || "-"}${unpackCellRange(cvRecord.cv).map(cv => notes[cv] || []).reduce((a, b) => [...a, ...b])
                         .map(nr => cleanNoteLine(nr))
                         .map(note => `<p class="note">${note}</p>`)
                         .join('\n')}`

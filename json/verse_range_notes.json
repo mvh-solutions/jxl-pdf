@@ -1,0 +1,32 @@
+{
+  "global": {
+    "fonts": "allOpen",
+    "pages": "A4P",
+    "sizes": "12on15",
+    "outputPath": "/home/mark/Downloads/verse_range_notes.pdf",
+    "workingDir": "/home/mark/.jxlpdf/working",
+    "verbose": false
+  },
+  "sections": [
+    {
+      "type": "bcvWrapper",
+      "ranges": [
+        "TIT"
+      ],
+      "sections": [
+        {
+          "id": "bcvWithNotes",
+          "type": "bcvBible",
+          "content": {
+            "startOn": "recto",
+            "showPageNumber": true,
+            "scriptureText": "By Verse",
+            "scriptureSrc": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_psle",
+            "scriptureType": "translation",
+            "notes": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_sq"
+          }
+        }
+      ]
+    }
+  ]
+}

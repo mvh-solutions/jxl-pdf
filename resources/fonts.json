@@ -1,16 +1,4 @@
 {
-  "test": {
-    "label": {
-      "en": "Test (horrible)",
-      "fr": "Test ( horrible )"
-    },
-    "body": "ani",
-    "body2": "purisa",
-    "heading": "kalimati",
-    "footnote": "karumbi",
-    "greek": "\"Gentium Book Plus\", serif",
-    "hebrew": "\"Ezra SIL\", serif"
-  },
   "allGentium": {
     "label": {
       "en": "All Gentium",
@@ -23,10 +11,34 @@
     "greek": "\"Gentium Book Plus\", serif",
     "hebrew": "\"Ezra SIL\", serif"
   },
+  "gentiumOpen": {
+    "label": {
+      "en": "Gentium plus Open Sans",
+      "fr": "Gentium plus Open Sans"
+    },
+    "body": "\"Gentium Book Plus\", serif",
+    "body2": "\"Open Sans Condensed Light\", sans-serif",
+    "heading": "\"Gentium Book Plus\", serif",
+    "footnote": "\"Gentium Book Plus\", serif",
+    "greek": "\"Gentium Book Plus\", serif",
+    "hebrew": "\"Ezra SIL\", serif"
+  },
   "allCharis": {
     "label": {
       "en": "All Charis",
       "fr": "Charis partout"
+    },
+    "body": "\"Charis SIL\", serif",
+    "body2": "\"Charis SIL\", serif",
+    "heading": "\"Charis SIL\", serif",
+    "footnote": "\"Charis SIL\", serif",
+    "greek": "\"Gentium Book Plus\", serif",
+    "hebrew": "\"Ezra SIL\", serif"
+  },
+  "charisOpen": {
+    "label": {
+      "en": "Charis plus Open Sans",
+      "fr": "Charis plus Open Sans"
     },
     "body": "\"Charis SIL\", serif",
     "body2": "\"Open Sans Condensed Light\", sans-serif",
@@ -53,6 +65,18 @@
       "fr": "Cardo partout"
     },
     "body": "Cardo, serif",
+    "body2": "Cardo, serif",
+    "heading": "Cardo, serif",
+    "footnote": "Cardo, serif",
+    "greek": "Cardo, serif",
+    "hebrew": "\"Ezra SIL\", serif"
+  },
+  "cardoOpen": {
+    "label": {
+      "en": "Cardo plus Open Sans",
+      "fr": "Cardo plus Open Sans"
+    },
+    "body": "Cardo, serif",
     "body2": "\"Open Sans Condensed Light\", sans-serif",
     "heading": "Cardo, serif",
     "footnote": "Cardo, serif",
@@ -65,34 +89,22 @@
       "fr": "Roboto partout"
     },
     "body": "Roboto, sans-serif",
-    "body2": "\"Open Sans Condensed Light\", sans-serif",
+    "body2": "Roboto, sans-serif",
     "heading": "Roboto, sans-serif",
     "footnote": "Roboto, sans-serif",
     "greek": "\"Gentium Book Plus\", serif",
     "hebrew": "\"Ezra SIL\", serif"
   },
-  "allAndika": {
+  "andikaCharis": {
     "label": {
-      "en": "All Andika",
-      "fr": "Andika partout"
+      "en": "Andika with Charis for peripherals",
+      "fr": "Andika plus Charis pour les annexes"
     },
     "body": "Andika, serif",
     "body2": "\"Charis SIL\", serif",
     "heading": "Andika, serif",
     "footnote": "Andika, serif",
     "greek": "\"Charis SIL\", serif",
-    "hebrew": "\"Ezra SIL\", serif"
-  },
-  "charisOpen": {
-    "label": {
-      "en": "Charis body, Open Sans headings",
-      "fr": "Texte du corps en Charis, titres en Open Sans"
-    },
-    "body": "\"Charis SIL\", serif",
-    "body2": "\"Open Sans Condensed Light\", sans-serif",
-    "heading": "\"Open Sans\", serif",
-    "footnote": "\"Charis SIL\", serif",
-    "greek": "\"Gentium Book Plus\", serif",
     "hebrew": "\"Ezra SIL\", serif"
   },
   "notoNaskh": {

@@ -140,10 +140,10 @@
     },
     "h1": {
       "font": 20,
-      "height": 20,
-      "bottomMargin": 6,
-      "bottomBorderWidth": 2,
-      "bottomPadding": 2
+      "height": 24,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
     },
     "footnote": {
       "font": 8,
@@ -154,6 +154,59 @@
     },
     "rule": {
       "bottomMargin": 5,
+      "bottomBorderWidth": 1,
+      "bottomPadding": 6
+    }
+  },
+  "10on13": {
+    "label": {
+      "en": "10pt on 13pt grid",
+      "fr": "10 pt sur grille de 13 pt"
+    },
+    "body": {
+      "font": 10,
+      "height": 13,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h4": {
+      "font": 12,
+      "height": 26,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h3": {
+      "font": 14,
+      "height": 26,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h2": {
+      "font": 18,
+      "height": 26,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h1": {
+      "font": 20,
+      "height": 26,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "footnote": {
+      "font": 8,
+      "height": 13,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "rule": {
+      "bottomMargin": 6,
       "bottomBorderWidth": 1,
       "bottomPadding": 6
     }
@@ -247,9 +300,9 @@
     "h1": {
       "font": 24,
       "height": 30,
-      "bottomMargin": 6,
-      "bottomBorderWidth": 2,
-      "bottomPadding": 2
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
     },
     "footnote": {
       "font": 10,
@@ -259,9 +312,62 @@
       "bottomPadding": 0
     },
     "rule": {
-      "bottomMargin": 6,
+      "bottomMargin": 7,
       "bottomBorderWidth": 1,
       "bottomPadding": 7
+    }
+  },
+  "14on16": {
+    "label": {
+      "en": "14pt on 16pt grid",
+      "fr": "14 pt sur grille de 16 pt"
+    },
+    "body": {
+      "font": 14,
+      "height": 16,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h4": {
+      "font": 18,
+      "height": 32,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h3": {
+      "font": 20,
+      "height": 32,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h2": {
+      "font": 24,
+      "height": 32,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h1": {
+      "font": 28,
+      "height": 32,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "footnote": {
+      "font": 10,
+      "height": 16,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "rule": {
+      "bottomMargin": 7,
+      "bottomBorderWidth": 1,
+      "bottomPadding": 8
     }
   }
 }

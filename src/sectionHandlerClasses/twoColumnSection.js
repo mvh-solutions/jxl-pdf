@@ -126,7 +126,10 @@ class TwoColumnSection extends Section {
         );
         const bookName = getBookName(pk, "xxx_yyy0", section.bcvRange);
         const cvTexts = getCVTexts(section.bcvRange, pk);
-        const notes = section.content.notes ? bcvNotes(section.content.notes, section.bcvRange) : {};
+        let notes = section.content.notes ? bcvNotes(section.content.notes, section.bcvRange) : {};
+        for (const [cv, noteArray] of Object.entries(notes)) {
+            notes[cv] = [`<b>${cv}</b> ${noteArray[0]}`, ...noteArray.slice(1).map(nt => `<span class="not_first_note">${nt}</span>`)];
+        }
         const verses = [];
         verses.push(templates['2_column_title'].replace('%%BOOKNAME%%', bookName));
         const qualified_id = `${section.id}_${section.bcvRange}`;
@@ -174,7 +177,7 @@ class TwoColumnSection extends Section {
                     '%%RIGHTCOLUMN%%',
                     `<div class="col2">${cvRecord.texts["xxx_yyy1"] || "-"}${unpackCellRange(cvRecord.cv).map(cv => notes[cv] || []).reduce((a, b) => [...a, ...b])
                         .map(nr => cleanNoteLine(nr))
-                        .map(note => `<p class="note">${note}</p>`)
+                        .map(note => `<span class="note">${note}</span>`)
                         .join('\n')}</div>`
                 );
             verses.push(verseHtml);

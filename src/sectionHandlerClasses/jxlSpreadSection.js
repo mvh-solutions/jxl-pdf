@@ -223,7 +223,6 @@ class jxlSpreadSection extends Section {
             }
             let first = true;
             for (const content of docSpecs) {
-                console.log(content)
                 const cvRecord = quoteForCv(pk, content, section.bcvRange, cv);
                 let lhsText = sentenceJson.sourceString;
                 if (sentenceJson.forceTrans && cvRecord.type !== "greek") {

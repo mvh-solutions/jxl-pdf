@@ -1,6 +1,6 @@
 ::footnote-call {
     font-weight: bold;
-    font-size: 70%;
+    font-size: 0.5em;
     vertical-align: baseline;
     position: relative;
     top: -0.5em;
@@ -9,6 +9,7 @@
 
 ::footnote-marker {
     font-weight: bold;
+    font-size: 0.8em;
 }
 
 .note {
@@ -20,6 +21,10 @@
     padding-left: 6pt;
     text-indent: -6pt;
     font-family: %%FOOTNOTEFONT%%;
+}
+
+.not_first_note {
+    padding-left: 12pt;
 }
 
 .note_n {

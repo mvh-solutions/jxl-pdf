@@ -33,14 +33,9 @@
                 "src": "/home/mark/repos/mvh-solutions/jxl-pdf/data/grc_ugnt"
               },
               {
-                "text": "LITTÉRALE",
+                "text": "PSLE",
                 "type": "translation",
-                "src": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_tlx"
-              },
-              {
-                "text": "SÉMANTIQUE",
-                "type": "translation",
-                "src": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_tsx"
+                "src": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_psle"
               }
             ],
             "notes": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_tn",

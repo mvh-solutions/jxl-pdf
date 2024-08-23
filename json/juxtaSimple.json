@@ -1,0 +1,31 @@
+{
+  "global": {
+    "fonts": "cardoOpen",
+    "pages": "A4P",
+    "sizes": "12on14",
+    "outputPath": "/home/mark/Downloads/juxtaSimple.pdf",
+    "workingDir": "/home/mark/.jxlpdf/working",
+    "verbose": false
+  },
+  "sections": [
+    {
+      "type": "bcvWrapper",
+      "ranges": [
+        "JUD"
+      ],
+      "sections": [
+        {
+          "id": "juxtaSimple",
+          "type": "jxlSimple",
+          "content": {
+            "startOn": "recto",
+            "showPageNumber": true,
+            "jxl": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_jxl",
+            "notes": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_tn",
+            "notesPivot": "/home/mark/repos/mvh-solutions/jxl-pdf/data/jxl2note"
+          }
+        }
+      ]
+    }
+  ]
+}

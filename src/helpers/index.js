@@ -16,7 +16,7 @@ const {
 
 const {
     cvForSentence,
-    trimLhsText,
+    tidyLhsText,
     getGreekContent
 } = require('./jxl');
 
@@ -51,7 +51,7 @@ module.exports = {
     quoteForCv,
     getCVTexts,
     cvForSentence,
-    trimLhsText,
+    tidyLhsText,
     getGreekContent,
     loadTemplates,
     loadTemplate,

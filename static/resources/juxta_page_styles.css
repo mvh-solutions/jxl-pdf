@@ -8,6 +8,10 @@
 
 %%%JUXTA%%%
 
+.jxlTable {
+    margin-bottom: %%BODYLINEHEIGHT%%pt;
+}
+
 h2.phraseN {
     font-size: %%BODYFONTSIZE%%pt;
     line-height: %%BODYLINEHEIGHT%%pt;

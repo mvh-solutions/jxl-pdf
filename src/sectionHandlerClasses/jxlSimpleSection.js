@@ -111,7 +111,33 @@ class jxlSimpleSection extends Section {
 
     async doSection({section, templates, manifest, options}) {
         const jsonFile = fse.readJsonSync(path.resolve(path.join(section.content.jxl, section.bcvRange + ".json")));
+        const mergeCvs = (cvs) => {
+            const chapter = cvs[0]
+                .split(":")[0];
+            const firstCvFirstV = cvs[0]
+                .split(":")[1]
+                .split('-')[0];
+            const lastCvLastV = cvs.reverse()[0]
+                .split(":")[1]
+                .split('-').reverse()[0];
+            return `${chapter}:${firstCvFirstV}${firstCvFirstV === lastCvLastV ? "" : `-${lastCvLastV}`}`;
+        }
         const jxlJson = jsonFile.bookCode ? jsonFile.sentences : jsonFile;
+        const sentenceMerges = []; // True means "merge with next sentence"
+        let sentenceN = 0;
+        for (const sentence of jxlJson) {
+            let sentenceLastV = cvForSentence(sentence)
+                .split(":")[1]
+                .split('-')
+                .reverse()[0];
+            let nextSentenceFirstV = (sentenceN + 1) === jxlJson.length ?
+                999 :
+                cvForSentence(jxlJson[sentenceN + 1])
+                    .split(":")[1]
+                    .split('-')[0];
+            sentenceMerges.push(sentenceLastV === nextSentenceFirstV);
+            sentenceN++;
+        }
         let pivotIds = new Set([]);
         const notes = {};
         const notePivot = {};
@@ -145,6 +171,8 @@ class jxlSimpleSection extends Section {
         let chapterN = 0;
         const qualified_id = `${section.id}_${section.bcvRange}`;
         options.verbose && console.log(`       Sentences`);
+        let jxls = [];
+        let cvs = [];
         for (const [sentenceN, sentenceJson] of jxlJson.entries()) {
             if (section.content.firstSentence && (sentenceN + 1) < section.content.firstSentence) {
                 continue;
@@ -152,12 +180,8 @@ class jxlSimpleSection extends Section {
             if (section.content.lastSentence && (sentenceN + 1) > section.content.lastSentence) {
                 continue;
             }
-            const cv = cvForSentence(sentenceJson);
-            const newChapterN = cv.split(':')[0];
-            if (chapterN !== newChapterN) {
-                sentences.push(maybeChapterNotes(newChapterN, 'chapter', notes, templates, options.verbose));
-                chapterN = newChapterN;
-            }
+            cvs.push(cvForSentence(sentenceJson));
+            // const cv = cvForSentence(sentenceJson);
             options.verbose && console.log(`         ${sentenceN + 1}`);
             let jxlRows = [];
             let sentenceNotes = [];
@@ -185,20 +209,24 @@ class jxlSimpleSection extends Section {
                 jxlRows.push(row);
                 sentenceNotes = [];
             }
-            const jxl = templates.jxl
-                .replace('%%ROWS%%', jxlRows.join('\n'));
-            const sentence = templates.simple_juxta_sentence
-                .replace('%%SENTENCEN%%', sentenceN + 1)
-                .replace('%%NSENTENCES%%', jxlJson.length)
-                .replace('%%BOOKNAME%%', bookName)
-                .replace('%%SENTENCEREF%%', cv)
-                .replace('%%JXL%%', jxl)
-                .replace(
-                    '%%NOTES%%',
-                    sentenceNotes.length === 0 ?
-                        "" :
-                        ``);
-            sentences.push(sentence);
+            jxls.push(templates.jxl
+                .replace('%%ROWS%%', jxlRows.join('\n'))
+            );
+            if (!sentenceMerges[sentenceN]) {
+                const cvRef = mergeCvs(cvs);
+                const sentence = templates.simple_juxta_sentence
+                    .replace('%%BOOKNAME%%', bookName)
+                    .replace('%%SENTENCEREF%%', cvRef)
+                    .replace('%%JXL%%', jxls.join("\n"))
+                    .replace(
+                        '%%NOTES%%',
+                        sentenceNotes.length === 0 ?
+                            "" :
+                            ``);
+                sentences.push(sentence);
+                jxls = [];
+                cvs = [];
+            }
         }
         fse.writeFileSync(
             path.join(options.htmlPath, `${qualified_id}.html`),

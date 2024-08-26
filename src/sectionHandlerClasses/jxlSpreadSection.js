@@ -68,25 +68,25 @@ class jxlSpreadSection extends Section {
                     typeName: "tNotes",
                     nValues: [0, 1]
                 },
-/*                {
-                    id: "firstSentence",
-                    label: {
-                        en: "First Sentence Number",
-                        fr: "N° de première phrase"
-                    },
-                    typeName: "integer",
-                    nValues: [0, 1]
-                },
-                {
-                    id: "lastSentence",
-                    label: {
-                        en: "Last Sentence Number",
-                        fr: "N° de dernière phrase"
-                    },
-                    typeName: "integer",
-                    nValues: [0, 1]
-                },
- */
+                /*                {
+                                    id: "firstSentence",
+                                    label: {
+                                        en: "First Sentence Number",
+                                        fr: "N° de première phrase"
+                                    },
+                                    typeName: "integer",
+                                    nValues: [0, 1]
+                                },
+                                {
+                                    id: "lastSentence",
+                                    label: {
+                                        en: "Last Sentence Number",
+                                        fr: "N° de dernière phrase"
+                                    },
+                                    typeName: "integer",
+                                    nValues: [0, 1]
+                                },
+                 */
                 {
                     id: "lhs",
                     label: {
@@ -167,12 +167,6 @@ class jxlSpreadSection extends Section {
         const sentenceMerges = []; // True means "merge with next sentence"
         let sentenceN = 0;
         for (const sentence of jxlJson) {
-            section.doPdfCallback && section.doPdfCallback({
-                type: "juxtaSentence",
-                level: 3,
-                msg: `Juxta Sentence ${sentenceN+1} of ${jxlJson.length}`,
-                args: [sentenceN + 1, jxlJson.length]
-            });
             let sentenceLastV = cvForSentence(sentence)
                 .split(":")[1]
                 .split('-')
@@ -230,7 +224,6 @@ class jxlSpreadSection extends Section {
         const qualified_id = `${section.id}_${section.bcvRange}`;
         let jxls = [];
         let cvs = [];
-        let sentenceNs = [];
         for (const [sentenceN, sentenceJson] of jxlJson.entries()) {
             if (section.firstSentence && (sentenceN + 1) < section.firstSentence) {
                 continue;
@@ -238,6 +231,12 @@ class jxlSpreadSection extends Section {
             if (section.lastSentence && (sentenceN + 1) > section.lastSentence) {
                 continue;
             }
+            section.doPdfCallback && section.doPdfCallback({
+                type: "juxtaSentence",
+                level: 3,
+                msg: `Juxta Sentence ${sentenceN + 1} of ${jxlJson.length}`,
+                args: [sentenceN + 1, jxlJson.length]
+            });
             cvs.push(cvForSentence(sentenceJson));
             options.verbose && console.log(`         ${sentenceN + 1}`);
             let jxlRows = [];
@@ -283,7 +282,8 @@ class jxlSpreadSection extends Section {
                         .replace('%%CONTENT%%', lhsText);
                     leftContent.push(sentence);
                     first = false;
-                }                const sentence = templates.sentence
+                }
+                const sentence = templates.sentence
                     .replace(/%%BOOKNAME%%/g, bookName)
                     .replace(/%%SENTENCEREF%%/g, cvRef)
                     .replace('%%LEFTCONTENT%%', leftContent.join('\n'))
@@ -296,7 +296,7 @@ class jxlSpreadSection extends Section {
                 sentences.push(sentence);
                 jxls = [];
                 cvs = [];
-                sentenceNs = [];            }
+            }
         }
         fse.writeFileSync(
             path.join(options.htmlPath, `${qualified_id}.html`),

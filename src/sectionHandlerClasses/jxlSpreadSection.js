@@ -167,6 +167,12 @@ class jxlSpreadSection extends Section {
         const sentenceMerges = []; // True means "merge with next sentence"
         let sentenceN = 0;
         for (const sentence of jxlJson) {
+            section.doPdfCallback && section.doPdfCallback({
+                type: "juxtaSentence",
+                level: 3,
+                msg: `Juxta Sentence ${sentenceN+1} of ${jxlJson.length}`,
+                args: [sentenceN + 1, jxlJson.length]
+            });
             let sentenceLastV = cvForSentence(sentence)
                 .split(":")[1]
                 .split('-')

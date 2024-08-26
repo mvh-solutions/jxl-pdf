@@ -38,6 +38,7 @@ h1, h2, h3, h4 {
 
 ::footnote-marker {
     font-weight: normal;
+    line-height: 1;
 }
 
 .glossary_star {

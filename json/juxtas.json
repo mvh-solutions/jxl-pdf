@@ -2,7 +2,7 @@
   "global": {
     "fonts": "allOpen",
     "pages": "A4P",
-    "sizes": "12on15",
+    "sizes": "12on14",
     "outputPath": "/home/mark/Downloads/juxtas.pdf",
     "workingDir": "/home/mark/.jxlpdf/working",
     "verbose": false

@@ -57,22 +57,6 @@ class PdfGen {
             output: this.options.global.outputPath
         };
         this.options = options;
-        // Check that output file will not accidentally overwrite an existing file
-        /*
-                if (fse.pathExistsSync(options.output) && !options.forceOverwrite) {
-                    throw new Error(`Output path '${options.output}' would be overwritten but 'forceOverwrite' flag is not set.`);
-                }
-
-                // Attempt to read config file and add JSON to options
-                if (!(fse.pathExistsSync(options.config)) || !(fse.lstatSync(options.config).isFile())) {
-                    throw new Error(`Config file path '${options.config}' does not exist or is not a file`);
-                }
-                try {
-                    options.configContent = fse.readJsonSync(options.config);
-                } catch (err) {
-                    throw new Error(`Could not read config file ${options.config} as JSON: ${err.message}`);
-                }
-        */
         // In CLEAR mode, delete working dir and exit
         if (options.steps.includes("clear")) {
             options.verbose && console.log("** CLEAR **");
@@ -245,7 +229,14 @@ class PdfGen {
             return false;
         }
         return PdfGen.validateSectionFields(
-            {signatureFields: signature.fields, sectionId: section.id, sectionN, sectionContent: section.content, errors, checkPaths}
+            {
+                signatureFields: signature.fields,
+                sectionId: section.id,
+                sectionN,
+                sectionContent: section.content,
+                errors,
+                checkPaths
+            }
         );
     }
 

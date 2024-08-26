@@ -3,11 +3,12 @@ const os = require('os');
 const pageSizes = require('../../resources/pages.json');
 const fontSets = require('../../resources/fonts.json');
 const fontSizes = require('../../resources/sizes.json');
+const packageJson = require('../../package.json');
 
 const constants = {
-    VERSION: "0.0.1",
+    VERSION: packageJson.version,
     DEFAULT_WORKING_DIR: path.resolve(path.join(os.homedir(), ".jxlpdf/working")),
-    DEFAULT_PAGE_SIZE: "EXECUTIVE",
+    DEFAULT_PAGE_SIZE: "A4P",
     DEFAULT_FONT_SET: "allGentium",
     DEFAULT_FONT_SIZE: "9on10",
     STEPS_OPTIONS: {

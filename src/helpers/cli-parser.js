@@ -1,82 +1,102 @@
 const commander = require('commander');
-const VALIDATORS = require('./validators');
+const fse = require('fs-extra');
+const path = require('path');
+const validators = require('./validators');
 const constants = require('./constants');
-
-function showDefaultStr(obj, defaultVal) {
-    if(process.argv.indexOf("--help") != -1 || process.argv.indexOf("-h") != -1) return defaultVal;
-    return obj;
-}
 
 const parseCommandLineArguments = () => {
     const program = new commander.Command();
 
-    program
-        .name('jxl-pdf')
-        .description('Versatile, print-ready PDFs, from industry-standard source files, in Javascript')
-        .version(constants.VERSION);
+    let configJson = {global: {}};
 
     program
+        .name('jxl-pdf')
+        .description('Versatile, print-ready Scripture-related PDFs, from industry-standard source files, in Javascript')
+        .version(constants.VERSION)
         .requiredOption(
             '-c, --config <path>',
             '(Required): Path to the JSON config file (must exist)',
-            VALIDATORS.config
+            validators.config
         )
-        .requiredOption(
+        .option(
             '-o, --output <path>',
-            '(Required): Path to which the final PDF should be written (should not exist unless --force-overwrite flag is set)',
-            VALIDATORS.output,
+            'Path to which the final PDF should be written (must not exist unless --force-overwrite flag is set)',
+            validators.output,
+            configJson.global.outputPath
         )
         .option(
             '-w, --working-dir <path>',
             'Path to a directory for temporary files including originated PDFs. This directory will be created recursively if necessary, and will be cleared whenever the command is run.',
-            VALIDATORS.working,
-            constants.DEFAULT_WORKING_DIR
+            validators.working,
+            configJson.global.workingDir || constants.DEFAULT_WORKING_DIR
         )
         .option(
             '-f, --force-overwrite',
             'When set, will clear and overwrite an existing directory for output. Use with care!',
-            VALIDATORS.forceOverwrite,
+            validators.forceOverwrite,
             false
         )
         .option(
             '-v, --verbose',
             'When set, generates console output for debugging and entertainment purposes',
-            VALIDATORS.verbose,
-            false
-        )
-        .option(
-            '-b, --book <bookCode>',
-            "Paratext 3-character bookCode, eg 'TIT' (required for some configurations)",
-            VALIDATORS.book,
-            null
+            validators.verbose,
+            "verbose" in configJson.global ? configJson.global.verbose : false
         )
         .option(
             '-p, --page-format <spec>',
             `One of ${Object.keys(constants.PAGE_SIZES).join(', ')}`,
-            VALIDATORS.pageFormat,
-            showDefaultStr(constants.PAGE_SIZES[constants.DEFAULT_PAGE_SIZE], constants.DEFAULT_PAGE_SIZE)
+            validators.pageFormat,
+            configJson.global.pages || constants.DEFAULT_PAGE_SIZE
         )
+        /*
         .option(
             '-s, --steps <stepsType>',
             `The processing steps that will take place. Options are ${Object.keys(constants.STEPS_OPTIONS).join(', ')}`,
-            VALIDATORS.steps,
-            showDefaultStr(constants.STEPS_OPTIONS["ALL"], "ALL")
+            validators.steps,
+            "ALL"
         )
+         */
         .option(
             '-F, --fonts <fontsType>',
             `The set of fonts to use. Options are ${Object.keys(constants.FONT_SETS).join(', ')}`,
-            VALIDATORS.fonts,
-            showDefaultStr(constants.FONT_SETS[constants.DEFAULT_FONT_SET], constants.DEFAULT_FONT_SET)
+            validators.fonts,
+            configJson.global.fonts || constants.DEFAULT_FONT_SET
         ).option(
-            '-S, --fontSizes <fontSizesType>',
-            `The set of font sizes to use. The name indicates the body font size and line spacing (in point) (format : {body font}on{line spacing}). Options are ${Object.keys(constants.FONT_SIZES).join(', ')}`,
-            VALIDATORS.fontSizes,
-            showDefaultStr(constants.FONT_SIZES[constants.DEFAULT_FONT_SIZE], constants.DEFAULT_FONT_SIZE)
-        );
+        '-S, --fontSizes <fontSizesType>',
+        `The set of font sizes to use. The name indicates the body font size and line spacing (in point) (format : {body font}on{line spacing}). Options are ${Object.keys(constants.FONT_SIZES).join(', ')}`,
+        validators.fontSizes,
+        configJson.global.sizes || constants.DEFAULT_FONT_SIZE
+    );
+
+    program.parse(process.argv);
+    let options = program.opts();
+    configJson = fse.readJsonSync(path.resolve(options.config));
 
     program.parse(process.argv);
 
-    return program.opts();
+    const opts = program.opts();
+    if (opts.output) {
+        configJson.global.outputPath = opts.output;
+    }
+    if (opts.workingDir) {
+        configJson.global.workingDir = opts.workingDir;
+    }
+    if ("verbose" in opts) {
+        configJson.global.verbose = opts.verbose;
+    }
+    if (opts.pageFormat) {
+        configJson.global.pages = opts.pageFormat;
+    }
+    if (opts.fonts) {
+        configJson.global.fonts = opts.fonts;
+    }
+    if (opts.fontSizes) {
+        configJson.global.sizes = opts.fontSizes;
+    }
+    if (!opts.forceOverwrite && fse.pathExistsSync(configJson.global.outputPath)) {
+        throw new commander.InvalidArgumentError(`Output would overwrite ${configJson.global.outputPath} - use --forceOverwrite.`);
+    }
+    return configJson;
 };
 
 module.exports = parseCommandLineArguments;

@@ -168,7 +168,6 @@ class jxlSimpleSection extends Section {
 
         const bookName = section.bcvRange;
         let sentences = [];
-        let chapterN = 0;
         const qualified_id = `${section.id}_${section.bcvRange}`;
         options.verbose && console.log(`       Sentences`);
         let jxls = [];
@@ -181,7 +180,6 @@ class jxlSimpleSection extends Section {
                 continue;
             }
             cvs.push(cvForSentence(sentenceJson));
-            // const cv = cvForSentence(sentenceJson);
             options.verbose && console.log(`         ${sentenceN + 1}`);
             let jxlRows = [];
             let sentenceNotes = [];

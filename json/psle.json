@@ -87,8 +87,7 @@
             "showVersesLabels": true,
             "showFirstVerseLabel": true,
             "nColumns": 1,
-            "showGlossaryStar": true,
-            "notes": "/home/mark/repos/mvh-solutions/jxl-pdf/data/fra_sq"
+            "showGlossaryStar": true
           }
         }
       ]

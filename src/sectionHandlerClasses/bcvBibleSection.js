@@ -7,7 +7,8 @@ const {
     bcvNotes,
     doPuppet,
     setupOneCSS,
-    checkCssSubstitution
+    checkCssSubstitution,
+    resolvePath
 } = require("../helpers");
 const fse = require("fs-extra");
 const path = require("path");
@@ -130,10 +131,10 @@ class bcvBibleSection extends Section {
         if (!section.bcvRange) {
             throw new Error(`No bcvRange found for section ${section.id}`);
         }
-        const pk = pkWithDocs(section.bcvRange, [{id: "xxx_yyy", path: section.content.scriptureSrc}], options.verbose);
+        const pk = pkWithDocs(section.bcvRange, [{id: "xxx_yyy", path: resolvePath(section.content.scriptureSrc)}], options.verbose);
         const bookName = getBookName(pk, "xxx_yyy", section.bcvRange);
         const cvTexts = getCVTexts(section.bcvRange, pk);
-        let notes = section.content.notes ? bcvNotes(section.content.notes, section.bcvRange) : {};
+        let notes = section.content.notes ? bcvNotes(resolvePath(section.content.notes), section.bcvRange) : {};
         for (const [cv, noteArray] of Object.entries(notes)) {
             notes[cv] = [`<b>${cv}</b> ${noteArray[0]}`, ...noteArray.slice(1).map(nt => `<span class="not_first_note">${nt}</span>`)];
         }

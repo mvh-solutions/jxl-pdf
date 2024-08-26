@@ -3,7 +3,8 @@ const {
     pkWithDocs,
     getBookName,
     bcvNotes,
-    doPuppet
+    doPuppet,
+    resolvePath
 } = require("../helpers");
 const fse = require("fs-extra");
 const path = require("path");
@@ -249,9 +250,9 @@ class paraBibleSection extends Section {
             "nColumns": section.content.nColumns,
             "showGlossaryStar": section.content.showGlossaryStar
         }
-        const pk = pkWithDocs(section.bcvRange, [{id: "xxx_yyy", path: section.content.scriptureSrc}], options.verbose);
+        const pk = pkWithDocs(section.bcvRange, [{id: "xxx_yyy", path: resolvePath(section.content.scriptureSrc)}], options.verbose);
         const bookName = getBookName(pk, "xxx_yyy", section.bcvRange);
-        const notes = section.content.notes ? bcvNotes(section.content.notes, section.bcvRange) : {};
+        const notes = section.content.notes ? bcvNotes(resolvePath(section.content.notes), section.bcvRange) : {};
         const docId = pk.gqlQuerySync('{documents { id } }').data.documents[0].id;
         const actions = render.sofria2web.renderActions.sofria2WebActions;
         const renderers = render.sofria2web.sofria2html.renderers;

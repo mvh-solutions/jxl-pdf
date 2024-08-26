@@ -5,6 +5,7 @@ const pages = require('../resources/pages.json');
 const sizes = require('../resources/sizes.json');
 const handlers = require('./sectionHandlerClasses');
 const {sectionHandlerLookup} = require('./sectionHandlerLookup');
+const {resolvePath} = require('./helpers');
 const fse = require("fs-extra");
 const path = require("path");
 const os = require("os");
@@ -326,7 +327,9 @@ class PdfGen {
                     return false;
                 }
                 if (checkPaths) {
-                    const unresolvedValues = normalizedContent.filter(c => !fse.pathExistsSync(c));
+                    const unresolvedValues = normalizedContent
+                        .map(c => resolvePath(c))
+                        .filter(c => !fse.pathExistsSync(resolvePath(c)));
                     if (unresolvedValues.length > 0) {
                         errors.push(`${unresolvedValues.length} value(s) of field '${fieldId}' in Section '${sectionId}' (#${sectionN}) could not be resolved in the FS: ${unresolvedValues.map(p => `'${p}'`).join(',')}`);
                     }

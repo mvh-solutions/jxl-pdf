@@ -1,1 +1,0 @@
-unfoldingWord® Open Bible Stories

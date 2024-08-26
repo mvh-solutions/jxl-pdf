@@ -3,13 +3,11 @@ const fse = require('fs-extra');
 const path = require('path');
 const validators = require('./validators');
 const constants = require('./constants');
+const {resolvePath} = require('./paths');
 
 const parseCommandLineArguments = () => {
-    const program = new commander.Command();
 
-    let configJson = {global: {}};
-
-    program
+    const configureProgram = p => p
         .name('jxl-pdf')
         .description('Versatile, print-ready Scripture-related PDFs, from industry-standard source files, in Javascript')
         .version(constants.VERSION)
@@ -48,30 +46,28 @@ const parseCommandLineArguments = () => {
             validators.pageFormat,
             configJson.global.pages || constants.DEFAULT_PAGE_SIZE
         )
-        /*
-        .option(
-            '-s, --steps <stepsType>',
-            `The processing steps that will take place. Options are ${Object.keys(constants.STEPS_OPTIONS).join(', ')}`,
-            validators.steps,
-            "ALL"
-        )
-         */
         .option(
             '-F, --fonts <fontsType>',
             `The set of fonts to use. Options are ${Object.keys(constants.FONT_SETS).join(', ')}`,
             validators.fonts,
             configJson.global.fonts || constants.DEFAULT_FONT_SET
         ).option(
-        '-S, --fontSizes <fontSizesType>',
-        `The set of font sizes to use. The name indicates the body font size and line spacing (in point) (format : {body font}on{line spacing}). Options are ${Object.keys(constants.FONT_SIZES).join(', ')}`,
-        validators.fontSizes,
-        configJson.global.sizes || constants.DEFAULT_FONT_SIZE
-    );
+            '-S, --fontSizes <fontSizesType>',
+            `The set of font sizes to use. The name indicates the body font size and line spacing (in point) (format : {body font}on{line spacing}). Options are ${Object.keys(constants.FONT_SIZES).join(', ')}`,
+            validators.fontSizes,
+            configJson.global.sizes || constants.DEFAULT_FONT_SIZE
+        );
 
+
+    let program = new commander.Command();
+    let configJson = {global: {}};
+    configureProgram(program);
     program.parse(process.argv);
     let options = program.opts();
     configJson = fse.readJsonSync(path.resolve(options.config));
 
+    program = new commander.Command();
+    configureProgram(program);
     program.parse(process.argv);
 
     const opts = program.opts();
@@ -93,6 +89,8 @@ const parseCommandLineArguments = () => {
     if (opts.fontSizes) {
         configJson.global.sizes = opts.fontSizes;
     }
+    configJson.global.outputPath = resolvePath(configJson.global.outputPath);
+    configJson.global.workingDir = resolvePath(configJson.global.workingDir);
     if (!opts.forceOverwrite && fse.pathExistsSync(configJson.global.outputPath)) {
         throw new commander.InvalidArgumentError(`Output would overwrite ${configJson.global.outputPath} - use --forceOverwrite.`);
     }

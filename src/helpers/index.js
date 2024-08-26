@@ -42,6 +42,10 @@ const {
     doPuppet
 } = require('./puppeteer');
 
+const {
+    resolvePath
+} = require('./paths');
+
 module.exports = {
     constants,
     parseCommandLineArguments,
@@ -62,5 +66,6 @@ module.exports = {
     formatNote,
     getBookName,
     pkWithDocs,
-    doPuppet
+    doPuppet,
+    resolvePath
 }

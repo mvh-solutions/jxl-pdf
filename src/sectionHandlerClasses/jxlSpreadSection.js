@@ -74,7 +74,7 @@ class jxlSpreadSection extends Section {
                                         en: "First Sentence Number",
                                         fr: "N° de première phrase"
                                     },
-                                    typeName: "integer",
+                                    typeName: "number",
                                     nValues: [0, 1]
                                 },
                                 {
@@ -83,7 +83,7 @@ class jxlSpreadSection extends Section {
                                         en: "Last Sentence Number",
                                         fr: "N° de dernière phrase"
                                     },
-                                    typeName: "integer",
+                                    typeName: "number",
                                     nValues: [0, 1]
                                 },
                  */

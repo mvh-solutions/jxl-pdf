@@ -69,13 +69,14 @@ class jxlSimpleSection extends Section {
                     typeName: "juxta",
                     nValues: [1, 1]
                 },
+                /*
                 {
                     id: "firstSentence",
                     label: {
                         en: "First Sentence Number",
                         fr: "N° de première phrase"
                     },
-                    typeName: "integer",
+                    typeName: "number",
                     nValues: [0, 1]
                 },
                 {
@@ -84,9 +85,10 @@ class jxlSimpleSection extends Section {
                         en: "Last Sentence Number",
                         fr: "N° de dernière phrase"
                     },
-                    typeName: "integer",
+                    typeName: "number",
                     nValues: [0, 1]
                 },
+                 */
                 {
                     id: "notes",
                     label: {

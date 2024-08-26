@@ -1,6 +1,6 @@
 const fse = require("fs-extra");
 const path = require("path");
-const {doPuppet} = require("../helpers");
+const {doPuppet, resolvePath} = require("../helpers");
 const marked = require('marked');
 const DOMPurify = require('isomorphic-dompurify');
 
@@ -82,7 +82,7 @@ class MarkdownSection extends Section {
                 .replace(
                     "%%BODY%%",
                     DOMPurify.sanitize(
-                        marked.parse(fse.readFileSync(path.resolve(path.join(`${section.content.md}`))).toString())
+                        marked.parse(fse.readFileSync(resolvePath(path.join(`${section.content.md}`))).toString())
                     )
                 )
         );

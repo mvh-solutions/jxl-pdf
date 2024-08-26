@@ -1,6 +1,6 @@
 {
   "global": {
-    "fonts": "allAndika",
+    "fonts": "andikaCharis",
     "pages": "A5P",
     "sizes": "12on15",
     "outputPath": "/home/mark/Downloads/psle.pdf",

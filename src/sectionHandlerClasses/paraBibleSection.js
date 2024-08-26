@@ -8,8 +8,6 @@ const {
 const fse = require("fs-extra");
 const path = require("path");
 const {SofriaRenderFromProskomma, render} = require("proskomma-json-tools");
-const {sofria2WebActions} = require('./mySofria2Web');
-const {renderers} = require('./mySofria2Html');
 
 const Section = require('./section');
 
@@ -255,9 +253,9 @@ class paraBibleSection extends Section {
         const bookName = getBookName(pk, "xxx_yyy", section.bcvRange);
         const notes = section.content.notes ? bcvNotes(section.content.notes, section.bcvRange) : {};
         const docId = pk.gqlQuerySync('{documents { id } }').data.documents[0].id;
-        // const actions = render.sofria2web.renderActions.sofria2WebActions;
-        // const renderers = render.sofria2web.sofria2html.renderers;
-        const cl = new SofriaRenderFromProskomma({proskomma: pk, actions: sofria2WebActions, debugLevel: 0})
+        const actions = render.sofria2web.renderActions.sofria2WebActions;
+        const renderers = render.sofria2web.sofria2html.renderers;
+        const cl = new SofriaRenderFromProskomma({proskomma: pk, actions, debugLevel: 0})
         const output = {};
         sectionConfig.selectedBcvNotes = ["foo"];
         sectionConfig.renderers = renderers;

@@ -1,0 +1,64 @@
+{
+  "global": {
+    "fonts": "allOpen",
+    "pages": "A4P",
+    "sizes": "12on14",
+    "outputPath": "/home/mark/Downloads/juxtas.pdf",
+    "workingDir": "/home/mark/.jxlpdf/working",
+    "verbose": false
+  },
+  "sections": [
+    {
+      "type": "bcvWrapper",
+      "ranges": [
+        "TIT"
+      ],
+      "sections": [
+        {
+          "id": "juxtaSpread",
+          "type": "jxlSpread",
+          "content": {
+            "startOn": "verso",
+            "showPageNumber": true,
+            "jxl": "^/test/test_resources/fra_jxl",
+            "lhs": [
+              {
+                "text": "GREC",
+                "type": "greek",
+                "src": "^/test/test_resources/grc_ugnt"
+              },
+              {
+                "text": "PSLE",
+                "type": "translation",
+                "src": "^/test/test_resources/fra_psle"
+              }
+            ],
+            "bcvNotes": "^/test/test_resources/fra_sq",
+            "glossNotes": [
+              {
+                "notes": "^/test/test_resources/fra_tn",
+                "pivot": "^/test/test_resources/jxl2note"
+              }
+            ]
+          }
+        },
+        {
+          "id": "juxtaSimple",
+          "type": "jxlSimple",
+          "content": {
+            "startOn": "recto",
+            "showPageNumber": true,
+            "jxl": "^/test/test_resources/fra_jxl",
+            "bcvNotes": "^/test/test_resources/fra_sq",
+            "glossNotes": [
+              {
+                "notes": "^/test/test_resources/fra_tn",
+                "pivot": "^/test/test_resources/jxl2note"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

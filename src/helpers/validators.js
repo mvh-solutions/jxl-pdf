@@ -32,6 +32,19 @@ const validators = {
         }
         return resolved;
     },
+    resourcesDir: resourcesPath => {
+        if (!resourcesPath) {
+            return null;
+        }
+        const resolved = path.resolve(resourcesPath);
+        if (!fse.pathExistsSync(resolved)) {
+            throw new commander.InvalidArgumentError(`Resources dir '${resolved}' does not exist`);
+        }
+        if (!(fse.lstatSync(resolved).isDirectory())) {
+            throw new commander.InvalidArgumentError(`Resources dir '${resolved}' is not a directory`);
+        }
+        return resolved;
+    },
     output: outputDirPath => {
         if (!(fse.pathExistsSync(path.dirname(outputDirPath)))) {
             throw new commander.InvalidArgumentError(`The parent directory of '${outputDirPath}' does not exist. Please create it or pick another output path.`);

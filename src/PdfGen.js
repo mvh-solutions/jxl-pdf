@@ -40,16 +40,16 @@ class PdfGen {
     }
 
     async doPdf() {
-        const workingDir = this.options.global.workingDir || path.resolve(path.join(os.homedir(), ".jxlpdf/working"));
         if (!this.options.global.outputPath) {
             throw new Error("Must provide an outputPath in doPdf()");
         }
         const options = {
             verbose: this.options.global.verbose || false,
-            workingDir,
-            pdfPath: path.join(workingDir, "pdf"),
-            htmlPath: path.join(workingDir, "html", "pages"),
-            manifestPath: path.join(workingDir, "manifest.json"),
+            workingDir: this.options.global.workingDir,
+            resourcesDir: this.options.global.resourcesDir,
+            pdfPath: path.join(this.options.global.workingDir, "pdf"),
+            htmlPath: path.join(this.options.global.workingDir, "html", "pages"),
+            manifestPath: path.join(this.options.global.workingDir, "manifest.json"),
             steps: ["originate", "assemble"],
             pageFormat: pages[this.options.global.pages],
             fonts: fonts[this.options.global.fonts],
@@ -164,7 +164,9 @@ class PdfGen {
                 while (sectionN < sections.length && !skip) {
                     const section = sections[sectionN];
                     if (sectionHandlerLookup[section.type]) { // A section
-                        if (!this.validateSection(section, null, ret, sectionN, checkPaths)) {
+                        const sectionErrors = this.validateSection(section, null, ret, sectionN, checkPaths);
+                        if (sectionErrors.length > 0) {
+                            sectionErrors.forEach(e => ret.push(e));
                             skip = true;
                             break;
                         }
@@ -202,32 +204,32 @@ class PdfGen {
     static validateSection(section, wrapper, errors, sectionN, checkPaths = false) {
         if (!section.id) {
             errors.push(`Section has no id (#${sectionN})`);
-            return false;
+            return errors;
         }
         if (!section.type) {
             errors.push(`Section '${section.id}' has no type (#${sectionN})`);
-            return false;
+            return errors;
         }
         const sectionHandler = sectionHandlerLookup[section.type];
         if (!sectionHandler) {
             errors.push(`Unknown section type '${section.type}' near section '${section.id}' (#${sectionN})`);
-            return false;
+            return errors;
         }
         const signature = sectionHandler.signature();
         // console.log(JSON.stringify(signature, null, 2));
         if (signature.requiresWrapper.length > 0) {
             if (!wrapper) {
                 errors.push(`No wrapper for section '${section.id}' of type '${section.type}' (expected '${signature.requiresWrapper[0]}) (#${sectionN})'`);
-                return false;
+                return errors;
             }
             if (wrapper.type !== `${signature.requiresWrapper[0]}Wrapper`) {
                 errors.push(`Expected wrapper of type '${signature.requiresWrapper[0]}' for section '${section.id}' but found '${wrapper.type}' (#${sectionN})`);
-                return false;
+                return errors;
             }
         }
         if (!section.content) {
             errors.push(`No content for section '${section.id}' (#${sectionN})`);
-            return false;
+            return errors;
         }
         return PdfGen.validateSectionFields(
             {
@@ -254,7 +256,7 @@ class PdfGen {
             }
         }
         if (errors.length > 0) {
-            return false;
+            return errors;
         }
         let foundError = false;
         for (const [key, value] of Object.entries(sectionContent)) {
@@ -272,7 +274,7 @@ class PdfGen {
                 foundError = true;
             }
         }
-        return !foundError;
+        return errors;
 
     }
 

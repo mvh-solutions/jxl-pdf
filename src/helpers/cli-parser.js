@@ -29,6 +29,12 @@ const parseCommandLineArguments = () => {
             configJson.global.workingDir || constants.DEFAULT_WORKING_DIR
         )
         .option(
+            '-r, --resources-dir <path>',
+            'Path to a directory containing project-specific images etc.',
+            validators.resources,
+            configJson.global.resourcesDir
+        )
+        .option(
             '-f, --force-overwrite',
             'When set, will clear and overwrite an existing directory for output. Use with care!',
             validators.forceOverwrite,

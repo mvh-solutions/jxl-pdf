@@ -104,7 +104,7 @@ const originatePdfs = async (options, doPdfCallback=null) => {
     setupCSS(options);
     fse.copySync(path.join(__dirname, "..", "static", "resources", "paged.polyfill.js"), path.join(options.workingDir, "html", "resources", "paged.polyfill.js"));
     fse.mkdirsSync(path.join(options.workingDir, "html", "page_resources"));
-    fse.copySync(path.join(__dirname, "..", "static", "page_resources"), path.join(options.workingDir, "html", "page_resources"));
+    options.resourcesDir && fse.copySync(path.resolve(options.resourcesDir), path.join(options.workingDir, "html", "page_resources"));
     fse.mkdirsSync(options.pdfPath);
 
     const checkBookCode = (sectionId) => {

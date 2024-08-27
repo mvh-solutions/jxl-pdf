@@ -7,7 +7,8 @@ const {
     quoteForCv,
     tidyLhsText,
     cleanNoteLine,
-    doPuppet
+    doPuppet,
+    resolvePath
 } = require("../helpers");
 const books = require("../../resources/books.json");
 const Section = require('./section');
@@ -51,22 +52,42 @@ class jxlSpreadSection extends Section {
                     nValues: [1, 1]
                 },
                 {
-                    id: "notes",
+                    id: "bcvNotes",
                     label: {
-                        en: "Notes Source",
-                        fr: "Source pour notes"
+                        en: "Notes by verse",
+                        fr: "Notes par verset"
                     },
                     typeName: "tNotes",
                     nValues: [0, 1]
                 },
                 {
-                    id: "notesPivot",
+                    id: "glossNotes",
                     label: {
-                        en: "Notes pivot table",
-                        fr: "Tableau croisé pour notes"
+                        en: "Gloss notes (advanced)",
+                        fr: "Notes pour gloss (avancé)"
                     },
-                    typeName: "tNotes",
-                    nValues: [0, 1]
+                    nValues: [0, 1],
+                    typeSpec: [
+
+                        {
+                            id: "notes",
+                            label: {
+                                en: "Notes",
+                                fr: "Notes"
+                            },
+                            typeName: "tNotes",
+                            nValues: [1, 1]
+                        },
+                        {
+                            id: "pivot",
+                            label: {
+                                en: "Pivot table",
+                                fr: "Tableau croisé"
+                            },
+                            typeName: "tNotes",
+                            nValues: [1, 1]
+                        }
+                    ]
                 },
                 /*                {
                                     id: "firstSentence",
@@ -151,7 +172,7 @@ class jxlSpreadSection extends Section {
     }
 
     async doSection({section, templates, manifest, options}) {
-        const jsonFile = fse.readJsonSync(path.resolve(path.join(section.content.jxl, section.bcvRange + ".json")));
+        const jsonFile = fse.readJsonSync(resolvePath(path.join(section.content.jxl, section.bcvRange + ".json")));
         const mergeCvs = (cvs) => {
             const chapter = cvs[0]
                 .split(":")[0];
@@ -182,8 +203,8 @@ class jxlSpreadSection extends Section {
         let pivotIds = new Set([]);
         const notes = {};
         const notePivot = {};
-        if (section.content.notes && section.content.notesPivot) {
-            const pivotRows = fse.readFileSync(path.join(section.content.notesPivot, `${section.bcvRange}.tsv`)).toString().split("\n");
+        if (section.content.glossNotes) {
+            const pivotRows = fse.readFileSync(resolvePath(path.join(section.content.glossNotes[0].pivot, `${section.bcvRange}.tsv`))).toString().split("\n");
             for (const pivotRow of pivotRows) {
                 const cells = pivotRow.split("\t");
                 if (!cells[4] || cells[4].length === 0) {
@@ -198,7 +219,7 @@ class jxlSpreadSection extends Section {
                     pivotIds.add(noteId);
                 }
             }
-            const notesRows = fse.readFileSync(path.join(section.content.notes, `${section.bcvRange}.tsv`)).toString().split("\n");
+            const notesRows = fse.readFileSync(resolvePath(path.join(section.content.glossNotes[0].notes, `${section.bcvRange}.tsv`))).toString().split("\n");
             for (const notesRow of notesRows) {
                 const cells = notesRow.split('\t');
                 if (pivotIds.has(cells[4])) {
@@ -211,7 +232,7 @@ class jxlSpreadSection extends Section {
         for (const scripture of section.content.lhs) {
             docSpecs.push({
                 id: `xxx_yyy${scriptureN}`,
-                path: scripture.src,
+                path: resolvePath(scripture.src),
                 type: scripture.type,
                 text: scripture.text
             });

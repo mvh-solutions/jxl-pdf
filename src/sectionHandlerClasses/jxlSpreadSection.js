@@ -8,7 +8,7 @@ const {
     tidyLhsText,
     cleanNoteLine,
     doPuppet,
-    resolvePath
+    resolvePath, bcvNotes, unpackCellRange
 } = require("../helpers");
 const books = require("../../resources/books.json");
 const Section = require('./section');
@@ -200,6 +200,10 @@ class jxlSpreadSection extends Section {
             sentenceMerges.push(sentenceLastV === nextSentenceFirstV);
             sentenceN++;
         }
+        let vNotes = section.content.bcvNotes ? bcvNotes(resolvePath(section.content.bcvNotes), section.bcvRange) : {};
+        for (const [cv, noteArray] of Object.entries(vNotes)) {
+            vNotes[cv] = [`<b>${cv}</b> ${noteArray[0]}`, ...noteArray.slice(1).map(nt => `<span class="not_first_note">${nt}</span>`)];
+        }
         let pivotIds = new Set([]);
         const glossNotes = {};
         const glossNotePivot = {};
@@ -291,6 +295,7 @@ class jxlSpreadSection extends Section {
             );
             if (!sentenceMerges[sentenceN]) {
                 const cvRef = mergeCvs(cvs);
+                const cvNotes = unpackCellRange(cvRef).map(cv => vNotes[cv] || []);
                 let leftContent = [];
                 let first = true;
                 for (const content of docSpecs) {
@@ -311,9 +316,12 @@ class jxlSpreadSection extends Section {
                     .replace('%%JXL%%', jxls.join("\n"))
                     .replace(
                         '%%NOTES%%',
-                        sentenceNotes.length === 0 ?
-                            "" :
-                            ``);
+                        cvNotes.length > 0 ?
+                            `${cvNotes.reduce((a, b) => [...a, ...b])
+                                .map(nr => cleanNoteLine(nr))
+                                .map(note => `<p class="bcvnote">${note}</p>`)
+                                .join('\n')}` :
+                            "");
                 sentences.push(sentence);
                 jxls = [];
                 cvs = [];

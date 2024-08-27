@@ -162,9 +162,9 @@ class jxlSimpleSection extends Section {
             sentenceMerges.push(sentenceLastV === nextSentenceFirstV);
             sentenceN++;
         }
-        let notes = section.content.bcvNotes ? bcvNotes(resolvePath(section.content.bcvNotes), section.bcvRange) : {};
-        for (const [cv, noteArray] of Object.entries(notes)) {
-            notes[cv] = [`<b>${cv}</b> ${noteArray[0]}`, ...noteArray.slice(1).map(nt => `<span class="not_first_note">${nt}</span>`)];
+        let vNotes = section.content.bcvNotes ? bcvNotes(resolvePath(section.content.bcvNotes), section.bcvRange) : {};
+        for (const [cv, noteArray] of Object.entries(vNotes)) {
+            vNotes[cv] = [`<b>${cv}</b> ${noteArray[0]}`, ...noteArray.slice(1).map(nt => `<span class="not_first_note">${nt}</span>`)];
         }
         let pivotIds = new Set([]);
         const glossNotes = {};
@@ -240,7 +240,7 @@ class jxlSimpleSection extends Section {
             );
             if (!sentenceMerges[sentenceN]) {
                 const cvRef = mergeCvs(cvs);
-                const cvNotes = unpackCellRange(cvRef).map(cv => notes[cv] || []);
+                const cvNotes = unpackCellRange(cvRef).map(cv => vNotes[cv] || []);
                 const sentence = templates.simple_juxta_sentence
                     .replace('%%BOOKNAME%%', bookName)
                     .replace('%%SENTENCEREF%%', cvRef)

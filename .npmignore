@@ -4,4 +4,5 @@ data/
 output/
 scripts/
 json/
+test/
 utils/

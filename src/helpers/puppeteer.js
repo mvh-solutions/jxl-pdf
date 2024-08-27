@@ -38,8 +38,8 @@ const doPuppet = async ({htmlPath, pdfPath, verbose=false}) => {
         path: pdfPath,
         format: 'A3',
         landscape: true,
-        timeout: 300000
-    }); // 5 minutes
+        timeout: 300000 // 5 minutes
+    });
     verbose && console.log(`      PDF generated and saved to ${pdfPath}`);
     await browser.close();
 }

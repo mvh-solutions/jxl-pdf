@@ -1,7 +1,8 @@
 {
   "EXECUTIVE": {
     "label": {
-      "en": "Executive"
+      "en": "Executive",
+      "fr": "Executive"
     },
     "pageSize": [
       504,
@@ -54,22 +55,7 @@
         ]
       },
       "paraBible": {},
-      "biblePlusNotes": {
-        "cssValues": [
-          [
-            "SCRIPTURECOLUMNWIDTH",
-            [
-              88
-            ]
-          ],
-          [
-            "NOTESCOLUMNWIDTH",
-            [
-              288
-            ]
-          ]
-        ]
-      },
+      "biblePlusNotes": {},
       "obsPlusNotes": {
         "cssValues": [
           ["IMGWIDTH", [60]]
@@ -77,9 +63,74 @@
       }
     }
   },
+  "LETTERP": {
+    "label": {
+      "en": "US Letter Portrait",
+      "fr": "Lettre US Portrait"
+    },
+    "pageSize": [
+      612,
+      791
+    ],
+    "margins": {
+      "top": [
+        60
+      ],
+      "firstPageTop": [
+        40
+      ],
+      "bottom": [
+        50
+      ],
+      "outer": [
+        44
+      ],
+      "inner": [
+        72
+      ]
+    },
+    "footerOffset": [
+      10
+    ],
+    "columnGap": [
+      12
+    ],
+    "sections": {
+      "front": {},
+      "bookNote": {},
+      "4ColumnSpread": {},
+      "jxlSpread": {},
+      "jxlSimple": {},
+      "2Column": {},
+      "bcvBible": {
+        "cssValues": [
+          [
+            "CVCOLUMNWIDTH",
+            [
+              50
+            ]
+          ],
+          [
+            "VERSECOLUMNWIDTH",
+            [
+              446
+            ]
+          ]
+        ]
+      },
+      "paraBible": {},
+      "biblePlusNotes": {},
+      "obsPlusNotes": {
+        "cssValues": [
+          ["IMGWIDTH", [70]]
+        ]
+      }
+    }
+  },
   "A4P": {
     "label": {
-      "en": "A4 Portrait"
+      "en": "A4 Portrait",
+      "fr": "A4 Portrait"
     },
     "pageSize": [
       595,
@@ -132,22 +183,7 @@
         ]
       },
       "paraBible": {},
-      "biblePlusNotes": {
-        "cssValues": [
-          [
-            "SCRIPTURECOLUMNWIDTH",
-            [
-              107
-            ]
-          ],
-          [
-            "NOTESCOLUMNWIDTH",
-            [
-              360
-            ]
-          ]
-        ]
-      },
+      "biblePlusNotes": {},
       "obsPlusNotes": {
         "cssValues": [
           ["IMGWIDTH", [70]]
@@ -157,66 +193,258 @@
   },
   "A3P": {
     "label": {
-      "en": "A4 Portrait"
+      "en": "A3 Portrait",
+      "fr": "A3 Portrait"
     },
     "pageSize": [
       841.89,
-      1190,
-      5
-    ]
+      1190
+    ],
+    "margins": {
+      "top": [
+        84
+      ],
+      "firstPageTop": [
+        56
+      ],
+      "bottom": [
+        70
+      ],
+      "outer": [
+        62
+      ],
+      "inner": [
+        102
+      ]
+    },
+    "footerOffset": [
+      10
+    ],
+    "columnGap": [
+      12
+    ],
+    "sections": {
+      "front": {},
+      "bookNote": {},
+      "4ColumnSpread": {},
+      "jxlSpread": {},
+      "jxlSimple": {},
+      "2Column": {},
+      "bcvBible": {
+        "cssValues": [
+          [
+            "CVCOLUMNWIDTH",
+            [
+              70
+            ]
+          ],
+          [
+            "VERSECOLUMNWIDTH",
+            [
+              606
+            ]
+          ]
+        ]
+      },
+      "paraBible": {},
+      "biblePlusNotes": {},
+      "obsPlusNotes": {
+        "cssValues": [
+          ["IMGWIDTH", [10]]
+        ]
+      }
+    }
   },
   "A5P": {
     "label": {
-      "en": "A5 Portrait"
+      "en": "A5 Portrait",
+      "fr": "A5 Portrait"
     },
     "pageSize": [
       419.53,
       595.28
-    ]
+    ],
+    "margins": {
+      "top": [
+        54
+      ],
+      "firstPageTop": [
+        40
+      ],
+      "bottom": [
+        35
+      ],
+      "outer": [
+        41
+      ],
+      "inner": [
+        51
+      ]
+    },
+    "footerOffset": [
+      5
+    ],
+    "columnGap": [
+      12
+    ],
+    "sections": {
+      "front": {},
+      "bookNote": {},
+      "4ColumnSpread": {},
+      "jxlSpread": {},
+      "jxlSimple": {},
+      "2Column": {},
+      "bcvBible": {
+        "cssValues": [
+          [
+            "CVCOLUMNWIDTH",
+            [
+              35
+            ]
+          ],
+          [
+            "VERSECOLUMNWIDTH",
+            [
+              292
+            ]
+          ]
+        ]
+      },
+      "paraBible": {},
+      "biblePlusNotes": {},
+      "obsPlusNotes": {
+        "cssValues": [
+          ["IMGWIDTH", [50]]
+        ]
+      }
+    }
   },
   "A6P": {
     "label": {
-      "en": "A6 Portrait"
+      "en": "A6 Portrait",
+      "fr": "A6 Portrait"
     },
     "pageSize": [
       297.64,
       419.53
-    ]
+    ],
+    "margins": {
+      "top": [
+        30
+      ],
+      "firstPageTop": [
+        10
+      ],
+      "bottom": [
+        25
+      ],
+      "outer": [
+        22
+      ],
+      "inner": [
+        36
+      ]
+    },
+    "footerOffset": [
+      5
+    ],
+    "columnGap": [
+      12
+    ],
+    "sections": {
+      "front": {},
+      "bookNote": {},
+      "4ColumnSpread": {},
+      "jxlSpread": {},
+      "jxlSimple": {},
+      "2Column": {},
+      "bcvBible": {
+        "cssValues": [
+          [
+            "CVCOLUMNWIDTH",
+            [
+              25
+            ]
+          ],
+          [
+            "VERSECOLUMNWIDTH",
+            [
+              215
+            ]
+          ]
+        ]
+      },
+      "paraBible": {},
+      "biblePlusNotes": {},
+      "obsPlusNotes": {
+        "cssValues": [
+          ["IMGWIDTH", [35]]
+        ]
+      }
+    }
   },
-  "FOLIO": {
+  "POCKETP": {
     "label": {
-      "en": "Folio"
+      "en": "Pocket Book Portrait",
+      "fr": "Livre de Poche Portrait"
     },
     "pageSize": [
-      612,
-      936
-    ]
-  },
-  "LEGAL": {
-    "label": {
-      "en": "Folio"
+      306,
+      495
+    ],
+    "margins": {
+      "top": [
+        30
+      ],
+      "firstPageTop": [
+        10
+      ],
+      "bottom": [
+        25
+      ],
+      "outer": [
+        22
+      ],
+      "inner": [
+        36
+      ]
     },
-    "pageSize": [
-      612,
-      1008
-    ]
-  },
-  "LETTER": {
-    "label": {
-      "en": "Letter"
-    },
-    "pageSize": [
-      612,
-      792
-    ]
-  },
-  "TABLOID": {
-    "label": {
-      "en": "Tabloid"
-    },
-    "pageSize": [
-      792,
-      1224
-    ]
+    "footerOffset": [
+      5
+    ],
+    "columnGap": [
+      12
+    ],
+    "sections": {
+      "front": {},
+      "bookNote": {},
+      "4ColumnSpread": {},
+      "jxlSpread": {},
+      "jxlSimple": {},
+      "2Column": {},
+      "bcvBible": {
+        "cssValues": [
+          [
+            "CVCOLUMNWIDTH",
+            [
+              25
+            ]
+          ],
+          [
+            "VERSECOLUMNWIDTH",
+            [
+              223
+            ]
+          ]
+        ]
+      },
+      "paraBible": {},
+      "biblePlusNotes": {},
+      "obsPlusNotes": {
+        "cssValues": [
+          ["IMGWIDTH", [35]]
+        ]
+      }
+    }
   }
 }

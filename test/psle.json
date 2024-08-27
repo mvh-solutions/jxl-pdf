@@ -1,0 +1,67 @@
+{
+  "global": {
+    "fonts": "gentiumOpen",
+    "pages": "A4P",
+    "sizes": "12on15",
+    "outputPath": "~/Downloads/test_psle.pdf",
+    "workingDir": "~/.jxlpdf/working",
+    "verbose": false
+  },
+  "sections": [
+    {
+      "id": "title",
+      "type": "markdown",
+      "content": {
+        "startOn": "recto",
+        "showPageNumber": false,
+        "md": "^/test/test_resources/title.md"
+      }
+    },
+    {
+      "type": "bcvWrapper",
+      "ranges": [
+        "PHP",
+        "TIT"
+      ],
+      "sections": [
+        {
+          "id": "ba5c63b1-2377-42b8-b032-38ff9007b72f",
+          "type": "paraBible",
+          "content": {
+            "startOn": "recto",
+            "showPageNumber": true,
+            "scriptureText": "para Bible",
+            "scriptureSrc": "^/test/test_resources/fra_psle",
+            "scriptureType": "translation",
+            "showWordAtts": false,
+            "showTitles": true,
+            "showHeadings": true,
+            "showIntroductions": true,
+            "showFootnotes": true,
+            "showXrefs": true,
+            "showParaStyles": true,
+            "showCharacterMarkup": true,
+            "showChapterLabels": true,
+            "showVersesLabels": true,
+            "showFirstVerseLabel": true,
+            "nColumns": 2,
+            "showGlossaryStar": true
+          }
+        },
+        {
+          "id": "4a663359-0726-4cb1-8b5a-ecf0f9978cab",
+          "type": "bcvBible",
+          "content": {
+            "startOn": "recto",
+            "showPageNumber": true,
+            "notes": "^/test/test_resources/fra_sq",
+            "scriptureText": "bcvBible",
+            "scriptureSrc": "^/test/test_resources/fra_psle",
+            "scriptureType": "translation"
+          }
+        }
+
+      ]
+    }
+  ]
+}

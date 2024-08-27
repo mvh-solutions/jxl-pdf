@@ -1,7 +1,7 @@
 {
   "name": "jxl-pdf",
-  "version": "0.2.4",
-  "description": "Printable PDFs from Sundesmos Juxtalinear JSON",
+  "version": "0.5.0",
+  "description": "Printable Scripture-related PDFs",
   "main": "src/index.js",
   "dependencies": {
     "commander": "^11.1.0",
@@ -12,8 +12,8 @@
     "os": "^0.1.2",
     "path": "^0.12.7",
     "pdf-lib": "^1.17.1",
-    "proskomma-core": "^0.10.4",
-    "proskomma-json-tools": "^0.8.4",
+    "proskomma-core": "^0.10.9",
+    "proskomma-json-tools": "^0.8.20",
     "puppeteer": "^21.6.1",
     "text-diff": "^1.0.1"
   },

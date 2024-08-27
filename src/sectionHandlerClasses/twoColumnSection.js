@@ -1,4 +1,12 @@
-const {pkWithDocs, getBookName, getCVTexts, cleanNoteLine, bcvNotes, doPuppet} = require("../helpers");
+const {
+    unpackCellRange,
+    pkWithDocs,
+    getBookName,
+    getCVTexts,
+    cleanNoteLine,
+    bcvNotes,
+    doPuppet
+} = require("../helpers");
 const fse = require("fs-extra");
 const path = require("path");
 const Section = require('./section');
@@ -50,7 +58,7 @@ class TwoColumnSection extends Section {
                     nValues: [2, 2],
                     typeSpec: [
                         {
-                            id: "scripture#Text",
+                            id: "text",
                             label: {
                                 en: "Scripture # Text Label",
                                 "fr": "Etiquette pour texte biblique #"
@@ -59,7 +67,7 @@ class TwoColumnSection extends Section {
                             nValues: [1, 1]
                         },
                         {
-                            id: "scripture#Src",
+                            id: "src",
                             label: {
                                 en: "Source # Text Source",
                                 "fr": "Source pour texte biblique #"
@@ -68,7 +76,7 @@ class TwoColumnSection extends Section {
                             nValues: [1, 1]
                         },
                         {
-                            id: "scripture#Type",
+                            id: "type",
                             label: {
                                 en: "Scripture # Text Type",
                                 "fr": "Type de texte biblique #"
@@ -104,65 +112,82 @@ class TwoColumnSection extends Section {
         };
     }
 
-    async doSection ({section, templates, bookCode, options}) {
-        if (!section.texts || section.texts.length !== 2) {
-            throw new Error("2 Column Section requires exactly 2 text definitions");
+    async doSection ({section, templates, manifest, options}) {
+        const docSpecs = [];
+        let scriptureN = 0;
+        for (const scripture of section.content.scripture) {
+            docSpecs.push({id: `xxx_yyy${scriptureN}`, path: scripture.src});
+            scriptureN++;
         }
-        const pk = pkWithDocs(bookCode, section.texts, options.verbose);
-        const bookName = getBookName(pk, section.texts[0].id, bookCode);
-        const cvTexts = getCVTexts(bookCode, pk);
-        const notes = section.showNotes ? bcvNotes(options.configContent, bookCode) : {};
+        const pk = pkWithDocs(
+            section.bcvRange,
+            docSpecs,
+            options.verbose
+        );
+        const bookName = getBookName(pk, "xxx_yyy0", section.bcvRange);
+        const cvTexts = getCVTexts(section.bcvRange, pk);
+        let notes = section.content.notes ? bcvNotes(section.content.notes, section.bcvRange) : {};
+        for (const [cv, noteArray] of Object.entries(notes)) {
+            notes[cv] = [`<b>${cv}</b> ${noteArray[0]}`, ...noteArray.slice(1).map(nt => `<span class="not_first_note">${nt}</span>`)];
+        }
         const verses = [];
         verses.push(templates['2_column_title'].replace('%%BOOKNAME%%', bookName));
+        const qualified_id = `${section.id}_${section.bcvRange}`;
         const headerHtml = templates['2_column_header_page']
             .replace(
                 "%%TITLE%%",
-                `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`
+                `${section.id.replace('%%bookCode%%', section.bcvRange)} - ${section.type}`
             )
-            .replace(/%%TRANS1TITLE%%/g, section.texts[0].label)
-            .replace(/%%TRANS2TITLE%%/g, section.texts[1].label);
+            .replace(/%%TRANS1TITLE%%/g, section.content.scripture[0].text)
+            .replace(/%%TRANS2TITLE%%/g, section.content.scripture[1].text);
         fse.writeFileSync(
-            path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.html`),
+            path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', section.bcvRange)}_superimpose.html`),
             headerHtml
         );
         await doPuppet({
             verbose: options.verbose,
-            htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.html`),
-            pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}_superimpose.pdf`)
+            htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', section.bcvRange)}_superimpose.html`),
+            pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', section.bcvRange)}_superimpose.pdf`)
         });
         verses.push(`
 <section class="columnHeadings">
     <section class="leftColumn">
-        <h2 class="verseRecordHeadLeft">${section.texts[0].label}</h2>
+        <h2 class="verseRecordHeadLeft">${section.content.scripture[0].text}</h2>
     </section>
     <section class="rightColumn">
-        <h2 class="verseRecordHeadRight">${section.texts[1].label}</h2>
+        <h2 class="verseRecordHeadRight">${section.content.scripture[1].text}</h2>
     </section>
 </section>
 `);
+        const seenCvs = new Set([]);
         for (const cvRecord of cvTexts) {
+            if (seenCvs.has(cvRecord.cv)) {
+                continue;
+            } else {
+                seenCvs.add(cvRecord.cv);
+            }
             const verseHtml = templates['2_column_verse']
-                .replace("%%TRANS1TITLE%%", section.texts[0].label)
-                .replace("%%TRANS2TITLE%%", section.texts[1].label)
+                .replace("%%TRANS1TITLE%%", section.content.scripture[0].text)
+                .replace("%%TRANS2TITLE%%", section.content.scripture[1].text)
                 .replace(
                     '%%LEFTCOLUMN%%',
-                    `<div class="col1"><span class="cv">${cvRecord.cv}</span> ${cvRecord.texts[section.texts[0].id] || "-"}</div>`
+                    `<div class="col1"><span class="cv">${cvRecord.cv}</span> ${cvRecord.texts["xxx_yyy0"] || "-"}</div>`
                 )
                 .replace(
                     '%%RIGHTCOLUMN%%',
-                    `<div class="col2">${cvRecord.texts[section.texts[1].id] || "-"}${(notes[cvRecord.cv] || [])
+                    `<div class="col2">${cvRecord.texts["xxx_yyy1"] || "-"}${unpackCellRange(cvRecord.cv).map(cv => notes[cv] || []).reduce((a, b) => [...a, ...b])
                         .map(nr => cleanNoteLine(nr))
-                        .map(note => `<p class="note">${note}</p>`)
+                        .map(note => `<span class="note">${note}</span>`)
                         .join('\n')}</div>`
                 );
             verses.push(verseHtml);
         }
         fse.writeFileSync(
-            path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
+            path.join(options.htmlPath, `${qualified_id.replace('%%bookCode%%', section.bcvRange)}.html`),
             templates['2_column_page']
                 .replace(
                     "%%TITLE%%",
-                    `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`
+                    `${qualified_id.replace('%%bookCode%%', section.bcvRange)} - ${section.type}`
                 )
                 .replace(
                     "%%BODY%%",
@@ -175,8 +200,15 @@ class TwoColumnSection extends Section {
         );
         await doPuppet({
             verbose: options.verbose,
-            htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
-            pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)
+            htmlPath: path.join(options.htmlPath, `${qualified_id.replace('%%bookCode%%', section.bcvRange)}.html`),
+            pdfPath: path.join(options.pdfPath, `${qualified_id.replace('%%bookCode%%', section.bcvRange)}.pdf`)
+        });
+        manifest.push({
+            id: `${qualified_id}`,
+            type: section.type,
+            startOn: section.content.startOn,
+            showPageNumber: section.content.showPageNumber,
+            makeFromDouble: false
         });
     }
 

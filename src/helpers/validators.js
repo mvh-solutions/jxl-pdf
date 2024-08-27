@@ -4,7 +4,7 @@ const constants = require('./constants');
 const commander = require('commander');
 
 /**
- * VALIDATORS: Functions to ensure CLI args meet criteria (and in some cases modify CLI args).
+ * Validators: Functions to ensure CLI args meet criteria (and in some cases modify CLI args).
  * - config: Validates path to the JSON config file.
  * - working: Checks existence of the working directory.
  * - output: Ensures the output directory's parent exists.
@@ -17,7 +17,7 @@ const commander = require('commander');
  *
  * Usage: `VALIDATORS[key](value)` to validate each command-line option.
  */
-const VALIDATORS = {
+const validators = {
     config: configPath => {
         const resolved = path.resolve(configPath);
         if (!(fse.pathExistsSync(resolved)) || !(fse.lstatSync(resolved).isFile())) {
@@ -29,6 +29,19 @@ const VALIDATORS = {
         const resolved = path.resolve(workingDirPath);
         if ((fse.pathExistsSync(resolved)) && !(fse.lstatSync(resolved).isDirectory())) {
             throw new commander.InvalidArgumentError(`Working dir path '${workingDirPath}' exists but is not a directory`);
+        }
+        return resolved;
+    },
+    resourcesDir: resourcesPath => {
+        if (!resourcesPath) {
+            return null;
+        }
+        const resolved = path.resolve(resourcesPath);
+        if (!fse.pathExistsSync(resolved)) {
+            throw new commander.InvalidArgumentError(`Resources dir '${resolved}' does not exist`);
+        }
+        if (!(fse.lstatSync(resolved).isDirectory())) {
+            throw new commander.InvalidArgumentError(`Resources dir '${resolved}' is not a directory`);
         }
         return resolved;
     },
@@ -45,7 +58,7 @@ const VALIDATORS = {
         if (!(ucFormat in constants.PAGE_SIZES)) {
             throw new commander.InvalidArgumentError(`'${ucFormat}' is not one of ${Object.keys(constants.PAGE_SIZES).join(', ')}`)
         }
-        return constants.PAGE_SIZES[ucFormat];
+        return ucFormat;
     },
     book: bookCode => {
         if (!/^[A-Z\d]{3}$/.test(bookCode)) {
@@ -57,20 +70,20 @@ const VALIDATORS = {
         if (!(Object.keys(constants.STEPS_OPTIONS).includes(stepOptName))) {
             throw new commander.InvalidArgumentError(`'${stepOptName}' is not one of ${Object.keys(constants.STEPS_OPTIONS).join(', ')}`)
         }
-        return constants.STEPS_OPTIONS[stepOptName];
+        return stepOptName;
     },
     fonts: fontName => {
         if (!(Object.keys(constants.FONT_SETS).includes(fontName))) {
             throw new commander.InvalidArgumentError(`'${fontName}' is not one of ${Object.keys(constants.FONT_SETS).join(', ')}`)
         }
-        return constants.FONT_SETS[fontName];
+        return fontName;
     },
     fontSizes: fontSizesName => {
         if (!(Object.keys(constants.FONT_SIZES).includes(fontSizesName))) {
             throw new commander.InvalidArgumentError(`'${fontSizesName}' is not one of ${Object.keys(constants.FONT_SIZES).join(', ')}`)
         }
-        return constants.FONT_SIZES[fontSizesName];
+        return fontSizesName;
     }
 };
 
-module.exports = VALIDATORS;
+module.exports = validators;

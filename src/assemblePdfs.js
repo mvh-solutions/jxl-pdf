@@ -4,7 +4,8 @@ const {
 const {
     loadTemplate,
     doPuppet,
-    constants
+    constants,
+    resolvePath
 } = require("./helpers");
 const fontKit = require('fontkit');
 const fse = require("fs-extra");
@@ -12,6 +13,7 @@ const path = require("path");
 
 /**
  * Generates HTML for page numbers and converts it to a PDF.
+ * Does this 100 pages at a time because of weird Puppeteer 180-page limit
  * @param {Object} params - Parameters for generating page numbers.
  *   - options: Object - Configuration options including paths and verbose flag.
  *   - numPages: number - Total number of pages.
@@ -23,23 +25,41 @@ const doPageNumber = async ({
 }) => {
     const masterTemplate = loadTemplate('page_number_master');
     const pageNumTemplate = loadTemplate('page_number_page');
-    const pageNumbersHtml = [...Array(numPages).keys()]
+    // All pages
+    let pageNumbersHtmls = [...Array(numPages).keys()]
         .map((pageNum) => pageNumTemplate
-            .replace('%%PAGENUM%%', pageNum + 1)).join('');
-    fse.writeFileSync(
-        path.resolve(path.join(options.htmlPath, '__pageNumbers.html')),
-        masterTemplate
-        .replace(
-            "%%CONTENT%%",
-            pageNumbersHtml
-        )
-    );
+            .replace('%%PAGENUM%%', pageNum + 1));
+    let nPdfNumbersWorkingFiles = 0;
+    const pageNumbersPaths = [];
+    // Make PDFs of slices of page numbers
+    while (pageNumbersHtmls.length > 0) {
+        nPdfNumbersWorkingFiles++;
+        fse.writeFileSync(
+            path.resolve(path.join(options.htmlPath, `__pageNumbers_${nPdfNumbersWorkingFiles}_.html`)),
+            masterTemplate
+                .replace(
+                    "%%CONTENT%%",
+                    pageNumbersHtmls.slice(0, 100).join('')
+                )
+        );
+        const pageNumbersWorkingFilePath = path.resolve(path.join(options.pdfPath, `__pageNumbers_${nPdfNumbersWorkingFiles}_.pdf`));
+        pageNumbersPaths.push(pageNumbersWorkingFilePath);
+        await doPuppet({
+            verbose: options.verbose,
+            htmlPath: path.join(options.htmlPath, `__pageNumbers_${nPdfNumbersWorkingFiles}_.html`),
+            pdfPath: pageNumbersWorkingFilePath
+        });
+        pageNumbersHtmls = pageNumbersHtmls.slice(100);
+    }
+    // Assemble slice PDFs
     const pageNumbersPdfPath = path.resolve(path.join(options.pdfPath, '__pageNumbers.pdf'));
-    await doPuppet({
-        verbose: options.verbose,
-        htmlPath: path.join(options.htmlPath, `__pageNumbers.html`),
-        pdfPath: pageNumbersPdfPath
-    });
+    const pnPdf = await PDFDocument.load(fse.readFileSync(pageNumbersPaths[0]));
+    for (const mergeablePath of pageNumbersPaths.slice(1)) {
+        const mergeablePDF = await PDFDocument.load(fse.readFileSync(mergeablePath));
+        const copiedPages = await pnPdf.copyPages(mergeablePDF, mergeablePDF.getPageIndices());
+        copiedPages.forEach(page => pnPdf.addPage(page));
+    }
+    fse.writeFileSync(pageNumbersPdfPath, await pnPdf.save());
     return pageNumbersPdfPath;
 }
 
@@ -174,7 +194,7 @@ const makeSuperimposed = async function (manifestStep, superimposePdf) {
  *   - pageFormat: Format specification for pages in the PDF.
  *   - verbose: Boolean to enable verbose logging.
  */
-const assemblePdfs = async function (options) {
+const assemblePdfs = async function (options, doPdfCallback) {
     const fontBytes = fse.readFileSync(path.resolve(path.join(__dirname, '..', 'fonts/GentiumBookPlus-Regular.ttf')));
     const pdfDoc = await PDFDocument.create();
     pdfDoc.registerFontkit(fontKit);
@@ -193,7 +213,13 @@ const assemblePdfs = async function (options) {
 
     let numPages = 0;
     options.verbose && console.log(`      Manifest steps`);
-    for (const manifestStep of manifest) {
+    for (const [n, manifestStep] of manifest.entries()) {
+        doPdfCallback && doPdfCallback({
+            type: "manifest",
+            level: 1,
+            msg: `Assembling PDF ${n + 1} of ${manifest.length}`,
+            args: [n, manifest.length, manifestStep.id]
+        });
         // Loop over non-superimpose steps
         if (manifestStep.type === "superimpose") {
             continue
@@ -239,6 +265,12 @@ const assemblePdfs = async function (options) {
 
     // Generate page numbers PDF and merge with content PDF
     options.verbose && console.log(`   Add page numbers`);
+    doPdfCallback && doPdfCallback({
+        type: "pageNumbers",
+        level: 1,
+        msg: `Generate Page Numbers`,
+        args: []
+    });
     const pdfDocWithPageNum = await makePageNumber({
         options,
         pdfDoc,
@@ -248,8 +280,14 @@ const assemblePdfs = async function (options) {
 
     // Serialize the PDFDocument to bytes (a Uint8Array)
     const pdfBytes = await pdfDocWithPageNum.save();
-    fse.writeFileSync(options.output, pdfBytes);
-    options.verbose && console.log(`   Assembled PDF (with ${pdfDocWithPageNum.getPageCount()} pages) written to ${options.output}`);
+    fse.writeFileSync(resolvePath(options.output), pdfBytes);
+    options.verbose && console.log(`   Assembled PDF (with ${pdfDocWithPageNum.getPageCount()} pages, ${Math.floor(pdfBytes.length / (1024 * 1024))} Mb) written to ${options.output}`);
+    doPdfCallback && doPdfCallback({
+        type: "writeOutput",
+        level: 0,
+        msg: `Writing out assembled PDF to ${options.output} (${pdfDocWithPageNum.getPageCount()}) page(s)`,
+        args: [options.output, pdfDocWithPageNum.getPageCount()]
+    });
 }
 
 module.exports = assemblePdfs;

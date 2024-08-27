@@ -1,4 +1,4 @@
-const FrontSection = require('./frontSection');
+const PdfSection = require('./pdfSection');
 const MarkdownSection = require('./markdownSection');
 const ObsSection = require('./obsSection');
 const ObsPlusNotesSection = require('./obsPlusNotesSection');
@@ -12,7 +12,7 @@ const ParaBibleSection = require("./paraBibleSection");
 const BiblePlusNotesSection = require("./biblePlusNotesSection");
 
 module.exports = {
-    FrontSection,
+    PdfSection,
     MarkdownSection,
     ObsSection,
     ObsPlusNotesSection,
@@ -23,5 +23,5 @@ module.exports = {
     TwoColumnSection,
     BcvBibleSection,
     ParaBibleSection,
-    BiblePlusNotesSection
+    BiblePlusNotesSection,
 }

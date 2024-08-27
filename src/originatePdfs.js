@@ -97,14 +97,14 @@ const setupCSS = options => {
     options.verbose && console.log(`   ${cssFilenames.length} CSS file(s) customized`);
 }
 
-const originatePdfs = async options => {
+const originatePdfs = async (options, doPdfCallback=null) => {
     // Set up workspace - options.workingDir should already exist
     fse.mkdirsSync(options.htmlPath);
     fse.mkdirsSync(path.join(options.workingDir, "html", "resources"));
     setupCSS(options);
     fse.copySync(path.join(__dirname, "..", "static", "resources", "paged.polyfill.js"), path.join(options.workingDir, "html", "resources", "paged.polyfill.js"));
     fse.mkdirsSync(path.join(options.workingDir, "html", "page_resources"));
-    fse.copySync(path.join(__dirname, "..", "static", "page_resources"), path.join(options.workingDir, "html", "page_resources"));
+    options.resourcesDir && fse.copySync(path.resolve(options.resourcesDir), path.join(options.workingDir, "html", "page_resources"));
     fse.mkdirsSync(options.pdfPath);
 
     const checkBookCode = (sectionId) => {
@@ -117,46 +117,34 @@ const originatePdfs = async options => {
 
     let links = [];
     let manifest = [];
-    let bookCode = null;
-    let obsCode = null;
-    let juxtaCode = null;
+    let wrapperRange = null;
 
     const doSection = async (section, nested) => {
-        options.verbose && nested && console.log(`   Section ${section.id.replace('%%bookCode%%', bookCode)} (${section.type} in setBooks)`);
+        options.verbose && nested && console.log(`   Section ${section.id.replace('%%bookCode%%', wrapperRange)} (${section.type} in wrapper)`);
         if (section.forceSkip) {
             options.verbose && console.log(`      Force skip in config file; continuing...`);
             return;
         }
         links.push(
             templates['web_index_page_link']
-                .replace(/%%ID%%/g, section.id.replace('%%bookCode%%', bookCode))
+                .replace(/%%ID%%/g, section.id.replace('%%bookCode%%', wrapperRange))
         );
         if (["4ColumnSpread", "2Column"].includes(section.type)) {
             links.push(
                 templates['web_index_page_link']
-                    .replace(/%%ID%%/g, `${section.id.replace('%%bookCode%%', bookCode)}_superimpose`)
+                    .replace(/%%ID%%/g, `${section.id.replace('%%bookCode%%', wrapperRange)}_superimpose`)
             );
             manifest.push({
-                id: `${section.id.replace('%%bookCode%%', bookCode)}_superimpose`,
+                id: `${section.id.replace('%%bookCode%%', wrapperRange)}_superimpose`,
                 type: "superimpose",
-                for: section.id.replace('%%bookCode%%', bookCode)
+                for: section.id.replace('%%bookCode%%', wrapperRange)
             });
         }
         const sectionHandler = sectionHandlerLookup[section.type];
         if (!sectionHandler) {
             throw new Error(`Unknown section type '${section.type}' (id '${section.id}')`);
         }
-        if (sectionHandler.requiresWrapper().includes("bcv")) {
-            checkBookCode(section.id);
-        }
-        await sectionHandler.doSection({section, templates, bookCode, options});
-        manifest.push({
-            id: section.id.replace('%%bookCode%%', bookCode),
-            type: section.type,
-            startOn: section.startOn,
-            showPageNumber: section.showPageNumber,
-            makeFromDouble: ["jxlSpread", "4ColumnSpread"].includes(section.type)
-        });
+        await sectionHandler.doSection({section, templates, wrapperRange, manifest, options});
         if (section.forceQuit) {
             console.log("** Force quit in config file **");
             process.exit(0);
@@ -165,30 +153,47 @@ const originatePdfs = async options => {
 
     for (const section of options.configContent.sections) {
         options.verbose && console.log(`   Section ${section.id ? `${section.id} (${section.type})` : section.type}`);
+        doPdfCallback && doPdfCallback({
+            type: "section",
+            level: 1,
+            msg: `Section or wrapper ${section.type}`,
+            args: [section.type]
+        });
 
         switch (section.type) {
-            case "setBook":
-                if (section.source && section.source === "cli" && options.book) {
-                    bookCode = options.book;
-                } else if (section.source && section.source === "literal" && section.bookCode) {
-                    bookCode = section.bookCode;
-                } else {
-                    throw new Error(`Could not set bookCode using '${JSON.stringify(section)}': maybe you need to provide a bookCode at the command line?`);
-                }
-                options.verbose && console.log(`      bookCode = ${bookCode} (from 'setBook')`);
-                break;
-            case "setBooks":
-                for (const bc of section.bookCodes) {
-                    bookCode = bc;
-                    options.verbose && console.log(`      bookCode = ${bookCode} (from 'setBooks')`);
+            case "obsWrapper":
+                options.verbose && console.log(`      obsRanges`);
+                for (const obsRange of section.ranges) {
+                    options.verbose && console.log(`      obsRange = ${obsRange}`);
+                    const [firstStory, lastStory] = obsRange.split('-').map(n => parseInt(n));
                     for (const section2 of section.sections) {
-                        await doSection(section2, true);
+                        doPdfCallback && doPdfCallback({
+                            type: "wrappedSection",
+                            level: 2,
+                            msg: `Wrapped section ${section2.type}`,
+                            args: [section2.type, obsRange]
+                        });
+                        await doSection({...section2, firstStory, lastStory: lastStory || firstStory, doPdfCallback}, true);
                     }
-                    bookCode = null;
+                }
+                break;
+            case "bcvWrapper":
+                options.verbose && console.log(`      bcvRanges`);
+                for (const bcvRange of section.ranges) {
+                    options.verbose && console.log(`      bcvRange = ${bcvRange}`);
+                    for (const section2 of section.sections) {
+                        doPdfCallback && doPdfCallback({
+                            type: "wrappedSection",
+                            level: 2,
+                            msg: `Wrapped section ${section2.type}`,
+                            args: [section2.type, bcvRange]
+                        });
+                        await doSection({...section2, bcvRange, doPdfCallback}, true);
+                    }
                 }
                 break;
             default:
-                await doSection(section, false);
+                await doSection({...section, doPdfCallback}, false);
         }
     }
     fse.writeFileSync(

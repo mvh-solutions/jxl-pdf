@@ -1,0 +1,71 @@
+%%%ATPAGE%%%
+
+%%%BODY%%%
+
+%%%P%%%
+
+h1 {
+    font-size: %%H1FONTSIZE%%pt;
+    line-height: %%H1LINEHEIGHT%%pt;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: %%H1BOTTOMMARGIN%%pt;
+    border-bottom: %%H1BOTTOMBORDERWIDTH%%pt solid #000;
+    padding-bottom: %%H1BOTTOMMARGIN%%pt;
+    width: %%PAGEBODYWIDTH%%pt;
+    font-family: %%HEADINGFONT%%;
+    break-after: avoid;
+    color: #000;
+}
+
+.leftColumn {
+    display: block;
+    vertical-align: top;
+    text-align: left;
+    color: #000;
+    margin-left: 20pt;
+    text-indent: -20pt;
+}
+
+.rightColumn {
+    display: block;
+    vertical-align: top;
+}
+
+.verseRecord {
+    page-break-inside: avoid;
+    vertical-align: top;
+    display: block;
+    padding-bottom: %%RULEPADDING%%pt;
+    border-bottom: %%RULEWIDTH%%pt solid black;
+    border-color: #000;
+    margin-bottom: %%RULEMARGIN%%pt;
+}
+
+.col1, .col2 {
+    vertical-align: top;
+    display: block;
+}
+
+.col2 {
+}
+.cv {
+    font-style: italic;
+    font-weight: bold;
+}
+.note {
+    font-family: %%BODYFONT2%%;
+    display: list-item;
+    list-style-type: lower-alpha;
+    list-style-position: inside;
+    font-size: %%BODYFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
+    text-align: justify;
+    margin-bottom: 0pt;
+    margin-left: 30pt;
+    text-indent: -10pt;
+}
+
+.note .b {
+    font-weight: #000;
+}

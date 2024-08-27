@@ -5,28 +5,59 @@ body {
     line-height: %%BODYLINEHEIGHT%%pt;
     font-family: %%BODYFONT%%;
     text-align: justify;
-    text-align-last: left;
+    text-align-last: start;
 }
 
-div.chapters {
-    columns: 2;
+section.chapters {
+    column-fill: balance;
+    page-break-before: avoid;
+    page-break-inside: auto;
+    -webkit-column-break-inside: auto;
 }
 
 %%%P%%%
 
-%%%H1%%%
+h1 {
+    page-break-after: avoid;
+}
+
+h1, h2, h3, h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+    break-after: avoid;
+    -webkit-column-break-after: avoid;
+}
 
 ::footnote-call {
-    font-weight: bold;
-    font-size: %%FOOTNOTEFONTSIZE%%;
-    vertical-align: baseline;
-    position: relative;
-    top: -0.5em;
+    font-style: italic;
+    font-size: 0.5em;
+    vertical-align: top;
     padding-left: 1pt;
+    line-height: 1;
 }
 
 ::footnote-marker {
-    font-weight: bold;
+    font-weight: normal;
+    line-height: 1;
+}
+
+.glossary_star {
+    color: #777;
+}
+
+.bcv_note {
+    font-size: %%FOOTNOTEFONTSIZE%%pt;
+    line-height: %%FOOTNOTELINEHEIGHT%%pt;
+    float: footnote;
+    font-family: %%BODYFONT2%%;
+}
+
+.bcv_note::footnote-call {
+    content: none;
+}
+
+.bcv_note::footnote-marker {
+    content: none;
 }
 
 /* paras CSS format : */
@@ -34,6 +65,7 @@ div.chapters {
     color: purple;
 }
 .paras_usfm_b {
+    min-height: %%BODYLINEHEIGHT%%pt;
 }
 .paras_usfm_d {
     font-style: italic;
@@ -42,83 +74,130 @@ div.chapters {
     font-size: %%FOOTNOTEFONTSIZE%%pt;
     line-height: %%FOOTNOTELINEHEIGHT%%pt;
     float: footnote;
-    font-family: %%FOOTNOTEFONT%%;
+    font-family: %%BODYFONT2%%;
 }
 .paras_usfm_hanging_graft {
 }
+.paras_usfm_ib {
+    min-height: %%BODYLINEHEIGHT%%pt;
+}
+.paras_usfm_ili {
+    display: list-item;
+    list-style-type: disc;
+    list-style-position: inside;
+    padding-left: 24pt;
+    text-indent: -12pt;
+    font-family: %%BODYFONT2%%;
+    break-inside: avoid;
+}
+.paras_usfm_ili2 {
+    display: list-item;
+    list-style-type: circle;
+    list-style-position: inside;
+    padding-left: 36pt;
+    text-indent: -12pt;
+    font-family: %%BODYFONT2%%;
+    break-inside: avoid;
+}
+.paras_usfm_ili3 {
+    display: list-item;
+    list-style-position: inside;
+    list-style-type: circle;
+    padding-left: 48pt;
+    text-indent: -12pt;
+    font-family: %%BODYFONT2%%;
+    break-inside: avoid;
+}
+.paras_usfm_im {
+    font-family: %%BODYFONT2%%
+}
 .paras_usfm_imt {
-    font-weight: bold;
+    font-weight: normal;
     font-style: italic;
     font-size: %%H1FONTSIZE%%pt;
     line-height: %%H1LINEHEIGHT%%pt;
     text-align: center;
-    font-family: %%HEADINGFONT%%;
+    font-family: %%BODYFONT2%%;
 }
 .paras_usfm_imt2 {
-    font-weight: bold;
+    font-weight: normal;
     font-style: italic;
     font-size: %%H2FONTSIZE%%pt;
     line-height: %%H2LINEHEIGHT%%pt;
     text-align: center;
-    font-family: %%HEADINGFONT%%;
+    font-family: %%BODYFONT2%%;
 }
 .paras_usfm_imt3 {
-    font-weight: bold;
+    font-weight: normal;
     font-style: italic;
     font-size: %%H3FONTSIZE%%pt;
     line-height: %%H3LINEHEIGHT%%pt;
     text-align: center;
-    font-family: %%HEADINGFONT%%;
+    font-family: %%BODYFONT2%%;
 }
 .paras_usfm_ip {
     text-indent: 12pt;
+    font-family: %%BODYFONT2%%
 }
 .paras_usfm_ipi {
     padding-left: 12pt;
     text-indent: 12pt;
+    font-family: %%BODYFONT2%%
 }
 .paras_usfm_io {
     padding-left: 12pt;
+    font-family: %%BODYFONT2%%
 }
 .paras_usfm_iot {
     font-weight: bold;
     font-size: %%H4FONTSIZE%%pt;
     line-height: %%H4LINEHEIGHT%%pt;
+    font-family: %%BODYFONT2%%
 }
 .paras_usfm_is {
     font-style: italic;
-    font-size: %%H1FONTSIZE%%pt;
-    line-height: %%H1LINEHEIGHT%%pt;
-    font-family: %%HEADINGFONT%%;
+    font-size: %%H2FONTSIZE%%pt;
+    line-height: %%H2LINEHEIGHT%%pt;
+    font-family: %%BODYFONT2%%;
+    break-after: avoid;
 }
 .paras_usfm_is2 {
     font-style: italic;
-    font-size: %%H2FONTSIZE%%pt;
-    line-height: %%H2LINEHEIGHT%%pt;
-    font-family: %%HEADINGFONT%%;
+    font-size: %%H3FONTSIZE%%pt;
+    line-height: %%H3LINEHEIGHT%%pt;
+    font-family: %%BODYFONT2%%;
+    break-after: avoid;
 }
 .paras_usfm_is3 {
     font-style: italic;
-    font-size: %%H3FONTSIZE%%pt;
-    line-height: %%H3LINEHEIGHT%%pt;
-    font-family: %%HEADINGFONT%%;
+    font-size: %%H4FONTSIZE%%pt;
+    line-height: %%H4LINEHEIGHT%%pt;
+    font-family: %%BODYFONT2%%;
+    break-after: avoid;
 }
 .paras_usfm_li {
+    display: list-item;
+    list-style-position: inside;
     list-style-type: disc;
     padding-left: 24pt;
     text-indent: -12pt;
 }
 .paras_usfm_li2 {
-    list-style-type: disc;
+    display: list-item;
+    list-style-position: inside;
+    list-style-type: circle;
     padding-left: 36pt;
     text-indent: -12pt;
 }
 .paras_usfm_li3 {
-    list-style-type: disc;
+    display: list-item;
+    list-style-position: inside;
+    list-style-type: circle;
     padding-left: 48pt;
     text-indent: -12pt;
 }
 .paras_usfm_m {
+    break-before: avoid-column;
 }
 .paras_usfm_mi {
     padding-left: 12pt;
@@ -140,7 +219,7 @@ div.chapters {
     font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_mt {
-    font-weight: bold;
+    font-weight: normal;
     font-style: italic;
     font-size: %%H1FONTSIZE%%pt;
     line-height: %%H1LINEHEIGHT%%pt;
@@ -148,7 +227,7 @@ div.chapters {
     font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_mt2 {
-    font-weight: bold;
+    font-weight: normal;
     font-style: italic;
     font-size: %%H2FONTSIZE%%pt;
     line-height: %%H2LINEHEIGHT%%pt;
@@ -156,7 +235,7 @@ div.chapters {
     font-family: %%HEADINGFONT%%;
 }
 .paras_usfm_mt3 {
-    font-weight: bold;
+    font-weight: normal;
     font-style: italic;
     font-size: %%H3FONTSIZE%%pt;
     line-height: %%H3LINEHEIGHT%%pt;
@@ -167,6 +246,7 @@ div.chapters {
 }
 .paras_usfm_p {
     text-indent: 12pt;
+    break-inside: auto;
 }
 .paras_usfm_pc {
     text-align: center;
@@ -187,18 +267,26 @@ div.chapters {
     padding-left: 12pt;
     text-align: left;
     line-height: 10pt;
+    font-size: %%BODYFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
 }
 .paras_usfm_q2 {
     padding-left: 24pt;
     text-align: left;
+    font-size: %%BODYFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
 }
 .paras_usfm_q3 {
     padding-left: 36pt;
     text-align: left;
+    font-size: %%BODYFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
 }
 .paras_usfm_q4 {
     padding-left: 48pt;
     text-align: left;
+    font-size: %%BODYFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
 }
 .paras_usfm_qa {
     font-weight: bold;
@@ -214,26 +302,30 @@ div.chapters {
 }
 .paras_usfm_s {
     font-style: italic;
-    font-size: %%H1FONTSIZE%%pt;
-    line-height: %%H1LINEHEIGHT%%pt;
-    font-family: %%HEADINGFONT%%;
-}
-.paras_usfm_s2 {
-    font-style: italic;
     font-size: %%H2FONTSIZE%%pt;
     line-height: %%H2LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
+    text-align: left;
 }
-.paras_usfm_s3 {
+.paras_usfm_s2 {
     font-style: italic;
     font-size: %%H3FONTSIZE%%pt;
     line-height: %%H3LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
+    text-align: left;
 }
-.paras_usfm_sr {
+.paras_usfm_s3 {
+    font-style: italic;
+    font-size: %%H4FONTSIZE%%pt;
+    line-height: %%H4LINEHEIGHT%%pt;
+    font-family: %%HEADINGFONT%%;
+    text-align: left;
+}
+paras_usfm_sr {
     font-size: %%H3FONTSIZE%%pt;
     line-height: %%H3LINEHEIGHT%%pt;
     font-family: %%HEADINGFONT%%;
+    text-align: left;
 }
 .paras_usfm_tr {
 }
@@ -264,7 +356,7 @@ p:has(.marks_chapter_label) {
     font-size: 70%;
     line-height: 1;
     margin-right: 2pt;
-    vertical-align: top;
+    vertical-align: baseline;
 }
 /* wrappers CSS format : */
 .wrappers_default {
@@ -280,7 +372,7 @@ p:has(.marks_chapter_label) {
     font-style: italic;
 }
 .wrappers_usfm_bk {
-    font-weight: bold;
+    font-style: italic;
 }
 .wrappers_chapter {
 }
@@ -302,6 +394,9 @@ p:has(.marks_chapter_label) {
 .wrappers_usfm_it {
     font-style: italic;
 }
+.wrappers_usfm_k {
+    font-weight: bold;
+}
 .wrappers_usfm_nd {
     font-weight: bold;
     font-size: smaller;
@@ -310,9 +405,27 @@ p:has(.marks_chapter_label) {
 .wrappers_usfm_qs {
     font-style: italic;
 }
+.wrappers_usfm_pn {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-color: #777;
+    text-decoration-thickness: 1pt;
+}
+.wrappers_usfm_png {
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-decoration-color: #777;
+    text-decoration-thickness: 1pt;
+}
+.wrappers_usfm_qt {
+    font-style: italic;
+}
 .wrappers_usfm_sc {
     font-size: smaller;
     text-transform: uppercase;
+}
+.wrappers_usfm_sls {
+    font-family: %%GREEKFONT%%;
 }
 .wrappers_usfm_tl {
     font-style: italic;

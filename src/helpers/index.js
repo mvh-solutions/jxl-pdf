@@ -16,7 +16,7 @@ const {
 
 const {
     cvForSentence,
-    trimLhsText,
+    tidyLhsText,
     getGreekContent
 } = require('./jxl');
 
@@ -26,9 +26,11 @@ const {
 } = require('./loadTemplates');
 
 const {
+    unpackCellRange,
     cleanNoteLine,
     maybeChapterNotes,
-    bcvNotes
+    bcvNotes,
+    formatNote
 } = require('./notes');
 
 const {
@@ -40,6 +42,10 @@ const {
     doPuppet
 } = require('./puppeteer');
 
+const {
+    resolvePath
+} = require('./paths');
+
 module.exports = {
     constants,
     parseCommandLineArguments,
@@ -49,14 +55,17 @@ module.exports = {
     quoteForCv,
     getCVTexts,
     cvForSentence,
-    trimLhsText,
+    tidyLhsText,
     getGreekContent,
     loadTemplates,
     loadTemplate,
+    unpackCellRange,
     cleanNoteLine,
     maybeChapterNotes,
     bcvNotes,
+    formatNote,
     getBookName,
     pkWithDocs,
-    doPuppet
+    doPuppet,
+    resolvePath
 }

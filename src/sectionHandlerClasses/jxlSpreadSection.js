@@ -201,8 +201,8 @@ class jxlSpreadSection extends Section {
             sentenceN++;
         }
         let pivotIds = new Set([]);
-        const notes = {};
-        const notePivot = {};
+        const glossNotes = {};
+        const glossNotePivot = {};
         if (section.content.glossNotes) {
             const pivotRows = fse.readFileSync(resolvePath(path.join(section.content.glossNotes[0].pivot, `${section.bcvRange}.tsv`))).toString().split("\n");
             for (const pivotRow of pivotRows) {
@@ -210,11 +210,11 @@ class jxlSpreadSection extends Section {
                 if (!cells[4] || cells[4].length === 0) {
                     continue;
                 }
-                if (!notePivot[cells[0]]) {
-                    notePivot[cells[0]] = {};
+                if (!glossNotePivot[cells[0]]) {
+                    glossNotePivot[cells[0]] = {};
                 }
                 const noteIds = cells[4].split(";").map(n => n.trim());
-                notePivot[cells[0]][cells[1]] = noteIds;
+                glossNotePivot[cells[0]][cells[1]] = noteIds;
                 for (const noteId of noteIds) {
                     pivotIds.add(noteId);
                 }
@@ -223,7 +223,7 @@ class jxlSpreadSection extends Section {
             for (const notesRow of notesRows) {
                 const cells = notesRow.split('\t');
                 if (pivotIds.has(cells[4])) {
-                    notes[cells[4]] = cells[6];
+                    glossNotes[cells[4]] = cells[6];
                 }
             }
         }
@@ -266,14 +266,14 @@ class jxlSpreadSection extends Section {
                 const source = chunk.source.map(s => s.content).join(' ');
                 const gloss = chunk.gloss;
                 let noteFound = false;
-                if (notePivot[`${sentenceN + 1}`] && notePivot[`${sentenceN + 1}`][`${chunkN + 1}`]) {
+                if (glossNotePivot[`${sentenceN + 1}`] && glossNotePivot[`${sentenceN + 1}`][`${chunkN + 1}`]) {
                     noteFound = true;
-                    for (const noteId of notePivot[`${sentenceN + 1}`][`${chunkN + 1}`]) {
-                        if (!notes[noteId]) {
+                    for (const noteId of glossNotePivot[`${sentenceN + 1}`][`${chunkN + 1}`]) {
+                        if (!glossNotes[noteId]) {
                             continue;
                         }
                         sentenceNotes.push(
-                            cleanNoteLine(notes[noteId])
+                            cleanNoteLine(glossNotes[noteId])
                         );
                     }
                 }

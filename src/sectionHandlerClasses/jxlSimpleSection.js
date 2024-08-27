@@ -4,7 +4,9 @@ const {
     cvForSentence,
     cleanNoteLine,
     doPuppet,
-    resolvePath
+    resolvePath,
+    bcvNotes,
+    unpackCellRange
 } = require("../helpers");
 const books = require("../../resources/books.json");
 const Section = require('./section');
@@ -160,9 +162,13 @@ class jxlSimpleSection extends Section {
             sentenceMerges.push(sentenceLastV === nextSentenceFirstV);
             sentenceN++;
         }
+        let notes = section.content.bcvNotes ? bcvNotes(resolvePath(section.content.bcvNotes), section.bcvRange) : {};
+        for (const [cv, noteArray] of Object.entries(notes)) {
+            notes[cv] = [`<b>${cv}</b> ${noteArray[0]}`, ...noteArray.slice(1).map(nt => `<span class="not_first_note">${nt}</span>`)];
+        }
         let pivotIds = new Set([]);
-        const notes = {};
-        const notePivot = {};
+        const glossNotes = {};
+        const glossNotePivot = {};
         if (section.content.glossNotes) {
             const pivotRows = fse.readFileSync(resolvePath(path.join(section.content.glossNotes[0].pivot, `${section.bcvRange}.tsv`))).toString().split("\n");
             for (const pivotRow of pivotRows) {
@@ -170,11 +176,11 @@ class jxlSimpleSection extends Section {
                 if (!cells[4] || cells[4].length === 0) {
                     continue;
                 }
-                if (!notePivot[cells[0]]) {
-                    notePivot[cells[0]] = {};
+                if (!glossNotePivot[cells[0]]) {
+                    glossNotePivot[cells[0]] = {};
                 }
                 const noteIds = cells[4].split(";").map(n => n.trim());
-                notePivot[cells[0]][cells[1]] = noteIds;
+                glossNotePivot[cells[0]][cells[1]] = noteIds;
                 for (const noteId of noteIds) {
                     pivotIds.add(noteId);
                 }
@@ -183,7 +189,7 @@ class jxlSimpleSection extends Section {
             for (const notesRow of notesRows) {
                 const cells = notesRow.split('\t');
                 if (pivotIds.has(cells[4])) {
-                    notes[cells[4]] = cells[6];
+                    glossNotes[cells[4]] = cells[6];
                 }
             }
         }
@@ -209,14 +215,14 @@ class jxlSimpleSection extends Section {
                 const source = chunk.source.map(s => s.content).join(' ');
                 const gloss = chunk.gloss;
                 let noteFound = false;
-                if (notePivot[`${sentenceN + 1}`] && notePivot[`${sentenceN + 1}`][`${chunkN + 1}`]) {
+                if (glossNotePivot[`${sentenceN + 1}`] && glossNotePivot[`${sentenceN + 1}`][`${chunkN + 1}`]) {
                     noteFound = true;
-                    for (const noteId of notePivot[`${sentenceN + 1}`][`${chunkN + 1}`]) {
-                        if (!notes[noteId]) {
+                    for (const noteId of glossNotePivot[`${sentenceN + 1}`][`${chunkN + 1}`]) {
+                        if (!glossNotes[noteId]) {
                             continue;
                         }
                         sentenceNotes.push(
-                            cleanNoteLine(notes[noteId])
+                            cleanNoteLine(glossNotes[noteId])
                         );
                     }
                 }
@@ -234,15 +240,20 @@ class jxlSimpleSection extends Section {
             );
             if (!sentenceMerges[sentenceN]) {
                 const cvRef = mergeCvs(cvs);
+                const cvNotes = unpackCellRange(cvRef).map(cv => notes[cv] || []);
                 const sentence = templates.simple_juxta_sentence
                     .replace('%%BOOKNAME%%', bookName)
                     .replace('%%SENTENCEREF%%', cvRef)
                     .replace('%%JXL%%', jxls.join("\n"))
                     .replace(
                         '%%NOTES%%',
-                        sentenceNotes.length === 0 ?
-                            "" :
-                            ``);
+                        cvNotes.length > 0 ?
+                            `${cvNotes.reduce((a, b) => [...a, ...b])
+                                .map(nr => cleanNoteLine(nr))
+                                .map(note => `<p class="bcvnote">${note}</p>`)
+                                .join('\n')}` :
+                            ""
+                    );
                 sentences.push(sentence);
                 jxls = [];
                 cvs = [];

@@ -146,14 +146,17 @@ class bcvBibleSection extends Section {
             } else {
                 seenCvs.add(cvRecord.cv);
             }
+            const cvNotes = unpackCellRange(cvRecord.cv).map(cv => notes[cv] || []);
             const verseHtml = templates['bcv_bible_verse']
                 .replace("%%CV%%", cvRecord.cv)
                 .replace(
                     '%%VERSECONTENT%%',
-                    `${cvRecord.texts["xxx_yyy"] || "-"}${unpackCellRange(cvRecord.cv).map(cv => notes[cv] || []).reduce((a, b) => [...a, ...b])
+                    cvNotes.length > 0 ?
+                        `${cvRecord.texts["xxx_yyy"] || "-"}${cvNotes.reduce((a, b) => [...a, ...b])
                         .map(nr => cleanNoteLine(nr))
                         .map(note => `<p class="note">${note}</p>`)
-                        .join('\n')}`
+                        .join('\n')}` :
+                        ""
                 );
             verses.push(verseHtml);
         }

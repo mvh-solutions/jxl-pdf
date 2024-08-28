@@ -1,6 +1,6 @@
 const fse = require("fs-extra");
 const path = require("path");
-const {doPuppet} = require("../helpers");
+const {resolvePath} = require("../helpers");
 const Section = require('./section');
 
 class pdfSection extends Section {
@@ -68,7 +68,7 @@ class pdfSection extends Section {
     }
 
     async doSection({section, templates, manifest, options}) {
-        const pdfContent = fse.readFileSync(section.content.pdf);
+        const pdfContent = fse.readFileSync(resolvePath(section.content.pdf));
         fse.writeFileSync(
             path.join(options.pdfPath, `${section.id}.pdf`),
             pdfContent

@@ -263,7 +263,10 @@ class paraBibleSection extends Section {
         sectionConfig.renderers.verses_label = (vn, bcv, _, currentIndex) => {
             let ret = [];
             const cv = `${bcv[1]}:${bcv[2]}`;
-            const verseNotes = (unpackCellRange(cv).map(cv => notes[cv] || []).reduce((a, b) => [...a, ...b])).map(n => n.replace(/ \?/g, "&nbsp;?").replace(/\*\*([^*]+)\*\*/g, '<i>$1</i>'));
+            const cvNotes = unpackCellRange(cv).map(cv => notes[cv] || []);
+            const verseNotes = cvNotes.length > 0 ?
+                (cvNotes.reduce((a, b) => [...a, ...b])).map(n => n.replace(/ \?/g, "&nbsp;?").replace(/\*\*([^*]+)\*\*/g, '<i>$1</i>')) :
+            "";
             if (verseNotes.length > 0) {
                 ret.push(`<span class="bcv_note"><b>${cv}</b>: ${verseNotes.join(' ')}</span>`);
             }

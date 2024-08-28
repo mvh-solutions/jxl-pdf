@@ -1,6 +1,6 @@
 const fse = require("fs-extra");
 const path = require("path");
-const {doPuppet} = require("../helpers");
+const {doPuppet, resolvePath} = require("../helpers");
 const marked = require('marked');
 const DOMPurify = require('isomorphic-dompurify');
 const Section = require('./section');
@@ -71,7 +71,7 @@ class obsSection extends Section {
 
     async doSection({section, templates, manifest, options}) {
         let isFirst = true;
-        for (const mdName of fse.readdirSync(path.resolve(section.content.obs))) {
+        for (const mdName of fse.readdirSync(resolvePath(section.content.obs))) {
             const [name, suffix] = mdName.split('.');
             if (suffix !== 'md' || !parseInt(name)) {
                 continue;
@@ -83,7 +83,7 @@ class obsSection extends Section {
                 continue;
             }
             const markdown = DOMPurify.sanitize(
-                    marked.parse(fse.readFileSync(path.resolve(`${section.content.obs}/${mdName}`)).toString())
+                    marked.parse(fse.readFileSync(resolvePath(`${section.content.obs}/${mdName}`)).toString())
             );
             fse.writeFileSync(
                 path.join(options.htmlPath, `${section.id}_${name}.html`),

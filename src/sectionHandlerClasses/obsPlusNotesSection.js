@@ -1,12 +1,17 @@
 const fse = require("fs-extra");
 const path = require("path");
-const {doPuppet, setupOneCSS, checkCssSubstitution} = require("../helpers");
+const {
+    doPuppet,
+    setupOneCSS,
+    checkCssSubstitution,
+    resolvePath
+} = require("../helpers");
 const marked = require('marked');
 const DOMPurify = require('isomorphic-dompurify');
 const Section = require('./section');
 
 const getObsNotes = (notesPath, notesRef) => {
-    return fse.readFileSync(path.resolve(path.join(notesPath, 'tn.tsv'))).toString()
+    return fse.readFileSync(resolvePath(path.join(notesPath, 'tn.tsv'))).toString()
         .split('\n')
         .map(l => l.trim())
         .filter(l => l.startsWith(`${notesRef}\t`))
@@ -90,7 +95,7 @@ class obsPlusNotesSection extends Section {
 
     async doSection({section, templates, bookCode, manifest, options, doPdfCallback}) {
         let isFirst = false;
-        for (const mdName of fse.readdirSync(path.resolve(section.content.obs))) {
+        for (const mdName of fse.readdirSync(resolvePath(section.content.obs))) {
             const [name, suffix] = mdName.split('.');
             let storyNotes = "";
             if (section.obsNotesPath) {
@@ -106,7 +111,7 @@ class obsPlusNotesSection extends Section {
                 continue;
             }
             let markdown = DOMPurify.sanitize(
-                marked.parse(fse.readFileSync(path.resolve(`${section.content.obs}/${mdName}`)).toString())
+                marked.parse(fse.readFileSync(resolvePath(`${section.content.obs}/${mdName}`)).toString())
             );
             if (section.content.notes) {
                 markdown = markdown.replace(/<\/h1>/g, `</h1><section class=\"storynotes\">\n${storyNotes}\n</section>\n`);

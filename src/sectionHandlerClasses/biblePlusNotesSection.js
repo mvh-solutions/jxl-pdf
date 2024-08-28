@@ -8,6 +8,7 @@ const {
     doPuppet,
     setupOneCSS,
     checkCssSubstitution,
+    resolvePath,
 } = require("../helpers");
 const fse = require("fs-extra");
 const path = require("path");
@@ -227,7 +228,7 @@ class biblePlusNotesSection extends Section {
         section.content.notesUnit = section.content.notesUnit || "verse";
         section.content.notesPosition = section.content.notesPosition || "columns";
         section.content.notesWidth = section.content.notesWidth || 70;
-        const pk = pkWithDocs(section.bcvRange, [{id: "xxx_yyy", path: section.content.scriptureSrc}], options.verbose);
+        const pk = pkWithDocs(section.bcvRange, [{id: "xxx_yyy", path: resolvePath(section.content.scriptureSrc)}], options.verbose);
         const bookName = getBookName(pk, "xxx_yyy", section.bcvRange);
         const notes = bcvNotes(section.content.notes, section.bcvRange, []);
         const cvTexts = getCVTexts(section.bcvRange, pk);
@@ -243,6 +244,7 @@ class biblePlusNotesSection extends Section {
                 } else {
                     seenCvs.add(cvRecord.cv);
                 }
+                const cvNotes = unpackCellRange(cvRecord.cv).map(cv => notes[cv] || []);
                 const verseHtml = templates[`bible_plus_notes_${section.content.notesPosition}`]
                     .replace("%%TRANS1TITLE%%", section.content.scriptureText)
                     .replace("%%TRANS2TITLE%%", section.content.scriptureText)
@@ -254,10 +256,12 @@ class biblePlusNotesSection extends Section {
                     )
                     .replace(
                         '%%RIGHTCOLUMN%%',
-                        `<div class="col2">${unpackCellRange(cvRecord.cv).map(cv => notes[cv] || []).reduce((a, b) => [...a, ...b])
+                        cvNotes.length > 0 ?
+                        `<div class="col2">${cvNotes.reduce((a, b) => [...a, ...b])
                             .map(nr => cleanNoteLine(nr))
                             .map(note => `<p class="note">${note}</p>`)
-                            .join('\n')}</div>`
+                            .join('\n')}</div>`:
+                        ""
                     );
                 verses.push(verseHtml);
             }

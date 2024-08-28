@@ -5,7 +5,8 @@ const {
     getCVTexts,
     cleanNoteLine,
     bcvNotes,
-    doPuppet
+    doPuppet,
+    resolvePath
 } = require("../helpers");
 const fse = require("fs-extra");
 const path = require("path");
@@ -116,7 +117,7 @@ class TwoColumnSection extends Section {
         const docSpecs = [];
         let scriptureN = 0;
         for (const scripture of section.content.scripture) {
-            docSpecs.push({id: `xxx_yyy${scriptureN}`, path: scripture.src});
+            docSpecs.push({id: `xxx_yyy${scriptureN}`, path: resolvePath(scripture.src)});
             scriptureN++;
         }
         const pk = pkWithDocs(
@@ -126,7 +127,7 @@ class TwoColumnSection extends Section {
         );
         const bookName = getBookName(pk, "xxx_yyy0", section.bcvRange);
         const cvTexts = getCVTexts(section.bcvRange, pk);
-        let notes = section.content.notes ? bcvNotes(section.content.notes, section.bcvRange) : {};
+        let notes = section.content.notes ? bcvNotes(resolvePath(section.content.notes), section.bcvRange) : {};
         for (const [cv, noteArray] of Object.entries(notes)) {
             notes[cv] = [`<b>${cv}</b> ${noteArray[0]}`, ...noteArray.slice(1).map(nt => `<span class="not_first_note">${nt}</span>`)];
         }
@@ -166,6 +167,7 @@ class TwoColumnSection extends Section {
             } else {
                 seenCvs.add(cvRecord.cv);
             }
+            const cvNotes = unpackCellRange(cvRecord.cv).map(cv => notes[cv] || []);
             const verseHtml = templates['2_column_verse']
                 .replace("%%TRANS1TITLE%%", section.content.scripture[0].text)
                 .replace("%%TRANS2TITLE%%", section.content.scripture[1].text)
@@ -175,7 +177,7 @@ class TwoColumnSection extends Section {
                 )
                 .replace(
                     '%%RIGHTCOLUMN%%',
-                    `<div class="col2">${cvRecord.texts["xxx_yyy1"] || "-"}${unpackCellRange(cvRecord.cv).map(cv => notes[cv] || []).reduce((a, b) => [...a, ...b])
+                    `<div class="col2">${cvRecord.texts["xxx_yyy1"] || "-"}${(cvNotes.length > 0 ? cvNotes.reduce((a, b) => [...a, ...b]) : [])
                         .map(nr => cleanNoteLine(nr))
                         .map(note => `<span class="note">${note}</span>`)
                         .join('\n')}</div>`

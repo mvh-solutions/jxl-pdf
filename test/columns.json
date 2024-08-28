@@ -1,0 +1,73 @@
+{
+  "global": {
+    "fonts": "gentiumOpen",
+    "pages": "A4P",
+    "sizes": "12on15",
+    "outputPath": "~/Downloads/test_columns.pdf",
+    "workingDir": "~/.jxlpdf/working",
+    "verbose": false
+  },
+  "sections": [
+    {
+      "type": "bcvWrapper",
+      "ranges": [
+        "PHP",
+        "TIT"
+      ],
+      "sections": [
+        {
+          "id": "ba5c63b1-2377-42b8-b032-38ff9007b72f",
+          "type": "2Column",
+          "content": {
+            "startOn": "recto",
+            "showPageNumber": true,
+            "scripture": [
+              {
+                "type": "greek",
+                "src": "^/test/test_resources/grc_ugnt",
+                "text": "UGNT"
+              },
+              {
+                "type": "translation",
+                "src": "^/test/test_resources/fra_psle",
+                "text": "PSLE"
+              }
+            ],
+            "notes": "^/test/test_resources/fra_sq"
+          }
+        },
+        {
+          "id": "ba5c63b1-2377-42b8-b032-38ff9007b72e",
+          "type": "4ColumnSpread",
+          "content": {
+            "startOn": "verso",
+            "showPageNumber": true,
+            "scripture": [
+              {
+                "type": "greek",
+                "src": "^/test/test_resources/grc_ugnt",
+                "text": "UGNT"
+              },
+              {
+                "type": "translation",
+                "src": "^/test/test_resources/fra_tlx",
+                "text": "TLX"
+              },
+              {
+                "type": "translation",
+                "src": "^/test/test_resources/fra_tsx",
+                "text": "TSX"
+              },
+              {
+                "type": "translation",
+                "src": "^/test/test_resources/fra_psle",
+                "text": "PSLE"
+              }
+            ],
+            "notes": "^/test/test_resources/fra_sq"
+          }
+        }
+      ]
+    }
+  ]
+}

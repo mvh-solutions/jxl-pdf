@@ -342,7 +342,7 @@ class PdfGen {
             const enumIds = fieldSpec.typeEnum.map(e => e.id);
             const badValues = normalizedContent.filter(c => !enumIds.includes(c));
             if (badValues.length > 0) {
-                errors.push(`${badValues.length} value(s) of field '${fieldId}' in Section '${sectionId}' (#${sectionN}) not found enum [${fieldSpec.typeEnum.map(e => e.id).join(", ")}]`);
+                errors.push(`${badValues.length} value(s) of field '${fieldId}' in Section '${sectionId}' (#${sectionN}) not found in enum [${fieldSpec.typeEnum.map(e => e.id).join(", ")}]`);
                 return false;
             }
         }

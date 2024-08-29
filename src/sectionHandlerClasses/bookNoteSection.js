@@ -1,6 +1,11 @@
 const fse = require("fs-extra");
 const path = require("path");
-const {formatNote, doPuppet, bcvNotes} = require("../helpers");
+const {
+    formatNote,
+    doPuppet,
+    bcvNotes,
+    resolvePath
+} = require("../helpers");
 const Section = require('./section');
 
 class bookNoteSection extends Section {
@@ -68,7 +73,7 @@ class bookNoteSection extends Section {
     }
 
     async doSection({section, templates, manifest, options}) {
-        const notes = section.content.notes ? bcvNotes(section.content.notes, section.bcvRange) : {};
+        const notes = section.content.notes ? bcvNotes(resolvePath(section.content.notes), section.bcvRange) : {};
         const introNotes = notes["front:intro"] ? notes["front:intro"].join('\n\n'): "";
         const [title, body] = formatNote(introNotes, templates);
         const qualified_id = `${section.id}_${section.bcvRange}`;

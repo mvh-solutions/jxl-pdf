@@ -1,7 +1,7 @@
 const fse = require('fs-extra');
 const textDiff = require('text-diff');
 
-const usage = "node scripts/juxta_notes_diff.js ~/repos/door43/fr_tn/fr_tn_51-PHP.tsv data/fra_tn/PHP.tsv data/jxl2note/PHP.tsv";
+const usage = "node scripts/juxta_notes_diff.js ~/repos/door43/fr_tn/fr_tn_51-PHP.tsv data/fra_tn_q/PHP.tsv data/jxl2note/PHP.tsv";
 
 if (process.argv.length !== 5) {
     console.log(`Expected exactly four arguments\nUSAGE : ${usage}`);

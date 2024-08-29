@@ -3,7 +3,7 @@
     "fonts": "gentiumOpen",
     "pages": "A4P",
     "sizes": "12on15",
-    "outputPath": "~/Downloads/test_psle.pdf",
+    "outputPath": "~/Downloads/test_one_bible.pdf",
     "workingDir": "~/.jxlpdf/working",
     "verbose": false
   },
@@ -24,6 +24,15 @@
         "TIT"
       ],
       "sections": [
+        {
+          "id": "4a663359-0726-4cb1-8b5a-ecf0f9978caa",
+          "type": "bookNote",
+          "content": {
+            "startOn": "recto",
+            "showPageNumber": true,
+            "notes": "^/test/test_resources/fra_sq"
+          }
+        },
         {
           "id": "ba5c63b1-2377-42b8-b032-38ff9007b72f",
           "type": "paraBible",
@@ -59,8 +68,19 @@
             "scriptureSrc": "^/test/test_resources/fra_psle",
             "scriptureType": "translation"
           }
+        },
+        {
+          "id": "4a663359-0726-4cb1-8b5a-ecf0f9978cac",
+          "type": "biblePlusNotes",
+          "content": {
+            "startOn": "recto",
+            "showPageNumber": true,
+            "notes": "^/test/test_resources/fra_sq",
+            "scriptureText": "bcvBible",
+            "scriptureSrc": "^/test/test_resources/fra_psle",
+            "scriptureType": "translation"
+          }
         }
-
       ]
     }
   ]

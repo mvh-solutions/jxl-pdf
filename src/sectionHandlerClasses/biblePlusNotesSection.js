@@ -230,7 +230,7 @@ class biblePlusNotesSection extends Section {
         section.content.notesWidth = section.content.notesWidth || 70;
         const pk = pkWithDocs(section.bcvRange, [{id: "xxx_yyy", path: resolvePath(section.content.scriptureSrc)}], options.verbose);
         const bookName = getBookName(pk, "xxx_yyy", section.bcvRange);
-        const notes = bcvNotes(section.content.notes, section.bcvRange, []);
+        const notes = bcvNotes(resolvePath(section.content.notes), section.bcvRange, []);
         const cvTexts = getCVTexts(section.bcvRange, pk);
         const verses = [
             `<h1>${bookName}</h1>`
@@ -316,9 +316,6 @@ class biblePlusNotesSection extends Section {
         );
         let css = fse.readFileSync(cssPath).toString();
         const spaceOption = 0; // MAKE THIS CONFIGURABLE
-        for (const [placeholder, values] of options.pageFormat.sections.biblePlusNotes.cssValues) {
-            css = setupOneCSS(css, placeholder, "%", values[0]);
-        }
         checkCssSubstitution("bible_plus_notes_in_columns_page_styles.css", css, "%");
         fse.writeFileSync(cssPath, css);
         await doPuppet({

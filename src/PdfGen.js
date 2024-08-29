@@ -159,6 +159,16 @@ class PdfGen {
             if (sections.length === 0) {
                 ret.push("Top-level section has zero length");
             } else {
+                // Check for duplicate section ids at top level
+                const ids = {};
+                for (const section of sections) {
+                    if (ids[section.id]) {
+                        ret.push(`Duplicate ID '${section.id}'`);
+                        skip = true;
+                        break;
+                    }
+                    ids[section.id] = true;
+                }
                 // Iterate over sections
                 let sectionN = 0;
                 while (sectionN < sections.length && !skip) {
@@ -183,7 +193,14 @@ class PdfGen {
                             skip = true;
                             break;
                         }
+                        const ids = {};
                         for (const subSection of section.sections) {
+                                if (ids[subSection.id]) {
+                                    ret.push(`Duplicate ID '${subSection.id}'`);
+                                    skip = true;
+                                    break;
+                                }
+                                ids[subSection.id] = true;
                             if (!PdfGen.validateSection(subSection, wrapperOnly, ret, sectionN, checkPaths)) {
                                 skip = true;
                                 break;

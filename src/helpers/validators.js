@@ -46,6 +46,9 @@ const validators = {
         return resolved;
     },
     output: outputDirPath => {
+        if (!outputDirPath) {
+            throw new commander.InvalidArgumentError(`Falsy value provided for outputPath`);
+        }
         if (!(fse.pathExistsSync(path.dirname(outputDirPath)))) {
             throw new commander.InvalidArgumentError(`The parent directory of '${outputDirPath}' does not exist. Please create it or pick another output path.`);
         }

@@ -95,7 +95,13 @@ const parseCommandLineArguments = () => {
     if (opts.fontSizes) {
         configJson.global.sizes = opts.fontSizes;
     }
+    if (!configJson.global.outputPath) {
+        throw new commander.InvalidArgumentError(`No value for outputPath found`);
+    }
     configJson.global.outputPath = resolvePath(configJson.global.outputPath);
+    if (!configJson.global.workingDir) {
+        throw new commander.InvalidArgumentError(`No value for workingDir found`);
+    }
     configJson.global.workingDir = resolvePath(configJson.global.workingDir);
     if (!opts.forceOverwrite && fse.pathExistsSync(configJson.global.outputPath)) {
         throw new commander.InvalidArgumentError(`Output would overwrite ${configJson.global.outputPath} - use --forceOverwrite.`);

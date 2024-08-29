@@ -1,0 +1,42 @@
+{
+  "global": {
+    "fonts": "allGentium",
+    "pages": "A4P",
+    "sizes": "9on10",
+    "outputPath": "~/Downloads/test_obs.pdf",
+    "workingDir": "~/.jxlpdf/working",
+    "verbose": false
+  },
+  "sections": [
+    {
+      "type": "obsWrapper",
+      "ranges": [
+        "1",
+        "4-5"
+      ],
+      "sections": [
+        {
+          "id": "67481a98-1759-11ef-b34d-1326466935f3",
+          "type": "obs",
+          "content": {
+            "showPageNumber": [
+              true
+            ],
+            "obs": "^/test/test_resources/fra_obs",
+            "startOn": "recto"
+          }
+        },
+        {
+          "id": "67481a98-1759-11ef-b34d-1326466935f4",
+          "type": "obsPlusNotes",
+          "content": {
+            "showPageNumber": [true],
+            "obs": "^/test/test_resources/fra_obs",
+            "startOn": "recto",
+            "notes": "^/test/test_resources/fra_obstn"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -135,8 +135,15 @@ class PdfGen {
                 Object.entries(PdfGen.pageInfo())
                     .map(([k, v]) => [k, Object.keys(v)])
             );
+            const globalContextKeys = ["verbose", "workingDir", "outputPath"];
+            for (const expectedKey of [...Object.keys(globalSpecKeys), ...globalContextKeys]) {
+                if (!(expectedKey in configOb.global)) {
+                    ret.push(`Expected global key '${expectedKey}' not found`);
+                    skip = true;
+                }
+            }
             for (const globalKey of Object.keys(configOb.global)) {
-                if (["verbose", "workingDir", "outputPath"].includes(globalKey)) {
+                if (globalContextKeys.includes(globalKey)) {
                     continue;
                 }
                 if (!globalSpecKeys[globalKey]) {
@@ -302,7 +309,7 @@ class PdfGen {
             return false;
         }
         if (fieldSpec.typeName) {
-            if (!["boolean", "number", "string", "obs", "tNotes", "translationText", "md", "juxta"].includes(fieldSpec.typeName)) {
+            if (!["boolean", "number", "string", "obs", "obsNotes", "tNotes", "translationText", "md", "juxta"].includes(fieldSpec.typeName)) {
                 errors.push(`Unknown typeName '${fieldSpec.typeName}' in Section '${sectionId}' (#${sectionN})`);
                 return false;
             }

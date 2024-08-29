@@ -309,7 +309,7 @@ class PdfGen {
             return false;
         }
         if (fieldSpec.typeName) {
-            if (!["boolean", "number", "string", "obs", "obsNotes", "tNotes", "translationText", "md", "juxta"].includes(fieldSpec.typeName)) {
+            if (!["boolean", "number", "string", "obs", "obsNotes", "tNotes", "translationText", "md", "juxta", "pdf"].includes(fieldSpec.typeName)) {
                 errors.push(`Unknown typeName '${fieldSpec.typeName}' in Section '${sectionId}' (#${sectionN})`);
                 return false;
             }

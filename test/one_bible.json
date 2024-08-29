@@ -9,6 +9,15 @@
   },
   "sections": [
     {
+      "id": "cover",
+      "type": "pdf",
+      "content": {
+        "startOn": "recto",
+        "showPageNumber": false,
+        "pdf": "^/test/test_resources/cover.pdf"
+      }
+    },
+    {
       "id": "title",
       "type": "markdown",
       "content": {

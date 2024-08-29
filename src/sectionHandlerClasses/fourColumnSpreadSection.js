@@ -178,7 +178,7 @@ class fourColumnSpreadSection extends Section {
                 )
                 .replace(
                     '%%RECTOCOLUMNS%%',
-                    `<div class="col3">${cvRecord.texts["xxx_yyy2"] || "-"}</div><div class="col4">${cvRecord.texts["xxx_yyy3"] || "-"}${                    cvNotes.length > 0 ? cvNotes.reduce((a, b) => [...a, ...b]) : []
+                    `<div class="col3">${cvRecord.texts["xxx_yyy2"] || "-"}</div><div class="col4">${cvRecord.texts["xxx_yyy3"] || "-"}${                    (cvNotes.length > 0 ? cvNotes.reduce((a, b) => [...a, ...b]) : [])
                         .map(nr => cleanNoteLine(nr))
                         .map(note => `<span class="note">${note}</span>`)
                         .join('\n')}</div>`

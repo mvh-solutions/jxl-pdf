@@ -39,7 +39,6 @@
           "content": {
             "startOn": "recto",
             "showPageNumber": true,
-            "scriptureText": "para Bible",
             "scriptureSrc": "^/test/test_resources/fra_psle",
             "scriptureType": "translation",
             "showWordAtts": false,
@@ -64,7 +63,6 @@
             "startOn": "recto",
             "showPageNumber": true,
             "notes": "^/test/test_resources/fra_sq",
-            "scriptureText": "bcvBible",
             "scriptureSrc": "^/test/test_resources/fra_psle",
             "scriptureType": "translation"
           }
@@ -76,7 +74,6 @@
             "startOn": "recto",
             "showPageNumber": true,
             "notes": "^/test/test_resources/fra_sq",
-            "scriptureText": "bcvBible",
             "scriptureSrc": "^/test/test_resources/fra_psle",
             "scriptureType": "translation"
           }

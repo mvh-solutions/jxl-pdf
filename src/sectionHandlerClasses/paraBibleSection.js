@@ -42,15 +42,6 @@ class paraBibleSection extends Section {
                     nValues: [1, 1]
                 },
                 {
-                    id: "scriptureText",
-                    label: {
-                        en: "Scripture Text Label",
-                        "fr": "Etiquette pour texte biblique"
-                    },
-                    typeName: "string",
-                    nValues: [1, 1]
-                },
-                {
                     id: "scriptureSrc",
                     label: {
                         en: "Scripture Text Source",

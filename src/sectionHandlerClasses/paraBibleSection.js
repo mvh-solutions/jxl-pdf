@@ -29,8 +29,8 @@ class paraBibleSection extends Section {
                         en: "Start Page Side",
                         fr: "Côté pour première page"
                     },
-                    typeLiteral: "recto",
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: "recto"
                 },
                 {
                     id: "showPageNumber",
@@ -39,7 +39,8 @@ class paraBibleSection extends Section {
                         fr: "Afficher numéro de page"
                     },
                     typeName: "boolean",
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: true
                 },
                 {
                     id: "scriptureSrc",
@@ -79,7 +80,8 @@ class paraBibleSection extends Section {
                             },
                         }
                     ],
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: "translation"
                 },
                 {
                     id: "nColumns",
@@ -90,7 +92,8 @@ class paraBibleSection extends Section {
                     },
                     nValues: [1, 1],
                     minValue: 1,
-                    maxValue: 3
+                    maxValue: 3,
+                    suggestedDefault: 1
                 },
                 {
                     id: "showWordAtts",
@@ -99,7 +102,8 @@ class paraBibleSection extends Section {
                         en: "Show Word Atts",
                         fr: "Afficher attributs des mots"
                     },
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: false
                 },
                 {
                     id: "showTitles",
@@ -108,7 +112,8 @@ class paraBibleSection extends Section {
                         en: "Show Titles",
                         fr: "Afficher titres de livre"
                     },
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: true
                 },
                 {
                     id: "showHeadings",
@@ -117,7 +122,8 @@ class paraBibleSection extends Section {
                         en: "Show Headings",
                         fr: "Afficher titres de section"
                     },
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: true
                 },
                 {
                     id: "showIntroductions",
@@ -126,7 +132,8 @@ class paraBibleSection extends Section {
                         en: "Show Introductions",
                         fr: "Afficher introductions"
                     },
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: true
                 },
                 {
                     id: "showFootnotes",
@@ -135,7 +142,8 @@ class paraBibleSection extends Section {
                         en: "Show Footnotes",
                         fr: "Afficher notes de bas de page"
                     },
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: true
                 },
                 {
                     id: "showXrefs",
@@ -144,7 +152,8 @@ class paraBibleSection extends Section {
                         en: "Show Cross-references",
                         fr: "Afficher références croisées"
                     },
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: true
                 },
                 {
                     id: "showXrefs",
@@ -153,7 +162,8 @@ class paraBibleSection extends Section {
                         en: "Show Cross-references",
                         fr: "Afficher références croisées"
                     },
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: true
                 },
                 {
                     id: "showParaStyles",
@@ -162,7 +172,8 @@ class paraBibleSection extends Section {
                         en: "Show Paragraph Styles",
                         fr: "Afficher styles de paragraphes"
                     },
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: true
                 },
                 {
                     id: "showCharacterMarkup",
@@ -171,7 +182,8 @@ class paraBibleSection extends Section {
                         en: "Show Character Markup",
                         fr: "Afficher styles de caractère"
                     },
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: true
                 },
                 {
                     id: "showChapterLabels",
@@ -180,7 +192,8 @@ class paraBibleSection extends Section {
                         en: "Show Chapter Numbers",
                         fr: "Afficher numéros de chapitre"
                     },
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: true
                 },
                 {
                     id: "showVersesLabels",
@@ -189,7 +202,8 @@ class paraBibleSection extends Section {
                         en: "Show Verse Numbers",
                         fr: "Afficher numéros de versets"
                     },
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: true
                 },
                 {
                     id: "showFirstVerseLabel",
@@ -198,7 +212,8 @@ class paraBibleSection extends Section {
                         en: "Show Verse Number for v1",
                         fr: "Afficher numéro de verset pour v1"
                     },
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: false
                 },
                 {
                     id: "showGlossaryStar",
@@ -207,7 +222,8 @@ class paraBibleSection extends Section {
                         en: "Show asterisk after words in glossary",
                         fr: "Afficher une étoile après des mot dans le glossaire"
                     },
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: false
                 },
                 {
                     id: "notes",

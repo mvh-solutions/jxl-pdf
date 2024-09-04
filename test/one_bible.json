@@ -62,7 +62,8 @@
             "showVersesLabels": true,
             "showFirstVerseLabel": true,
             "nColumns": 2,
-            "showGlossaryStar": true
+            "showGlossaryStar": true,
+            "notes": "^/test/test_resources/en_tn"
           }
         },
         {
@@ -82,7 +83,7 @@
           "content": {
             "startOn": "recto",
             "showPageNumber": true,
-            "notes": "^/test/test_resources/fra_sq",
+            "notes": "^/test/test_resources/en_tn",
             "scriptureSrc": "^/test/test_resources/fra_psle",
             "scriptureType": "translation"
           }

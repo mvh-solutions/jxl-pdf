@@ -30,7 +30,30 @@ class paraBibleSection extends Section {
                         fr: "Côté pour première page"
                     },
                     nValues: [1, 1],
-                    suggestedDefault: "recto"
+                    suggestedDefault: "recto",
+                    typeEnum: [
+                        {
+                            id: "recto",
+                            label: {
+                                en: "Recto",
+                                fr: "Recto"
+                            },
+                        },
+                        {
+                            id: "verso",
+                            label: {
+                                en: "Verso",
+                                fr: "Verso"
+                            },
+                        },
+                        {
+                            id: "either",
+                            label: {
+                                en: "Next Page",
+                                fr: "Page suivante"
+                            },
+                        }
+                    ],
                 },
                 {
                     id: "showPageNumber",

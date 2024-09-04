@@ -105,7 +105,14 @@ const bcvNotes = (notesPath, bookCode, excludeTags=[]) => {
         throw new Error(`No notes for ${bookCode} found in bcvNotes`);
     }
     const notesRows = fse.readFileSync(path.join(notesPath, fileWithBook)).toString().split("\n");
-    for (const notesRow of notesRows) {
+    // Introspect type (question or note)
+    let noteType = "notes";
+    const headings = notesRows[0];
+    if (headings.indexOf("Question") > 0) {
+        noteType = "questions";
+    }
+
+    for (const notesRow of notesRows.slice(1)) {
         const cells = notesRow.split('\t');
         let toExclude = false;
         for (const tag of (cells[2] || "").split(",")) {
@@ -118,7 +125,10 @@ const bcvNotes = (notesPath, bookCode, excludeTags=[]) => {
             continue;
         }
         const rowKey = cells[0];
-        let content = cells[5] || "";
+        let content = (noteType === "questions" ? cells[5] : cells[6]) || "";
+        if (content.trim().length === 0) {
+            continue;
+        }
         if (content.slice(0, 1) === "\"") {
             content = content.slice(1, content.length - 1).replace(/""/g, "\"");
         }

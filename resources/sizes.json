@@ -105,6 +105,59 @@
       "bottomPadding": 5
     }
   },
+  "9on18": {
+    "label": {
+      "en": "9pt on 18pt grid (double spacing)",
+      "fr": "9 pt sur grille de 18 pt (interligne 2)"
+    },
+    "body": {
+      "font": 9,
+      "height": 18,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h4": {
+      "font": 10,
+      "height": 36,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h3": {
+      "font": 12,
+      "height": 36,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h2": {
+      "font": 14,
+      "height": 36,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h1": {
+      "font": 16,
+      "height": 36,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "footnote": {
+      "font": 7,
+      "height": 18,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "rule": {
+      "bottomMargin": 8,
+      "bottomBorderWidth": 1,
+      "bottomPadding": 9
+    }
+  },
   "10on12": {
     "label": {
       "en": "10pt on 12pt grid",
@@ -211,6 +264,59 @@
       "bottomPadding": 6
     }
   },
+  "10on20": {
+    "label": {
+      "en": "10pt on 20pt grid (double spacing)",
+      "fr": "10 pt sur grille de 20 pt (interligne 2)"
+    },
+    "body": {
+      "font": 10,
+      "height": 20,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h4": {
+      "font": 12,
+      "height": 40,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h3": {
+      "font": 14,
+      "height": 40,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h2": {
+      "font": 18,
+      "height": 40,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h1": {
+      "font": 20,
+      "height": 40,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "footnote": {
+      "font": 8,
+      "height": 20,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "rule": {
+      "bottomMargin": 9,
+      "bottomBorderWidth": 1,
+      "bottomPadding": 10
+    }
+  },
   "12on14": {
     "label": {
       "en": "12pt on 14pt grid",
@@ -315,6 +421,59 @@
       "bottomMargin": 7,
       "bottomBorderWidth": 1,
       "bottomPadding": 7
+    }
+  },
+  "12on24": {
+    "label": {
+      "en": "12pt on 24pt grid (double spacing)",
+      "fr": "12 pt sur grille de 24 pt (interligne 2)"
+    },
+    "body": {
+      "font": 12,
+      "height": 24,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h4": {
+      "font": 14,
+      "height": 48,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h3": {
+      "font": 16,
+      "height": 48,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h2": {
+      "font": 20,
+      "height": 48,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "h1": {
+      "font": 24,
+      "height": 48,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "footnote": {
+      "font": 10,
+      "height": 24,
+      "bottomMargin": 0,
+      "bottomBorderWidth": 0,
+      "bottomPadding": 0
+    },
+    "rule": {
+      "bottomMargin": 11,
+      "bottomBorderWidth": 1,
+      "bottomPadding": 12
     }
   },
   "14on16": {

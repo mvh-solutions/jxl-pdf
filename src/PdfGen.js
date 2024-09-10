@@ -372,6 +372,10 @@ class PdfGen {
         }
         if (fieldSpec.typeSpec) {
             let foundError = false;
+            if (!Array.isArray(fieldContent)) {
+                errors.push(`Expected array of values in field '${fieldId}' in Section '${sectionId}' (#${sectionN}) but found '${JSON.stringify(fieldContent)}'`);
+                return false;
+            }
             for (const fieldContentItem of fieldContent) {
                 const fieldReport = PdfGen.validateSectionFields(
                     {

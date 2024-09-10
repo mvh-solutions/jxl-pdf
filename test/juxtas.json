@@ -36,7 +36,7 @@
             "bcvNotes": "^/test/test_resources/fra_sq",
             "glossNotes": [
               {
-                "notes": "^/test/test_resources/fra_tn",
+                "notes": "^/test/test_resources/en_tn",
                 "pivot": "^/test/test_resources/jxl2note"
               }
             ]
@@ -52,7 +52,7 @@
             "bcvNotes": "^/test/test_resources/fra_sq",
             "glossNotes": [
               {
-                "notes": "^/test/test_resources/fra_tn",
+                "notes": "^/test/test_resources/en_tn",
                 "pivot": "^/test/test_resources/jxl2note"
               }
             ]

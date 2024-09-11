@@ -268,7 +268,7 @@ const assemblePdfs = async function (options, doPdfCallback) {
     doPdfCallback && doPdfCallback({
         type: "pageNumbers",
         level: 1,
-        msg: `Generate Page Numbers`,
+        msg: `Generate Page Numbers As Needed`,
         args: []
     });
     const pdfDocWithPageNum = await makePageNumber({

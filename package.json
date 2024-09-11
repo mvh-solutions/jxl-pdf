@@ -14,7 +14,7 @@
     "pdf-lib": "^1.17.1",
     "proskomma-core": "^0.10.9",
     "proskomma-json-tools": "^0.8.20",
-    "puppeteer": "^21.6.1",
+    "puppeteer": "^23.3.0",
     "text-diff": "^1.0.1"
   },
   "scripts": {},

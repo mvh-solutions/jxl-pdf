@@ -1,9 +1,8 @@
 const puppeteer = require("puppeteer");
-const path = require('path');
 
 const doPuppet = async ({htmlPath, pdfPath, verbose=false}) => {
     const waitTillHTMLRendered = async (page, timeout = 30000) => {
-        const checkDurationMsecs = 1000;
+        const checkDurationMsecs = 3000;
         const maxChecks = timeout / checkDurationMsecs;
         let lastHTMLSize = 0;
         let checkCounts = 1;
@@ -22,7 +21,10 @@ const doPuppet = async ({htmlPath, pdfPath, verbose=false}) => {
                 break;
             }
             lastHTMLSize = currentHTMLSize;
-            await page.waitForTimeout(checkDurationMsecs);
+            await Promise.race([
+                page.waitForNavigation(),
+                new Promise(resolve => setTimeout(resolve, checkDurationMsecs))
+            ]);
         }
     };
 

@@ -48,7 +48,8 @@ class bookNoteSection extends Section {
                             },
                         }
                     ],
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: "recto"
                 },
                 {
                     id: "showPageNumber",
@@ -57,7 +58,8 @@ class bookNoteSection extends Section {
                         fr: "Afficher numéro de page"
                     },
                     typeName: "boolean",
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: true
                 },
                 {
                     id: "notes",

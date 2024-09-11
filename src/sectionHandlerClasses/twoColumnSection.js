@@ -29,8 +29,31 @@ class TwoColumnSection extends Section {
                         en: "Start Page Side",
                         fr: "Côté pour première page"
                     },
-                    typeLiteral: "verso",
-                    nValues: [1, 1]
+                    typeEnum: [
+                        {
+                            id: "recto",
+                            label: {
+                                en: "Recto",
+                                fr: "Recto"
+                            },
+                        },
+                        {
+                            id: "verso",
+                            label: {
+                                en: "Verso",
+                                fr: "Verso"
+                            },
+                        },
+                        {
+                            id: "either",
+                            label: {
+                                en: "Next Page",
+                                fr: "Page suivante"
+                            },
+                        }
+                    ],
+                    nValues: [1, 1],
+                    suggestedDefault: "recto"
                 },
                 {
                     id: "showPageNumber",
@@ -39,7 +62,8 @@ class TwoColumnSection extends Section {
                         fr: "Afficher numéro de page"
                     },
                     typeName: "boolean",
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: true
                 },
                 {
                     id: "notes",
@@ -105,7 +129,8 @@ class TwoColumnSection extends Section {
                                     },
                                 }
                             ],
-                            nValues: [1, 1]
+                            nValues: [1, 1],
+                            suggestedDefault: "translation"
                         },
                     ]
                 }

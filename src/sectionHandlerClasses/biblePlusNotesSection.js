@@ -54,7 +54,8 @@ class biblePlusNotesSection extends Section {
                             },
                         }
                     ],
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: "recto"
                 },
                 {
                     id: "showPageNumber",
@@ -63,7 +64,8 @@ class biblePlusNotesSection extends Section {
                         fr: "Afficher numéro de page"
                     },
                     typeName: "boolean",
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: true
                 },
                 {
                     id: "notes",
@@ -96,7 +98,8 @@ class biblePlusNotesSection extends Section {
                             },
                         },
                     ],
-                    nValues: [0, 1]
+                    nValues: [0, 1],
+                    suggestedDefault: "verse"
                 },
                 {
                     id: "notesPosition",
@@ -120,7 +123,8 @@ class biblePlusNotesSection extends Section {
                             },
                         },
                     ],
-                    nValues: [0, 1]
+                    nValues: [0, 1],
+                    suggestedDefault: "rows"
                 },
                 {
                     id: "notesWidth",
@@ -131,7 +135,8 @@ class biblePlusNotesSection extends Section {
                     typeName: "number",
                     maxValue: 80,
                     minValue: 20,
-                    nValues: [0, 1]
+                    nValues: [0, 1],
+                    suggestedDefault: 50
                 },
                 {
                     id: "scriptureSrc",
@@ -171,7 +176,8 @@ class biblePlusNotesSection extends Section {
                             },
                         }
                     ],
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: "translation"
                 },
             ]
         }

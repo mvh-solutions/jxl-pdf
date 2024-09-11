@@ -54,7 +54,8 @@ class bcvBibleSection extends Section {
                             },
                         }
                     ],
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: "recto"
                 },
                 {
                     id: "showPageNumber",
@@ -63,7 +64,8 @@ class bcvBibleSection extends Section {
                         fr: "Afficher numéro de page"
                     },
                     typeName: "boolean",
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: true
                 },
                 {
                     id: "notes",
@@ -112,7 +114,8 @@ class bcvBibleSection extends Section {
                             },
                         }
                     ],
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: "translation"
                 },
             ]
         };

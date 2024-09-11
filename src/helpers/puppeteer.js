@@ -3,7 +3,7 @@ const path = require('path');
 
 const doPuppet = async ({htmlPath, pdfPath, verbose=false}) => {
     const waitTillHTMLRendered = async (page, timeout = 30000) => {
-        const checkDurationMsecs = 1000;
+        const checkDurationMsecs = 5000;
         const maxChecks = timeout / checkDurationMsecs;
         let lastHTMLSize = 0;
         let checkCounts = 1;

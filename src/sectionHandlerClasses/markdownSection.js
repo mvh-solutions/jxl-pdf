@@ -46,7 +46,8 @@ class MarkdownSection extends Section {
                             },
                         }
                     ],
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: "recto"
                 },
                 {
                     id: "showPageNumber",
@@ -64,7 +65,8 @@ class MarkdownSection extends Section {
                         fr: "Source pour markdown"
                     },
                     typeName: "md",
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: true
                 },
             ]
         }

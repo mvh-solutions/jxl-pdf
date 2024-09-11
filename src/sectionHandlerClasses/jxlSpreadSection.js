@@ -40,7 +40,8 @@ class jxlSpreadSection extends Section {
                         fr: "Afficher numéro de page"
                     },
                     typeName: "boolean",
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: true
                 },
                 {
                     id: "jxl",
@@ -163,7 +164,8 @@ class jxlSpreadSection extends Section {
                                     },
                                 }
                             ],
-                            nValues: [1, 1]
+                            nValues: [1, 1],
+                            suggestedDefault: "translation"
                         },
                     ]
                 }

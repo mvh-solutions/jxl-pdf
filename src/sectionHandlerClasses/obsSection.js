@@ -45,7 +45,8 @@ class obsSection extends Section {
                             },
                         }
                     ],
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: "recto"
                 },
                 {
                     id: "showPageNumber",
@@ -54,7 +55,8 @@ class obsSection extends Section {
                         fr: "Afficher numéro de page"
                     },
                     typeName: "boolean",
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: true
                 },
                 {
                     id: "obs",

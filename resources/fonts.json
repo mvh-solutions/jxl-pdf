@@ -9,6 +9,7 @@
     "heading": "\"Gentium Book Plus\", serif",
     "footnote": "\"Gentium Book Plus\", serif",
     "greek": "\"Gentium Book Plus\", serif",
+    "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
     "hebrew": "\"Ezra SIL\", serif"
   },
   "gentiumOpen": {
@@ -20,6 +21,7 @@
     "body2": "\"Open Sans Condensed Light\", sans-serif",
     "heading": "\"Gentium Book Plus\", serif",
     "footnote": "\"Gentium Book Plus\", serif",
+    "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
     "greek": "\"Gentium Book Plus\", serif",
     "hebrew": "\"Ezra SIL\", serif"
   },
@@ -32,6 +34,7 @@
     "body2": "\"Charis SIL\", serif",
     "heading": "\"Charis SIL\", serif",
     "footnote": "\"Charis SIL\", serif",
+    "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
     "greek": "\"Gentium Book Plus\", serif",
     "hebrew": "\"Ezra SIL\", serif"
   },
@@ -44,6 +47,7 @@
     "body2": "\"Open Sans Condensed Light\", sans-serif",
     "heading": "\"Charis SIL\", serif",
     "footnote": "\"Charis SIL\", serif",
+    "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
     "greek": "\"Gentium Book Plus\", serif",
     "hebrew": "\"Ezra SIL\", serif"
   },
@@ -56,6 +60,7 @@
     "body2": "\"Open Sans Condensed Light\", sans-serif",
     "heading": "\"Open Sans\", serif",
     "footnote": "\"Open Sans Condensed Light\", serif",
+    "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
     "greek": "\"Gentium Book Plus\", serif",
     "hebrew": "\"Ezra SIL\", serif"
   },
@@ -68,6 +73,7 @@
     "body2": "Cardo, serif",
     "heading": "Cardo, serif",
     "footnote": "Cardo, serif",
+    "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
     "greek": "Cardo, serif",
     "hebrew": "\"Ezra SIL\", serif"
   },
@@ -80,6 +86,7 @@
     "body2": "\"Open Sans Condensed Light\", sans-serif",
     "heading": "Cardo, serif",
     "footnote": "Cardo, serif",
+    "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
     "greek": "Cardo, serif",
     "hebrew": "\"Ezra SIL\", serif"
   },
@@ -92,6 +99,7 @@
     "body2": "Roboto, sans-serif",
     "heading": "Roboto, sans-serif",
     "footnote": "Roboto, sans-serif",
+    "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
     "greek": "\"Gentium Book Plus\", serif",
     "hebrew": "\"Ezra SIL\", serif"
   },
@@ -104,6 +112,7 @@
     "body2": "\"Charis SIL\", serif",
     "heading": "Andika, serif",
     "footnote": "Andika, serif",
+    "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
     "greek": "\"Charis SIL\", serif",
     "hebrew": "\"Ezra SIL\", serif"
   },
@@ -116,6 +125,7 @@
     "body2": "\"Noto Naskh Arabic\", sans-serif",
     "heading": "\"Noto Naskh Arabic\", serif",
     "footnote": "\"Noto Naskh Arabic\", serif",
+    "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
     "greek": "\"Gentium Book Plus\", serif",
     "hebrew": "\"Ezra SIL\", serif"
   }

@@ -1,6 +1,6 @@
 {
   "name": "jxl-pdf",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "Printable Scripture-related PDFs",
   "main": "src/index.js",
   "dependencies": {

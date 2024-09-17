@@ -45,6 +45,7 @@ const setupCSS = options => {
             ["BODYFONT2", options.fonts.body2 || options.fonts.body],
             ["HEADINGFONT", options.fonts.heading],
             ["FOOTNOTEFONT", options.fonts.footnote],
+            ["MONOFONT", options.fonts.mono],
             ["GREEKFONT", options.fonts.greek],
             ["HEBREWFONT", options.fonts.hebrew],
             ["BODYFONTSIZE", options.fontSizes.body.font],

@@ -56,7 +56,18 @@ class MarkdownSection extends Section {
                         fr: "Afficher numéro de page"
                     },
                     typeName: "boolean",
-                    nValues: [1, 1]
+                    nValues: [1, 1],
+                    suggestedDefault: true
+                },
+                {
+                    id: "forceMono",
+                    label: {
+                        en: "Use monospace font",
+                        fr: "Utiliser police monospace"
+                    },
+                    typeName: "boolean",
+                    nValues: [0, 1],
+                    suggestedDefault: false
                 },
                 {
                     id: "md",
@@ -65,8 +76,7 @@ class MarkdownSection extends Section {
                         fr: "Source pour markdown"
                     },
                     typeName: "md",
-                    nValues: [1, 1],
-                    suggestedDefault: true
+                    nValues: [1, 1]
                 },
             ]
         }
@@ -76,7 +86,7 @@ class MarkdownSection extends Section {
         fse.writeFileSync(
             path.join(
                 options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
-            templates['markdown_page']
+            templates[section.content.forceMono ? 'markdown_mono_page': 'markdown_page']
                 .replace(
                     "%%TITLE%%",
                     `${section.id.replace('%%bookCode%%', bookCode)} - ${section.type}`

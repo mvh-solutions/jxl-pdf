@@ -169,6 +169,9 @@ class PdfGen {
                 // Check for duplicate section ids at top level
                 const ids = {};
                 for (const section of sections) {
+                    if (section.type.endsWith("Wrapper")) {
+                        continue;
+                    }
                     if (ids[section.id]) {
                         ret.push(`Duplicate ID '${section.id}'`);
                         skip = true;

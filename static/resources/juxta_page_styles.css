@@ -8,27 +8,27 @@
 
 %%%JUXTA%%%
 
+.greekLeft {
+    font-family: %%GREEKFONT%%;
+}
+
 h2.phraseN {
-    font-size: %%BODYFONTSIZE%%pt;
-    line-height: %%BODYLINEHEIGHT%%pt;
-    font-weight: bold;
+    font-size: %%H4FONTSIZE%%pt;
+    line-height: %%DOUBLEBODYLINEHEIGHT%%pt;
+    font-style: italic;
+    font-weight: normal;
     margin: 0;
-    padding-bottom: %%RULEPADDING%%pt;
-    margin-bottom: %%RULEMARGIN%%pt;
-    border-bottom: solid %%RULEWIDTH%%pt black;
     width: %%PAGEBODYWIDTH%%pt;
     text-align: left;
     font-family: %%HEADINGFONT%%;
 }
 
 h2.sentenceRef {
-    font-size: %%BODYFONTSIZE%%pt;
-    line-height: %%BODYLINEHEIGHT%%pt;
-    font-weight: bold;
+    font-size: %%H4FONTSIZE%%pt;
+    line-height: %%DOUBLEBODYLINEHEIGHT%%pt;
+    font-style: italic;
+    font-weight: normal;
     margin: 0;
-    padding-bottom: %%RULEPADDING%%pt;
-    margin-bottom: %%RULEMARGIN%%pt;
-    border-bottom: solid %%RULEWIDTH%%pt black;
     width: %%PAGEBODYWIDTH%%pt;
     text-align: right;
     font-family: %%HEADINGFONT%%;
@@ -37,13 +37,7 @@ h2.sentenceRef {
 .transAbbr {
     font-family: %%BODYFONT%%;
     font-weight: bold;
-    font-style: italic;
     padding-right: 4pt;
-}
-
-.transAbbr {
-    font-size: %%H4FONTSIZE%%pt;
-    font-weight: bold;
 }
 
 .leftPane {
@@ -70,7 +64,6 @@ h2.sentenceRef {
     string-set: sentenceN attr(data-n), cvRef attr(data-cv);
     page-break-inside: avoid;
     vertical-align: top;
-    padding-bottom: %%BODYLINEHEIGHT%%pt;
 }
 
 .firstLeft, .otherLeft {

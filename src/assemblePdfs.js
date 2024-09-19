@@ -224,7 +224,7 @@ const assemblePdfs = async function (options, doPdfCallback) {
         if (manifestStep.type === "superimpose") {
             continue
         }
-        options.verbose && console.log(`         ${manifestStep.id} - ${manifestStep.numPages} originated page(s)`);
+        options.verbose && console.log(`         ${manifestStep.id} - ${manifestStep.makeFromDouble ? manifestStep.numPages * 2 :manifestStep.numPages} originated page(s)`);
 
         // if we need to superimposes
         const superimposeStep = manifest.filter((s) => s.for === manifestStep.id)[0];

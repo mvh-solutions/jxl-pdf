@@ -26,7 +26,7 @@ const doPuppet = async ({htmlPath, pdfPath, verbose=false}) => {
         }
     };
 
-    const browser = await puppeteer.launch({headless: "new", args: [ '--disable-web-security', ]});
+    const browser = await puppeteer.launch({headless: "new", args: [ '--disable-web-security', '--no-sandbox', ]});
     const page = await browser.newPage();
     await page.goto(`file://${htmlPath}`);
     page.on("pageerror", function (err) {

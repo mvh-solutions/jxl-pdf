@@ -1,4 +1,11 @@
-const cvForSentence = sentence => {
+const cvForSentence = (sentence, punctuation) => {
+    const referencePunctuation =
+        punctuation ||
+        {
+        "bookChapter": " ",
+            "chapterVerse": ":",
+            "verseRange": "-"
+    }
     const cvSet = new Set([]);
     sentence.chunks.forEach(c => c.source.forEach(se => cvSet.add(se.cv)));
     const cvValues = Array.from(cvSet);
@@ -10,9 +17,9 @@ const cvForSentence = sentence => {
     const [c1, v1] = cv1.split(':');
     const [c2, v2] = cv2.split(':');
     if (c1 === c2) {
-        return `${c1}:${v1}-${v2}`;
+        return `${c1}${referencePunctuation.bookChapter}${v1}${referencePunctuation.verseRange}${v2}`;
     }
-    return `${cv1}-${cv2}`
+    return `${cv1}${referencePunctuation.verseRange}${cv2}`
 };
 
 const tidyLhsText = (cvRecord) => {

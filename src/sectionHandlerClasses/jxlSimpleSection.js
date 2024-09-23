@@ -137,7 +137,7 @@ class jxlSimpleSection extends Section {
 
     async doSection({section, templates, manifest, options}) {
         const jsonFile = fse.readJsonSync(resolvePath(path.join(section.content.jxl, section.bcvRange + ".json")));
-        const mergeCvs = (cvs) => {
+        const mergeCvs = (cvs, canonical=true) => {
             const chapter = cvs[0]
                 .split(":")[0];
             const firstCvFirstV = cvs[0]
@@ -146,7 +146,9 @@ class jxlSimpleSection extends Section {
             const lastCvLastV = cvs.reverse()[0]
                 .split(":")[1]
                 .split('-').reverse()[0];
-            return `${chapter}:${firstCvFirstV}${firstCvFirstV === lastCvLastV ? "" : `-${lastCvLastV}`}`;
+            const chapterVerseSeparator = canonical ? ":" : options.referencePunctuation.chapterVerse;
+            const verseRangeSeparator = canonical ? "-" : options.referencePunctuation.verseRange;
+            return `${chapter}${chapterVerseSeparator}${firstCvFirstV}${firstCvFirstV === lastCvLastV ? "" : `${verseRangeSeparator}${lastCvLastV}`}`;
         }
         const jxlJson = jsonFile.bookCode ? jsonFile.sentences : jsonFile;
         const sentenceMerges = []; // True means "merge with next sentence"
@@ -241,8 +243,9 @@ class jxlSimpleSection extends Section {
                 .replace('%%ROWS%%', jxlRows.join('\n'))
             );
             if (!sentenceMerges[sentenceN]) {
+                const canonicalCvRef = mergeCvs(cvs, true);
                 const cvRef = mergeCvs(cvs);
-                const cvNotes = unpackCellRange(cvRef).map(cv => vNotes[cv] || []);
+                const cvNotes = unpackCellRange(canonicalCvRef).map(cv => vNotes[cv] || []);
                 const sentence = templates.simple_juxta_sentence
                     .replace('%%BOOKNAME%%', bookName)
                     .replace('%%SENTENCEREF%%', cvRef)

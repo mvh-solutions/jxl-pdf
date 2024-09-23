@@ -108,12 +108,6 @@ const originatePdfs = async (options, doPdfCallback=null) => {
     options.resourcesDir && fse.copySync(path.resolve(options.resourcesDir), path.join(options.workingDir, "html", "page_resources"));
     fse.mkdirsSync(options.pdfPath);
 
-    const checkBookCode = (sectionId) => {
-        if (!bookCode) {
-            throw new Error(`bookCode not set for section '${sectionId}`);
-        }
-    }
-
     const templates = loadTemplates();
 
     let links = [];

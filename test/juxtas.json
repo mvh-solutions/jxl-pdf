@@ -5,7 +5,12 @@
     "sizes": "12on14",
     "outputPath": "/home/mark/Downloads/juxtas.pdf",
     "workingDir": "/home/mark/.jxlpdf/working",
-    "verbose": false
+    "verbose": false,
+    "referencePunctuation": {
+      "bookChapter": " ",
+      "chapterVerse": ".",
+      "verseRange": "-"
+    }
   },
   "sections": [
     {

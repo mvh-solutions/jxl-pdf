@@ -54,6 +54,11 @@ class PdfGen {
             pageFormat: pages[this.options.global.pages],
             fonts: fonts[this.options.global.fonts],
             fontSizes: sizes[this.options.global.sizes],
+            referencePunctuation: this.options.global.referencePunctuation || {
+                bookChapter: " ",
+                chapterVerse: ":",
+                verseRange: "-"
+            },
             configContent: this.options,
             output: this.options.global.outputPath
         };
@@ -144,6 +149,9 @@ class PdfGen {
             }
             for (const globalKey of Object.keys(configOb.global)) {
                 if (globalContextKeys.includes(globalKey)) {
+                    continue;
+                }
+                if (globalKey === "referencePunctuation") {
                     continue;
                 }
                 if (!globalSpecKeys[globalKey]) {

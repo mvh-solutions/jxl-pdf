@@ -137,7 +137,7 @@ class jxlSimpleSection extends Section {
 
     async doSection({section, templates, manifest, options}) {
         const jsonFile = fse.readJsonSync(resolvePath(path.join(section.content.jxl, section.bcvRange + ".json")));
-        const mergeCvs = (cvs, canonical=true) => {
+        const mergeCvs = (cvs, canonical=false) => {
             const chapter = cvs[0]
                 .split(":")[0];
             const firstCvFirstV = cvs[0]

@@ -194,9 +194,11 @@ class jxlSpreadSection extends Section {
         const sentenceMerges = []; // True means "merge with next sentence"
         let sentenceN = 0;
         for (const sentence of jxlJson) {
-            let sentenceLastV = cvForSentence(sentence)
+            const cv4Sentence = cvForSentence(sentence);
+            console.log("cvs", cv4Sentence);
+            let sentenceLastV = cv4Sentence
                 .split(":")[1]
-                .split('-')
+                .split("-")
                 .reverse()[0];
             let nextSentenceFirstV = (sentenceN + 1) === jxlJson.length ?
                 999 :

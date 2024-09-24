@@ -17,9 +17,9 @@ const cvForSentence = (sentence, punctuation) => {
     const [c1, v1] = cv1.split(':');
     const [c2, v2] = cv2.split(':');
     if (c1 === c2) {
-        return `${c1}${referencePunctuation.bookChapter}${v1}${referencePunctuation.verseRange}${v2}`;
+        return `${c1}${referencePunctuation.chapterVerse}${v1}${referencePunctuation.verseRange}${v2}`;
     }
-    return `${cv1}${referencePunctuation.verseRange}${cv2}`
+    return `${c1}${referencePunctuation.chapterVerse}${v1}${referencePunctuation.verseRange}${c2}referencePunctuation.chapterVerse}${v2}`
 };
 
 const tidyLhsText = (cvRecord) => {

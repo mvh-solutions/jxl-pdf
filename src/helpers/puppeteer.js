@@ -25,8 +25,24 @@ const doPuppet = async ({htmlPath, pdfPath, verbose=false}) => {
             await page.waitForTimeout(checkDurationMsecs);
         }
     };
-
-    const browser = await puppeteer.launch({headless: "new", args: [ '--disable-web-security', '--no-sandbox', ]});
+    let browser;
+    try {
+        browser = await puppeteer.launch({
+            headless: "new",
+            args: [
+                '--disable-web-security',
+            ]
+        });
+    } catch (err) {
+        verbose && console.log("      Puppeteer falling back to no-sandbox")
+        browser = await puppeteer.launch({
+            headless: "new",
+            args: [
+                '--disable-web-security',
+                '--no-sandbox',
+            ]
+        });
+    }
     const page = await browser.newPage();
     await page.goto(`file://${htmlPath}`);
     page.on("pageerror", function (err) {

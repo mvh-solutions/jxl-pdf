@@ -1,7 +1,4 @@
-const puppeteer = require("puppeteer");
-const path = require('path');
-
-const doPuppet = async ({htmlPath, pdfPath, verbose=false}) => {
+const doPuppet = async ({browser, htmlPath, pdfPath, verbose=false}) => {
     const waitTillHTMLRendered = async (page, timeout = 30000) => {
         const checkDurationMsecs = 5000;
         const maxChecks = timeout / checkDurationMsecs;
@@ -25,24 +22,6 @@ const doPuppet = async ({htmlPath, pdfPath, verbose=false}) => {
             await page.waitForTimeout(checkDurationMsecs);
         }
     };
-    let browser;
-    try {
-        browser = await puppeteer.launch({
-            headless: "new",
-            args: [
-                '--disable-web-security',
-            ]
-        });
-    } catch (err) {
-        verbose && console.log("      Puppeteer falling back to no-sandbox")
-        browser = await puppeteer.launch({
-            headless: "new",
-            args: [
-                '--disable-web-security',
-                '--no-sandbox',
-            ]
-        });
-    }
     const page = await browser.newPage();
     await page.goto(`file://${htmlPath}`);
     page.on("pageerror", function (err) {
@@ -57,7 +36,6 @@ const doPuppet = async ({htmlPath, pdfPath, verbose=false}) => {
         timeout: 300000 // 5 minutes
     });
     verbose && console.log(`      PDF generated and saved to ${pdfPath}`);
-    await browser.close();
 }
 
 module.exports = {

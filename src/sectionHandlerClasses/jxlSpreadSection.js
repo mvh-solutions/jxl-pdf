@@ -343,6 +343,7 @@ class jxlSpreadSection extends Section {
                 .replace('%%SENTENCES%%', sentences.join(''))
         );
         await doPuppet({
+            browser: options.browser,
             verbose: options.verbose,
             htmlPath: path.join(options.htmlPath, `${qualified_id}.html`),
             pdfPath: path.join(options.pdfPath, `${qualified_id}.pdf`)

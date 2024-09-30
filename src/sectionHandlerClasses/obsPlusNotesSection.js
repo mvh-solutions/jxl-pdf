@@ -154,6 +154,7 @@ class obsPlusNotesSection extends Section {
                 args: [`${path.join(options.pdfPath, `${section.id}_${name}.pdf`)}`, mdName]
             });
             await doPuppet({
+                browser: options.browser,
                 verbose: options.verbose,
                 htmlPath: path.join(options.htmlPath, `${section.id}_${name}.html`),
                 pdfPath: path.join(options.pdfPath, `${section.id}_${name}.pdf`)

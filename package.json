@@ -1,6 +1,6 @@
 {
   "name": "jxl-pdf",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Printable Scripture-related PDFs",
   "main": "src/index.js",
   "dependencies": {
@@ -14,8 +14,10 @@
     "pdf-lib": "^1.17.1",
     "proskomma-core": "^0.10.9",
     "proskomma-json-tools": "^0.8.20",
-    "puppeteer": "^21.6.1",
     "text-diff": "^1.0.1"
+  },
+  "devDependencies": {
+    "puppeteer": "^21.6.1"
   },
   "scripts": {},
   "repository": {

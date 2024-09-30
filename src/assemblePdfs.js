@@ -45,6 +45,7 @@ const doPageNumber = async ({
         const pageNumbersWorkingFilePath = path.resolve(path.join(options.pdfPath, `__pageNumbers_${nPdfNumbersWorkingFiles}_.pdf`));
         pageNumbersPaths.push(pageNumbersWorkingFilePath);
         await doPuppet({
+            browser: options.browser,
             verbose: options.verbose,
             htmlPath: path.join(options.htmlPath, `__pageNumbers_${nPdfNumbersWorkingFiles}_.html`),
             pdfPath: pageNumbersWorkingFilePath
@@ -288,6 +289,8 @@ const assemblePdfs = async function (options, doPdfCallback) {
         msg: `Writing out assembled PDF to ${options.output} (${pdfDocWithPageNum.getPageCount()}) page(s)`,
         args: [options.output, pdfDocWithPageNum.getPageCount()]
     });
+    // Cleanup
+    await options.browser.close();
 }
 
 module.exports = assemblePdfs;

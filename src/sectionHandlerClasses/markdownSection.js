@@ -105,6 +105,7 @@ class MarkdownSection extends Section {
             args: [path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)]
         });
         await doPuppet({
+            browser: options.browser,
             verbose: options.verbose,
             htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', bookCode)}.html`),
             pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', bookCode)}.pdf`)

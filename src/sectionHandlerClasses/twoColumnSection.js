@@ -171,6 +171,7 @@ class TwoColumnSection extends Section {
             headerHtml
         );
         await doPuppet({
+            browser: options.browser,
             verbose: options.verbose,
             htmlPath: path.join(options.htmlPath, `${section.id.replace('%%bookCode%%', section.bcvRange)}_superimpose.html`),
             pdfPath: path.join(options.pdfPath, `${section.id.replace('%%bookCode%%', section.bcvRange)}_superimpose.pdf`)
@@ -226,6 +227,7 @@ class TwoColumnSection extends Section {
                 )
         );
         await doPuppet({
+            browser: options.browser,
             verbose: options.verbose,
             htmlPath: path.join(options.htmlPath, `${qualified_id.replace('%%bookCode%%', section.bcvRange)}.html`),
             pdfPath: path.join(options.pdfPath, `${qualified_id.replace('%%bookCode%%', section.bcvRange)}.pdf`)

@@ -316,6 +316,7 @@ class biblePlusNotesSection extends Section {
         checkCssSubstitution("bible_plus_notes_in_columns_page_styles.css", css, "%");
         fse.writeFileSync(cssPath, css);
         await doPuppet({
+            browser: options.browser,
             verbose: options.verbose,
             htmlPath: path.join(options.htmlPath, `${qualified_id}.html`),
             pdfPath: path.join(options.pdfPath, `${qualified_id}.pdf`)

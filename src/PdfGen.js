@@ -8,7 +8,6 @@ const {sectionHandlerLookup} = require('./sectionHandlerLookup');
 const {resolvePath} = require('./helpers');
 const fse = require("fs-extra");
 const path = require("path");
-const os = require("os");
 
 class PdfGen {
 
@@ -18,6 +17,7 @@ class PdfGen {
             throw new Error(`Validation errors for config file:\n${errors.map(e => `  - ${e}`).join('\n')}`);
         }
         this.options = options;
+        this.browser = options.browser;
         this.doPdfCallback = doPdfCallback;
     }
 
@@ -410,11 +410,11 @@ class PdfGen {
     }
 
     async originatePdfs() {
-        return await _originatePdfs(this.options, this.doPdfCallback);
+        return await _originatePdfs({...this.options, browser: this.browser}, this.doPdfCallback);
     }
 
     async assemblePdfs() {
-        return await _assemblePdfs(this.options, this.doPdfCallback);
+        return await _assemblePdfs({...this.options, browser: this.browser}, this.doPdfCallback);
     }
 }
 

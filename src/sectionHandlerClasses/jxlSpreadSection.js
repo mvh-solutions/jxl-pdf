@@ -92,7 +92,7 @@ class jxlSpreadSection extends Section {
                         }
                     ]
                 },
-                /*                {
+                                {
                                     id: "firstSentence",
                                     label: {
                                         en: "First Sentence Number",
@@ -110,7 +110,7 @@ class jxlSpreadSection extends Section {
                                     typeName: "number",
                                     nValues: [0, 1]
                                 },
-                 */
+
                 {
                     id: "lhs",
                     label: {
@@ -195,7 +195,6 @@ class jxlSpreadSection extends Section {
         let sentenceN = 0;
         for (const sentence of jxlJson) {
             const cv4Sentence = cvForSentence(sentence);
-            console.log("cvs", cv4Sentence);
             let sentenceLastV = cv4Sentence
                 .split(":")[1]
                 .split("-")
@@ -258,10 +257,10 @@ class jxlSpreadSection extends Section {
         let jxls = [];
         let cvs = [];
         for (const [sentenceN, sentenceJson] of jxlJson.entries()) {
-            if (section.firstSentence && (sentenceN + 1) < section.firstSentence) {
+            if (section.content.firstSentence && (sentenceN + 1) < section.content.firstSentence) {
                 continue;
             }
-            if (section.lastSentence && (sentenceN + 1) > section.lastSentence) {
+            if (section.content.lastSentence && (sentenceN + 1) > section.content.lastSentence) {
                 continue;
             }
             section.doPdfCallback && section.doPdfCallback({

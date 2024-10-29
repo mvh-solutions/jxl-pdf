@@ -225,7 +225,10 @@ class biblePlusNotesSection extends Section {
         section.content.notesUnit = section.content.notesUnit || "verse";
         section.content.notesPosition = section.content.notesPosition || "columns";
         section.content.notesWidth = section.content.notesWidth || 70;
-        const pk = pkWithDocs(section.bcvRange, [{id: "xxx_yyy", path: resolvePath(section.content.scriptureSrc)}], options.verbose);
+        const pk = pkWithDocs(section.bcvRange, [{
+            id: "xxx_yyy",
+            path: resolvePath(section.content.scriptureSrc)
+        }], options.verbose);
         const bookName = getBookName(pk, "xxx_yyy", section.bcvRange);
         const notes = bcvNotes(resolvePath(section.content.notes), section.bcvRange, []);
         const cvTexts = getCVTexts(section.bcvRange, pk);
@@ -234,6 +237,8 @@ class biblePlusNotesSection extends Section {
         ];
         const qualified_id = `${section.id}_${section.bcvRange}`;
         const seenCvs = new Set([]);
+        const chapterVerseSeparator = options.referencePunctuation ? options.referencePunctuation.chapterVerse || ":" : ":";
+        const verseRangeSeparator = options.referencePunctuation ? options.referencePunctuation.verseRange || "-" : "-";
         if (section.content.notesUnit === "verse") {
             for (const cvRecord of cvTexts) {
                 if (seenCvs.has(cvRecord.cv)) {
@@ -249,16 +254,20 @@ class biblePlusNotesSection extends Section {
                     .replace("%%NOTEWIDTH%%", section.content.notesWidth)
                     .replace(
                         '%%LEFTCOLUMN%%',
-                        `<div class="col1"><span class="cv">${cvRecord.cv}</span> ${cvRecord.texts["xxx_yyy"] || "-"}</div>`
+                        `<div class="col1"><span class="cv">${
+                            cvRecord.cv
+                                .replace(":", chapterVerseSeparator)
+                                .replace("-", verseRangeSeparator)
+                        }</span> ${cvRecord.texts["xxx_yyy"] || "-"}</div>`
                     )
                     .replace(
                         '%%RIGHTCOLUMN%%',
                         cvNotes.length > 0 ?
-                        `<div class="col2">${cvNotes.reduce((a, b) => [...a, ...b])
-                            .map(nr => cleanNoteLine(nr))
-                            .map(note => `<p class="note">${note}</p>`)
-                            .join('\n')}</div>`:
-                        ""
+                            `<div class="col2">${cvNotes.reduce((a, b) => [...a, ...b])
+                                .map(nr => cleanNoteLine(nr))
+                                .map(note => `<p class="note">${note}</p>`)
+                                .join('\n')}</div>` :
+                            ""
                     );
                 verses.push(verseHtml);
             }
@@ -277,7 +286,11 @@ class biblePlusNotesSection extends Section {
                     .replace("%%NOTEWIDTH%%", section.content.notesWidth)
                     .replace(
                         '%%LEFTCOLUMN%%',
-                        `<div class="col1"><span class="cv">${sentenceRecord.cv}</span> ${sentenceRecord.text || "-"}</div>`
+                        `<div class="col1"><span class="cv">${
+                            sentenceRecord.cv
+                                .replace(":", chapterVerseSeparator)
+                                .replace("-", verseRangeSeparator)
+                        }</span> ${sentenceRecord.text || "-"}</div>`
                     )
                     .replace(
                         '%%RIGHTCOLUMN%%',

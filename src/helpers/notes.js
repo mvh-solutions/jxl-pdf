@@ -82,7 +82,8 @@ const maybeChapterNotes = (chapterN, noteType, notes, templates, verbose = false
 
 const unpackCellRange = cv => {
     let ret = [];
-    const [chapter, verseRange] = cv.split(':');
+    let [chapter, verseRange] = cv.split(':');
+    chapter = chapter.replace(/^0+/g, "");
     if (!verseRange) {
         return ret;
     }
@@ -93,7 +94,7 @@ const unpackCellRange = cv => {
             fromV++;
         }
     } else {
-        ret.push(cv);
+        ret.push(cv.replace(/^0+/g, ""));
     }
     return ret;
 }
@@ -124,7 +125,7 @@ const bcvNotes = (notesPath, bookCode, excludeTags=[]) => {
         if (toExclude) {
             continue;
         }
-        const rowKey = cells[0];
+        const rowKey = cells[0].replace(/^0+/g, "");
         let content = (noteType === "questions" ? cells[5] : cells[6]) || "";
         if (content.trim().length === 0) {
             continue;

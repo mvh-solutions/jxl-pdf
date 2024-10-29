@@ -125,7 +125,10 @@ class bcvBibleSection extends Section {
         if (!section.bcvRange) {
             throw new Error(`No bcvRange found for section ${section.id}`);
         }
-        const pk = pkWithDocs(section.bcvRange, [{id: "xxx_yyy", path: resolvePath(section.content.scriptureSrc)}], options.verbose);
+        const pk = pkWithDocs(section.bcvRange, [{
+            id: "xxx_yyy",
+            path: resolvePath(section.content.scriptureSrc)
+        }], options.verbose);
         const bookName = getBookName(pk, "xxx_yyy", section.bcvRange);
         const cvTexts = getCVTexts(section.bcvRange, pk);
         let notes = section.content.notes ? bcvNotes(resolvePath(section.content.notes), section.bcvRange) : {};
@@ -141,15 +144,27 @@ class bcvBibleSection extends Section {
                 seenCvs.add(cvRecord.cv);
             }
             const cvNotes = unpackCellRange(cvRecord.cv).map(cv => notes[cv] || []);
+            const chapterVerseSeparator = options.referencePunctuation ? options.referencePunctuation.chapterVerse || ":" : ":";
+            const verseRangeSeparator = options.referencePunctuation ? options.referencePunctuation.verseRange || "-" : "-";
             const verseHtml = templates['bcv_bible_verse']
-                .replace("%%CV%%", cvRecord.cv)
+                .replace(
+                    "%%CV%%",
+                    cvRecord.cv
+                        .replace(":", chapterVerseSeparator)
+                        .replace("-", verseRangeSeparator))
                 .replace(
                     '%%VERSECONTENT%%',
                     cvNotes.length > 0 ?
                         `${cvRecord.texts["xxx_yyy"] || "-"}${cvNotes.reduce((a, b) => [...a, ...b])
-                        .map(nr => cleanNoteLine(nr))
-                        .map(note => `<p class="note">${note}</p>`)
-                        .join('\n')}` :
+                            .map(nr => cleanNoteLine(nr))
+                            .map(
+                                note => `<p class="note">${
+                                    note
+                                        .replace(":", chapterVerseSeparator)
+                                        .replace("-", verseRangeSeparator)
+                                }</p>`
+                            )
+                            .join('\n')}` :
                         ""
                 );
             verses.push(verseHtml);

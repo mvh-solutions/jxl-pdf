@@ -32,18 +32,15 @@
 }
 
 .note {
-    font-size: %%FOOTNOTEFONTSIZE%%pt;
-    line-height: %%FOOTNOTELINEHEIGHT%%pt;
+    font-family: %%BODYFONT2%%;
+    font-size: %%BODYFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
     text-align: justify;
     float: footnote;
     margin-bottom: 0pt;
     padding-left: 6pt;
     text-indent: -6pt;
     font-family: %%FOOTNOTEFONT%%;
-}
-
-.not_first_note {
-    padding-left: 12pt;
 }
 
 .note_n {

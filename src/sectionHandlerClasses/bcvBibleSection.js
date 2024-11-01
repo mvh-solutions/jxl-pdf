@@ -155,16 +155,16 @@ class bcvBibleSection extends Section {
                 .replace(
                     '%%VERSECONTENT%%',
                     cvNotes.length > 0 ?
-                        `${cvRecord.texts["xxx_yyy"] || "-"}${cvNotes.reduce((a, b) => [...a, ...b])
+                        `${cvRecord.texts["xxx_yyy"] || "-"}<p class="note">${cvNotes.reduce((a, b) => [...a, ...b])
                             .map(nr => cleanNoteLine(nr))
                             .map(
-                                note => `<p class="note">${
+                                note => `<span>${
                                     note
                                         .replace(":", chapterVerseSeparator)
                                         .replace("-", verseRangeSeparator)
-                                }</p>`
+                                }</span>`
                             )
-                            .join('\n')}` :
+                            .join(' • ')}</p>` : // space before, no break space after
                         ""
                 );
             verses.push(verseHtml);

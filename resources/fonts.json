@@ -35,7 +35,7 @@
     "heading": "\"Charis SIL\", serif",
     "footnote": "\"Charis SIL\", serif",
     "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
-    "greek": "\"Gentium Book Plus\", serif",
+    "greek": "Cardo, serif",
     "hebrew": "\"Ezra SIL\", serif"
   },
   "charisOpen": {
@@ -48,7 +48,7 @@
     "heading": "\"Charis SIL\", serif",
     "footnote": "\"Charis SIL\", serif",
     "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
-    "greek": "\"Gentium Book Plus\", serif",
+    "greek": "Cardo, serif",
     "hebrew": "\"Ezra SIL\", serif"
   },
   "allOpen": {
@@ -61,7 +61,7 @@
     "heading": "\"Open Sans\", serif",
     "footnote": "\"Open Sans Condensed Light\", serif",
     "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
-    "greek": "\"Gentium Book Plus\", serif",
+    "greek": "Cardo, serif",
     "hebrew": "\"Ezra SIL\", serif"
   },
   "allCardo": {
@@ -100,7 +100,7 @@
     "heading": "Roboto, sans-serif",
     "footnote": "Roboto, sans-serif",
     "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
-    "greek": "\"Gentium Book Plus\", serif",
+    "greek": "Cardo, serif",
     "hebrew": "\"Ezra SIL\", serif"
   },
   "andikaCharis": {
@@ -113,7 +113,33 @@
     "heading": "Andika, serif",
     "footnote": "\"Charis SIL\", serif",
     "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
-    "greek": "\"Charis SIL\", serif",
+    "greek": "Cardo, serif",
+    "hebrew": "\"Ezra SIL\", serif"
+  },
+  "andikaOpen": {
+    "label": {
+      "en": "Andika with Open for peripherals",
+      "fr": "Andika plus Open pour les annexes"
+    },
+    "body": "Andika, serif",
+    "body2": "\"Open Sans Condensed Light\", sans-serif",
+    "heading": "Andika, serif",
+    "footnote": "\"Open Sans Condensed Light\", sans-serif",
+    "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
+    "greek": "Cardo, serif",
+    "hebrew": "\"Ezra SIL\", serif"
+  },
+  "andikaGentium": {
+    "label": {
+      "en": "Andika with Gentium for peripherals",
+      "fr": "Andika plus Gentium pour les annexes"
+    },
+    "body": "Andika, serif",
+    "body2": "\"Gentium Book Plus\", serif",
+    "heading": "Andika, serif",
+    "footnote": "\"Gentium Book Plus\", serif",
+    "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
+    "greek": "\"Gentium Book Plus\", serif",
     "hebrew": "\"Ezra SIL\", serif"
   },
   "notoNaskh": {
@@ -126,7 +152,7 @@
     "heading": "\"Noto Naskh Arabic\", serif",
     "footnote": "\"Noto Naskh Arabic\", serif",
     "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
-    "greek": "\"Gentium Book Plus\", serif",
+    "greek": "Cardo, serif",
     "hebrew": "\"Ezra SIL\", serif"
   }
 }

@@ -133,7 +133,7 @@ class bcvBibleSection extends Section {
         const cvTexts = getCVTexts(section.bcvRange, pk);
         let notes = section.content.notes ? bcvNotes(resolvePath(section.content.notes), section.bcvRange) : {};
         for (const [cv, noteArray] of Object.entries(notes)) {
-            notes[cv] = [`<b>${cv}</b> ${noteArray[0]}`, ...noteArray.slice(1).map(nt => `<span class="not_first_note">${nt}</span>`)];
+            notes[cv] = [`<span class="cv">${cv}</span> ${noteArray[0]}`, ...noteArray.slice(1).map(nt => `<span class="not_first_note">${nt}</span>`)];
         }
         const verses = [`<h1>${bookName}</h1>`];
         const seenCvs = new Set([]);

@@ -9,6 +9,8 @@
 .cvCol {
     font-weight: bold;
     width: %CVCOLUMNWIDTH%pt;
+    font-size: %%FOOTNOTEFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
 }
 .verseContent {
     display: inline-block;
@@ -50,4 +52,10 @@
 
 .note .b {
     font-weight: bold;
+}
+
+.cv {
+    font-weight: bold;
+    font-size: %%FOOTNOTEFONTSIZE%%pt;
+    line-height: %%BODYLINEHEIGHT%%pt;
 }

@@ -394,19 +394,19 @@
     ],
     "margins": {
       "top": [
-        30
+        50
       ],
       "firstPageTop": [
-        10
+        30
       ],
       "bottom": [
         40
       ],
       "outer": [
-        22
+        32
       ],
       "inner": [
-        36
+        26
       ]
     },
     "footerOffset": [

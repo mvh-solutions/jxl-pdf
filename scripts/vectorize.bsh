@@ -1,0 +1,3 @@
+echo Vectorize $1 to $2
+gs -dPDFA -dBATCH -dNOPAUSE -dNOCANCEL -dNOPROMPT -dNOSAFER -dQUIET -dPDFACompatibilityPolicy=1 -dNoOutputFonts -sDEVICE=pdfwrite -sOutputFile=$2 $1
+echo done

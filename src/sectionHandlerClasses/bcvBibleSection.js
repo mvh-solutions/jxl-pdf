@@ -150,8 +150,8 @@ class bcvBibleSection extends Section {
                 .replace(
                     "%%CV%%",
                     cvRecord.cv
-                        .replace(":", chapterVerseSeparator)
-                        .replace("-", verseRangeSeparator))
+                        .replace(/(\d):/, (match, p1) => `${p1}${chapterVerseSeparator}`)
+                        .replace(/(\d)-/, (match, p1) => `${p1}${verseRangeSeparator}`))
                 .replace(
                     '%%VERSECONTENT%%',
                     cvNotes.length > 0 ?
@@ -160,8 +160,8 @@ class bcvBibleSection extends Section {
                             .map(
                                 note => `<span>${
                                     note
-                                        .replace(":", chapterVerseSeparator)
-                                        .replace("-", verseRangeSeparator)
+                                        .replace(/(\d):/, (match, p1) => `${p1}${chapterVerseSeparator}`)
+                                        .replace(/(\d)-/, (match, p1) => `${p1}${verseRangeSeparator}`)
                                 }</span>`
                             )
                             .join(' • ')}</p>` : // space before, no break space after

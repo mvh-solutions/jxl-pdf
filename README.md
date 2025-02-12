@@ -55,5 +55,6 @@ allCardo, cardoOpen, allRoboto, andikaCharis, notoNaskh (default: "allGentium")
 
 ## To normalize PDF with vectorized text using Ghostscript:
 ```
-gs -dPDFA -dBATCH -dNOPAUSE -dNOCANCEL -dNOPROMPT -dNOSAFER -dQUIET -dPDFACompatibilityPolicy=1 -dNoOutputFonts -sDEVICE=pdfwrite -sOutputFile=out.pdf in.pdf
+cd scripts
+./vectorize.bsh path/to/infile.pdf path/to/outfile.pdf
 ```

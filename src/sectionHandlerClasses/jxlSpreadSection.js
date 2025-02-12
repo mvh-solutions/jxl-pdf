@@ -186,8 +186,8 @@ class jxlSpreadSection extends Section {
             const lastCvLastV = cvs.reverse()[0]
                 .split(":")[1]
                 .split('-').reverse()[0];
-            const chapterVerseSeparator = options.referencePunctuation ? options.referencePunctuation.chapterVerse || ":" : ":";
-            const verseRangeSeparator = options.referencePunctuation ? options.referencePunctuation.verseRange || "-" : "-";
+            const chapterVerseSeparator = (!canonical && options.referencePunctuation) ? options.referencePunctuation.chapterVerse || ":" : ":";
+            const verseRangeSeparator = (!canonical && options.referencePunctuation) ? options.referencePunctuation.verseRange || "-" : "-";
             return `${chapter}${chapterVerseSeparator}${firstCvFirstV}${firstCvFirstV === lastCvLastV ? "" : `${verseRangeSeparator}${lastCvLastV}`}`;
         }
         const jxlJson = jsonFile.bookCode ? jsonFile.sentences : jsonFile;

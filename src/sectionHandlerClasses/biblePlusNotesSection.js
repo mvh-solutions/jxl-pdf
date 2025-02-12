@@ -256,8 +256,8 @@ class biblePlusNotesSection extends Section {
                         '%%LEFTCOLUMN%%',
                         `<div class="col1"><span class="cv">${
                             cvRecord.cv
-                                .replace(":", chapterVerseSeparator)
-                                .replace("-", verseRangeSeparator)
+                                .replace(/(\d):/, (match, p1) => `${p1}${chapterVerseSeparator}`)
+                                .replace(/(\d)-/, (match, p1) => `${p1}${verseRangeSeparator}`)
                         }</span> ${cvRecord.texts["xxx_yyy"] || "-"}</div>`
                     )
                     .replace(
@@ -288,8 +288,8 @@ class biblePlusNotesSection extends Section {
                         '%%LEFTCOLUMN%%',
                         `<div class="col1"><span class="cv">${
                             sentenceRecord.cv
-                                .replace(":", chapterVerseSeparator)
-                                .replace("-", verseRangeSeparator)
+                                .replace(/(\d):/, (match, p1) => `${p1}${chapterVerseSeparator}`)
+                                .replace(/(\d)-/, (match, p1) => `${p1}${verseRangeSeparator}`)
                         }</span> ${sentenceRecord.text || "-"}</div>`
                     )
                     .replace(

@@ -4,11 +4,37 @@
       "en": "All Gentium",
       "fr": "Gentium partout"
     },
-    "body": "\"Gentium Book Plus\", serif",
-    "body2": "\"Gentium Book Plus\", serif",
-    "heading": "\"Gentium Book Plus\", serif",
-    "footnote": "\"Gentium Book Plus\", serif",
-    "greek": "\"Gentium Book Plus\", serif",
+    "body": "\"Gentium Book Basic\", serif",
+    "body2": "\"Gentium Book Basic\", serif",
+    "heading": "\"Gentium Book Basic\", serif",
+    "footnote": "\"Gentium Book Basic\", serif",
+    "greek": "\"Gentium Book Basic\", serif",
+    "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
+    "hebrew": "\"Ezra SIL\", serif"
+  },
+  "gentiumOpenWide": {
+    "label": {
+      "en": "All Gentium",
+      "fr": "Gentium partout"
+    },
+    "body": "\"Gentium Book Basic\", serif",
+    "body2": "\"Open Sans\", serif",
+    "heading": "\"Gentium Book Basic\", serif",
+    "footnote": "\"Open Sans\", serif",
+    "greek": "\"Gentium Book Basic\", serif",
+    "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
+    "hebrew": "\"Ezra SIL\", serif"
+  },
+  "openWideGentium": {
+    "label": {
+      "en": "All Gentium",
+      "fr": "Gentium partout"
+    },
+    "body": "\"Open Sans\", serif",
+    "body2": "\"Gentium Book Basic\", serif",
+    "heading": "\"Gentium Book Basic\", serif",
+    "footnote": "\"Gentium Book Basic\", serif",
+    "greek": "\"Gentium Book Basic\", serif",
     "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
     "hebrew": "\"Ezra SIL\", serif"
   },

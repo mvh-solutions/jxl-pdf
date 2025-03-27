@@ -5,10 +5,10 @@
       "fr": "Gentium partout"
     },
     "body": "\"Gentium Book Basic\", serif",
-    "body2": "\"Gentium Book Basic\", serif",
+    "body2": "\"Gentium Basic\", serif",
     "heading": "\"Gentium Book Basic\", serif",
-    "footnote": "\"Gentium Book Basic\", serif",
-    "greek": "\"Gentium Book Basic\", serif",
+    "footnote": "\"Gentium Basic\", serif",
+    "greek": "\"Gentium Basic\", serif",
     "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
     "hebrew": "\"Ezra SIL\", serif"
   },
@@ -27,8 +27,8 @@
   },
   "openWideGentium": {
     "label": {
-      "en": "All Gentium",
-      "fr": "Gentium partout"
+      "en": "Open/Gentium",
+      "fr": "Open/Gentium"
     },
     "body": "\"Open Sans\", serif",
     "body2": "\"Gentium Book Basic\", serif",
@@ -43,12 +43,12 @@
       "en": "Gentium plus Open Sans",
       "fr": "Gentium plus Open Sans"
     },
-    "body": "\"Gentium Book Plus\", serif",
-    "body2": "\"Open Sans Condensed Light\", sans-serif",
-    "heading": "\"Gentium Book Plus\", serif",
-    "footnote": "\"Gentium Book Plus\", serif",
+    "body": "\"Gentium Plus\", serif",
+    "body2": "\"Open Sans SemiCondensed\", sans-serif",
+    "heading": "\"Gentium Plus\", serif",
+    "footnote": "\"Open Sans SemiCondensed\", serif",
     "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
-    "greek": "\"Gentium Book Plus\", serif",
+    "greek": "\"Gentium Plus\", serif",
     "hebrew": "\"Ezra SIL\", serif"
   },
   "allCharis": {
@@ -70,9 +70,9 @@
       "fr": "Charis plus Open Sans"
     },
     "body": "\"Charis SIL\", serif",
-    "body2": "\"Open Sans Condensed Light\", sans-serif",
+    "body2": "\"Charis SIL\", serif",
     "heading": "\"Charis SIL\", serif",
-    "footnote": "\"Charis SIL\", serif",
+    "footnote": "\"Open Sans SemiCondensed\", serif",
     "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
     "greek": "Cardo, serif",
     "hebrew": "\"Ezra SIL\", serif"
@@ -83,9 +83,9 @@
       "fr": "Open partout"
     },
     "body": "\"Open Sans\", serif",
-    "body2": "\"Open Sans Condensed Light\", sans-serif",
+    "body2": "\"Open Sans Light\", sans-serif",
     "heading": "\"Open Sans\", serif",
-    "footnote": "\"Open Sans Condensed Light\", serif",
+    "footnote": "\"Open Sans Light\", serif",
     "mono": "\"Courier New\", \"Liberation Sans Mono\", \"Deja Vu Sans Mono\", monospace",
     "greek": "Cardo, serif",
     "hebrew": "\"Ezra SIL\", serif"

@@ -21,7 +21,7 @@ h1 {
     page-break-after: avoid;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, .paras_usfm_iot {
     margin-top: 0;
     margin-bottom: 0;
     break-after: avoid;
@@ -146,13 +146,15 @@ h1, h2, h3, h4 {
 }
 .paras_usfm_io {
     padding-left: 12pt;
-    font-family: %%BODYFONT2%%
+    font-family: %%BODYFONT2%%;
+    text-align: left;
 }
 .paras_usfm_iot {
     font-weight: bold;
     font-size: %%H4FONTSIZE%%pt;
     line-height: %%H4LINEHEIGHT%%pt;
-    font-family: %%BODYFONT2%%
+    font-family: %%BODYFONT2%%;
+    text-align: left
 }
 .paras_usfm_is {
     font-style: italic;

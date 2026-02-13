@@ -111,6 +111,10 @@ h1, h2, h3, h4, .paras_usfm_iot {
 .paras_usfm_im {
     font-family: %%BODYFONT2%%
 }
+.paras_usfm_im:has(.wrappers_usfm_k) {
+    padding-top: %%BODYLINEHEIGHT%%pt;
+    text-indent: -1em;
+    margin-left: 1em;}
 .paras_usfm_imt {
     font-weight: normal;
     font-style: italic;

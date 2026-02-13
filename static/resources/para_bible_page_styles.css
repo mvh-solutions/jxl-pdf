@@ -116,6 +116,8 @@ h1, h2, h3, h4, .paras_usfm_iot {
     font-style: italic;
     font-size: %%H1FONTSIZE%%pt;
     line-height: %%H1LINEHEIGHT%%pt;
+    padding-top: %%BODYLINEHEIGHT%%pt;
+    padding-bottom: %%BODYLINEHEIGHT%%pt;
     text-align: center;
     font-family: %%BODYFONT2%%;
 }
@@ -160,6 +162,7 @@ h1, h2, h3, h4, .paras_usfm_iot {
     font-style: italic;
     font-size: %%H2FONTSIZE%%pt;
     line-height: %%H2LINEHEIGHT%%pt;
+    padding-top: %%BODYLINEHEIGHT%%pt;
     font-family: %%BODYFONT2%%;
     break-after: avoid;
 }
@@ -225,6 +228,8 @@ h1, h2, h3, h4, .paras_usfm_iot {
     font-style: italic;
     font-size: %%H1FONTSIZE%%pt;
     line-height: %%H1LINEHEIGHT%%pt;
+    padding-top: %%BODYLINEHEIGHT%%pt;
+    padding-bottom: %%BODYLINEHEIGHT%%pt;
     text-align: center;
     font-family: %%HEADINGFONT%%;
 }

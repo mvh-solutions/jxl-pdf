@@ -34,6 +34,7 @@ const TEMPLATE_NAMES = [
     'otherLeft',
     'jxl',
     'jxlRow',
+    'jxlRow3Col',
     'chapterNote',
     'bookNote',
     'markdownPara'

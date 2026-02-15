@@ -43,7 +43,7 @@ h2.sentenceHeader {
     string-set: sentenceN attr(data-n), cvRef attr(data-cv);
     page-break-inside: avoid;
     vertical-align: top;
-    padding-bottom: %%DOUBLEBODYLINEHEIGHT%%pt;
+    padding-bottom: %%BODYLINEHEIGHT%%pt;
 }
 
 .chapterNote {

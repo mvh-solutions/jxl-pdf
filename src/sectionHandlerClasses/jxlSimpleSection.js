@@ -103,6 +103,15 @@ class jxlSimpleSection extends Section {
                     nValues: [0, 1]
                 },
                 {
+                    id: "parseVerbs",
+                    label: {
+                        en: "Parse verbs",
+                        fr: "Parser les verbes"
+                    },
+                    typeName: "boolean",
+                    nValues: [0, 1]
+                },
+                {
                     id: "glossNotes",
                     label: {
                         en: "Gloss notes (advanced)",
@@ -231,11 +240,13 @@ class jxlSimpleSection extends Section {
                     }
                 }
                 const bookTestament = books[section.bcvRange];
-                const row = templates.jxlRow
+                const add3Col = section.content.parseVerbs ? "3Col" : "";
+                const row = (section.content.parseVerbs ? templates.jxlRow3Col : templates.jxlRow)
                     .replace('%%SOURCE%%', source)
-                    .replace('%%SOURCECLASS%%', bookTestament === "OT" ? "jxlHebrew" : "jxlGreek")
+                    .replace('%%SOURCECLASS%%', bookTestament === "OT" ? "jxlHebrew" : `jxlGreek${add3Col}`)
                     .replace('%%GLOSS%%', gloss.replace(/\*([^*]+)\*/g, (m, m1) => `<i>${m1}</i>`))
-                    .replace('%%NOTECALLERS%%', (noteFound ? `${sentenceNotes.map(note => `<p class="note">${note}</p>`).join('')}` : ""));
+                    .replace('%%NOTECALLERS%%', (noteFound ? `${sentenceNotes.map(note => `<p class="note">${note}</p>`).join('')}` : ""))
+                    .replace('%%VERBS%%', "Verbs go here");
                 jxlRows.push(row);
                 sentenceNotes = [];
             }

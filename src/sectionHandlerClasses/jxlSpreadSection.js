@@ -183,7 +183,7 @@ class jxlSpreadSection extends Section {
             const firstCvFirstV = cvs[0]
                 .split(":")[1]
                 .split('-')[0];
-            const lastCvLastV = cvs.reverse()[0]
+            const lastCvLastV = [...cvs].reverse()[0]
                 .split(":")[1]
                 .split('-').reverse()[0];
             const chapterVerseSeparator = (!canonical && options.referencePunctuation) ? options.referencePunctuation.chapterVerse || ":" : ":";

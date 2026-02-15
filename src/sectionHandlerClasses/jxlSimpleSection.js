@@ -77,7 +77,7 @@ class jxlSimpleSection extends Section {
                 {
                     id: "firstSentence",
                     label: {
-                        en: "First Sentence Number",
+                        en: "First Sentence Number",f
                         fr: "N° de première phrase"
                     },
                     typeName: "number",
@@ -143,11 +143,11 @@ class jxlSimpleSection extends Section {
             const firstCvFirstV = cvs[0]
                 .split(":")[1]
                 .split('-')[0];
-            const lastCvLastV = cvs.reverse()[0]
+            const lastCvLastV = [...cvs].reverse()[0]
                 .split(":")[1]
                 .split('-').reverse()[0];
-            const chapterVerseSeparator = canonical ? ":" : options.referencePunctuation.chapterVerse;
-            const verseRangeSeparator = canonical ? "-" : options.referencePunctuation.verseRange;
+            const chapterVerseSeparator = (!canonical && options.referencePunctuation) ? options.referencePunctuation.chapterVerse || ":" : ":";
+            const verseRangeSeparator = (!canonical && options.referencePunctuation) ? options.referencePunctuation.verseRange || "-" : "-";
             return `${chapter}${chapterVerseSeparator}${firstCvFirstV}${firstCvFirstV === lastCvLastV ? "" : `${verseRangeSeparator}${lastCvLastV}`}`;
         }
         const jxlJson = jsonFile.bookCode ? jsonFile.sentences : jsonFile;

@@ -8,7 +8,12 @@ const cvForSentence = (sentence, punctuation) => {
     }
     const cvSet = new Set([]);
     sentence.chunks.forEach(c => c.source.forEach(se => cvSet.add(se.cv)));
-    const cvValues = Array.from(cvSet);
+    const cvValues = Array.from(cvSet)
+        .sort((a, b) => {
+            const aa = a.split(":").map(s => parseInt(s));
+            const bb = b.split(":").map(s => parseInt(s));
+            return aa[1] - bb[1];
+        });
     const cv1 = cvValues[0];
     const cv2 = cvValues[cvValues.length - 1];
     if (cv1 === cv2) {

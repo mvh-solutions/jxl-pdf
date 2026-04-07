@@ -60,6 +60,22 @@
     vertical-align: baseline;
     padding: 0;
     padding-left: %%HALFCOLUMNGAP%%pt;
+    font-family: %%GREEKFONT%%;
+}
+
+.jxlTopText {
+    line-height: %%BODYLINEHEIGHT%%pt;
+    font-size: %%BODYFONTSIZE%%pt;
+    font-family: %%GREEKFONT%%;
+    margin-bottom: %%BODYLINEHEIGHT%%pt;
+    text-align: justify
+}
+
+.jxlBottomText {
+    line-height: %%BODYLINEHEIGHT%%pt;
+    font-size: %%BODYFONTSIZE%%pt;
+    margin-top: %%BODYLINEHEIGHT%%pt;
+    text-align: justify
 }
 
 .jxlTable {

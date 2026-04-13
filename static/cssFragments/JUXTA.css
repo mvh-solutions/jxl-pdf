@@ -11,7 +11,7 @@
 }
 
 .jxlGreek3Col {
-    width: %%35PCWIDTH%%pt;
+    width: %%2COLUMNWIDTH%%pt;
     text-align: right;
     line-height: %%BODYLINEHEIGHT%%pt;
     font-size: %%BODYFONTSIZE%%pt;
@@ -44,7 +44,7 @@
 }
 
 .jxlGloss3Col {
-    width: %%45PCWIDTH%%pt;
+    width: %%2COLUMNWIDTH%%pt;
     line-height: %%BODYLINEHEIGHT%%pt;
     font-size: %%BODYFONTSIZE%%pt;
     vertical-align: baseline;
@@ -53,14 +53,15 @@
 
 }
 
-.jxlVerbs {
-    width: %%20PCWIDTH%%pt;
+.jxlMorph {
     line-height: %%BODYLINEHEIGHT%%pt;
     font-size: %%FOOTNOTEFONTSIZE%%pt;
     vertical-align: baseline;
-    padding: 0;
-    padding-left: %%HALFCOLUMNGAP%%pt;
-    font-family: %%GREEKFONT%%;
+    white-space: nowrap;
+}
+
+.sourceContent {
+    white-space: nowrap;
 }
 
 .jxlTopText {

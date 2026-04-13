@@ -381,7 +381,10 @@ class jxlSimpleSection extends Section {
           verbs = chunk.source
             .filter((s) => s.morph[1] === "V")
             .map((s) => `${s.lemma} <i>${morphSummary(s.morph)}</i>`)
-            .join("<br/>");
+            .join("; ");
+          if (verbs) {
+            verbs = " |&nbsp;" + verbs;
+          }
         }
         const row = (
           section.content.parseVerbs ? templates.jxlRow3Col : templates.jxlRow

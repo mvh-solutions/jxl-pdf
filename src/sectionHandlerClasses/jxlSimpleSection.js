@@ -169,13 +169,15 @@ class jxlSimpleSection extends Section {
       resolvePath(path.join(section.content.jxl, section.bcvRange + ".json")),
     );
     const mergeCvs = (cvs, canonical = false) => {
-      const chapter = cvs[0].split(":")[0];
+      const firstChapter = cvs[0].split(":")[0];
       const firstCvFirstV = cvs[0].split(":")[1].split("-")[0];
-      const lastCvLastV = [...cvs]
-        .reverse()[0]
-        .split(":")[1]
-        .split("-")
-        .reverse()[0];
+      let lastCv = [...cvs].reverse()[0];
+      const lastCvBits = lastCv.split("-");
+      if (lastCvBits[1] && lastCvBits[1].includes(":")) {
+        lastCv = lastCvBits[1];
+      }
+      const lastChapter = lastCv.split(":")[0];
+      const lastCvLastV = lastCv.split(":")[1].split("-").reverse()[0];
       const chapterVerseSeparator =
         !canonical && options.referencePunctuation
           ? options.referencePunctuation.chapterVerse || ":"
@@ -184,7 +186,11 @@ class jxlSimpleSection extends Section {
         !canonical && options.referencePunctuation
           ? options.referencePunctuation.verseRange || "-"
           : "-";
-      return `${chapter}${chapterVerseSeparator}${firstCvFirstV}${firstCvFirstV === lastCvLastV ? "" : `${verseRangeSeparator}${lastCvLastV}`}`;
+      if (firstChapter === lastChapter) {
+        return `${firstChapter}${chapterVerseSeparator}${firstCvFirstV}${firstCvFirstV === lastCvLastV ? "" : `${verseRangeSeparator}${lastCvLastV}`}`;
+      } else {
+        return `${firstChapter}${chapterVerseSeparator}${firstCvFirstV}-${lastChapter}${chapterVerseSeparator}${lastCvLastV}`;
+      }
     };
     const jxlJson = jsonFile.bookCode ? jsonFile.sentences : jsonFile;
     const sentenceMerges = []; // True means "merge with next sentence"
@@ -419,15 +425,29 @@ class jxlSimpleSection extends Section {
           .replace(
             "%%TOPTEXT%%",
             extraTexts.top
-              ? tidyLhsText(quoteForCv(pk, extraTexts.top, section.bcvRange, canonicalCvRef))
+              ? tidyLhsText(
+                  quoteForCv(
+                    pk,
+                    extraTexts.top,
+                    section.bcvRange,
+                    canonicalCvRef,
+                  ),
+                )
               : "",
           )
           .replace(
             "%%BOTTOMTEXT%%",
-              extraTexts.bottom
-              ? tidyLhsText(quoteForCv(pk, extraTexts.bottom, section.bcvRange, canonicalCvRef))
-              : ""
-        )
+            extraTexts.bottom
+              ? tidyLhsText(
+                  quoteForCv(
+                    pk,
+                    extraTexts.bottom,
+                    section.bcvRange,
+                    canonicalCvRef,
+                  ),
+                )
+              : "",
+          )
           .replace("%%BOOKNAME%%", bookName)
           .replace("%%SENTENCEREF%%", cvRef)
           .replace("%%JXL%%", jxls.join("\n"))
